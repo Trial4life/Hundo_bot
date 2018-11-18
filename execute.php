@@ -38,6 +38,8 @@ $authorizedChats = array( $group_PogoTube42, $group_NordEstLegit );
 
 if (in_array($chatId, $authorizedChats)) {
 
+
+// 100%
 if(strpos($text, "/100") === 0 )
 {
 	if(isset($message['reply_to_message']['text']))
@@ -57,6 +59,9 @@ if(strpos($text, "/100") === 0 )
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
 }
+
+
+
 
 } else { $response = "Gruppo non autorizzato. Contattare l'admin."; };
 
