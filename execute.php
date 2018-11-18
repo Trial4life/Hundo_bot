@@ -18,6 +18,8 @@ $date = isset($message['date']) ? $message['date'] : "";
 $text = isset($message['text']) ? $message['text'] : "";
 $text = trim($text);
 $text = strtolower($text);
+$reply = isset($message['replytomessage']['text']) ? $message['replytomessage']['text'] : "";
+
 header("Content-Type: application/json");
 $response = '';
 
@@ -25,7 +27,7 @@ $apiToken = "721221790:AAFvEHkZQUVU3S9SeNaYoKIHPvvVojnCq6Q";
 
 $data = [
     'chat_id' => '@centoPoGO',
-    'text' => str_replace('/hundo', '', $text)
+    'text' => str_replace('/hundo', '', $reply)
 ];
 
 if(strpos($text, "/hundo") === 0 )
