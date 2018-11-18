@@ -32,7 +32,7 @@ if ($conn->connect_error) {
 	$error = "Connection failed: " . $conn->connect_error;
 }
 
-$group_PogoTube42 = -1001204753064;
+//$group_PogoTube42 = -1001204753064;
 $group_NordEstLegit = -1001187994497;
 $authorizedChats = array( $group_PogoTube42, $group_NordEstLegit );
 
