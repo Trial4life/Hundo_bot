@@ -63,8 +63,10 @@ if(strpos($text, "/100") === 0 )
 	}
 }
 
+/*
 //close the mySQL connection
 $conn->close();
+*/
 
 /*
 } else { $response = "Gruppo non autorizzato. Contattare l'admin."; };
@@ -72,7 +74,7 @@ $conn->close();
 
 
 // DEBUG - PRINT
-$response= $chatId;
+$response = $chatId;
 $parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
