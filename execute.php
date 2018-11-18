@@ -22,17 +22,26 @@ $reply = isset($message['reply_to_message']['text']) ? $message['reply_to_messag
 
 header("Content-Type: application/json");
 $response = '';
-
 $apiToken = "721221790:AAFvEHkZQUVU3S9SeNaYoKIHPvvVojnCq6Q";
 
-$data = [
-    'chat_id' => '@centoPoGO',
-    'text' => str_replace('/hundo', '', $reply)
-];
-
-if(strpos($text, "/hundo") === 0 )
+if(strpos($text, "/100") === 0 )
 {
-	$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+	if($reply)
+	{
+		$data = [
+    		'chat_id' => '@centoPoGO',
+    		'text' => $reply
+		];
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+	}
+	else
+	{
+		$data = [
+   	 	'chat_id' => '@centoPoGO',
+   	 	'text' => str_replace('/100', '', $text)
+		];
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+	}
 }
 
 $response = $message['reply_to_message']['text'];
