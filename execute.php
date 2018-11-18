@@ -25,7 +25,7 @@ $apiToken = "721221790:AAFvEHkZQUVU3S9SeNaYoKIHPvvVojnCq6Q";
 
 $data = [
     'chat_id' => '@centoPoGO',
-    'text' => str_replace('/hundo', '', $text);
+    'text' => str_replace('/hundo', '', $text)
 ];
 
 if(strpos($text, "/hundo") === 0 )
@@ -34,8 +34,8 @@ if(strpos($text, "/hundo") === 0 )
 }
 
 
-
+/*
 $parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
-
+*/
