@@ -81,6 +81,7 @@ if($status == 0)
 		}
 		else
 		{
+			$text = str_replace('/100', '', $text);
 			$data = [
 	   	 	'chat_id' => $userId,
 	   	 	'text' => 'Mandami la posizione di*'.str_replace('/100', '', $text).'*.',
@@ -97,7 +98,7 @@ elseif($status == 1)
 	   'chat_id' => $channel,
 	   'text' => '*'.$alert.'*',
 	   'parse_mode' => 'markdown',
-	  	];
+	];
 	  	/*
 		$location = [
 	    	'chat_id' => '@centoPoGO',
