@@ -34,14 +34,12 @@ $authorizedChats = array( $group_PogoTube42, $group_NordEstLegit, $bot_Exeggutor
 if (in_array($chatId, $authorizedChats)) {
 
 
-/*
 // Create connection
-$conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "pogotube42", "", "pogotube42");
+$conn = new mysqli("s336.altervista.org/phpmyadmin/db_structure.php?db=my_pogotube42&table=&server=1&target=&token=e01f170d7aa9cf2b35d903acd4750b49#PMAURL-1:sql.php?db=my_pogotube42&table=pokestop&server=1&target=&token=e01f170d7aa9cf2b35d903acd4750b49", "pogotube42", "", "pogotube42");
 // Check connection
 if ($conn->connect_error) {
 	$error = "Connection failed: " . $conn->connect_error;
-}*/
-
+}
 
 // 100%
 if(strpos($text, "/100") === 0 )
@@ -64,19 +62,19 @@ if(strpos($text, "/100") === 0 )
 	}
 }
 
-/*
+
 //close the mySQL connection
 $conn->close();
-*/
+
 
 
 } else { $response = "Gruppo non autorizzato. Contattare l'admin."; };
 
-
-
+/*
 // DEBUG - PRINT
 $parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
+*/
 
 
