@@ -45,7 +45,7 @@ if ($conn->connect_error) {
 // CONTROLLA SESSIONE UTENTE
 $query = "SELECT * FROM `sessions` WHERE `userID` = $userId";
 $result = mysqli_query($conn,$query);
-if(mysql_num_rows($result) == 0) {
+if(!$result) {
 	$status = 0;
 }
 else {
