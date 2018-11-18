@@ -22,7 +22,7 @@ $reply = isset($message['reply_to_message']['text']) ? $message['reply_to_messag
 
 header("Content-Type: application/json");
 $response = '';
-$apiToken = "721221790:AAFvEHkZQUVU3S9SeNaYoKIHPvvVojnCq6Q";
+$apiToken = "689487990:AAGhqhcsalt0mXYRnUqFro9ECNxPuOOVPZc";
 
 
 // Create connection
