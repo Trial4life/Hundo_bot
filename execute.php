@@ -67,9 +67,14 @@ else {
 
 if(strpos($text, "/annulla") === 0 ) {
 	mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
+	$data = [
+	   'chat_id' => $userId,
+	   'text' => 'Segnalazione annullata.',
+	];
+	$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 }
 
-if($status == 0)
+elseif($status == 0)
 {
 	// 100%
 	if(strpos($text, "/100") === 0 )
@@ -107,7 +112,6 @@ elseif($status == 1 and $chatId == $userId)
 		$data = [
 	   	'chat_id' => $userId,
 	   	'text' => 'Ho bisogno della posizione per inoltrare la segnalazione.',
-	   	'parse_mode' => 'markdown',
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
