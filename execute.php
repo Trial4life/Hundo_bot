@@ -25,7 +25,7 @@ $apiToken = "721221790:AAFvEHkZQUVU3S9SeNaYoKIHPvvVojnCq6Q";
 
 $data = [
     'chat_id' => '@cento42',
-    'text' => $text
+    'text' => str_replace('/hundo', '', $text)
 ];
 
 if(strpos($text, "/hundo") === 0 )
