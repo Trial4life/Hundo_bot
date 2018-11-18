@@ -41,11 +41,16 @@ if ($conn->connect_error) {
 	$error = "Connection failed: " . $conn->connect_error;
 }
 
-// CERCA POKÈSTOP NEL DATABASE
+// CONTROLLA SESSIONE UTENTE
 $query = "SELECT * FROM `sessions` WHERE `userID` = '$userId'";
 $result = mysqli_query($conn,$query);
-$row = mysqli_fetch_assoc($result);
-$status = $row['status'];
+if(mysql_num_rows($result) == 0) {
+	$status = 0;
+}
+else {
+	$row = mysqli_fetch_assoc($result);
+	$status = $row['status'];
+}
 
 /*
 			// CERCA POKÈSTOP NEL DATABASE
