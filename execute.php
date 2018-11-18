@@ -21,7 +21,7 @@ $text = strtolower($text);
 header("Content-Type: application/json");
 $response = '';
 
-$apiToken = "721221790:AAFvEHkZQUVU3S9SeNaYoKIHPvvVojnCq6Q";
+/*$apiToken = "721221790:AAFvEHkZQUVU3S9SeNaYoKIHPvvVojnCq6Q";
 
 $data = [
     'chat_id' => '@cento42',
@@ -31,7 +31,7 @@ $data = [
 $response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 
 // Do what you want with result
-
+*/
 if(strpos($text, "/hundo") === 0 )
 {
 	$response = "100."; }
@@ -42,4 +42,3 @@ if(strpos($text, "/hundo") === 0 )
 $parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
->
