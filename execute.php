@@ -58,8 +58,8 @@ if(strpos($text, "/100") === 0 )
 		];
 		$location = [
     		'chat_id' => '@centoPoGO',
-    		'latitude' => $lat,
-    		'longitude' => $lng,
+    		'latitude' => 1.1,
+    		'longitude' => 1.23,
 		];
 		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
