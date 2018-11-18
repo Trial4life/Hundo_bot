@@ -44,9 +44,8 @@ if(strpos($text, "/100") === 0 )
 	}
 }
 
-$response = $message['reply_to_message']['text'];
-
+/*
 $parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
-
+*/
