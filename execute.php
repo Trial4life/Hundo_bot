@@ -62,8 +62,12 @@ if(strpos($text, "/100") === 0 )
 } else { $response = "Gruppo non autorizzato. Contattare l'admin."; };
 
 $response = $chatId;
-/*
+
+
+
+
+// DEBUG - PRINT
 $parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
-*/
+
