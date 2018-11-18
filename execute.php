@@ -92,7 +92,7 @@ if($status == 0)
 		}
 	}
 }
-elseif($status == 1)
+elseif($status == 1 and $chatId == $userId)
 {
 	$data = [
 	   'chat_id' => $channel,
@@ -121,7 +121,7 @@ $conn->close();
 
 
 // DEBUG - PRINT
-$response = $status;
+$response = $userId . '.' . $chatId;
 $parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
