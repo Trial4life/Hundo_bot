@@ -34,7 +34,7 @@ $response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage
 */
 if(strpos($text, "/hundo") === 0 )
 {
-	$response = "100."; }
+	$response = "100.";
 }
 
 
