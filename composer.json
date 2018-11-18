@@ -1,8 +1,8 @@
 {
-    "name": "telegram-bot/TradePkMn-bot",
+    "name": "telegram-bot/hundo-bot",
     "type": "project",
-    "description": "Trade Pokémon bot",
-    "keywords": ["telegram", "bot", "Trade", "Pokémon"],
+    "description": "Hundo Pokémon bot",
+    "keywords": ["telegram", "bot", "Hundo", "Pokémon"],
     "license": "MIT",
     "homepage": "https://tradepkmn.herokuapp.com/",
     "support": {
