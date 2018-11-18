@@ -23,7 +23,7 @@ $reply = isset($message['reply_to_message']['text']) ? $message['reply_to_messag
 header("Content-Type: application/json");
 $response = '';
 $apiToken = "689487990:AAGhqhcsalt0mXYRnUqFro9ECNxPuOOVPZc";
-
+$channel = '@centoPoGO';
 
 
 $bot_Exeggutor = 158754689;
@@ -57,7 +57,7 @@ if(strpos($text, "/100") === 0 )
 	if(isset($message['reply_to_message']['text']))
 	{
 		$data = [
-    		'chat_id' => '@centoPoGO',
+    		'chat_id' => $username,
     		'text' => $reply,
 		];
 		/*
@@ -73,7 +73,7 @@ if(strpos($text, "/100") === 0 )
 	else
 	{
 		$data = [
-   	 	'chat_id' => '@centoPoGO',
+   	 	'chat_id' => $username,
    	 	'text' => str_replace('/100', '', $text),
 		];
 		/*
@@ -96,12 +96,12 @@ $conn->close();
 
 } else { $response = "Gruppo non autorizzato. Contattare l'admin."; };
 
-
+/*
 // DEBUG - PRINT
 $response = $lat . ", " . $lng;
 $parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
-
+*/
 
 
