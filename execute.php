@@ -56,7 +56,7 @@ $status = $row['status'];
 			$lng = $row['lng'];
 */
 
-if($status == 0)
+if($status == '')
 {
 	// 100%
 	if(strpos($text, "/100") === 0 )
@@ -76,7 +76,7 @@ if($status == 0)
 			];
 			*/
 			$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-			mysqli_query($conn,"INSERT INTO `sessions` (userID, status) VALUES ($userId, 1)";
+			mysqli_query($conn,"INSERT INTO `sessions` (userID, status, alert) VALUES ($userId, 1, '$reply')";
 			//$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
 		}
 		else
@@ -94,7 +94,7 @@ if($status == 0)
 			];
 			*/
 			$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-			mysqli_query($conn,"INSERT INTO `sessions` (userID, status) VALUES ($userId, 1)";
+			mysqli_query($conn,"INSERT INTO `sessions` (userID, status, alert) VALUES ($userId, 1, '$text')";
 			//$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
 		}
 	}
