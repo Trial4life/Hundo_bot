@@ -54,17 +54,17 @@ if(strpos($text, "/100") === 0 )
 	{
 		$data = [
     		'chat_id' => '@centoPoGO',
-    		'text' => $reply
+    		'text' => $coords
 		];
-		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($coords) );
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
 	else
 	{
 		$data = [
    	 	'chat_id' => '@centoPoGO',
-   	 	'text' => str_replace('/100', '', $text)
+   	 	'text' => str_replace('/100', '', $coords)
 		];
-		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($coords) );
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
 }
 
