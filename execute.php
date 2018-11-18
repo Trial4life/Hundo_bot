@@ -18,7 +18,7 @@ $date = isset($message['date']) ? $message['date'] : "";
 $text = isset($message['text']) ? $message['text'] : "";
 $text = trim($text);
 $text = strtolower($text);
-$reply = isset($message['replytomessage']['text']) ? $message['replytomessage']['text'] : "";
+$reply = isset($message['reply_to_message']['text']) ? $message['reply_to_message']['text'] : "";
 
 header("Content-Type: application/json");
 $response = '';
@@ -35,7 +35,7 @@ if(strpos($text, "/hundo") === 0 )
 	$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 }
 
-$response = $message['replytomessage']['text'];
+$response = $message['reply_to_message']['text'];
 
 $parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 $parameters["method"] = "sendMessage";
