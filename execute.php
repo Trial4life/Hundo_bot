@@ -35,7 +35,7 @@ if (in_array($chatId, $authorizedChats)) {
 
 
 // Create connection
-$conn = new mysqli("http://185.27.134.10/db_structure.php?db=epiz_23014838_pogotube42", "	epiz_23014838", "160293", "	epiz_23014838");
+$conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");
 // Check connection
 if ($conn->connect_error) {
 	$error = "Connection failed: " . $conn->connect_error;
