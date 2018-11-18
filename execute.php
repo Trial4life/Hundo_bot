@@ -32,9 +32,9 @@ if ($conn->connect_error) {
 	$error = "Connection failed: " . $conn->connect_error;
 }
 
-$group_TestBot = -267586313;
+$group_PogoTube42 = -1001204753064;
 $group_NordEstLegit = -1001187994497;
-$authorizedChats = array( $group_TestBot, $group_NordEstLegit );
+$authorizedChats = array( $group_PogoTube42, $group_NordEstLegit );
 
 //if($chatId === $group_TestBot or $chatId === $group_NordEstLegit) {
 if (in_array($chatId, $authorizedChats)) {
@@ -61,13 +61,12 @@ if(strpos($text, "/100") === 0 )
 
 } else { $response = "Gruppo non autorizzato. Contattare l'admin."; };
 
-$response = $chatId;
-
-
 
 
 // DEBUG - PRINT
+/*
 $parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
+*/
 
