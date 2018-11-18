@@ -94,6 +94,18 @@ if($status == 0)
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
 elseif($status == 1 and $chatId == $userId)
 {
 	if (!$lat or !$lng)
