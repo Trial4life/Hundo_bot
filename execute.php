@@ -26,7 +26,7 @@ $apiToken = "721221790:AAFvEHkZQUVU3S9SeNaYoKIHPvvVojnCq6Q";
 
 if(strpos($text, "/100") === 0 )
 {
-	if($reply)
+	if(isset($message['reply_to_message']['text']))
 	{
 		$data = [
     		'chat_id' => '@centoPoGO',
