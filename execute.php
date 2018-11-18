@@ -40,10 +40,10 @@ $conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4
 if ($conn->connect_error) {
 	$error = "Connection failed: " . $conn->connect_error;
 }
-$status = 0;
-/*
+
+
 // CONTROLLA SESSIONE UTENTE
-$query = "SELECT * FROM `sessions` WHERE `userID` = 42";
+$query = "SELECT * FROM `sessions` WHERE `userID` = $userId";
 $result = mysqli_query($conn,$query);
 if(mysql_num_rows($result) == 0) {
 	$status = 0;
@@ -52,7 +52,7 @@ else {
 	$row = mysqli_fetch_assoc($result);
 	$status = $row['status'];
 }
-*/
+
 /*
 			BETA// CERCA POKÈSTOP NEL DATABASE
 			$query = "SELECT * FROM `pokestops` WHERE `pokestop` = 'Squid'";
