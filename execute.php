@@ -57,7 +57,7 @@ if(strpos($text, "/100") === 0 )
 	if(isset($message['reply_to_message']['text']))
 	{
 		$data = [
-    		'chat_id' => '@'.$userId,
+    		'chat_id' => $userId,
     		'text' => $reply,
 		];
 		/*
@@ -73,7 +73,7 @@ if(strpos($text, "/100") === 0 )
 	else
 	{
 		$data = [
-   	 	'chat_id' => '@'.$userId,
+   	 	'chat_id' => $userId,
    	 	'text' => str_replace('/100', '', $text),
 		];
 		/*
