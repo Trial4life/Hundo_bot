@@ -51,6 +51,7 @@ if(!$result) {
 else {
 	$row = mysqli_fetch_assoc($result);
 	$status = $row['status'];
+	$alert = $row['alert'];
 }
 
 /*
@@ -74,16 +75,9 @@ if($status == 0)
 	    		'text' => 'Mandami la posizione di*'.$reply.'*.',
 	    		'parse_mode' => 'markdown',
 			];
-			/*
-			$location = [
-	    		'chat_id' => '@centoPoGO',
-	    		'latitude' => $lat,
-	    		'longitude' => $lng,
-			];
-			*/
-			$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			mysqli_query($conn,"INSERT INTO `sessions` (userID, status, alert) VALUES ($userId, 1, '$reply')");
-			//$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
+
 		}
 		else
 		{
@@ -92,27 +86,27 @@ if($status == 0)
 	   	 	'text' => 'Mandami la posizione di*'.str_replace('/100', '', $text).'*.',
 	    		'parse_mode' => 'markdown',
 	   	];
-			/*
-			$location = [
-	    		'chat_id' => '@centoPoGO',
-	    		'latitude' => $lat,
-	    		'longitude' => $lng,
-			];
-			*/
-			$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			mysqli_query($conn,"INSERT INTO `sessions` (userID, status, alert) VALUES ($userId, 1, '$text')");
-			//$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
 		}
 	}
 }
 elseif($status == 1)
 {
 	$data = [
-	   'chat_id' => $userId,
-	   'text' => 'da completare.',
+	   'chat_id' => $channel,
+	   'text' => '*'.$alert.'*',
 	   'parse_mode' => 'markdown',
-	  ];
+	  	];
+	  	/*
+		$location = [
+	    	'chat_id' => '@centoPoGO',
+	    	'latitude' => $lat,
+	    	'longitude' => $lng,
+		];
+		*/
 	$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+	//$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
 	mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
 }
 
