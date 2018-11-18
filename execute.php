@@ -41,6 +41,11 @@ if ($conn->connect_error) {
 	$error = "Connection failed: " . $conn->connect_error;
 }
 
+// CERCA POKÈSTOP NEL DATABASE
+$query = "SELECT * FROM `sessions` WHERE `userID` = '$userId'";
+$result = mysqli_query($conn,$query);
+$row = mysqli_fetch_assoc($result);
+$status = $row['status'];
 
 /*
 			// CERCA POKÈSTOP NEL DATABASE
@@ -51,43 +56,57 @@ if ($conn->connect_error) {
 			$lng = $row['lng'];
 */
 
-// 100%
-if(strpos($text, "/100") === 0 )
+if($status == 0)
 {
-	if(isset($message['reply_to_message']['text']))
+	// 100%
+	if(strpos($text, "/100") === 0 )
 	{
-		$data = [
-    		'chat_id' => $userId,
-    		'text' => 'Mandami la posizione di*'.$reply.'*.',
-    		'parse_mode' => 'markdown',
-		];
-		/*
-		$location = [
-    		'chat_id' => '@centoPoGO',
-    		'latitude' => $lat,
-    		'longitude' => $lng,
-		];
-		*/
-		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-		//$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
+		if(isset($message['reply_to_message']['text']))
+		{
+			$data = [
+	    		'chat_id' => $userId,
+	    		'text' => 'Mandami la posizione di*'.$reply.'*.',
+	    		'parse_mode' => 'markdown',
+			];
+			/*
+			$location = [
+	    		'chat_id' => '@centoPoGO',
+	    		'latitude' => $lat,
+	    		'longitude' => $lng,
+			];
+			*/
+			$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+			mysqli_query($conn,"INSERT INTO `sessions` (userID, status) VALUES ('$userId', 1)";
+			//$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
+		}
+		else
+		{
+			$data = [
+	   	 	'chat_id' => $userId,
+	   	 	'text' => 'Mandami la posizione di*'.str_replace('/100', '', $text).'*.',
+	    		'parse_mode' => 'markdown',
+	   	];
+			/*
+			$location = [
+	    		'chat_id' => '@centoPoGO',
+	    		'latitude' => $lat,
+	    		'longitude' => $lng,
+			];
+			*/
+			$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+			mysqli_query($conn,"INSERT INTO `sessions` (userID, status) VALUES ('$userId', 1)";
+			//$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
+		}
 	}
-	else
-	{
-		$data = [
-   	 	'chat_id' => $userId,
-   	 	'text' => 'Mandami la posizione di*'.str_replace('/100', '', $text).'*.',
-    		'parse_mode' => 'markdown',
-   	];
-		/*
-		$location = [
-    		'chat_id' => '@centoPoGO',
-    		'latitude' => $lat,
-    		'longitude' => $lng,
-		];
-		*/
-		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-		//$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
-	}
+}
+elseif($status == 1)
+{
+	$data = [
+	   'chat_id' => $userId,
+	   'text' => 'da completare.',
+	   'parse_mode' => 'markdown',
+	  ];
+	$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 }
 
 
