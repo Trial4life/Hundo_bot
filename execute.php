@@ -19,6 +19,8 @@ $text = isset($message['text']) ? $message['text'] : "";
 $text = trim($text);
 $text = strtolower($text);
 $reply = isset($message['reply_to_message']['text']) ? $message['reply_to_message']['text'] : "";
+$lat = isset($message['location']['latitude']) ? $message['location']['latitude'] : "";
+$lng = isset($message['location']['longitude']) ? $message['location']['longitude'] : "";
 
 header("Content-Type: application/json");
 $response = '';
@@ -99,15 +101,13 @@ elseif($status == 1 and $chatId == $userId)
 	   'text' => '*'.$alert.'*',
 	   'parse_mode' => 'markdown',
 	];
-	  	/*
-		$location = [
-	    	'chat_id' => '@centoPoGO',
-	    	'latitude' => $lat,
-	    	'longitude' => $lng,
-		];
-		*/
+	$location = [
+	    'chat_id' => $channel,
+	    'latitude' => $lat,
+	    'longitude' => $lng,
+	];
 	$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-	//$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
+	$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
 	mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
 }
 
