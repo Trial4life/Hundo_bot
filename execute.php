@@ -17,7 +17,7 @@ $username = isset($message['from']['username']) ? $message['from']['username'] :
 $date = isset($message['date']) ? $message['date'] : "";
 $text = isset($message['text']) ? $message['text'] : "";
 $text = trim($text);
-$text = strtolower($text);
+//$text = strtolower($text);
 $reply = isset($message['reply_to_message']['text']) ? $message['reply_to_message']['text'] : "";
 $lat = isset($message['location']['latitude']) ? $message['location']['latitude'] : NULL;
 $lng = isset($message['location']['longitude']) ? $message['location']['longitude'] : NULL;
@@ -65,8 +65,12 @@ else {
 			$lng = $row['lng'];
 */
 
-//if($status == 0)
-//{
+if(strpos($text, "/annulla") === 0 ) {
+	mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
+}
+
+if($status == 0)
+{
 	// 100%
 	if(strpos($text, "/100") === 0 )
 	{
@@ -93,7 +97,7 @@ else {
 			mysqli_query($conn,"INSERT INTO `sessions` (userID, status, alert) VALUES ($userId, 1, '$text')");
 		}
 	}
-//}
+}
 
 
 elseif($status == 1 and $chatId == $userId)
