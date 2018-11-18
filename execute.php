@@ -25,18 +25,21 @@ $response = '';
 $apiToken = "689487990:AAGhqhcsalt0mXYRnUqFro9ECNxPuOOVPZc";
 
 
-// Create connection
-$conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "pogotube42", "", "pogotube42");
-// Check connection
-if ($conn->connect_error) {
-	$error = "Connection failed: " . $conn->connect_error;
-}
-
+/*
 $group_PogoTube42 = -1001204753064
 $group_NordEstLegit = -1001119443518;
 $authorizedChats = array( $group_PogoTube42, $group_NordEstLegit );
 
 if (in_array($chatId, $authorizedChats)) {
+*/
+
+/*
+// Create connection
+$conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "pogotube42", "", "pogotube42");
+// Check connection
+if ($conn->connect_error) {
+	$error = "Connection failed: " . $conn->connect_error;
+}*/
 
 
 // 100%
@@ -60,17 +63,18 @@ if(strpos($text, "/100") === 0 )
 	}
 }
 
+//close the mySQL connection
+$conn->close();
 
-
-
+/*
 } else { $response = "Gruppo non autorizzato. Contattare l'admin."; };
-
+*/
 
 
 // DEBUG - PRINT
-/*
+$response= $chatId;
 $parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
-*/
+
 
