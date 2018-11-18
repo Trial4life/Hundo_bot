@@ -65,8 +65,8 @@ else {
 			$lng = $row['lng'];
 */
 
-if($status == 0)
-{
+//if($status == 0)
+//{
 	// 100%
 	if(strpos($text, "/100") === 0 )
 	{
@@ -93,7 +93,7 @@ if($status == 0)
 			mysqli_query($conn,"INSERT INTO `sessions` (userID, status, alert) VALUES ($userId, 1, '$text')");
 		}
 	}
-}
+//}
 
 
 elseif($status == 1 and $chatId == $userId)
@@ -132,12 +132,12 @@ $conn->close();
 
 } else { $response = "Gruppo non autorizzato. Contattare l'admin."; };
 
-
+/*
 // DEBUG - PRINT
 $response = 'Status = '.$status;
 $parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
-
+*/
 
 
