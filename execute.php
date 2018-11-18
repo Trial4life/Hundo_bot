@@ -40,6 +40,12 @@ $conn = new mysqli("s336.altervista.org/phpmyadmin/db_structure.php?db=my_pogotu
 if ($conn->connect_error) {
 	$error = "Connection failed: " . $conn->connect_error;
 }
+			// CERCA NEL DATABASE
+			$query = "SELECT * FROM `pokestops` WHERE `pokestop` = 'Squid'";
+			$result = mysqli_query($conn,$query);
+			$row = mysqli_fetch_assoc($result);
+			$coords = $row['coordinate'];
+
 
 // 100%
 if(strpos($text, "/100") === 0 )
@@ -50,7 +56,7 @@ if(strpos($text, "/100") === 0 )
     		'chat_id' => '@centoPoGO',
     		'text' => $reply
 		];
-		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($coords) );
 	}
 	else
 	{
@@ -58,7 +64,7 @@ if(strpos($text, "/100") === 0 )
    	 	'chat_id' => '@centoPoGO',
    	 	'text' => str_replace('/100', '', $text)
 		];
-		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($coords) );
 	}
 }
 
