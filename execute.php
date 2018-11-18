@@ -113,6 +113,7 @@ elseif($status == 1)
 	   'parse_mode' => 'markdown',
 	  ];
 	$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+	mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
 }
 
 
