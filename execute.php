@@ -32,11 +32,10 @@ if ($conn->connect_error) {
 	$error = "Connection failed: " . $conn->connect_error;
 }
 
-//$group_PogoTube42 = -1001204753064;
+$group_PogoTube42 = -1001204753064
 $group_NordEstLegit = -1001119443518;
 $authorizedChats = array( $group_PogoTube42, $group_NordEstLegit );
 
-//if($chatId === $group_TestBot or $chatId === $group_NordEstLegit) {
 if (in_array($chatId, $authorizedChats)) {
 
 if(strpos($text, "/100") === 0 )
@@ -64,9 +63,9 @@ if(strpos($text, "/100") === 0 )
 
 
 // DEBUG - PRINT
-
+/*
 $parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
-
+*/
 
