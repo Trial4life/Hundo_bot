@@ -35,7 +35,7 @@ if (in_array($chatId, $authorizedChats)) {
 
 
 // Create connection
-$conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "epiz_23014838_pogotube42", "4ezgelH6xq", "sql7243921");
+$conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");
 // Check connection
 if ($conn->connect_error) {
 	$error = "Connection failed: " . $conn->connect_error;
