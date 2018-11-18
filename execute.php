@@ -44,8 +44,8 @@ if ($conn->connect_error) {
 			$query = "SELECT * FROM `pokestops` WHERE `pokestop` = 'Squid'";
 			$result = mysqli_query($conn,$query);
 			$row = mysqli_fetch_assoc($result);
-			$lat = $row['lat'];
-			$lng = $row['lng'];
+			$lat = floatval($row['lat']);
+			$lng = floatval($row['lng']);
 
 // 100%
 if(strpos($text, "/100") === 0 )
@@ -61,7 +61,6 @@ if(strpos($text, "/100") === 0 )
     		'latitude' => $lat,
     		'longitude' => $lng,
 		];
-
 		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
 	}
