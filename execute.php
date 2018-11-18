@@ -42,7 +42,7 @@ if ($conn->connect_error) {
 }
 
 // CONTROLLA SESSIONE UTENTE
-$query = "SELECT * FROM `sessions` WHERE `userID` = '$userId'";
+$query = "SELECT * FROM `sessions` WHERE `userID` = 42";
 $result = mysqli_query($conn,$query);
 if(mysql_num_rows($result) == 0) {
 	$status = 0;
