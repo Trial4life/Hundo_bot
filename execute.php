@@ -35,7 +35,7 @@ if (in_array($chatId, $authorizedChats)) {
 
 
 // Create connection
-$conn = new mysqli("s336.altervista.org/phpmyadmin/db_structure.php?db=my_pogotube42&table=&server=1&target=&token=e01f170d7aa9cf2b35d903acd4750b49#PMAURL-1:sql.php?db=my_pogotube42&table=pokestop&server=1&target=&token=e01f170d7aa9cf2b35d903acd4750b49", "pogotube42", "", "pogotube42");
+$conn = new mysqli("http://185.27.134.10/db_structure.php?db=epiz_23014838_pogotube42", "	epiz_23014838", "160293", "	epiz_23014838");
 // Check connection
 if ($conn->connect_error) {
 	$error = "Connection failed: " . $conn->connect_error;
