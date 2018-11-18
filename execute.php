@@ -40,12 +40,16 @@ $conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4
 if ($conn->connect_error) {
 	$error = "Connection failed: " . $conn->connect_error;
 }
-			// CERCA NEL DATABASE
+
+
+/*
+			// CERCA POKÈSTOP NEL DATABASE
 			$query = "SELECT * FROM `pokestops` WHERE `pokestop` = 'Squid'";
 			$result = mysqli_query($conn,$query);
 			$row = mysqli_fetch_assoc($result);
 			$lat = $row['lat'];
 			$lng = $row['lng'];
+*/
 
 // 100%
 if(strpos($text, "/100") === 0 )
@@ -56,13 +60,15 @@ if(strpos($text, "/100") === 0 )
     		'chat_id' => '@centoPoGO',
     		'text' => $reply,
 		];
+		/*
 		$location = [
     		'chat_id' => '@centoPoGO',
     		'latitude' => $lat,
     		'longitude' => $lng,
 		];
+		*/
 		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-		$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
+		//$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
 	}
 	else
 	{
@@ -70,13 +76,15 @@ if(strpos($text, "/100") === 0 )
    	 	'chat_id' => '@centoPoGO',
    	 	'text' => str_replace('/100', '', $text),
 		];
+		/*
 		$location = [
     		'chat_id' => '@centoPoGO',
     		'latitude' => $lat,
     		'longitude' => $lng,
 		];
+		*/
 		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-		$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
+		//$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
 	}
 }
 
