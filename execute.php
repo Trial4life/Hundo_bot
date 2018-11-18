@@ -44,8 +44,8 @@ if ($conn->connect_error) {
 			$query = "SELECT * FROM `pokestops` WHERE `pokestop` = 'Squid'";
 			$result = mysqli_query($conn,$query);
 			$row = mysqli_fetch_assoc($result);
-			$coords = $row['coordinate'];
-
+			$lat = $row['lat'];
+			$lng = $row['lng'];
 
 // 100%
 if(strpos($text, "/100") === 0 )
@@ -54,17 +54,23 @@ if(strpos($text, "/100") === 0 )
 	{
 		$data = [
     		'chat_id' => '@centoPoGO',
-    		'text' => $coords
+    		'text' => $reply,
+    		'latitude' => $lat,
+    		'longitude' => $lng,
 		];
-		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($data) );
 	}
 	else
 	{
 		$data = [
    	 	'chat_id' => '@centoPoGO',
-   	 	'text' => str_replace('/100', '', $coords)
+   	 	'text' => str_replace('/100', '', $text),
+   	 	'latitude' => $lat,
+    		'longitude' => $lng,
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($data)
 	}
 }
 
