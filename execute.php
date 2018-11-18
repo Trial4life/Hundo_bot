@@ -44,8 +44,8 @@ if ($conn->connect_error) {
 			$query = "SELECT * FROM `pokestops` WHERE `pokestop` = 'Squid'";
 			$result = mysqli_query($conn,$query);
 			$row = mysqli_fetch_assoc($result);
-			$lat = floatval($row['lat']);
-			$lng = floatval($row['lng']);
+			$lat = $row['lat'];
+			$lng = $row['lng'];
 
 // 100%
 if(strpos($text, "/100") === 0 )
