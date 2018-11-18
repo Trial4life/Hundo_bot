@@ -25,7 +25,7 @@ $apiToken = "721221790:AAFvEHkZQUVU3S9SeNaYoKIHPvvVojnCq6Q";
 
 $data = [
     'chat_id' => '@cento42',
-    'text' => str_replace('/hundo', '', $text)
+    'text' => $text
 ];
 
 if(strpos($text, "/hundo") === 0 )
@@ -33,6 +33,7 @@ if(strpos($text, "/hundo") === 0 )
 	$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 }
 
+$response = str_replace('/hundo', '', $text)
 
 
 $parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
