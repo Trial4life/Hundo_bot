@@ -4,15 +4,15 @@
     "description": "Hundo Pokémon bot",
     "keywords": ["telegram", "bot", "Hundo", "Pokémon"],
     "license": "MIT",
-    "homepage": "https://tradepkmn.herokuapp.com/",
+    "homepage": "https://hundo.herokuapp.com/",
     "support": {
-        "issues": "https://tradepkmn.herokuapp.com/",
-        "source": "https://tradepkmn.herokuapp.com/"
+        "issues": "https://hundo.herokuapp.com/",
+        "source": "https://hundo.herokuapp.com/"
     },
     "authors": [
         {
             "name": "Trial4life",
-            "homepage": "https://tradepkmn.herokuapp.com/",
+            "homepage": "https://hundo.herokuapp.com/",
             "role": "Developer"
         }
     ]

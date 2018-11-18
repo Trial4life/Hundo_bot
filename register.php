@@ -1,7 +1,7 @@
 <?php
 
 // PARAMETRI DA MODIFICARE
-$WEBHOOK_URL = 'https://tradepkmn.herokuapp.com/execute.php';
+$WEBHOOK_URL = 'https://hundo.herokuapp.com/execute.php';
 $BOT_TOKEN = '721221790:AAFvEHkZQUVU3S9SeNaYoKIHPvvVojnCq6Q';
 
 // NON APPORTARE MODIFICHE NEL CODICE SEGUENTE
