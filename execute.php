@@ -40,7 +40,8 @@ $conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4
 if ($conn->connect_error) {
 	$error = "Connection failed: " . $conn->connect_error;
 }
-
+$status = 0;
+/*
 // CONTROLLA SESSIONE UTENTE
 $query = "SELECT * FROM `sessions` WHERE `userID` = 42";
 $result = mysqli_query($conn,$query);
@@ -51,9 +52,9 @@ else {
 	$row = mysqli_fetch_assoc($result);
 	$status = $row['status'];
 }
-
+*/
 /*
-			// CERCA POKÈSTOP NEL DATABASE
+			BETA// CERCA POKÈSTOP NEL DATABASE
 			$query = "SELECT * FROM `pokestops` WHERE `pokestop` = 'Squid'";
 			$result = mysqli_query($conn,$query);
 			$row = mysqli_fetch_assoc($result);
@@ -61,7 +62,7 @@ else {
 			$lng = $row['lng'];
 */
 
-if(mysql_num_rows($result) == 0)
+if($status == 0)
 {
 	// 100%
 	if(strpos($text, "/100") === 0 )
@@ -81,7 +82,7 @@ if(mysql_num_rows($result) == 0)
 			];
 			*/
 			$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-			mysqli_query($conn,"INSERT INTO `sessions` (userID, status, alert) VALUES ($userId, 1, '$reply')");
+			//mysqli_query($conn,"INSERT INTO `sessions` (userID, status, alert) VALUES ($userId, 1, '$reply')");
 			//$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
 		}
 		else
@@ -99,7 +100,7 @@ if(mysql_num_rows($result) == 0)
 			];
 			*/
 			$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-			mysqli_query($conn,"INSERT INTO `sessions` (userID, status, alert) VALUES ($userId, 1, '$text')");
+			//mysqli_query($conn,"INSERT INTO `sessions` (userID, status, alert) VALUES ($userId, 1, '$text')");
 			//$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
 		}
 	}
