@@ -56,7 +56,7 @@ $status = $row['status'];
 			$lng = $row['lng'];
 */
 
-if($status == '')
+if(mysql_num_rows($result) == 0)
 {
 	// 100%
 	if(strpos($text, "/100") === 0 )
