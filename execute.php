@@ -26,14 +26,14 @@ $apiToken = "721221790:AAFvEHkZQUVU3S9SeNaYoKIHPvvVojnCq6Q";
 
 
 // Create connection
-$conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");
+$conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "pogotube42", "", "pogotube42");
 // Check connection
 if ($conn->connect_error) {
 	$error = "Connection failed: " . $conn->connect_error;
 }
 
 //$group_PogoTube42 = -1001204753064;
-$group_NordEstLegit = -1001187994497;
+$group_NordEstLegit = -1001119443518;
 $authorizedChats = array( $group_PogoTube42, $group_NordEstLegit );
 
 //if($chatId === $group_TestBot or $chatId === $group_NordEstLegit) {
@@ -64,9 +64,9 @@ if(strpos($text, "/100") === 0 )
 
 
 // DEBUG - PRINT
-/*
+
 $parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
-*/
+
 
