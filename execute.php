@@ -59,7 +59,7 @@ if(strpos($text, "/100") === 0 )
     		'longitude' => $lng,
 		];
 		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($data) );
+		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?chat_id=@centoPoGO&latitude=51.6680&longitude=32.6546");
 	}
 	else
 	{
@@ -69,8 +69,8 @@ if(strpos($text, "/100") === 0 )
    	 	'latitude' => $lat,
     		'longitude' => $lng,
 		];
-		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($data)
+		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?chat_id=@centoPoGO&latitude=51.6680&longitude=32.6546");
 	}
 }
 
