@@ -19,8 +19,8 @@ $text = isset($message['text']) ? $message['text'] : "";
 $text = trim($text);
 $text = strtolower($text);
 $reply = isset($message['reply_to_message']['text']) ? $message['reply_to_message']['text'] : "";
-$lat = isset($message['location']['latitude']) ? $message['location']['latitude'] : "";
-$lng = isset($message['location']['longitude']) ? $message['location']['longitude'] : "";
+$lat = isset($message['location']['latitude']) ? $message['location']['latitude'] : NULL;
+$lng = isset($message['location']['longitude']) ? $message['location']['longitude'] : NULL;
 
 header("Content-Type: application/json");
 $response = '';
@@ -96,19 +96,30 @@ if($status == 0)
 }
 elseif($status == 1 and $chatId == $userId)
 {
-	$data = [
-	   'chat_id' => $channel,
-	   'text' => '*'.$alert.'*',
-	   'parse_mode' => 'markdown',
-	];
-	$location = [
-	    'chat_id' => $channel,
-	    'latitude' => $lat,
-	    'longitude' => $lng,
-	];
-	$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-	$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
-	mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
+	if (!$lat or !$lng)
+	{
+		$data = [
+	   	'chat_id' => $userId,
+	   	'text' => 'Ho bisogno della posizione per inoltrare la segnalazione.',
+	   	'parse_mode' => 'markdown',
+		];
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+	}
+	else {
+		$data = [
+	   	'chat_id' => $channel,
+	   	'text' => '*'.$alert.'*',
+	   	'parse_mode' => 'markdown',
+		];
+		$location = [
+	    	'chat_id' => $channel,
+	   	 'latitude' => $lat,
+	   	 'longitude' => $lng,
+		];
+		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
+		mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
+	}
 }
 
 
