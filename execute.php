@@ -62,7 +62,7 @@ if(strpos($text, "/100") === 0 )
     		'longitude' => $lng,
 		];
 		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
+		$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
 	}
 	else
 	{
@@ -76,7 +76,7 @@ if(strpos($text, "/100") === 0 )
     		'longitude' => $lng,
 		];
 		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
+		$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
 	}
 }
 
