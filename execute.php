@@ -58,7 +58,7 @@ if(strpos($text, "/100") === 0 )
 	{
 		$data = [
     		'chat_id' => $userId,
-    		'text' => 'Mandami la posizione di*'.$reply.'*.',
+    		'text' => 'Mandami la posizione di<b>'.$reply.'</b>.',
 		];
 		/*
 		$location = [
@@ -74,7 +74,7 @@ if(strpos($text, "/100") === 0 )
 	{
 		$data = [
    	 	'chat_id' => $userId,
-   	 	'text' => 'Mandami la posizione di*'.str_replace('/100', '', $text).'*.',
+   	 	'text' => 'Mandami la posizione di<b>'.str_replace('/100', '', $text).'</b>.',
 		];
 		/*
 		$location = [
