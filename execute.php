@@ -76,11 +76,12 @@ $conn->close();
 
 } else { $response = "Gruppo non autorizzato. Contattare l'admin."; };
 
-/*
+
 // DEBUG - PRINT
+$response = $error;
 $parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
-*/
+
 
 
