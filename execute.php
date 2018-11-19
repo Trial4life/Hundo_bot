@@ -78,16 +78,21 @@ elseif(strpos($text, "/quests") === 0 ) {
 	// ELENCO QUESTS
 	$query = "SELECT * FROM `quests`";
 	$result_quest = mysqli_query($conn,$query);
-	$quest = array();
-	$pokestop = array();
+	$quest = $pokestop = $lat = $lng = array();
 	while ($row = mysqli_fetch_assoc($result_quest)) {
 		array_push($quest, $row['quest']);
 		array_push($pokestop, $row['pokestop']);
+		$query = "SELECT * FROM `pokestops` WHERE pokestop = '$pokestop[$i]'";
+		$result_pkst = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result_pkst);
+		array_push($lat, $row['lat']);
+		array_push($lng, $row['lng']);
 	}
 
 	$response = 'Elenco delle quests di oggi:';
 	for ($i = 0; $i <= sizeof($quest)-1; $i++){
-		$response = $response . "\n*" . $quest[$i] . "* − ". $pokestop[$i];
+		$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i];
+		$response = $response . "\n*" . $quest[$i] . "* − [" . $pokestop[$i] . "](" . $link . ")";
 	}
 
 	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
