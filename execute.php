@@ -92,7 +92,7 @@ elseif(strpos($text, "/quests") === 0 ) {
 		array_push($lng, $row2['lng']);
 	}
 
-	$response = 'Elenco delle quests di oggi:';
+	$response = 'Elenco delle quests di oggi:'.$today;
 	for ($i = 0; $i <= sizeof($quest)-1; $i++){
 		$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i];
 		$response = $response . "\n*" . $quest[$i] . "* − [" . $pokestop[$i] . "](" . $link . ")";
@@ -202,12 +202,12 @@ $conn->close();
 
 
 
-
+/*ì
 // DEBUG - PRINT
 $response = $today;
 $parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
-
+*/
 
 
