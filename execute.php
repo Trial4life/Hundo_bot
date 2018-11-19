@@ -84,9 +84,9 @@ elseif(strpos($text, "/quests") === 0 ) {
 		array_push($pokestop, $row['pokestop']);
 		$query = "SELECT * FROM `pokestops` WHERE pokestop = '$pokestop[$i]'";
 		$result_pkst = mysqli_query($conn,$query);
-		$row = mysqli_fetch_assoc($result_pkst);
-		array_push($lat, $row['lat']);
-		array_push($lng, $row['lng']);
+		$row2 = mysqli_fetch_assoc($result_pkst);
+		array_push($lat, $row2['lat']);
+		array_push($lng, $row2['lng']);
 	}
 
 	$response = 'Elenco delle quests di oggi:';
