@@ -150,8 +150,8 @@ elseif($status == 0)
 		if(strpos($text, "/quest") === 0 )	{
 			if (in_array($username, $authorizedUsers)) {
 				$phrase = explode(", ", str_replace('/quest ', '', $text));
-				$quest = $phrase[0];
-				$pkst = $phrase[1];
+				$quest = ucfirst($phrase[0]);
+				$pkst = ucfirst($phrase[1]);
 
 				$query = "SELECT * FROM `quests` WHERE `pokestop` = '$pkst'";
 				$result = mysqli_query($conn,$query);
