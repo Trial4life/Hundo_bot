@@ -182,6 +182,7 @@ elseif($status == 0)
 						$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 
 						// REGISTRA LA QUEST NEL DATABASE
+						mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, giorno) VALUES ('$quest', '$pkst', '$today')");
 					}
 				}
 				else {
