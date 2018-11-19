@@ -32,7 +32,7 @@ $bot_Exeggutor = 158754689;
 $group_PogoTube42 = -1001204753064;
 $group_NordEstLegit = -1001119443518;
 $authorizedChats = array( $group_PogoTube42, $group_NordEstLegit, $bot_Exeggutor );
-
+$authorizedUsers = array( 'Trial4life', 'DadyGC', 'medix93');
 if (in_array($chatId, $authorizedChats)) {
 
 
@@ -79,27 +79,36 @@ elseif($status == 0)
 	// 100%
 	if(strpos($text, "/100") === 0 )
 	{
-		if(isset($message['reply_to_message']['text']))
-		{
+		if (in_array($userId, $authorizedUsers)) {
+			if(isset($message['reply_to_message']['text']))
+			{
+				$data = [
+	   	 		'chat_id' => $userId,
+	   	 		'text' => 'Mandami la posizione di*'.$reply.'*.',
+	   	 		'parse_mode' => 'markdown',
+				];
+				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+				mysqli_query($conn,"INSERT INTO `sessions` (userID, status, alert) VALUES ($userId, 1, '$reply')");
+
+			}
+			else
+			{
+				$text = str_replace('/100', '', $text);
+				$data = [
+	   		 	'chat_id' => $userId,
+	   		 	'text' => 'Mandami la posizione di*'.str_replace('/100', '', $text).'*.',
+	   	 		'parse_mode' => 'markdown',
+	   		];
+				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+				mysqli_query($conn,"INSERT INTO `sessions` (userID, status, alert) VALUES ($userId, 1, '$text')");
+			}
+		}
+		else {
 			$data = [
-	    		'chat_id' => $userId,
-	    		'text' => 'Mandami la posizione di*'.$reply.'*.',
-	    		'parse_mode' => 'markdown',
+	   	 	'chat_id' => $chatId,
+	   	 	'text' => 'Non sei autorizzato alle segnalazioni. Contatta un admin.',
 			];
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-			mysqli_query($conn,"INSERT INTO `sessions` (userID, status, alert) VALUES ($userId, 1, '$reply')");
-
-		}
-		else
-		{
-			$text = str_replace('/100', '', $text);
-			$data = [
-	   	 	'chat_id' => $userId,
-	   	 	'text' => 'Mandami la posizione di*'.str_replace('/100', '', $text).'*.',
-	    		'parse_mode' => 'markdown',
-	   	];
-			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-			mysqli_query($conn,"INSERT INTO `sessions` (userID, status, alert) VALUES ($userId, 1, '$text')");
 		}
 	}
 }
