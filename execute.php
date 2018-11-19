@@ -156,10 +156,11 @@ elseif($status == 0)
 				$query = "SELECT * FROM `quests` WHERE `pokestop` = '$pkst'";
 				$result = mysqli_query($conn,$query);
 				$row = mysqli_fetch_assoc($result);
-				if(!$result) {
+				if(!$row) {
 					$query = "SELECT * FROM `pokestops` WHERE `pokestop` = '$pkst'";
 					$result = mysqli_query($conn,$query);
-					if(!$result) {
+					$row = mysqli_fetch_assoc($result);
+					if(!$row) {
 						// AVVISO DI POKÈSTOP NON TROVATO
 						$response = 'Pokéstop non trovato. Assicurati di immettere il nome esatto del pokéstop.';
 						$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
@@ -167,7 +168,7 @@ elseif($status == 0)
 					}
 					else {
 						// SEGNALA LA QUEST NEL CANALE
-						$row = mysqli_fetch_assoc($result);
+						//$row = mysqli_fetch_assoc($result);
 						$lat = $row['lat'];
 						$lng = $row['lng'];
 						$link = 'https://maps.google.com/?q='.$lat.','.$lng;
