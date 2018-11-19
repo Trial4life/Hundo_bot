@@ -87,7 +87,7 @@ elseif(strpos($text, "/quests") === 0 ) {
 
 	$response = 'Elenco delle quests di oggi:';
 	for ($i = 0; $i <= sizeof($quest); $i++){
-		$response = $response . "\n*" . $quest . "* − ". $pokestop;
+		$response = $response . "\n*" . $quest[$i] . "* − ". $pokestop[$i];
 	}
 
 	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
