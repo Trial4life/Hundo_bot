@@ -80,7 +80,7 @@ elseif(strpos($text, "/quests") === 0 ) {
 	$result_quest = mysqli_query($conn,$query);
 	$quest = array();
 	$pokestop = array();
-	while ($row = mysqli_fetch_assoc($result)) {
+	while ($row = mysqli_fetch_assoc($result_quest)) {
 		array_push($quest, $row['quest']);
 		array_push($pokestop, $row['pokestop']);
 	}
