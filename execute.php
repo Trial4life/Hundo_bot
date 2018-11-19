@@ -21,6 +21,7 @@ $text = trim($text);
 $reply = isset($message['reply_to_message']['text']) ? $message['reply_to_message']['text'] : "";
 $lat = isset($message['location']['latitude']) ? $message['location']['latitude'] : NULL;
 $lng = isset($message['location']['longitude']) ? $message['location']['longitude'] : NULL;
+$today = date("YYYY-m-d");
 
 header("Content-Type: application/json");
 $response = '';
@@ -76,6 +77,7 @@ if(strpos($text, "/annulla") === 0 ) {
 
 elseif(strpos($text, "/quests") === 0 ) {
 	// ELENCO QUESTS
+	mysqli_query($conn,"DELETE FROM `quests` WHERE giorno < $today");  // RIMUOVE LE QUEST DEL GIORNO PRECEDENTE
 	$query = "SELECT * FROM `quests`";
 	$result_quest = mysqli_query($conn,$query);
 	$quest = $pokestop = $lat = $lng = array();
