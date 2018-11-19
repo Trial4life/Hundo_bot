@@ -86,7 +86,7 @@ elseif(strpos($text, "/quests") === 0 ) {
 	}
 
 	$response = 'Elenco delle quests di oggi:';
-	for ($i = 0; $i <= sizeof($quest); $i++){
+	for ($i = 0; $i <= sizeof($quest)-1; $i++){
 		$response = $response . "\n*" . $quest[$i] . "* − ". $pokestop[$i];
 	}
 
