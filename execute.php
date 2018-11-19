@@ -147,7 +147,13 @@ $conn->close();
 
 
 
-} else { $response = "Gruppo non autorizzato. Contattare l'admin."; };
+} else {
+	$data = [
+	   'chat_id' => $chatId,
+	   'text' => "Gruppo non autorizzato. Contattare l'admin",
+	];
+	$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+}
 
 /*
 // DEBUG - PRINT
