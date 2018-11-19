@@ -34,7 +34,7 @@ $group_NordEstLegit = -1001119443518;
 $authorizedChats = array( $group_PogoTube42, $group_NordEstLegit, $bot_Exeggutor );
 $authorizedUsers = array( 'Trial4life', 'DadyGC', 'medix93');
 
-if (in_array($chatId, $authorizedChats)) {
+
 
 // Create connection
 $conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");
@@ -76,7 +76,10 @@ if(strpos($text, "/annulla") === 0 ) {
 
 elseif($status == 0)
 {
-	// 100%
+if (in_array($chatId, $authorizedChats)) {
+	//////////////
+	//// 100% ////
+	//////////////
 	if(strpos($text, "/100") === 0 )
 	{
 		if (in_array($username, $authorizedUsers)) {
@@ -111,6 +114,20 @@ elseif($status == 0)
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}
 	}
+
+	////////////////
+	//// QUESTS ////
+	////////////////
+
+
+
+} else {
+	$data = [
+	   'chat_id' => $chatId,
+	   'text' => "Gruppo non autorizzato. Contattare l'admin",
+	];
+	$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+	}
 }
 
 
@@ -141,19 +158,18 @@ elseif($status == 1 and $chatId == $userId)
 	}
 }
 
+elseif($status == 2 and $chatId == $userId)
+{
+	// CODICE QUEST
+}
+
 
 //close the mySQL connection
 $conn->close();
 
 
 
-} else {
-	$data = [
-	   'chat_id' => $chatId,
-	   'text' => "Gruppo non autorizzato. Contattare l'admin",
-	];
-	$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-}
+
 
 /*
 // DEBUG - PRINT
