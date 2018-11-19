@@ -127,7 +127,7 @@ elseif($status == 0)
 					$text = str_replace('/100', '', $text);
 					$data = [
 		   		 	'chat_id' => $userId,
-		   		 	'text' => 'Mandami la posizione di*'.str_replace('/100', '', $text).'*.',
+		   		 	'text' => 'Mandami la posizione di*'.$text.'*.',
 		   	 		'parse_mode' => 'markdown',
 		   		];
 					$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
@@ -149,7 +149,7 @@ elseif($status == 0)
 
 		if(strpos($text, "/quest") === 0 )	{
 			if (in_array($username, $authorizedUsers)) {
-				$phrase = explode(", ", str_replace('/quest', '', $text));
+				$phrase = explode(", ", str_replace('/quest ', '', $text));
 				$quest = $phrase[0];
 				$pkst = $phrase[1];
 
@@ -174,7 +174,7 @@ elseif($status == 0)
 						$link = 'https://maps.google.com/?q='.$lat.','.$lng;
 						$data = [
 		   		 		'chat_id' => $channel,
-		   		 		'text' => 'Quest *'. $quest . '*− pokéstop: [' . $pkst . '](' . $link . ')',
+		   		 		'text' => 'Quest *'. $quest . '* − pokéstop: [' . $pkst . '](' . $link . ')',
 		   	 			'parse_mode' => 'markdown',
 		   	 			'disable_web_page_preview' => TRUE,
 		   			];
