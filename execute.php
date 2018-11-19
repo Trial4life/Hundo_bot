@@ -74,6 +74,28 @@ if(strpos($text, "/annulla") === 0 ) {
 	$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 }
 
+elseif(strpos($text, "/quests") === 0 ) {
+	// ELENCO QUESTS
+	$query = "SELECT * FROM `quests`";
+	$result_quest = mysqli_query($conn,$query);
+	$quest = array();
+	$pokestop = array();
+	while ($row = mysqli_fetch_assoc($result)) {
+		array_push($quest, $row['quest']);
+		array_push($pokestop, $row['pokestop']);
+	}
+
+	$response = 'Elenco delle quests di oggi:';
+	for ($i = 0; $i <= sizeof($quest); $i++){
+		$response = $response . "\n*" . $quest . "* − ". $pokestop;
+	}
+
+	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
+	$parameters["method"] = "sendMessage";
+	echo json_encode($parameters);
+
+}
+
 elseif($status == 0)
 {
 	if (in_array($chatId, $authorizedChats)) {
