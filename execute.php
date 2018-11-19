@@ -165,6 +165,7 @@ elseif($status == 0)
 						$response = 'Pokéstop non trovato. Assicurati di immettere il nome esatto del pokéstop.';
 						$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 						$parameters["method"] = "sendMessage";
+						echo json_encode($parameters);
 					}
 					else {
 						// SEGNALA LA QUEST NEL CANALE
@@ -174,7 +175,7 @@ elseif($status == 0)
 						$link = 'https://maps.google.com/?q='.$lat.','.$lng;
 						$data = [
 		   		 		'chat_id' => $channel,
-		   		 		'text' => 'Quest *'. $quest . '* − pokéstop:[' . $pkst . '](' . $link . ')',
+		   		 		'text' => 'Quest *'. $quest . '* − pokéstop: [' . $pkst . '](' . $link . ')',
 		   	 			'parse_mode' => 'markdown',
 		   	 			'disable_web_page_preview' => TRUE,
 		   			];
@@ -185,8 +186,7 @@ elseif($status == 0)
 				}
 				else {
 					// AVVISO DI QUEST GIÀ SEGNALATA
-					//$response = 'La quest di questo pokéstop è stata già segnalata per oggi. DEBUG: '.!$result;
-					$response = $row;
+					$response = 'La quest di questo pokéstop è stata già segnalata per oggi.';
 					$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 					$parameters["method"] = "sendMessage";
 					echo json_encode($parameters);
