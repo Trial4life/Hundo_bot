@@ -110,15 +110,23 @@ elseif(strpos($text, "/quests") === 0 ) {
 		array_push($lng, $row2['lng']);
 	}
 
-	$response = 'Elenco delle quests di oggi:';
-	for ($i = 0; $i <= sizeof($quest)-1; $i++){
-		$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i];
-		$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
+	if (!$row) {
+		$response = 'Non è stata segnalata nessuna quest per oggi.';
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
 	}
+	else {
+		$response = 'Elenco delle quests di oggi:';
+		for ($i = 0; $i <= sizeof($quest)-1; $i++){
+			$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i];
+			$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
+		}
 
-	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
-	$parameters["method"] = "sendMessage";
-	echo json_encode($parameters);
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
 
 }
 
