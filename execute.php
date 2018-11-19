@@ -58,20 +58,25 @@ else {
 	$alert = $row['alert'];
 }
 
-/*
-			BETA// CERCA POKÈSTOP NEL DATABASE
-			$query = "SELECT * FROM `pokestops` WHERE `pokestop` = 'Squid'";
-			$result = mysqli_query($conn,$query);
-			$row = mysqli_fetch_assoc($result);
-			$lat = $row['lat'];
-			$lng = $row['lng'];
-*/
+
+
+// COMANDI
 
 if(strpos($text, "/annulla") === 0 ) {
 	mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
 	$data = [
 	   'chat_id' => $userId,
 	   'text' => 'Segnalazione annullata.',
+	];
+	$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+}
+
+elseif(strpos($text, "/cancella") === 0 ) {
+	$text = str_replace('/cancella ', '', $text)
+	mysqli_query($conn,"DELETE FROM `quests` WHERE pokestop = '$text'");
+	$data = [
+	   'chat_id' => $chatId,
+	   'text' => 'Quest cancellata.',
 	];
 	$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 }
