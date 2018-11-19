@@ -73,12 +73,24 @@ if(strpos($text, "/annulla") === 0 ) {
 
 elseif(strpos($text, "/cancella") === 0 ) {
 	$text = str_replace('/cancella ', '', $text);
-	mysqli_query($conn,"DELETE FROM `quests` WHERE pokestop = '$text'");
-	$data = [
-	   'chat_id' => $chatId,
-	   'text' => 'Quest cancellata.',
-	];
-	$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+	$query = "SELECT * FROM `quests` WHERE `pokestop` = '$text'";
+	$result = mysqli_query($conn,$query);
+	$row = mysqli_fetch_assoc($result);
+	if(!$row) {
+		$data = [
+	   	'chat_id' => $chatId,
+	   	'text' => 'Pokéstop non trovato.',
+		];
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+	}
+	else {
+		mysqli_query($conn,"DELETE FROM `quests` WHERE pokestop = '$text'");
+		$data = [
+		   'chat_id' => $chatId,
+		   'text' => 'Quest cancellata.',
+		];
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+	}
 }
 
 elseif(strpos($text, "/quests") === 0 ) {
