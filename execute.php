@@ -96,7 +96,7 @@ elseif(strpos($text, "/quests") === 0 ) {
 		$response = $response . "\n*" . $quest[$i] . "* − [" . $pokestop[$i] . "](" . $link . ")";
 	}
 
-	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
+	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 	$parameters["method"] = "sendMessage";
 	echo json_encode($parameters);
 
