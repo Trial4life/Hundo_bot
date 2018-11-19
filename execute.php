@@ -82,7 +82,8 @@ elseif(strpos($text, "/quests") === 0 ) {
 	while ($row = mysqli_fetch_assoc($result_quest)) {
 		array_push($quest, $row['quest']);
 		array_push($pokestop, $row['pokestop']);
-		$query = "SELECT * FROM `pokestops` WHERE pokestop = '$pokestop[$i]'";
+		$curr_pkst = end($pokestop);
+		$query = "SELECT * FROM `pokestops` WHERE pokestop = '$curr_pkst'";
 		$result_pkst = mysqli_query($conn,$query);
 		$row2 = mysqli_fetch_assoc($result_pkst);
 		array_push($lat, $row2['lat']);
