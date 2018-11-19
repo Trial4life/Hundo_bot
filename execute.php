@@ -110,7 +110,7 @@ elseif(strpos($text, "/quests") === 0 ) {
 		array_push($lng, $row2['lng']);
 	}
 
-	if (!$row) {
+	if (sizeof($quest)==0) {
 		$response = 'Non è stata segnalata nessuna quest per oggi.';
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
