@@ -184,7 +184,7 @@ elseif($status == 0)
 				else {
 					// AVVISO DI QUEST GIÀ SEGNALATA
 					//$response = 'La quest di questo pokéstop è stata già segnalata per oggi. DEBUG: '.!$result;
-					$response = !$result;
+					$response = $result;
 					$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 					$parameters["method"] = "sendMessage";
 					echo json_encode($parameters);
