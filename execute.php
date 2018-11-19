@@ -77,7 +77,7 @@ if(strpos($text, "/annulla") === 0 ) {
 
 elseif(strpos($text, "/quests") === 0 ) {
 	// ELENCO QUESTS
-	mysqli_query($conn,"DELETE FROM `quests` WHERE giorno < $today");  // RIMUOVE LE QUEST DEL GIORNO PRECEDENTE
+	//mysqli_query($conn,"DELETE FROM `quests` WHERE giorno < $today");  // RIMUOVE LE QUEST DEL GIORNO PRECEDENTE
 	$query = "SELECT * FROM `quests`";
 	$result_quest = mysqli_query($conn,$query);
 	$quest = $pokestop = $lat = $lng = array();
