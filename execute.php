@@ -79,7 +79,7 @@ elseif($status == 0)
 	// 100%
 	if(strpos($text, "/100") === 0 )
 	{
-		if (in_array($userId, $authorizedUsers)) {
+		if (in_array($username, $authorizedUsers)) {
 			if(isset($message['reply_to_message']['text']))
 			{
 				$data = [
