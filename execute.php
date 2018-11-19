@@ -72,7 +72,7 @@ if(strpos($text, "/annulla") === 0 ) {
 }
 
 elseif(strpos($text, "/cancella") === 0 ) {
-	$text = str_replace('/cancella ', '', $text)
+	$text = str_replace('/cancella ', '', $text);
 	mysqli_query($conn,"DELETE FROM `quests` WHERE pokestop = '$text'");
 	$data = [
 	   'chat_id' => $chatId,
