@@ -21,7 +21,7 @@ $text = trim($text);
 $reply = isset($message['reply_to_message']['text']) ? $message['reply_to_message']['text'] : "";
 $lat = isset($message['location']['latitude']) ? $message['location']['latitude'] : NULL;
 $lng = isset($message['location']['longitude']) ? $message['location']['longitude'] : NULL;
-$today = date('YYYY-m-d');
+$today = date('Y-m-d');
 
 header("Content-Type: application/json");
 $response = '';
@@ -77,7 +77,7 @@ if(strpos($text, "/annulla") === 0 ) {
 
 elseif(strpos($text, "/quests") === 0 ) {
 	// ELENCO QUESTS
-	//mysqli_query($conn,"DELETE FROM `quests` WHERE giorno < '$today'");  // RIMUOVE LE QUEST DEL GIORNO PRECEDENTE
+	mysqli_query($conn,"DELETE FROM `quests` WHERE giorno < '$today'");  // RIMUOVE LE QUEST DEL GIORNO PRECEDENTE
 	$query = "SELECT * FROM `quests`";
 	$result_quest = mysqli_query($conn,$query);
 	$quest = $pokestop = $lat = $lng = array();
@@ -92,7 +92,7 @@ elseif(strpos($text, "/quests") === 0 ) {
 		array_push($lng, $row2['lng']);
 	}
 
-	$response = 'Elenco delle quests di oggi:'.$today;
+	$response = 'Elenco delle quests di oggi:';
 	for ($i = 0; $i <= sizeof($quest)-1; $i++){
 		$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i];
 		$response = $response . "\n*" . $quest[$i] . "* − [" . $pokestop[$i] . "](" . $link . ")";
