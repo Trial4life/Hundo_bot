@@ -33,8 +33,8 @@ $group_PogoTube42 = -1001204753064;
 $group_NordEstLegit = -1001119443518;
 $authorizedChats = array( $group_PogoTube42, $group_NordEstLegit, $bot_Exeggutor );
 $authorizedUsers = array( 'Trial4life', 'DadyGC', 'medix93');
-if (in_array($chatId, $authorizedChats)) {
 
+if (in_array($chatId, $authorizedChats)) {
 
 // Create connection
 $conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");
