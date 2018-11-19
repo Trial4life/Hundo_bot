@@ -159,11 +159,13 @@ elseif($status == 0)
 					$query = "SELECT * FROM `pokestops` WHERE `pokestop` = '$pkst'";
 					$result = mysqli_query($conn,$query);
 					if(!$result) {
+						// AVVISO DI POKÈSTOP NON TROVATO
 						$response = 'Pokéstop non trovato. Assicurati di immettere il nome esatto del pokéstop.';
 						$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 						$parameters["method"] = "sendMessage";
 					}
 					else {
+						// SEGNALA LA QUEST NEL CANALE
 						$row = mysqli_fetch_assoc($result);
 						$lat = $row['lat'];
 						$lng = $row['lng'];
@@ -175,10 +177,13 @@ elseif($status == 0)
 		   	 			'disable_web_page_preview' => TRUE,
 		   			];
 						$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+
+						// REGISTRA LA QUEST NEL DATABASE
 					}
 				}
 				else {
-					$response = 'La quest di questo pokéstop è stata già segnalata per oggi.'.$pkst;
+					// AVVISO DI QUEST GIÀ SEGNALATA
+					$response = 'La quest di questo pokéstop è stata già segnalata per oggi. DEBUG: '.$result;
 					$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 					$parameters["method"] = "sendMessage";
 					echo json_encode($parameters);
