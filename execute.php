@@ -169,7 +169,6 @@ elseif($status == 0)
 					}
 					else {
 						// SEGNALA LA QUEST NEL CANALE
-						//$row = mysqli_fetch_assoc($result);
 						$lat = $row['lat'];
 						$lng = $row['lng'];
 						$link = 'https://maps.google.com/?q='.$lat.','.$lng;
