@@ -182,6 +182,12 @@ elseif($status == 0)
 
 						// REGISTRA LA QUEST NEL DATABASE
 						mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, giorno) VALUES ('$quest', '$pkst', '$today')");
+
+						$response = 'La quest è stata registrata.';
+						$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
+						$parameters["method"] = "sendMessage";
+						echo json_encode($parameters);
+				}
 					}
 				}
 				else {
