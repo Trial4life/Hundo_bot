@@ -29,15 +29,16 @@ $response = '';
 $apiToken = "689487990:AAGhqhcsalt0mXYRnUqFro9ECNxPuOOVPZc";
 $channel = '@centoPoGO';
 
+// AUTORIZZAZIONI
+include $_SERVER['DOCUMENT_ROOT'] . "authorizations.php";
 
-$bot_Exeggutor = 158754689;
-$group_PogoTube42 = -1001204753064;
-$group_NordEstLegit = -1001119443518;
-$group_admin = -1001205498567;
-$authorizedChats = array( $group_PogoTube42, $group_NordEstLegit, $bot_Exeggutor, $group_admin );
-$authorizedUsers = array( 'Trial4life', 'DadyGC', 'medix93', 'Barrazar', 'Giulia_Valorosi', 'MenoMenotti', 'Illidanrex');
-
-
+// EMOJIS
+$EMO_100 = json_decode('"'."\u1f4af".'"');
+$EMO_PIN = json_decode('"'."\u1f4cc".'"');
+$EMO_v = json_decode('"'."\u2705".'"');
+$EMO_x = json_decode('"'."\u274c".'"');
+$EMO_ALR = json_decode('"'."\u203c".'"');
+$EMO_ERR = json_decode('"'."\u26d4".'"');
 
 // Create connection
 $conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");
@@ -80,7 +81,7 @@ elseif(strpos($text, "/cancella") === 0 ) {
 	if(!$row) {
 		$data = [
 	   	'chat_id' => $chatId,
-	   	'text' => json_decode('"'."\u26d4".'"'). 'Pokéstop non trovato.',
+	   	'text' => $EMO_ERR . ' Pokéstop non trovato.',
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
