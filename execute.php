@@ -80,7 +80,7 @@ elseif(strpos($text, "/cancella") === 0 ) {
 	if(!$row) {
 		$data = [
 	   	'chat_id' => $chatId,
-	   	'text' => json_decode('\u26D4'). 'Pokéstop non trovato.',
+	   	'text' => json_decode('"'."\ud83d\udc4e".'"'). 'Pokéstop non trovato.',
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
