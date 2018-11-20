@@ -68,7 +68,7 @@ if(strpos($text, "/annulla") === 0 ) {
 	mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
 	$data = [
 	   'chat_id' => $userId,
-	   'text' => 'Segnalazione annullata.',
+	   'text' => $EMO_x.' Segnalazione annullata.',
 	];
 	$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 }
@@ -89,7 +89,7 @@ elseif(strpos($text, "/cancella") === 0 ) {
 		mysqli_query($conn,"DELETE FROM `quests` WHERE pokestop = '$text'");
 		$data = [
 		   'chat_id' => $chatId,
-		   'text' => 'Quest cancellata.',
+		   'text' => $EMO_x.' Quest cancellata.',
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
@@ -143,7 +143,7 @@ elseif($status == 0)
 				if(isset($message['reply_to_message']['text']))	{
 					$data = [
 		   	 		'chat_id' => $userId,
-		   	 		'text' => 'Mandami la posizione di *'.$reply.'*.',
+		   	 		'text' => $EMO_PIN.' Mandami la posizione di *'.$reply.'*.',
 		   	 		'parse_mode' => 'markdown',
 					];
 					$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
@@ -154,7 +154,7 @@ elseif($status == 0)
 					$text = str_replace('/100', '', $text);
 					$data = [
 		   		 	'chat_id' => $userId,
-		   		 	'text' => 'Mandami la posizione di*'.$text.'*.',
+		   		 	'text' => $EMO_PIN.' Mandami la posizione di*'.$text.'*.',
 		   	 		'parse_mode' => 'markdown',
 		   		];
 					$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
@@ -164,7 +164,7 @@ elseif($status == 0)
 			else {
 				$data = [
 		   	 	'chat_id' => $chatId,
-		   	 	'text' => 'Non sei autorizzato alle segnalazioni. Contatta un admin.',
+		   	 	'text' => $EMO_ERR.' Non sei autorizzato alle segnalazioni. Contatta un admin. '.$EMO_ERR,
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			}
@@ -189,7 +189,7 @@ elseif($status == 0)
 					$row = mysqli_fetch_assoc($result);
 					if(!$row) {
 						// AVVISO DI POKÈSTOP NON TROVATO
-						$response = 'Pokéstop non trovato. Assicurati di immettere il nome esatto del pokéstop.';
+						$response = $EMO_ERR.' Pokéstop non trovato. Assicurati di immettere il nome esatto del pokéstop.';
 						$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 						$parameters["method"] = "sendMessage";
 						echo json_encode($parameters);
@@ -210,7 +210,7 @@ elseif($status == 0)
 						// REGISTRA LA QUEST NEL DATABASE
 						mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, giorno) VALUES ('$quest', '$pkst', '$today')");
 
-						$response = 'La quest è stata registrata.';
+						$response = $EMO_v.' La quest è stata registrata.';
 						$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 						$parameters["method"] = "sendMessage";
 						echo json_encode($parameters);
@@ -218,7 +218,7 @@ elseif($status == 0)
 				}
 				else {
 					// AVVISO DI QUEST GIÀ SEGNALATA
-					$response = 'La quest di questo pokéstop è stata già segnalata per oggi.';
+					$response = $EMO_v.' La quest di questo pokéstop è stata già segnalata per oggi.';
 					$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 					$parameters["method"] = "sendMessage";
 					echo json_encode($parameters);
@@ -227,7 +227,7 @@ elseif($status == 0)
 			else {
 				$data = [
 		   	 	'chat_id' => $chatId,
-		   	 	'text' => 'Non sei autorizzato alle segnalazioni. Contatta un admin.',
+		   	 	'text' => $EMO_ERR.' Non sei autorizzato alle segnalazioni. Contatta un admin. '.$EMO_ERR,
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			}
@@ -236,7 +236,7 @@ elseif($status == 0)
 	else {
 		$data = [
 		   'chat_id' => $chatId,
-		   'text' => "Gruppo non autorizzato. Contattare l'admin",
+		   'text' => $EMO_ERR." Gruppo non autorizzato. Contattare l'admin. ".$EMO_ERR,
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
@@ -249,14 +249,14 @@ elseif($status == 1 and $chatId == $userId)
 	{
 		$data = [
 	   	'chat_id' => $userId,
-	   	'text' => 'Ho bisogno della posizione per inoltrare la segnalazione.',
+	   	'text' => $EMO_PIN.' Ho bisogno della posizione per inoltrare la segnalazione.',
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
 	else {
 		$data = [
 	   	'chat_id' => $channel,
-	   	'text' => '*'.$alert.'*',
+	   	'text' => $EMO_ALR." ".$EMO_100." ".$EMO_ALR.' *'.$alert.'* '.$EMO_ALR." ".$EMO_100." ".$EMO_ALR,
 	   	'parse_mode' => 'markdown',
 		];
 		$location = [
