@@ -201,7 +201,7 @@ elseif($status == 0)
 						$link = 'https://maps.google.com/?q='.$lat.','.$lng;
 						$data = [
 		   		 		'chat_id' => $channel,
-		   		 		'text' => 'Quest *'. $quest . '* − pokéstop: [' . $pkst . '](' . $link . ')',
+		   		 		'text' => 'Quest *'. $quest . '*\nPokéstop: [' . $pkst . '](' . $link . ')',
 		   	 			'parse_mode' => 'markdown',
 		   	 			'disable_web_page_preview' => TRUE,
 		   			];
