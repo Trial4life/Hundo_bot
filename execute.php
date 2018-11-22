@@ -23,7 +23,7 @@ $reply = isset($message['reply_to_message']['text']) ? $message['reply_to_messag
 $lat = isset($message['location']['latitude']) ? $message['location']['latitude'] : NULL;
 $lng = isset($message['location']['longitude']) ? $message['location']['longitude'] : NULL;
 $today = date('Y-m-d');
-$today2 = date('d-m-y');
+$today2 = date('d/m/y');
 
 header("Content-Type: application/json");
 $response = '';
