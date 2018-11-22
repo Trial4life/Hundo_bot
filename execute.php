@@ -68,7 +68,7 @@ else {
 if(strpos($text, "/annulla") === 0 ) {
 	mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
 	$data = [
-	   'chat_id' => $userId,
+	   'chat_id' => $chatId,
 	   'text' => $EMO_x.' Segnalazione annullata.',
 	];
 	$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
@@ -143,7 +143,7 @@ elseif($status == 0)
 			if (in_array($username, $authorizedUsers)) {
 				if(isset($message['reply_to_message']['text']))	{
 					$data = [
-		   	 		'chat_id' => $userId,
+		   	 		'chat_id' => $chatId,
 		   	 		'text' => $EMO_PIN.' Mandami la posizione di *'.$reply.'*.',
 		   	 		'parse_mode' => 'markdown',
 					];
@@ -154,7 +154,7 @@ elseif($status == 0)
 				else {
 					$text = str_replace('/100', '', $text);
 					$data = [
-		   		 	'chat_id' => $userId,
+		   		 	'chat_id' => $chatId,
 		   		 	'text' => $EMO_PIN.' Mandami la posizione di*'.$text.'*.',
 		   	 		'parse_mode' => 'markdown',
 		   		];
@@ -210,7 +210,7 @@ elseif($status == 1 and $chatId == $userId)
 	if (!$lat or !$lng)
 	{
 		$data = [
-	   	'chat_id' => $userId,
+	   	'chat_id' => $chatId,
 	   	'text' => $EMO_PIN.' Ho bisogno della posizione per inoltrare la segnalazione.',
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
