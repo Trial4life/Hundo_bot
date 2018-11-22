@@ -18,6 +18,7 @@ $username = isset($message['from']['username']) ? $message['from']['username'] :
 $date = isset($message['date']) ? $message['date'] : "";
 $text = isset($message['text']) ? $message['text'] : "";
 $text = trim($text);
+$URLs = isset($message['entities']) ? $message['entities'];
 $reply = isset($message['reply_to_message']['text']) ? $message['reply_to_message']['text'] : "";
 $lat = isset($message['location']['latitude']) ? $message['location']['latitude'] : NULL;
 $lng = isset($message['location']['longitude']) ? $message['location']['longitude'] : NULL;
@@ -239,7 +240,7 @@ elseif($status == 2 /*and $chatId == $userId*/)
 	if (!$lat or !$lng)	{
 		$data = [
 	   	'chat_id' => $userId,
-	   	'text' => $EMO_PIN.' Ho bisogno della posizione per inoltrare la segnalazione.'.mssql_guid_string('ffe00b93c5a541f682e2dde884845772'),
+	   	'text' => $EMO_PIN.' Ho bisogno della posizione per inoltrare la segnalazione.'.$URLs,
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
