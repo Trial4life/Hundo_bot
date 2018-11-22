@@ -239,7 +239,7 @@ elseif($status == 2 /*and $chatId == $userId*/)
 	if (!$lat or !$lng)	{
 		$data = [
 	   	'chat_id' => $userId,
-	   	'text' => $EMO_PIN.' Ho bisogno della posizione per inoltrare la segnalazione.',
+	   	'text' => $EMO_PIN.' Ho bisogno della posizione per inoltrare la segnalazione.'.$text,
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
@@ -273,7 +273,7 @@ elseif($status == 2 /*and $chatId == $userId*/)
 				mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, lat, lng, giorno) VALUES ('$quest', '$pkst', '$lat', '$lng', '$today')");
 				mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
 			}
-			$response = $EMO_v.' La quest è stata registrata.'.$flag;
+			$response = $EMO_v.' La quest è stata registrata.';
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
