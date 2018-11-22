@@ -35,7 +35,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/authorizations.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/functions.php";
 // EMOJIS
 $EMO_100 = json_decode('"'."\u1f4af".'"');
-$EMO_PIN = "\U00002744";
+$EMO_PIN = "\xF0\x9F\x98\x81";
 $EMO_v = json_decode('"'."\u2705".'"');
 $EMO_x = json_decode('"'."\u274c".'"');
 $EMO_ALR = json_decode('"'."\u203c".'"');
