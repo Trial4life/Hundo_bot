@@ -10,8 +10,9 @@
 
 	function getPortalData($msg) {
 		$pkst = get_string_between($msg, 'Portal: ', 'Address:');
-		$lat = 0;
-		$lng = 0;
+		$latlng = explode(',', get_string_between($URLs[1]['url'],'ll=','&z'));
+		$lat = $latlng[0];
+		$lng = $latlng[1];
    	return array($pkst, $lat, $lng);
    }
 ?>
