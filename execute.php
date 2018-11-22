@@ -236,7 +236,7 @@ elseif($status == 1 and $chatId == $userId)
 elseif($status == 2 /*and $chatId == $userId*/)
 {
 	$quest = $alert;
-	list($pkst, $lat, $lng) = getPortalData($text);
+	list($pkst, $lat, $lng) = getPortalData($text, $URLs[1]['url']);
 	if (!$lat or !$lng)	{
 		$data = [
 	   	'chat_id' => $userId,
