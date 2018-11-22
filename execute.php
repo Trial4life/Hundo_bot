@@ -34,7 +34,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/authorizations.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/functions.php";
 // EMOJIS
 $EMO_100 = json_decode('"'."\u1f4af".'"');
-$EMO_PIN = json_decode('"'."\u1f4cc".'"');
+//$EMO_PIN = json_decode('"'."\u1f4cc".'"');
+$EMO_PIN = json_decode('"'."\u2705".'"');
 $EMO_v = json_decode('"'."\u2705".'"');
 $EMO_x = json_decode('"'."\u274c".'"');
 $EMO_ALR = json_decode('"'."\u203c".'"');
@@ -176,7 +177,7 @@ elseif($status == 0)
 
 		if(strpos($text, "/quest") === 0 )	{
 			if (in_array($username, $authorizedUsers)) {
-				$quest = str_replace('/quest ', '', $text);
+				$quest = ucfirst(str_replace('/quest ', '', $text));
 				$data = [
 		   	 	'chat_id' => $chatId,
 		   	 	'text' => $EMO_PIN.' @'.$username.', mandami la posizione della quest *'.$quest.'* tramite @ingressportalbot.',
