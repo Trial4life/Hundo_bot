@@ -234,7 +234,7 @@ elseif($status == 1 and $chatId == $userId)
 elseif($status == 2 /*and $chatId == $userId*/)
 {
 	if (!$lat or !$lng)	{
-		data = [
+		$data = [
 	   	'chat_id' => $userId,
 	   	'text' => $EMO_PIN.' Ho bisogno della posizione per inoltrare la segnalazione.',
 		];
