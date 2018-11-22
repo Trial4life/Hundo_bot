@@ -35,8 +35,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/authorizations.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/functions.php";
 // EMOJIS
 $EMO_100 = json_decode('"'."\u1f4af".'"');
-//$EMO_PIN = json_decode('"'."\u1f4cc".'"');
-$EMO_PIN = json_decode('"'."\u2705".'"');
+$EMO_PIN = json_decode('"'."\U00002744".'"');
 $EMO_v = json_decode('"'."\u2705".'"');
 $EMO_x = json_decode('"'."\u274c".'"');
 $EMO_ALR = json_decode('"'."\u203c".'"');
@@ -240,7 +239,7 @@ elseif($status == 2 /*and $chatId == $userId*/)
 	if (!$lat or !$lng)	{
 		$data = [
 	   	'chat_id' => $userId,
-	   	'text' => $EMO_PIN.' Ho bisogno della posizione per inoltrare la segnalazione.'.$lat.','.$lng,
+	   	'text' => $EMO_PIN.' Ho bisogno della posizione per inoltrare la segnalazione.',
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
