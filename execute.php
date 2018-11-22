@@ -278,16 +278,15 @@ elseif($status == 2 /*and $chatId == $userId*/)
 
 				// REGISTRA LA QUEST NEL DATABASE
 				mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, lat, lng, giorno) VALUES ('$quest', '$pkst', '$lat', '$lng', '$today')");
-				mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
 			}
 			else {
 				mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, lat, lng, giorno) VALUES ('$quest', '$pkst', '$lat', '$lng', '$today')");
-				mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
 			}
 			$response = $EMO_v.' La quest è stata registrata. '.$flag.$task;
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
+			mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
 		}
 	}
 }
