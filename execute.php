@@ -264,13 +264,13 @@ elseif($status == 2 /*and $chatId == $userId*/)
 			$result = mysqli_query($conn,$query);
 			$row2 = mysqli_fetch_assoc($result);
 			$flag = $row2['flag'];
-			$task = $row2['task'];
+			//$task = $row2['task'];
 			// SEGNALA LA QUEST NEL CANALE - CONTROLLO FLAG MISSIONI RARE
 			if ($flag == 1) {
 				$link = 'https://maps.google.com/?q='.$lat.','.$lng;
 				$data = [
 			  		'chat_id' => $channel,
-			  		'text' => "`Quest:   ` *". $quest . "*\n`Task:    `". $task ."\n`Pokéstop:` [" . $pkst . "](" . $link . ")",
+			  		'text' => "`Quest:   ` *". $quest . "*\n`Task:    `"."\n`Pokéstop:` [" . $pkst . "](" . $link . ")",
 			  		'parse_mode' => 'markdown',
 			  		'disable_web_page_preview' => TRUE,
 				];
@@ -282,7 +282,7 @@ elseif($status == 2 /*and $chatId == $userId*/)
 			else {
 				mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, lat, lng, giorno) VALUES ('$quest', '$pkst', '$lat', '$lng', '$today')");
 			}
-			$response = /*$EMO_v.' La quest è stata registrata. '.*/$flag;
+			$response = $EMO_v.' La quest è stata registrata.';
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
