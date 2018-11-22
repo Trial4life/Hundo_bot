@@ -181,7 +181,7 @@ elseif($status == 0)
 				$data = [
 		   	 	'chat_id' => $chatId,
 		   	 	'text' => $EMO_PIN.' @'.$username.', mandami la posizione della quest *'.$quest.'* tramite @ingressportalbot.',
-		   	// 	'parse_mode' => 'markdown',
+		   	 	'parse_mode' => 'markdown',
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 				mysqli_query($conn,"INSERT INTO `sessions` (userID, status, alert) VALUES ($userId, 2, '$quest')");
@@ -234,6 +234,8 @@ elseif($status == 1 and $chatId == $userId)
 
 elseif($status == 2 /*and $chatId == $userId*/)
 {
+	$quest = $alert;
+	list($pkst, $lat, $lng) = getPortalData($text);
 	if (!$lat or !$lng)	{
 		$data = [
 	   	'chat_id' => $userId,
@@ -243,14 +245,11 @@ elseif($status == 2 /*and $chatId == $userId*/)
 	}
 	else {
 		// CODICE QUEST
-		$quest = $alert;
-		list($pkst, $lat, $lng) = getPortalData($text);
-
 		$query = "SELECT * FROM `quests` WHERE `pokestop` = '$pkst'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
 		if(!$row) { // !!! ATTENZIONE, RAFFINARE IL CHECK PER L'EVENTUALITÀ DI POKÈSTOP OMONIMI!!!
-			$query = "SELECT * FROM `tasks` WHERE `quest` = '$quest'";
+			$query = "SELECT * FROM `tasks` WHERE `reward` = '$quest'";
 			$result = mysqli_query($conn,$query);
 			$row2 = mysqli_fetch_assoc($result);
 			$flag = $row2['flag'];
