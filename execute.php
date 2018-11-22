@@ -179,8 +179,8 @@ elseif($status == 0)
 				$quest = explode(", ", str_replace('/quest ', '', $text));
 				$data = [
 		   	 	'chat_id' => $chatId,
-		   	 	'text' => $EMO_PIN.' '.$username.', mandami la posizione della quest *'.$quest.'* tramite @ingressportalbot.',
-		   	 	'parse_mode' => 'markdown',
+		   	 	'text' => $EMO_PIN.' @'.$username.', mandami la posizione della quest *'.$quest.'* tramite @ingressportalbot.',
+		   	// 	'parse_mode' => 'markdown',
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 				mysqli_query($conn,"INSERT INTO `sessions` (userID, status, alert) VALUES ($userId, 2, '$quest')");
