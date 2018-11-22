@@ -248,7 +248,18 @@ elseif($status == 2 /*and $chatId == $userId*/)
 		$query = "SELECT * FROM `quests` WHERE `pokestop` = '$pkst'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
-		if(!$row) { // !!! ATTENZIONE, RAFFINARE IL CHECK PER L'EVENTUALITÀ DI POKÈSTOP OMONIMI!!! (if pokestop = row['pokestop'] etc....)
+		$om_pkst = $row['pokestop'];
+		$om_lat = $row['lat'];
+		$om_lng = $row['lng'];
+		if ($om_pkst == $pkst and $om_lat == $lat and $om_lng == $lng) {
+			// AVVISO DI QUEST GIÀ SEGNALATA
+			$response = $EMO_v.' La quest di questo pokéstop è stata già segnalata per oggi.';
+			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
+			$parameters["method"] = "sendMessage";
+			echo json_encode($parameters);
+			mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
+		}
+		else {
 			$query = "SELECT * FROM `tasks` WHERE `reward` = '$quest'";
 			$result = mysqli_query($conn,$query);
 			$row2 = mysqli_fetch_assoc($result);
@@ -277,15 +288,6 @@ elseif($status == 2 /*and $chatId == $userId*/)
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
-		}
-
-		else {
-			// AVVISO DI QUEST GIÀ SEGNALATA
-			$response = $EMO_v.' La quest di questo pokéstop è stata già segnalata per oggi.';
-			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
-			$parameters["method"] = "sendMessage";
-			echo json_encode($parameters);
-			mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
 		}
 	}
 }
