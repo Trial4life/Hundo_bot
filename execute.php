@@ -218,7 +218,7 @@ elseif($status == 1 and $chatId == $userId)
 	else {
 		$data = [
 	   	'chat_id' => $channel,
-	   	'text' => $EMO_ALR." ".$EMO_100." ".$EMO_ALR.' *'.$alert.'* '.$EMO_ALR." ".$EMO_100." ".$EMO_ALR,
+	   	'text' => $EMO_ALR."*".$alert."*".$EMO_ALR.,
 	   	'parse_mode' => 'markdown',
 		];
 		$location = [
