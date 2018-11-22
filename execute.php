@@ -270,7 +270,7 @@ elseif($status == 2 /*and $chatId == $userId*/)
 				$link = 'https://maps.google.com/?q='.$lat.','.$lng;
 				$data = [
 			  		'chat_id' => $channel,
-			  		'text' => "`Quest:   ` *". $quest . "\n`Pokéstop:` [" . $pkst . "](" . $link . ")",
+			  		'text' => "`Quest:   ` *". $quest . "*\n`Task:    `". $task ."\n`Pokéstop:` [" . $pkst . "](" . $link . ")",
 			  		'parse_mode' => 'markdown',
 			  		'disable_web_page_preview' => TRUE,
 				];
@@ -284,7 +284,7 @@ elseif($status == 2 /*and $chatId == $userId*/)
 				mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, lat, lng, giorno) VALUES ('$quest', '$pkst', '$lat', '$lng', '$today')");
 				mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
 			}
-			$response = $EMO_v.' La quest è stata registrata.';
+			$response = $EMO_v.' La quest è stata registrata. '.$flag.$task;
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
