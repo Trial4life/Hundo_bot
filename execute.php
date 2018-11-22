@@ -23,7 +23,7 @@ $reply = isset($message['reply_to_message']['text']) ? $message['reply_to_messag
 $lat = isset($message['location']['latitude']) ? $message['location']['latitude'] : NULL;
 $lng = isset($message['location']['longitude']) ? $message['location']['longitude'] : NULL;
 $today = date('Y-m-d');
-$today2 = date('D M');
+$today2 = str_replace('0', date('D F'));
 
 header("Content-Type: application/json");
 $response = '';
@@ -271,8 +271,8 @@ elseif($status == 2 /*and $chatId == $userId*/)
 				$link = 'https://maps.google.com/?q='.$lat.','.$lng;
 				$data = [
 			  		'chat_id' => $channel,
-			  		//'text' => "`Quest:   ` *". $quest . "*\n`Task:    `". $task ."\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno   `".$today2",
-			  		'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno   `".$today2,
+			  		//'text' => "`Quest:   ` *". $quest . "*\n`Task:    `". $task ."\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:   `".$today2",
+			  		'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:   `".$today2,
 			  		'parse_mode' => 'markdown',
 			  		'disable_web_page_preview' => TRUE,
 				];
