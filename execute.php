@@ -176,7 +176,7 @@ elseif($status == 0)
 
 		if(strpos($text, "/quest") === 0 )	{
 			if (in_array($username, $authorizedUsers)) {
-				$quest = explode(", ", str_replace('/quest ', '', $text));
+				$quest = str_replace('/quest ', '', $text);
 				$data = [
 		   	 	'chat_id' => $chatId,
 		   	 	'text' => $EMO_PIN.' @'.$username.', mandami la posizione della quest *'.$quest.'* tramite @ingressportalbot.',
