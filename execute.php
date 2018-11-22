@@ -239,7 +239,7 @@ elseif($status == 2 /*and $chatId == $userId*/)
 	if (!$lat or !$lng)	{
 		$data = [
 	   	'chat_id' => $userId,
-	   	'text' => $EMO_PIN.' Ho bisogno della posizione per inoltrare la segnalazione.'.$text,
+	   	'text' => $EMO_PIN.' Ho bisogno della posizione per inoltrare la segnalazione.'.mssql_guid_string(ffe00b93c5a541f682e2dde884845772),
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
