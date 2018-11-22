@@ -240,7 +240,7 @@ elseif($status == 2 /*and $chatId == $userId*/)
 	if (!$lat or !$lng)	{
 		$data = [
 	   	'chat_id' => $userId,
-	   	'text' => $EMO_PIN.' Ho bisogno della posizione per inoltrare la segnalazione.'.$URLs[0],
+	   	'text' => $EMO_PIN.' Ho bisogno della posizione per inoltrare la segnalazione.',
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
@@ -249,7 +249,7 @@ elseif($status == 2 /*and $chatId == $userId*/)
 		$query = "SELECT * FROM `quests` WHERE `pokestop` = '$pkst'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
-		if(!$row) { // !!! ATTENZIONE, RAFFINARE IL CHECK PER L'EVENTUALITÀ DI POKÈSTOP OMONIMI!!!
+		if(!$row) { // !!! ATTENZIONE, RAFFINARE IL CHECK PER L'EVENTUALITÀ DI POKÈSTOP OMONIMI!!! (if pokestop = row['pokestop'] etc....)
 			$query = "SELECT * FROM `tasks` WHERE `reward` = '$quest'";
 			$result = mysqli_query($conn,$query);
 			$row2 = mysqli_fetch_assoc($result);
