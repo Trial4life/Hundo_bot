@@ -272,7 +272,7 @@ elseif($status == 0)
 			$result = mysqli_query($conn,$query);
 			$reward = $task = array();
 			while ($row = mysqli_fetch_assoc($result)) {
-				array_push($reward, $row['reqard']);
+				array_push($reward, $row['reward']);
 				array_push($task, $row['task']);
 			}
 
