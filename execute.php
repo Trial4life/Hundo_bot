@@ -355,14 +355,14 @@ elseif($status == 2 /*and $chatId == $userId*/)
 			$result = mysqli_query($conn,$query);
 			$row2 = mysqli_fetch_assoc($result);
 			$flag = $row2['flag'];
-			//$task = $row2['task']; BUGGED
+			$task = $row2['task'];
 			// SEGNALA LA QUEST NEL CANALE - CONTROLLO FLAG MISSIONI RARE
 			if ($flag == 1) {
 				$link = 'https://maps.google.com/?q='.$lat.','.$lng;
 				$data = [
 			  		'chat_id' => $channel,
-			  		//'text' => "`Quest:   ` *". $quest . "*\n`Task:    `". $task ."\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:   `".$today2",
-			  		'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
+			  		'text' => "`Quest:   ` *". $quest . "*\n`Task:    ` ". $task ."\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:   ` ".$today2,
+			  		//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
 			  		'parse_mode' => 'markdown',
 			  		'disable_web_page_preview' => TRUE,
 				];
