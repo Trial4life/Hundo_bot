@@ -361,7 +361,7 @@ elseif($status == 2 /*and $chatId == $userId*/)
 				$link = 'https://maps.google.com/?q='.$lat.','.$lng;
 				$data = [
 			  		'chat_id' => $channel,
-			  		'text' => "`Quest:   ` *". $quest . "*\n`Task:    ` ". $task ."\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:   ` ".$today2,
+			  		'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:   ` ".$today2."\n`Task:    ` ". $task,
 			  		//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
 			  		'parse_mode' => 'markdown',
 			  		'disable_web_page_preview' => TRUE,
