@@ -66,7 +66,15 @@ else {
 //________ COMANDI ________//
 //_________________________//
 
-if(strpos($text, "/annulla") === 0 ) {
+if(strpos($text, "/start") === 0 ) {
+	$data = [
+	   'chat_id' => $userId,
+	   'text' => 'Bot usato per segnalare le quest e gli avvistamenti di IV alti, che verranno pubblicati nel canale @CentoPoGO.',
+	];
+	$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+}
+
+elseif(strpos($text, "/annulla") === 0 ) {
 	mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
 	$data = [
 	   'chat_id' => $chatId,
