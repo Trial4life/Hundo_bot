@@ -222,8 +222,8 @@ elseif($status == 0)
 	if(strpos($text, "/newquest") === 0 )	{
 		if (in_array($username, $admins)) {
 			$str = explode(', ', str_replace('\newquest ', '', $text));
-			$reward = $str[0];
-			$task = $str[1];
+			$reward = ucfirst($str[0]);
+			$task = ucfirst($str[1]);
 			$flag = $str[2];
 			mysqli_query($conn,"INSERT INTO `tasks` (reward, task, flag) VALUES ('$reward', '$task', 1)");
 
