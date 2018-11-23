@@ -266,7 +266,7 @@ elseif($status == 0)
 	/////////////////
 	/// QUESTLIST ///
 	/////////////////
-	if(strpos($text, "/questlist") === 0 )	{
+	if(strpos($text, "/listquests") === 0 )	{
 		if (in_array($username, $admins)) {
 			$query = "SELECT * FROM `tasks`";
 			$result = mysqli_query($conn,$query);
