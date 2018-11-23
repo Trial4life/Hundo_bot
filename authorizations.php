@@ -7,7 +7,7 @@
 		$group_PogoTube42,
 		$group_NordEstLegit,
 		$bot_Exeggutor,
-		$group_admin
+		$group_admin,
 	);
 
 	$authorizedUsers = array(
@@ -17,6 +17,10 @@
 		'Barrazar',
 		'Giulia_Valorosi',
 		'MenoMenotti',
-		'Illidanrex'
+		'Illidanrex',
+	);
+
+	$admins = array(
+		'Trial4life',
 	);
 ?>

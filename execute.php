@@ -66,6 +66,7 @@ else {
 //________ COMANDI ________//
 //_________________________//
 
+/*
 if(strpos($text, "/start") === 0 ) {
 	$data = [
 	   'chat_id' => $userId,
@@ -73,8 +74,9 @@ if(strpos($text, "/start") === 0 ) {
 	];
 	$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 }
+*/
 
-elseif(strpos($text, "/annulla") === 0 ) {
+if(strpos($text, "/annulla") === 0 ) {
 	mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
 	$data = [
 	   'chat_id' => $chatId,
@@ -210,6 +212,35 @@ elseif($status == 0)
 		   'text' => $EMO_ERR." Gruppo non autorizzato. Contattare l'admin. ".$EMO_ERR,
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+	}
+
+
+
+	/////////////////
+	/// NEW QUEST ///
+	/////////////////
+	if(strpos($text, "/newquest") === 0 )	{
+		if (in_array($username, $admins)) {
+			$str = explode(', ', str_replace('\newquest ', '', $text));
+			$reward = $str[0];
+			$task = $str[1];
+			$flag = $str[2];
+			mysqli_query($conn,"INSERT INTO `tasks` (reward, task, flag) VALUES ('$reward', '$task', 1)");
+
+			$response = $EMO_v.' Quest aggiunta.';
+			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+			$parameters["method"] = "sendMessage";
+			echo json_encode($parameters);
+
+
+		}
+		else {
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_ERR.'Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		}
 	}
 }
 
