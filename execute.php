@@ -219,7 +219,7 @@ elseif($status == 0)
 	/////////////////
 	if(strpos($text, "/newquest") === 0 )	{
 		if (in_array($username, $admins)) {
-			$str = explode(', ', str_replace('\newquest ', '', $text));
+			$str = explode(', ', str_replace('/newquest ', '', $text));
 			$reward = ucfirst($str[0]);
 			$task = ucfirst($str[1]);
 			$flag = $str[2];
@@ -246,7 +246,7 @@ elseif($status == 0)
 	/////////////////
 	if(strpos($text, "/delquest") === 0 )	{
 		if (in_array($username, $admins)) {
-			$reward = str_replace('\newquest ', '', $text);
+			$reward = str_replace('/delquest ', '', $text);
 			mysqli_query($conn,"DELETE FROM `tasks` WHERE reward = '$reward'");
 
 			$response = $EMO_x.' Quest eliminata.';
