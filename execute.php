@@ -214,8 +214,6 @@ elseif($status == 0)
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
 
-
-
 	/////////////////
 	/// NEW QUEST ///
 	/////////////////
@@ -233,6 +231,59 @@ elseif($status == 0)
 			echo json_encode($parameters);
 
 
+		}
+		else {
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_ERR.'Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		}
+	}
+
+	/////////////////
+	/// DEL QUEST ///
+	/////////////////
+	if(strpos($text, "/delquest") === 0 )	{
+		if (in_array($username, $admins)) {
+			$reward = str_replace('\newquest ', '', $text);
+			mysqli_query($conn,"DELETE FROM `tasks` WHERE reward = '$reward'");
+
+			$response = $EMO_x.' Quest eliminata.';
+			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+			$parameters["method"] = "sendMessage";
+			echo json_encode($parameters);
+		}
+		else {
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_ERR.'Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		}
+	}
+
+	/////////////////
+	/// QUESTLIST ///
+	/////////////////
+	if(strpos($text, "/questlist") === 0 )	{
+		if (in_array($username, $admins)) {
+			$query = "SELECT * FROM `tasks`";
+			$result = mysqli_query($conn,$query);
+			$reward = $task = array();
+			while ($row = mysqli_fetch_assoc($result)) {
+				array_push($reward, $row['reqard']);
+				array_push($task, $row['task']);
+			}
+
+			$response = "Lista delle quest con notifica:";
+			for ($i = 0; $i <= sizeof($reward)-1; $i++){
+				$response = $response."\n".$reward[$i]." − ".$task[$i];
+			}
+
+			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+			$parameters["method"] = "sendMessage";
+			echo json_encode($parameters);
 		}
 		else {
 			$data = [
