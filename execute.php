@@ -278,7 +278,7 @@ elseif($status == 0)
 
 			$response = "Lista delle quest con notifica:";
 			for ($i = 0; $i <= sizeof($reward)-1; $i++){
-				$response = $response."\n".$reward[$i]." − ".$task[$i];
+				$response = $response."\n*".$reward[$i]."* − ".$task[$i];
 			}
 
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
