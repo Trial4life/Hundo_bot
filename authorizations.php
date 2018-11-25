@@ -10,7 +10,10 @@
 		$group_admin,
 	);
 
-	$authorizedUsers = array(
+	$bannedUsers = array(
+	);
+
+	$admins = array(
 		'Trial4life',
 		'DadyGC',
 		'medix93',
@@ -18,9 +21,5 @@
 		'Giulia_Valorosi',
 		'MenoMenotti',
 		'Illidanrex',
-	);
-
-	$admins = array(
-		'Trial4life',
 	);
 ?>

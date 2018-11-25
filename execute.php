@@ -160,7 +160,7 @@ elseif($status == 0)
 		//// 100% ////
 		//////////////
 		if(strpos($text, "/100") === 0 )	{
-			if (in_array($username, $authorizedUsers)) {
+			if (!in_array($username, $bannedUsers)) {
 				if(isset($message['reply_to_message']['text']))	{
 					$data = [
 		   	 		'chat_id' => $chatId,
@@ -196,7 +196,7 @@ elseif($status == 0)
 		////////////////
 
 		if(strpos($text, "/quest") === 0 )	{
-			if (in_array($username, $authorizedUsers)) {
+			if (!in_array($username, $bannedUsers)) {
 				$quest = ucfirst(str_replace('/quest ', '', $text));
 				$data = [
 		   	 	'chat_id' => $chatId,
