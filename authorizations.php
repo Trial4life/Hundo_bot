@@ -11,7 +11,7 @@
 	);
 
 	$bannedUsers = array(
-		'Trial4life',
+
 	);
 
 	$admins = array(
