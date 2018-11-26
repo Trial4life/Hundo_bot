@@ -15,4 +15,26 @@
 		$lng = $latlng[1];
    	return array($pkst, $lat, $lng);
    }
+
+   /*
+   function copyDB() {
+   	$conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");
+   	$connS1 = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");
+   	$connS2 = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");
+
+		$q1 = mysqli_query($conn, "
+    		SELECT *
+    		FROM   tasks"
+    	);
+
+		$tmp = array();
+		while($val = mysqli_fetch_assoc($q1))
+    		$tmp[] = $val['id'];
+
+		mysqli_query($connS1, "
+   		INSERT INTO	tasks
+   		VALUES (".implode(', ', $tmp).")"
+   	);
+   }
+   */
 ?>
