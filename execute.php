@@ -45,9 +45,6 @@ $EMO_ERR = json_decode('"'."\u26d4".'"');
 // MySQL -> Create connection
 $conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");
 // Check connection
-if ($conn->connect_error) {
-	$error = "Connection failed: " . $conn->connect_error;
-}
 
 // CONTROLLA SESSIONE UTENTE
 $query = "SELECT * FROM `sessions` WHERE `userID` = $userId";
@@ -76,7 +73,15 @@ if(strpos($text, "/start") === 0 ) {
 }
 */
 
-if(strpos($text, "/annulla") === 0 ) {
+// IN CASO DI ERRORE DI CONNESSIONE CON IL DATABASE
+if ($conn->connect_error) {
+	$response = "Database temporaneamente offline; riprova più tardi."
+	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
+	$parameters["method"] = "sendMessage";
+	echo json_encode($parameters);
+}
+
+elseif(strpos($text, "/annulla") === 0 ) {
 	if ($status == 0) {
 		$data = [
 		   'chat_id' => $chatId,
@@ -391,6 +396,8 @@ elseif($status == 2 /*and $chatId == $userId*/)
 		}
 	}
 }
+
+
 
 
 //close the mySQL connection
