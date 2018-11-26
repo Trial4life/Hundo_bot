@@ -329,12 +329,12 @@ elseif($status == 1 and $chatId == $userId)
 	}
 	else {
 		$data = [
-	   	'chat_id' => $bot_Exeggutor,
+	   	'chat_id' => $channel,
 	   	'text' => $EMO_ALR."*".$alert."* ".$EMO_ALR,
 	   	'parse_mode' => 'markdown',
 		];
 		$location = [
-	    	'chat_id' => $bot_Exeggutor,
+	    	'chat_id' => $channel,
 	   	 'latitude' => $lat,
 	   	 'longitude' => $lng,
 		];
