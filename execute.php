@@ -75,7 +75,7 @@ if(strpos($text, "/start") === 0 ) {
 
 // IN CASO DI ERRORE DI CONNESSIONE CON IL DATABASE
 if ($conn->connect_error) {
-	$response = "Database temporaneamente offline; riprova più tardi." . $conn->connect_error;
+	$response = "Database temporaneamente offline; riprova più tardi.";
 	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 	$parameters["method"] = "sendMessage";
 	echo json_encode($parameters);
