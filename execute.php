@@ -28,7 +28,7 @@ $today2 = date('d/m/y');
 header("Content-Type: application/json");
 $response = '';
 $apiToken = "689487990:AAGhqhcsalt0mXYRnUqFro9ECNxPuOOVPZc";
-$channel = '@centoPoGO';
+$channel = '@PokeradarRoma';
 
 // AUTORIZZAZIONI
 include $_SERVER['DOCUMENT_ROOT'] . "/authorizations.php";
