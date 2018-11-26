@@ -37,6 +37,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/functions.php";
 // EMOJIS
 $EMO_100 = "\xF0\x9F\x92\xAF";
 $EMO_PIN = "\xF0\x9F\x93\x8C";
+$EMO_zZz = "\xF0\x9F\x92\xA4";
 $EMO_v = json_decode('"'."\u2705".'"');
 $EMO_x = json_decode('"'."\u274c".'"');
 $EMO_ALR = json_decode('"'."\u203c".'"');
@@ -75,7 +76,7 @@ if(strpos($text, "/start") === 0 ) {
 
 // IN CASO DI ERRORE DI CONNESSIONE CON IL DATABASE
 if ($conn->connect_error) {
-	$response = "Database temporaneamente offline; riprova più tardi.";
+	$response = $EMO_zZz . "Database temporaneamente offline; riprova più tardi.";
 	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 	$parameters["method"] = "sendMessage";
 	echo json_encode($parameters);
