@@ -315,6 +315,10 @@ elseif($status == 0)
 
 elseif($status == 1 and $chatId == $userId)
 {
+	if (!$lat or !$lng) {
+		list($pkst, $lat, $lng) = getPortalData($text, $URLs[1]['url']);
+	}
+
 	if (!$lat or !$lng)
 	{
 		$data = [
@@ -325,7 +329,7 @@ elseif($status == 1 and $chatId == $userId)
 	}
 	else {
 		$data = [
-	   	'chat_id' => $channel,
+	   	'chat_id' => $bot_Exeggutor,
 	   	'text' => $EMO_ALR."*".$alert."*".$EMO_ALR,
 	   	'parse_mode' => 'markdown',
 		];
