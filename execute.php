@@ -134,23 +134,31 @@ elseif(strpos($text, "/cancella") === 0 ) {
 }
 
 if(strpos($text, "/termina") === 0 ) {
-
-	$user = str_replace("/termina ", "", $text);
-	$query = "SELECT * FROM `sessions` WHERE username = '$user'";
-	$result = mysqli_query($conn,$query);
-	$row = mysqli_fetch_assoc($result);
-	if(!$row) {
-		$data = [
-		   'chat_id' => $chatId,
-		   'text' => "Non c'è nessuna segnalazione in corso.",
-		];
-		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+	if (!in_array($username, $admins)) {
+		$user = str_replace("/termina ", "", $text);
+		$query = "SELECT * FROM `sessions` WHERE username = '$user'";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+		if(!$row) {
+			$data = [
+			   'chat_id' => $chatId,
+			   'text' => "Non c'è nessuna segnalazione in corso.",
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		}
+		else {
+			mysqli_query($conn,"DELETE FROM `sessions` WHERE username = '$user'");
+			$data = [
+			   'chat_id' => $chatId,
+			   'text' => $EMO_x.' Segnalazione annullata.',
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		}
 	}
 	else {
-		mysqli_query($conn,"DELETE FROM `sessions` WHERE username = '$user'");
 		$data = [
-		   'chat_id' => $chatId,
-		   'text' => $EMO_x.' Segnalazione annullata.',
+		  	'chat_id' => $chatId,
+		  	'text' => $EMO_ERR.'Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
