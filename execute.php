@@ -147,7 +147,7 @@ if(strpos($text, "/termina") === 0 ) {
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
 	else {
-		mysqli_query($conn,"DELETE FROM `sessions` WHERE username = $user");
+		mysqli_query($conn,"DELETE FROM `sessions` WHERE username = '$user'");
 		$data = [
 		   'chat_id' => $chatId,
 		   'text' => $EMO_x.' Segnalazione annullata.',
