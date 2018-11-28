@@ -208,7 +208,7 @@ elseif($status == 0)
 		   	 		'parse_mode' => 'markdown',
 					];
 					$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-					mysqli_query($conn,"INSERT INTO `sessions` (userID, username, status, alert) VALUES ($userId, $username, 1, '$reply')");
+					mysqli_query($conn,"INSERT INTO `sessions` (userID, username, status, alert) VALUES ($userId, '$username', 1, '$reply')");
 
 				}
 				else {
@@ -219,7 +219,7 @@ elseif($status == 0)
 		   	 		'parse_mode' => 'markdown',
 		   		];
 					$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-					mysqli_query($conn,"INSERT INTO `sessions` (userID, username, status, alert) VALUES ($userId, $username, 1, '$text')");
+					mysqli_query($conn,"INSERT INTO `sessions` (userID, username, status, alert) VALUES ($userId, '$username', 1, '$text')");
 				}
 			}
 			else {
@@ -231,9 +231,9 @@ elseif($status == 0)
 			}
 		}
 
-		////////////////
-		//// QUESTS ////
-		////////////////
+		///////////////
+		//// QUEST ////
+		///////////////
 
 		elseif(strpos($text, "/quest ") === 0 )	{
 			if (!in_array($username, $bannedUsers)) {
@@ -244,7 +244,7 @@ elseif($status == 0)
 		   	 	'parse_mode' => 'markdown',
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-				mysqli_query($conn,"INSERT INTO `sessions` (userID, username, status, alert) VALUES ($userId, $username, 2, '$quest')");
+				mysqli_query($conn,"INSERT INTO `sessions` (userID, username, status, alert) VALUES ($userId, '$username', 2, '$quest')");
 			}
 			else {
 				$data = [
