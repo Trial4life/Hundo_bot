@@ -103,22 +103,54 @@ if(strpos($text, "/annulla") === 0 ) {
 }
 
 elseif(strpos($text, "/cancella") === 0 ) {
-	$text = str_replace('/cancella ', '', $text);
-	$query = "SELECT * FROM `quests` WHERE `pokestop` = '$text'";
+	if (in_array($chatId, $authorizedChats)) {
+		$text = str_replace('/cancella ', '', $text);
+		$query = "SELECT * FROM `quests` WHERE `pokestop` = '$text'";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+		if(!$row) {
+			$data = [
+		   	'chat_id' => $chatId,
+		   	'text' => $EMO_ERR . ' Pokéstop non trovato.',
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		}
+		else {
+			mysqli_query($conn,"DELETE FROM `quests` WHERE pokestop = '$text'");
+			$data = [
+			   'chat_id' => $chatId,
+			   'text' => $EMO_x.' Quest cancellata.',
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		}
+	}
+	else {
+		$data = [
+		  	'chat_id' => $chatId,
+		  	'text' => $EMO_ERR.'Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+		];
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+	}
+}
+
+if(strpos($text, "/termina") === 0 ) {
+
+	$user = str_replace("/termina", "", $text);
+	$query = "SELECT * FROM `sessions` WHERE user = '$user'";
 	$result = mysqli_query($conn,$query);
 	$row = mysqli_fetch_assoc($result);
 	if(!$row) {
 		$data = [
-	   	'chat_id' => $chatId,
-	   	'text' => $EMO_ERR . ' Pokéstop non trovato.',
+		   'chat_id' => $chatId,
+		   'text' => "Non c'è nessuna segnalazione in corso.",
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
 	else {
-		mysqli_query($conn,"DELETE FROM `quests` WHERE pokestop = '$text'");
+		mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $user");
 		$data = [
 		   'chat_id' => $chatId,
-		   'text' => $EMO_x.' Quest cancellata.',
+		   'text' => $EMO_x.' Segnalazione annullata.',
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
