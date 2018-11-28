@@ -134,7 +134,7 @@ elseif(strpos($text, "/cancella") === 0 ) {
 }
 
 if(strpos($text, "/termina") === 0 ) {
-	if (!in_array($username, $admins)) {
+	if (in_array($username, $admins)) {
 		$user = str_replace("/termina ", "", $text);
 		$query = "SELECT * FROM `sessions` WHERE username = '$user'";
 		$result = mysqli_query($conn,$query);
