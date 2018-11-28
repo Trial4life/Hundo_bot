@@ -136,7 +136,7 @@ elseif(strpos($text, "/cancella") === 0 ) {
 if(strpos($text, "/termina") === 0 ) {
 
 	$user = str_replace("/termina ", "", $text);
-	$query = "SELECT * FROM `sessions` WHERE user = '$user'";
+	$query = "SELECT * FROM `sessions` WHERE username = '$user'";
 	$result = mysqli_query($conn,$query);
 	$row = mysqli_fetch_assoc($result);
 	if(!$row) {
@@ -147,7 +147,7 @@ if(strpos($text, "/termina") === 0 ) {
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
 	else {
-		mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $user");
+		mysqli_query($conn,"DELETE FROM `sessions` WHERE username = $user");
 		$data = [
 		   'chat_id' => $chatId,
 		   'text' => $EMO_x.' Segnalazione annullata.',
@@ -208,7 +208,7 @@ elseif($status == 0)
 		   	 		'parse_mode' => 'markdown',
 					];
 					$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-					mysqli_query($conn,"INSERT INTO `sessions` (userID, status, alert) VALUES ($userId, 1, '$reply')");
+					mysqli_query($conn,"INSERT INTO `sessions` (userID, username, status, alert) VALUES ($userId, $username, 1, '$reply')");
 
 				}
 				else {
@@ -219,7 +219,7 @@ elseif($status == 0)
 		   	 		'parse_mode' => 'markdown',
 		   		];
 					$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-					mysqli_query($conn,"INSERT INTO `sessions` (userID, status, alert) VALUES ($userId, 1, '$text')");
+					mysqli_query($conn,"INSERT INTO `sessions` (userID, username, status, alert) VALUES ($userId, $username, 1, '$text')");
 				}
 			}
 			else {
