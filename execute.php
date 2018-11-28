@@ -235,7 +235,7 @@ elseif($status == 0)
 		//// QUESTS ////
 		////////////////
 
-		if(strpos($text, "/quest") === 0 )	{
+		elseif(strpos($text, "/quest ") === 0 )	{
 			if (!in_array($username, $bannedUsers)) {
 				$quest = ucfirst(str_replace('/quest ', '', $text));
 				$data = [
