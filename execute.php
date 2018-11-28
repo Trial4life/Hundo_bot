@@ -188,7 +188,7 @@ elseif(strpos($text, "/quests") === 0 ) {
 		echo json_encode($parameters);
 	}
 	else {
-		$response = 'Elenco delle quests di oggi:';
+		$response = 'Elenco delle quest di oggi:';
 		for ($i = 0; $i <= sizeof($quest)-1; $i++){
 			$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i];
 			$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
