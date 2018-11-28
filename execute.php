@@ -244,7 +244,7 @@ elseif($status == 0)
 		   	 	'parse_mode' => 'markdown',
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-				mysqli_query($conn,"INSERT INTO `sessions` (userID, status, alert) VALUES ($userId, 2, '$quest')");
+				mysqli_query($conn,"INSERT INTO `sessions` (userID, username, status, alert) VALUES ($userId, $username, 2, '$quest')");
 			}
 			else {
 				$data = [
