@@ -204,7 +204,7 @@ elseif(strpos($text, "/quests") === 0 ) {
 elseif(strpos($text, "/mappaquest") === 0 ) {
 	$response = $EMO_GLO . ' *Mappa delle quests* ' . $EMO_GLO;
 	$link = 'http://pogocasts.com/questmap/questmap.php';
-	$response = "*[Mappa delle quests]*(" . $link . ")";
+	$response = "[*Mappa delle quests*](" . $link . ")";
 	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 	$parameters["method"] = "sendMessage";
 	echo json_encode($parameters);
