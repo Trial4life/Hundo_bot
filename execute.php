@@ -134,7 +134,7 @@ elseif(strpos($text, "/cancella") === 0 ) {
 	}
 }
 
-if(strpos($text, "/termina") === 0 ) {
+elseif(strpos($text, "/termina") === 0 ) {
 	if (in_array($username, $admins)) {
 		$user = str_replace("/termina ", "", $text);
 		$query = "SELECT * FROM `sessions` WHERE username = '$user'";
@@ -206,6 +206,9 @@ if(strpos($text, "/mappaquest") === 0 ) {
 	$response = $EMO_GLO . 'Mappa delle quests' . $EMO_GLO;
 	$link = 'http://pogocasts.com/questmap/questmap.php';
 	$response = "[" . $response . "](" . $link . ")";
+	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+	$parameters["method"] = "sendMessage";
+	echo json_encode($parameters);
 }
 
 elseif($status == 0)
