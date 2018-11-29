@@ -77,7 +77,7 @@ if(strpos($text, "/start") === 0 ) {
 
 // IN CASO DI ERRORE DI CONNESSIONE CON IL DATABASE
 
-if ($conn->connect_error and (strpos($text, "/annulla") === 0 or strpos($text, "/cancella") === 0 or strpos($text, "/quests") === 0 or strpos($text, "/quest") === 0 or strpos($text, "/100") === 0)) {
+if ($conn->connect_error and (strpos($text, "/annulla") === 0 or strpos($text, "/cancella") === 0 or strpos($text, "/quests") === 0 or strpos($text, "/quest") === 0 or strpos($text, "/100") === 0 or strpos($text, "/mappaquest") === 0)) {
 	$response = $EMO_zZz . " Database temporaneamente offline, riprova più tardi.";
 	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 	$parameters["method"] = "sendMessage";
@@ -202,7 +202,7 @@ elseif(strpos($text, "/quests") === 0 ) {
 
 }
 
-if(strpos($text, "/mappaquest") === 0 ) {
+elseif(strpos($text, "/mappaquest") === 0 ) {
 	$response = $EMO_GLO . 'Mappa delle quests' . $EMO_GLO;
 	$link = 'http://pogocasts.com/questmap/questmap.php';
 	$response = "[" . $response . "](" . $link . ")";
