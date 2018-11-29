@@ -202,7 +202,7 @@ elseif(strpos($text, "/quests") === 0 ) {
 
 }
 
-elseif(strpos($text, "/mappaquest") === 0 ) {
+if(strpos($text, "/mappaquest") === 0 ) {
 	$response = $EMO_GLO . 'Mappa delle quests' . $EMO_GLO;
 	$link = 'http://pogocasts.com/questmap/questmap.php';
 	$response = "[" . $response . "](" . $link . ")";
