@@ -199,7 +199,6 @@ elseif(strpos($text, "/quests") === 0 ) {
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
 	}
-
 }
 
 elseif(strpos($text, "/mappaquest") === 0 ) {
