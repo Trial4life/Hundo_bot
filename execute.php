@@ -38,6 +38,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/functions.php";
 $EMO_100 = "\xF0\x9F\x92\xAF";
 $EMO_PIN = "\xF0\x9F\x93\x8C";
 $EMO_zZz = "\xF0\x9F\x92\xA4";
+$EMO_GLO = "\xF0\x9F\x8C\x90";
 $EMO_v = json_decode('"'."\u2705".'"');
 $EMO_x = json_decode('"'."\u274c".'"');
 $EMO_ALR = json_decode('"'."\u203c".'"');
@@ -84,7 +85,7 @@ if ($conn->connect_error and (strpos($text, "/annulla") === 0 or strpos($text, "
 }
 
 
-if(strpos($text, "/annulla") === 0 ) {
+elseif(strpos($text, "/annulla") === 0 ) {
 	if ($status == 0) {
 		$data = [
 		   'chat_id' => $chatId,
@@ -199,6 +200,12 @@ elseif(strpos($text, "/quests") === 0 ) {
 		echo json_encode($parameters);
 	}
 
+}
+
+elseif(strpos($text, "/mappaquest") === 0 ) {
+	$response = $EMO_GLO . 'Mappa delle quests' . $EMO_GLO;
+	$link = 'http://pogocasts.com/questmap/questmap.php';
+	$response = "[" . $response . "](" . $link . ")";
 }
 
 elseif($status == 0)
