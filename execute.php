@@ -362,7 +362,7 @@ elseif($status == 0)
 }
 
 
-elseif($status == 1 and $chatId == $userId)
+elseif($status == 1)
 {
 	if (!$lat or !$lng) {
 		list($pkst, $lat, $lng) = getPortalData($text, $URLs[1]['url']);
