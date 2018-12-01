@@ -96,7 +96,7 @@ if(strpos($text, "/annulla") === 0 ) {
 //////////////
 //// 100% ////
 //////////////
-elseif($status == 0 and strpos($text, "/100") === 0 )	{
+elseif($status == 0 and strpos($text, "/100 ") === 0 )	{
 	if (!in_array($username, $bannedUsers)) {
 		if(isset($message['reply_to_message']['text']))	{
 			$data = [
