@@ -75,15 +75,80 @@ if(strpos($text, "/start") === 0 ) {
 }
 */
 
+
+//////////////
+//// 100% ////
+//////////////
+if($status == 0 and strpos($text, "/100") === 0 )	{
+	if (!in_array($username, $bannedUsers)) {
+		if(isset($message['reply_to_message']['text']))	{
+			$data = [
+   	 		'chat_id' => $chatId,
+   	 		'text' => $EMO_PIN.' Mandami la posizione di *'.$reply.'*.',
+   	 		'parse_mode' => 'markdown',
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+			mysqli_query($conn,"INSERT INTO `sessions` (userID, username, status, alert) VALUES ($userId, '$username', 1, '$reply')");
+		}
+		else {
+			$text = str_replace('/100', '', $text);
+			$data = [
+   		 	'chat_id' => $chatId,
+   		 	'text' => $EMO_PIN.' Mandami la posizione di*'.$text.'*.',
+   	 		'parse_mode' => 'markdown',
+   		];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+			mysqli_query($conn,"INSERT INTO `sessions` (userID, username, status, alert) VALUES ($userId, '$username', 1, '$text')");
+		}
+	}
+	else {
+		$data = [
+   	 	'chat_id' => $chatId,
+   	 	'text' => $EMO_ERR.' Non sei autorizzato alle segnalazioni. Contatta un admin. '.$EMO_ERR,
+		];
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+	}
+}
+
+elseif($status == 1)
+{
+	if (!$lat or !$lng) {
+		list($pkst, $lat, $lng) = getPortalData($text, $URLs[1]['url']);
+	}
+
+	if (!$lat or !$lng)
+	{
+		$data = [
+	   	'chat_id' => $chatId,
+	   	'text' => $EMO_PIN.' Ho bisogno della posizione per inoltrare la segnalazione.',
+		];
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+	}
+	else {
+		$data = [
+	   	'chat_id' => $channel,
+	   	'text' => $EMO_ALR."*".$alert."* ".$EMO_ALR,
+	   	'parse_mode' => 'markdown',
+		];
+		$location = [
+	    	'chat_id' => $channel,
+	   	 'latitude' => $lat,
+	   	 'longitude' => $lng,
+		];
+		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
+		mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
+	}
+}
+
 // IN CASO DI ERRORE DI CONNESSIONE CON IL DATABASE
 
-if ($conn->connect_error and (strpos($text, "/annulla") === 0 or strpos($text, "/cancella") === 0 or strpos($text, "/quests") === 0 or strpos($text, "/quest") === 0 or strpos($text, "/100") === 0 or strpos($text, "/mappaquest") === 0)) {
+elseif ($conn->connect_error and (strpos($text, "/annulla") === 0 or strpos($text, "/cancella") === 0 or strpos($text, "/quests") === 0 or strpos($text, "/quest") === 0 or strpos($text, "/100") === 0 or strpos($text, "/mappaquest") === 0)) {
 	$response = $EMO_zZz . " Database temporaneamente offline, riprova più tardi.";
 	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 	$parameters["method"] = "sendMessage";
 	echo json_encode($parameters);
 }
-
 
 elseif(strpos($text, "/annulla") === 0 ) {
 	if ($status == 0) {
@@ -213,46 +278,11 @@ elseif(strpos($text, "/mappaquest") === 0 ) {
 elseif($status == 0)
 {
 	if (in_array($chatId, $authorizedChats)) {
-		//////////////
-		//// 100% ////
-		//////////////
-		if(strpos($text, "/100") === 0 )	{
-			if (!in_array($username, $bannedUsers)) {
-				if(isset($message['reply_to_message']['text']))	{
-					$data = [
-		   	 		'chat_id' => $chatId,
-		   	 		'text' => $EMO_PIN.' Mandami la posizione di *'.$reply.'*.',
-		   	 		'parse_mode' => 'markdown',
-					];
-					$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-					mysqli_query($conn,"INSERT INTO `sessions` (userID, username, status, alert) VALUES ($userId, '$username', 1, '$reply')");
-
-				}
-				else {
-					$text = str_replace('/100', '', $text);
-					$data = [
-		   		 	'chat_id' => $chatId,
-		   		 	'text' => $EMO_PIN.' Mandami la posizione di*'.$text.'*.',
-		   	 		'parse_mode' => 'markdown',
-		   		];
-					$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-					mysqli_query($conn,"INSERT INTO `sessions` (userID, username, status, alert) VALUES ($userId, '$username', 1, '$text')");
-				}
-			}
-			else {
-				$data = [
-		   	 	'chat_id' => $chatId,
-		   	 	'text' => $EMO_ERR.' Non sei autorizzato alle segnalazioni. Contatta un admin. '.$EMO_ERR,
-				];
-				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-			}
-		}
-
 		///////////////
 		//// QUEST ////
 		///////////////
 
-		elseif(strpos($text, "/quest ") === 0 )	{
+		if(strpos($text, "/quest ") === 0 )	{
 			if (!in_array($username, $bannedUsers)) {
 				$quest = ucfirst(str_replace('/quest ', '', $text));
 				$data = [
@@ -362,38 +392,9 @@ elseif($status == 0)
 }
 
 
-elseif($status == 1)
-{
-	if (!$lat or !$lng) {
-		list($pkst, $lat, $lng) = getPortalData($text, $URLs[1]['url']);
-	}
 
-	if (!$lat or !$lng)
-	{
-		$data = [
-	   	'chat_id' => $chatId,
-	   	'text' => $EMO_PIN.' Ho bisogno della posizione per inoltrare la segnalazione.',
-		];
-		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-	}
-	else {
-		$data = [
-	   	'chat_id' => $channel,
-	   	'text' => $EMO_ALR."*".$alert."* ".$EMO_ALR,
-	   	'parse_mode' => 'markdown',
-		];
-		$location = [
-	    	'chat_id' => $channel,
-	   	 'latitude' => $lat,
-	   	 'longitude' => $lng,
-		];
-		$response1 = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-		$response2 = file_get_contents("https://api.telegram.org/bot$apiToken/sendlocation?" . http_build_query($location) );
-		mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
-	}
-}
 
-elseif($status == 2 /*and $chatId == $userId*/)
+elseif($status == 2)
 {
 	$quest = $alert;
 	list($pkst, $lat, $lng) = getPortalData($text, $URLs[1]['url']);
