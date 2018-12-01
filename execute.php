@@ -75,11 +75,28 @@ if(strpos($text, "/start") === 0 ) {
 }
 */
 
+if(strpos($text, "/annulla") === 0 ) {
+	if ($status == 0) {
+		$data = [
+		   'chat_id' => $chatId,
+		   'text' => "Non c'è nessuna segnalazione in corso.",
+		];
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+	}
+	else {
+		mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
+		$data = [
+		   'chat_id' => $chatId,
+		   'text' => $EMO_x.' Segnalazione annullata.',
+		];
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+	}
+}
 
 //////////////
 //// 100% ////
 //////////////
-if($status == 0 and strpos($text, "/100") === 0 )	{
+elseif($status == 0 and strpos($text, "/100") === 0 )	{
 	if (!in_array($username, $bannedUsers)) {
 		if(isset($message['reply_to_message']['text']))	{
 			$data = [
@@ -148,24 +165,6 @@ elseif ($conn->connect_error and (strpos($text, "/annulla") === 0 or strpos($tex
 	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 	$parameters["method"] = "sendMessage";
 	echo json_encode($parameters);
-}
-
-elseif(strpos($text, "/annulla") === 0 ) {
-	if ($status == 0) {
-		$data = [
-		   'chat_id' => $chatId,
-		   'text' => "Non c'è nessuna segnalazione in corso.",
-		];
-		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-	}
-	else {
-		mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
-		$data = [
-		   'chat_id' => $chatId,
-		   'text' => $EMO_x.' Segnalazione annullata.',
-		];
-		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-	}
 }
 
 elseif(strpos($text, "/cancella") === 0 ) {
