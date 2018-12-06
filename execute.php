@@ -286,7 +286,7 @@ elseif($status == 0)
 	if(strpos($text, "/quest ") === 0 )	{
 		if (in_array($chatId, $authorizedChats)) {
 			$data = [
-	   	 	'chat_id' => $userId,
+	   	 	'chat_id' => $chatId,
 	   	 	'text' => $EMO_EXE.' Per segnalare una quest, utilizza il comando /quests in chat privata con @Exeggutor_bot.',
 	   	 	'parse_mode' => 'markdown',
 			];
