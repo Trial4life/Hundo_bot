@@ -10,6 +10,7 @@
 		$group_NordEstLegit,
 		//$bot_Exeggutor,
 		$group_admin,
+		$group_SalarioParioli,
 	);
 
 	$bannedUsers = array(
