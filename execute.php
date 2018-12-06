@@ -98,7 +98,7 @@ if(strpos($text, "/annulla") === 0 ) {
 //////////////
 //// 100% ////
 //////////////
-elseif($status == 0 and strpos($text, "/100 ") === 0 )	{
+elseif($status == 0 and strpos($text, "/100 ") === 0 ) {
 	if (!in_array($username, $bannedUsers)) {
 		if(isset($message['reply_to_message']['text']))	{
 			$data = [
@@ -129,8 +129,7 @@ elseif($status == 0 and strpos($text, "/100 ") === 0 )	{
 	}
 }
 
-elseif($status == 1)
-{
+elseif($status == 1) {
 	if (!$lat or !$lng) {
 		list($pkst, $lat, $lng) = getPortalData($text, $URLs[1]['url']);
 	}
@@ -276,8 +275,7 @@ elseif(strpos($text, "/mappaquest") === 0 ) {
 	echo json_encode($parameters);
 }
 
-elseif($status == 0)
-{
+elseif($status == 0) {
 	//if (in_array($chatId, $authorizedChats)) {
 		///////////////
 		//// QUEST ////
@@ -287,7 +285,7 @@ elseif($status == 0)
 		if (in_array($chatId, $authorizedChats)) {
 			$data = [
 	   	 	'chat_id' => $chatId,
-	   	 	'text' => $EMO_EXE.' Per segnalare una quest, utilizza il comando /quests in chat privata con @Exeggutor_bot.',
+	   	 	'text' => ' Per segnalare una quest, utilizza il comando /quests in chat privata con @Exeggutor_bot.',
 	   	 	'parse_mode' => 'markdown',
 			];
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
@@ -402,11 +400,7 @@ elseif($status == 0)
 	}
 }
 
-
-
-
-elseif($status == 2)
-{
+elseif($status == 2) {
 	$quest = $alert;
 	list($pkst, $lat, $lng) = getPortalData($text, $URLs[1]['url']);
 	if (!$lat or !$lng)	{
@@ -465,15 +459,8 @@ elseif($status == 2)
 	}
 }
 
-
-
-
 //close the mySQL connection
 $conn->close();
-
-
-
-
 
 /*ì
 // DEBUG - PRINT
