@@ -293,24 +293,22 @@ elseif($status == 0)
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}
 		else {
-			if (in_array($chatId, $authorizedChats)) {
-				if (!in_array($username, $bannedUsers)) {
-					$quest = ucfirst(str_replace('/quest ', '', $text));
-					$data = [
-		   		 	'chat_id' => $userId,
-		   		 	'text' => $EMO_PIN.' @'.$username.', mandami la posizione della quest *'.$quest.'* tramite @ingressportalbot.',
-		   		 	'parse_mode' => 'markdown',
-					];
-					$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-					mysqli_query($conn,"INSERT INTO `sessions` (userID, username, status, alert) VALUES ($userId, '$username', 2, '$quest')");
-				}
-				else {
-					$data = [
-		   		 	'chat_id' => $userId,
-		   		 	'text' => $EMO_ERR.' Non sei autorizzato alle segnalazioni. Contatta un admin. '.$EMO_ERR,
-					];
-					$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-				}
+			if (!in_array($username, $bannedUsers)) {
+				$quest = ucfirst(str_replace('/quest ', '', $text));
+				$data = [
+		   	 	'chat_id' => $userId,
+		   	 	'text' => $EMO_PIN.' @'.$username.', mandami la posizione della quest *'.$quest.'* tramite @ingressportalbot.',
+		   	 	'parse_mode' => 'markdown',
+				];
+				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+				mysqli_query($conn,"INSERT INTO `sessions` (userID, username, status, alert) VALUES ($userId, '$username', 2, '$quest')");
+			}
+			else {
+				$data = [
+		   	 	'chat_id' => $userId,
+		   	 	'text' => $EMO_ERR.' Non sei autorizzato alle segnalazioni. Contatta un admin. '.$EMO_ERR,
+				];
+				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			}
 		}
 	}
