@@ -284,7 +284,7 @@ elseif($status == 0) {
 
 	if(strpos($text, "/quest ") === 0 )	{
 		//if (in_array($chatId, $authorizedChats)) {
-		if ($chatType = 'group' or $chatType = 'supergroup') {
+		if ($chatType == 'group' or $chatType == 'supergroup') {
 			$response = $EMO_EXE." Per segnalare le quest, utilizza il comando /quest in chat privata con il bot.";
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown",);
 			$parameters["method"] = "sendMessage";
