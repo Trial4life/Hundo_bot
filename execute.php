@@ -169,7 +169,7 @@ elseif ($conn->connect_error and (strpos($text, "/annulla") === 0 or strpos($tex
 }
 
 elseif(strpos($text, "/cancella") === 0 ) {
-	if (in_array($chatId, $authorizedChats)) {
+	if (in_array($username, $admins)) {
 		$text = str_replace('/cancella ', '', $text);
 		$query = "SELECT * FROM `quests` WHERE `pokestop` = '$text'";
 		$result = mysqli_query($conn,$query);
