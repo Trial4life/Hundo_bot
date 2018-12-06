@@ -277,7 +277,7 @@ elseif(strpos($text, "/mappaquest") === 0 ) {
 
 elseif($status == 0)
 {
-	if (in_array($chatId, $authorizedChats)) {
+	//if (in_array($chatId, $authorizedChats)) {
 		///////////////
 		//// QUEST ////
 		///////////////
@@ -286,7 +286,7 @@ elseif($status == 0)
 			if (!in_array($username, $bannedUsers)) {
 				$quest = ucfirst(str_replace('/quest ', '', $text));
 				$data = [
-		   	 	'chat_id' => $chatId,
+		   	 	'chat_id' => $userId,
 		   	 	'text' => $EMO_PIN.' @'.$username.', mandami la posizione della quest *'.$quest.'* tramite @ingressportalbot.',
 		   	 	'parse_mode' => 'markdown',
 				];
@@ -295,20 +295,20 @@ elseif($status == 0)
 			}
 			else {
 				$data = [
-		   	 	'chat_id' => $chatId,
+		   	 	'chat_id' => $userId,
 		   	 	'text' => $EMO_ERR.' Non sei autorizzato alle segnalazioni. Contatta un admin. '.$EMO_ERR,
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			}
 		}
 	}
-	else {
+	/*else {
 		$data = [
 		   'chat_id' => $chatId,
 		   'text' => $EMO_ERR." Gruppo non autorizzato. Contattare l'admin. ".$EMO_ERR,
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-	}
+	}*/
 
 	/////////////////
 	/// NEW QUEST ///
@@ -400,7 +400,7 @@ elseif($status == 2)
 	list($pkst, $lat, $lng) = getPortalData($text, $URLs[1]['url']);
 	if (!$lat or !$lng)	{
 		$data = [
-	   	'chat_id' => $chatId,
+	   	'chat_id' => $userId,
 	   	'text' => $EMO_PIN.' Ho bisogno della posizione per inoltrare la segnalazione. Inviami il pokéstop tramite @ingressportalbot.',
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
@@ -416,7 +416,7 @@ elseif($status == 2)
 		if ($om_pkst == $pkst and $om_lat == $lat and $om_lng == $lng) {
 			// AVVISO DI QUEST GIÀ SEGNALATA
 			$response = $EMO_v.' La quest di questo pokéstop è stata già segnalata per oggi.';
-			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
+			$parameters = array('chat_id' => $userId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
 			mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
@@ -446,7 +446,7 @@ elseif($status == 2)
 				mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, lat, lng, giorno) VALUES ('$quest', '$pkst', '$lat', '$lng', '$today')");
 			}
 			$response = $EMO_v.' La quest è stata registrata.';
-			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
+			$parameters = array('chat_id' => $userId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
 			mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
