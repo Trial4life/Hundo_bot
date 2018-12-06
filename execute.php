@@ -283,7 +283,7 @@ elseif($status == 0) {
 
 	if(strpos($text, "/quest ") === 0 )	{
 		if (in_array($chatId, $authorizedChats)) {
-			$response = $EMO_EXE.' Per segnalare una quest, utilizza il comando /quest in chat privata con @Exeggutor_bot.';
+			$response = $EMO_EXE.' prova.';
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
