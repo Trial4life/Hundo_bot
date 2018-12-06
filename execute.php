@@ -11,6 +11,7 @@ if(!$update)
 $message = isset($update['message']) ? $update['message'] : "";
 $messageId = isset($message['message_id']) ? $message['message_id'] : "";
 $chatId = isset($message['chat']['id']) ? $message['chat']['id'] : "";
+$chatType = isset($message['chat']['type']) ? $message['chat']['type'] : "";
 $userId = isset($message['from']['id']) ? $message['from']['id'] : "";
 $firstname = isset($message['from']['first_name']) ? $message['from']['first_name'] : "";
 $lastname = isset($message['chat']['last_name']) ? $message['chat']['last_name'] : "";
@@ -282,7 +283,8 @@ elseif($status == 0) {
 		///////////////
 
 	if(strpos($text, "/quest ") === 0 )	{
-		if (in_array($chatId, $authorizedChats)) {
+		//if (in_array($chatId, $authorizedChats)) {
+		if ($chatType = 'group' or $chatType = 'supergroup') {
 			$response = $EMO_EXE." Per segnalare le quest, utilizza il comando /quest in chat privata con il bot.";
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown",);
 			$parameters["method"] = "sendMessage";
