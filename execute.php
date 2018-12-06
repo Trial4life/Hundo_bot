@@ -39,6 +39,7 @@ $EMO_100 = "\xF0\x9F\x92\xAF";
 $EMO_PIN = "\xF0\x9F\x93\x8C";
 $EMO_zZz = "\xF0\x9F\x92\xA4";
 $EMO_GLO = "\xF0\x9F\x8C\x90";
+$EMO_EXE = "\xF0\x9F\x8C\xB4";
 $EMO_v = json_decode('"'."\u2705".'"');
 $EMO_x = json_decode('"'."\u274c".'"');
 $EMO_ALR = json_decode('"'."\u203c".'"');
@@ -283,22 +284,32 @@ elseif($status == 0)
 		///////////////
 
 		if(strpos($text, "/quest ") === 0 )	{
-			if (!in_array($username, $bannedUsers)) {
-				$quest = ucfirst(str_replace('/quest ', '', $text));
-				$data = [
-		   	 	'chat_id' => $userId,
-		   	 	'text' => $EMO_PIN.' @'.$username.', mandami la posizione della quest *'.$quest.'* tramite @ingressportalbot.',
-		   	 	'parse_mode' => 'markdown',
-				];
-				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-				mysqli_query($conn,"INSERT INTO `sessions` (userID, username, status, alert) VALUES ($userId, '$username', 2, '$quest')");
-			}
-			else {
-				$data = [
-		   	 	'chat_id' => $userId,
-		   	 	'text' => $EMO_ERR.' Non sei autorizzato alle segnalazioni. Contatta un admin. '.$EMO_ERR,
-				];
-				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+			$data = [
+		    	'chat_id' => $userId,
+		    	'text' => $EMO_EXE.' Per segnalare una quest, utilizza il comando /quests in chat privata con @Exeggutor_bot.',
+		    	'parse_mode' => 'markdown',
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		}
+		else {
+			if (in_array($chatId, $authorizedChats)) {
+				if (!in_array($username, $bannedUsers)) {
+					$quest = ucfirst(str_replace('/quest ', '', $text));
+					$data = [
+		   		 	'chat_id' => $userId,
+		   		 	'text' => $EMO_PIN.' @'.$username.', mandami la posizione della quest *'.$quest.'* tramite @ingressportalbot.',
+		   		 	'parse_mode' => 'markdown',
+					];
+					$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+					mysqli_query($conn,"INSERT INTO `sessions` (userID, username, status, alert) VALUES ($userId, '$username', 2, '$quest')");
+				}
+				else {
+					$data = [
+		   		 	'chat_id' => $userId,
+		   		 	'text' => $EMO_ERR.' Non sei autorizzato alle segnalazioni. Contatta un admin. '.$EMO_ERR,
+					];
+					$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+				}
 			}
 		}
 
