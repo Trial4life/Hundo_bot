@@ -6,7 +6,7 @@
 	$authorizedChats = array(
 		$group_PogoTube42,
 		$group_NordEstLegit,
-		$bot_Exeggutor,
+		//$bot_Exeggutor,
 		$group_admin,
 	);
 
