@@ -283,12 +283,10 @@ elseif($status == 0) {
 
 	if(strpos($text, "/quest ") === 0 )	{
 		if (in_array($chatId, $authorizedChats)) {
-			$data = [
-	   	 	'chat_id' => $chatId,
-	   	 	'text' => $EMO_EXE.' Per segnalare una quest, utilizza il comando /quests in chat privata con @Exeggutor_bot.',
-	   	 	'parse_mode' => 'markdown',
-			];
-			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+			$response = $EMO_EXE.' Per segnalare una quest, utilizza il comando /quest in chat privata con @Exeggutor_bot.';
+			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+			$parameters["method"] = "sendMessage";
+			echo json_encode($parameters);
 		}
 		else {
 			if (!in_array($username, $bannedUsers)) {
