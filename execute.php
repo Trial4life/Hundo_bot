@@ -418,7 +418,7 @@ elseif($status == 2) {
 		$om_pkst = $row['pokestop'];
 		$om_lat = $row['lat'];
 		$om_lng = $row['lng'];
-		if ($om_pkst == $pkst and $om_lat == $lat and $om_lng == $lng) {
+		if ($om_pkst == $pkst and $om_lat == $lat and $om_lng == $lng) {				// IN REALTÀ BISOGNA FAR EIL CONFRONTO CON TUTTI GLI OMONINI! CI VUOLE while
 			// AVVISO DI QUEST GIÀ SEGNALATA
 			$response = $EMO_v.' La quest di questo pokéstop è stata già segnalata per oggi.';
 			$parameters = array('chat_id' => $userId, "text" => $response, "parse_mode" => "markdown");
