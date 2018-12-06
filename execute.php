@@ -282,7 +282,7 @@ elseif($status == 0) {
 		///////////////
 
 	if(strpos($text, "/quest ") === 0 )	{
-		if (in_array($chatId, $authorizedChats)) {
+		if (!in_array($chatId, $authorizedChats)) {
 			$data = [
 	   	 	'chat_id' => $chatId,
 	   	 	'text' => $EMO_EXE.' Per segnalare una quest, utilizza il comando /quests in chat privata con @Exeggutor_bot.',
@@ -322,7 +322,7 @@ elseif($status == 0) {
 	/////////////////
 	/// NEW QUEST ///
 	/////////////////
-	if(strpos($text, "/newquest") === 0 )	{
+	elseif(strpos($text, "/newquest") === 0 )	{
 		if (in_array($username, $admins)) {
 			$str = explode(', ', str_replace('/newquest ', '', $text));
 			$reward = ucfirst($str[0]);
@@ -349,7 +349,7 @@ elseif($status == 0) {
 	/////////////////
 	/// DEL QUEST ///
 	/////////////////
-	if(strpos($text, "/delquest") === 0 )	{
+	elseif(strpos($text, "/delquest") === 0 )	{
 		if (in_array($username, $admins)) {
 			$reward = str_replace('/delquest ', '', $text);
 			mysqli_query($conn,"DELETE FROM `tasks` WHERE reward = '$reward'");
@@ -371,7 +371,7 @@ elseif($status == 0) {
 	/////////////////
 	/// QUESTLIST ///
 	/////////////////
-	if(strpos($text, "/listquests") === 0 )	{
+	elseif(strpos($text, "/listquests") === 0 )	{
 		if (in_array($username, $admins)) {
 			$query = "SELECT * FROM `tasks`";
 			$result = mysqli_query($conn,$query);
