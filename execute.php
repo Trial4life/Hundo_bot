@@ -41,6 +41,7 @@ $EMO_PIN = "\xF0\x9F\x93\x8C";
 $EMO_zZz = "\xF0\x9F\x92\xA4";
 $EMO_GLO = "\xF0\x9F\x8C\x90";
 $EMO_EXE = "\xF0\x9F\x8C\xB4";
+$EMO_SQR ="\xE2\x97\xBE";
 $EMO_v = json_decode('"'."\u2705".'"');
 $EMO_x = json_decode('"'."\u274c".'"');
 $EMO_ALR = json_decode('"'."\u203c".'"');
@@ -81,7 +82,7 @@ if(strpos($text, "/start") === 0 ) {
 if(strpos($text, "/exeggutorhelp") === 0 ) {
 	$data = [
 	   'chat_id' => $chatId,
-	   'text' => "Per segnalare una quest, utilizzare il comando `/quest <nome-quest>` e, dopo aver inviato il comando condividere la posizione del pokéstop tramite @ingressportalbot (da utilizzare in modalità inline: dopo aver digitato `@ingressportalbot`, iniziare a digitare il nome del portale e selezionarlo dal menu a tendina una volta comparso - si consiglia di condividere la posizione con il bot in modo da rilevare i portali più vicini).\n\n*Esempio:*\n`/quest Dratini`\n Per segnalare un pokémon selvatico, utilizzare il comando `/100 <segnalazione>` e, dopo aver inviato il comando, condivedere la posizione dell'avvistamento direttamente tramite telegram.\n\n*Esempio:*\n`/100 Dratini 100% appena spawnato al Pincio`",
+	   'text' => $EMO_SQR . "Per segnalare una quest, utilizzare il comando `/quest <nome-quest>` e, dopo aver inviato il comando condividere la posizione del pokéstop tramite @ingressportalbot (da utilizzare in modalità inline: dopo aver digitato `@ingressportalbot`, iniziare a digitare il nome del portale e selezionarlo dal menu a tendina una volta comparso - si consiglia di condividere la posizione con il bot in modo da rilevare i portali più vicini).\n\n*Esempio:*\n`/quest Dratini`\n\n". $EMO_SQR . "Per segnalare un pokémon selvatico, utilizzare il comando `/100 <segnalazione>` e, dopo aver inviato il comando, condivedere la posizione dell'avvistamento direttamente tramite telegram.\n\n*Esempio:*\n`/100 Dratini 100% appena spawnato al Pincio`",
 	   'parse_mode' => 'markdown',
 	];
 	$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
