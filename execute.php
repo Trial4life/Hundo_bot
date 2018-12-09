@@ -491,6 +491,7 @@ elseif($status == 2) {
 			  		'disable_web_page_preview' => TRUE,
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+				mysqli_query($conn,"UPDATE `pokeid` SET userAlerts = '$userAlertsIDs[$i]' WHERE id = '001'");
 			}
 
 			$response = $EMO_v.' La quest è stata registrata.';
