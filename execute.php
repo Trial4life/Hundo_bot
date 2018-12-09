@@ -445,7 +445,7 @@ elseif($status == 0) {
 		while ($row = mysqli_fetch_assoc($result)) {
 			$curr_PkMn = $row['pokemon'];
 			$usersFound = $row['userAlerts'];
-			if (stristr($usersFound, $userId)) {
+			if (stristr($usersFound, strval($userId))) {
 				array_push($alertsFound,$curr_PkMn);
 			}
 			$counter++;
@@ -455,7 +455,7 @@ elseif($status == 0) {
 		}
 
 		// INVIA MESSAGGIO
-		if (empty($alertsFound)) {
+		if (!empty($alertsFound)) {
 			$response = $EMO_ON." Notifiche quest attive ".$EMO_ON."\n*";
 			$alertsFound_num = sizeof($alertsFound);
 			for ($i = 0; $i <= $alertsFound_num-1; $i++) {
