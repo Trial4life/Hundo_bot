@@ -88,7 +88,6 @@ if(strpos($text, "/exeggutorhelp") === 0 ) {
 	$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 }
 
-
 elseif(strpos($text, "/annulla") === 0 ) {
 	if ($status == 0) {
 		$data = [
@@ -409,6 +408,19 @@ elseif($status == 0) {
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}
 	}
+
+	/////////////////
+	/// ADD ALERT ///
+	/////////////////
+	elseif(strpos($text, "/addalert") === 0 ) {
+	}
+
+	/////////////////
+	/// DEL ALERT ///
+	/////////////////
+	elseif(strpos($text, "/delalert") === 0 ) {
+	}
+
 }
 
 elseif($status == 2) {
@@ -458,9 +470,29 @@ elseif($status == 2) {
 				// REGISTRA LA QUEST NEL DATABASE
 				mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, lat, lng, giorno) VALUES ('$quest', '$pkst', '$lat', '$lng', '$today')");
 			}
+			// REGISTRA LA QUEST NEL DATABASE
 			else {
 				mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, lat, lng, giorno) VALUES ('$quest', '$pkst', '$lat', '$lng', '$today')");
 			}
+			// NOTIFICA UTENTI CON NOTIFICHE ATTIVE NELLA CHAT DEL BOT
+
+			$query = "SELECT * FROM `pokeid` WHERE `pokemon` = '$quest'";
+			$result = mysqli_query($conn,$query);
+			$row3 = mysqli_fetch_assoc($result);
+			$userAlerts = $row3['userAlerts'];
+			$userAlertsIDs = explode(',', $userAlerts);
+
+			for ($i = 0; $i == sizeof($userAlertsIDs); $i++) {
+				$data = [
+			  		'chat_id' => $userAlertsIDs[$i],
+			  		'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
+			  		//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
+			  		'parse_mode' => 'markdown',
+			  		'disable_web_page_preview' => TRUE,
+				];
+				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+			}
+
 			$response = $EMO_v.' La quest è stata registrata.';
 			$parameters = array('chat_id' => $userId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
