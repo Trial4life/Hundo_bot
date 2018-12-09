@@ -42,6 +42,8 @@ $EMO_zZz = "\xF0\x9F\x92\xA4";
 $EMO_GLO = "\xF0\x9F\x8C\x90";
 $EMO_EXE = "\xF0\x9F\x8C\xB4";
 $EMO_TRI = "\xE2\x96\xB6";
+$EMO_ON = "\xF0\x9F\x94\x94";
+$EMO_OFF = "\xF0\x9F\x94\x95";
 $EMO_v = json_decode('"'."\u2705".'"');
 $EMO_x = json_decode('"'."\u274c".'"');
 $EMO_ALR = json_decode('"'."\u203c".'"');
@@ -408,6 +410,9 @@ elseif($status == 0) {
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
 		$currUserAlerts = $row['userAlerts'];
+		$response = $EMO_ON.' Notifiche per le quest '.$quest.' attivate.';
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
 		mysqli_query($conn,"UPDATE `pokeid` SET userAlerts = concat('$currUserAlerts', '$userId', ',') WHERE pokemon = '$quest'");
 	}
 
@@ -420,6 +425,9 @@ elseif($status == 0) {
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
 		$currUserAlerts = $row['userAlerts'];
+		$response = $EMO_OFF.' Notifiche per le quest '.$quest.' disattivate.';
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
 		mysqli_query($conn,"UPDATE `pokeid` SET userAlerts = replace('$currUserAlerts',concat('$userId', ','), '') WHERE pokemon = '$quest'");
 	}
 
