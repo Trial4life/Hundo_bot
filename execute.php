@@ -410,7 +410,12 @@ elseif($status == 0) {
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
 		$currUserAlerts = $row['userAlerts'];
-		$response = $EMO_ON.' Notifiche per le quest *'.$quest.'* attivate.';
+		if (!$row) {
+			$response = $EMO_ERR.' Quest *'.$quest.'* non trovata.';
+		}
+		else {
+			$response = $EMO_ON.' Notifiche per le quest *'.$quest.'* attivate.';
+		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
@@ -426,7 +431,12 @@ elseif($status == 0) {
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
 		$currUserAlerts = $row['userAlerts'];
-		$response = $EMO_OFF.' Notifiche per le quest *'.$quest.'* disattivate.';
+		if (!$row) {
+			$response = $EMO_ERR.' Quest *'.$quest.'* non trovata.';
+		}
+		else {
+			$response = $EMO_OFF.' Notifiche per le quest *'.$quest.'* disattivate.';
+		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
