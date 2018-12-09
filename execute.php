@@ -456,10 +456,10 @@ elseif($status == 0) {
 
 		// INVIA MESSAGGIO
 		if (!empty($alertsFound)) {
-			$response = $EMO_ON." Notifiche quest attive ".$EMO_ON."\n*";
+			$response = $EMO_ON." Notifiche quest attive ".$EMO_ON."\n";
 			$alertsFound_num = sizeof($alertsFound);
 			for ($i = 0; $i <= $alertsFound_num-1; $i++) {
-				$response = $response . $alertsFound[$i]."*\n";
+				$response = $response."*".$alertsFound[$i]."*\n";
 			}
 		}
 		else {
