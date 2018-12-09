@@ -433,6 +433,37 @@ elseif($status == 0) {
 		mysqli_query($conn,"UPDATE `pokeid` SET userAlerts = replace('$currUserAlerts',concat('$userId', ','), '') WHERE pokemon = '$quest'");
 	}
 
+	/////////////////
+	/// DEL ALERT ///
+	/////////////////
+	elseif(strpos($text, "/alerts") === 0 ) {
+		// CERCA ALERTS NEL DATABASE
+		$query = "SELECT * FROM `pokeid`";
+		$result = mysqli_query($conn,$query);
+		$alertsFound = array();
+		while ($row = mysqli_fetch_assoc($result)) {
+			$curr_PkMn = $row['pokemon'];
+			$userFound = $row['userAlerts'];
+			if (stristr($userFound, $userId)) {
+				array_push($alertsFound,$curr_PkMn);
+			}
+		}
+
+		// INVIA MESSAGGIO
+		if (!empty($alertsFound)) {
+			$response = "Notifiche quest attive:\n*";
+			$alertsFound_num = sizeof($alertsFound);
+			for ($i = 0; $i <= $alertsFound_num-1; $i++) {
+				$response = $response . $alertsFound[$i]."*\n";
+			}
+		}
+		else {
+			$response = "Al momento non è attiva nessuna notifica per le quest.";
+		}
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
 }
 
 elseif($status == 2) {
