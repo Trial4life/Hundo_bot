@@ -410,7 +410,7 @@ elseif($status == 0) {
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
 		$currUserAlerts = $row['userAlerts'];
-		$response = $EMO_ON.' Notifiche per le quest '.$quest.' attivate.';
+		$response = $EMO_ON.' Notifiche per le quest *'.$quest.'* attivate.';
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
@@ -426,7 +426,7 @@ elseif($status == 0) {
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
 		$currUserAlerts = $row['userAlerts'];
-		$response = $EMO_OFF.' Notifiche per le quest '.$quest.' disattivate.';
+		$response = $EMO_OFF.' Notifiche per le quest *'.$quest.'* disattivate.';
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
@@ -444,8 +444,8 @@ elseif($status == 0) {
 		$counter = 0;
 		while ($row = mysqli_fetch_assoc($result)) {
 			$curr_PkMn = $row['pokemon'];
-			$userFound = $row['userAlerts'];
-			if (stristr($userFound, $userId)) {
+			$usersFound = $row['userAlerts'];
+			if (stristr($usersFound, $userId)) {
 				array_push($alertsFound,$curr_PkMn);
 			}
 			$counter++;
@@ -456,7 +456,7 @@ elseif($status == 0) {
 
 		// INVIA MESSAGGIO
 		if (!empty($alertsFound)) {
-			$response = "Notifiche quest attive:\n*";
+			$response = $EMO_ON." Notifiche quest attive ".$EMO_ON."\n*";
 			$alertsFound_num = sizeof($alertsFound);
 			for ($i = 0; $i <= $alertsFound_num-1; $i++) {
 				$response = $response . $alertsFound[$i]."*\n";
