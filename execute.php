@@ -474,15 +474,14 @@ elseif($status == 2) {
 			else {
 				mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, lat, lng, giorno) VALUES ('$quest', '$pkst', '$lat', '$lng', '$today')");
 			}
-			// NOTIFICA UTENTI CON NOTIFICHE ATTIVE NELLA CHAT DEL BOT
 
+			// NOTIFICA UTENTI CON NOTIFICHE ATTIVE NELLA CHAT DEL BOT
 			$query = "SELECT * FROM `pokeid` WHERE `pokemon` = '$quest'";
 			$result = mysqli_query($conn,$query);
 			$row3 = mysqli_fetch_assoc($result);
 			$userAlerts = $row3['userAlerts'];
 			$userAlertsIDs = explode(',', $userAlerts);
-
-			for ($i = 0; $i == sizeof($userAlertsIDs); $i++) {
+			for ($i = 0; $i == sizeof($userAlertsIDs)-1; $i++) {
 				$data = [
 			  		'chat_id' => $userAlertsIDs[$i],
 			  		'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
