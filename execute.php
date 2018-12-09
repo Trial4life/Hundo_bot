@@ -441,12 +441,17 @@ elseif($status == 0) {
 		$query = "SELECT * FROM `pokeid`";
 		$result = mysqli_query($conn,$query);
 		$alertsFound = array();
+		$counter = 0;
 		while ($row = mysqli_fetch_assoc($result)) {
 			$curr_PkMn = $row['pokemon'];
 			$userFound = $row['userAlerts'];
 			if (stristr($userFound, $userId)) {
 				array_push($alertsFound,$curr_PkMn);
 			}
+			$counter++;
+			if ($counter >= 100) {
+        		break;
+    		}
 		}
 
 		// INVIA MESSAGGIO
