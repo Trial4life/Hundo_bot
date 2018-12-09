@@ -481,7 +481,7 @@ elseif($status == 2) {
 			$row3 = mysqli_fetch_assoc($result);
 			$userAlerts = $row3['userAlerts'];
 			$userAlertsIDs = explode(',', $userAlerts);
-			for ($i = 0; $i < 1; $i++) {
+			foreach ($userAlertsIDs as $i) {
 				$link = 'https://maps.google.com/?q='.$lat.','.$lng;
 				$data = [
 			  		'chat_id' => $userAlertsIDs[$i],
