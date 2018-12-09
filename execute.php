@@ -481,22 +481,22 @@ elseif($status == 2) {
 			$row3 = mysqli_fetch_assoc($result);
 			$userAlerts = $row3['userAlerts'];
 			$userAlertsIDs = explode(',', $userAlerts);
-			for ($i = 0; $i == sizeof($userAlertsIDs)-1; $i++) {
+			//for ($i = 0; $i == sizeof($userAlertsIDs)-1; $i++) {
 				$link = 'https://maps.google.com/?q='.$lat.','.$lng;
 				$data = [
-			  		'chat_id' => $userAlertsIDs[$i],
+			  		'chat_id' => $userAlertsIDs[0],
 			  		'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
 			  		//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
 			  		'parse_mode' => 'markdown',
 			  		'disable_web_page_preview' => TRUE,
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-			}
+			//}
 
-			//$response = $EMO_v.' La quest è stata registrata.';
-			//$parameters = array('chat_id' => $userId, "text" => $response, "parse_mode" => "markdown");
-			//$parameters["method"] = "sendMessage";
-			//echo json_encode($parameters);
+			$response = $EMO_v.' La quest è stata registrata.';
+			$parameters = array('chat_id' => $userId, "text" => $response, "parse_mode" => "markdown");
+			$parameters["method"] = "sendMessage";
+			echo json_encode($parameters);
 			mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
 		}
 	}
