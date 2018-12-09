@@ -484,7 +484,7 @@ elseif($status == 2) {
 			for ($i = 0; $i == sizeof($userAlertsIDs)-1; $i++) {
 				$link = 'https://maps.google.com/?q='.$lat.','.$lng;
 				$data = [
-			  		'chat_id' => (int)$userAlertsIDs[$i],
+			  		'chat_id' => 158754689,
 			  		'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
 			  		//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
 			  		'parse_mode' => 'markdown',
