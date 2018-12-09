@@ -287,11 +287,9 @@ elseif(strpos($text, "/mappaquest") === 0 ) {
 }
 
 elseif($status == 0) {
-	//if (in_array($chatId, $authorizedChats)) {
-		///////////////
-		//// QUEST ////
-		///////////////
-
+	///////////////
+	//// QUEST ////
+	///////////////
 	if(strpos($text, "/quest ") === 0 )	{
 		//if (in_array($chatId, $authorizedChats)) {
 		if ($chatType == 'group' or $chatType == 'supergroup') {
@@ -320,14 +318,6 @@ elseif($status == 0) {
 			}
 		}
 	}
-
-	/*else {
-		$data = [
-		   'chat_id' => $chatId,
-		   'text' => $EMO_ERR." Gruppo non autorizzato. Contattare l'admin. ".$EMO_ERR,
-		];
-		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-	}*/
 
 	/////////////////
 	/// NEW QUEST ///
@@ -413,12 +403,24 @@ elseif($status == 0) {
 	/// ADD ALERT ///
 	/////////////////
 	elseif(strpos($text, "/addalert") === 0 ) {
+		$quest = ucfirst(str_replace('/addalert ', '', $text));
+		$query = "SELECT * FROM `pokeid` WHERE pokemon = '$quest'";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+		$currUserAlerts = $row['userAlerts'];
+		mysqli_query($conn,"UPDATE `pokeid` SET userAlerts = concat('$currUserAlerts', ',', '$userId') WHERE pokemon = '$quest'");
 	}
 
 	/////////////////
 	/// DEL ALERT ///
 	/////////////////
 	elseif(strpos($text, "/delalert") === 0 ) {
+		$quest = ucfirst(str_replace('/delalert ', '', $text));
+		$query = "SELECT * FROM `pokeid` WHERE pokemon = '$quest'";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+		$currUserAlerts = $row['userAlerts'];
+		mysqli_query($conn,"UPDATE `pokeid` SET userAlerts = replace('$currUserAlerts',concat('$userId',','),'') WHERE pokemon = '$quest'");
 	}
 
 }
@@ -441,6 +443,7 @@ elseif($status == 2) {
 		$om_pkst = $row['pokestop'];
 		$om_lat = $row['lat'];
 		$om_lng = $row['lng'];
+		$link = 'https://maps.google.com/?q='.$lat.','.$lng;
 		if ($om_pkst == $pkst and $om_lat == $lat and $om_lng == $lng) {				// IN REALTÀ BISOGNA FAR EIL CONFRONTO CON TUTTI GLI OMONINI! CI VUOLE while
 			// AVVISO DI QUEST GIÀ SEGNALATA
 			$response = $EMO_v.' La quest di questo pokéstop è stata già segnalata per oggi.';
@@ -455,25 +458,6 @@ elseif($status == 2) {
 			$row2 = mysqli_fetch_assoc($result);
 			$flag = $row2['flag'];
 			$task = $row2['task'];
-			// SEGNALA LA QUEST NEL CANALE - CONTROLLO FLAG MISSIONI RARE
-			if ($flag == 1) {
-				$link = 'https://maps.google.com/?q='.$lat.','.$lng;
-				$data = [
-			  		'chat_id' => $channel,
-			  		'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
-			  		//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
-			  		'parse_mode' => 'markdown',
-			  		'disable_web_page_preview' => TRUE,
-				];
-				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-
-				// REGISTRA LA QUEST NEL DATABASE
-				mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, lat, lng, giorno) VALUES ('$quest', '$pkst', '$lat', '$lng', '$today')");
-			}
-			// REGISTRA LA QUEST NEL DATABASE
-			else {
-				mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, lat, lng, giorno) VALUES ('$quest', '$pkst', '$lat', '$lng', '$today')");
-			}
 
 			// NOTIFICA UTENTI CON NOTIFICHE ATTIVE NELLA CHAT DEL BOT
 			$query = "SELECT * FROM `pokeid` WHERE `pokemon` = '$quest'";
@@ -482,9 +466,20 @@ elseif($status == 2) {
 			$userAlerts = $row3['userAlerts'];
 			$userAlertsIDs = explode(',', $userAlerts);
 			foreach ($userAlertsIDs as $userAlertsID) {
-				$link = 'https://maps.google.com/?q='.$lat.','.$lng;
 				$data = [
 			  		'chat_id' => $userAlertsID,
+			  		'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
+			  		//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
+			  		'parse_mode' => 'markdown',
+			  		'disable_web_page_preview' => TRUE,
+				];
+				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+			}
+
+			// SEGNALA LA QUEST NEL CANALE - CONTROLLO FLAG MISSIONI RARE
+			if ($flag == 1) {
+				$data = [
+			  		'chat_id' => $channel,
 			  		'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
 			  		//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
 			  		'parse_mode' => 'markdown',
@@ -497,6 +492,9 @@ elseif($status == 2) {
 			$parameters = array('chat_id' => $userId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
+
+			// REGISTRA LA QUEST NEL DATABASE E RESETTA LA SESSIONE DELL'UTENTE
+			mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, lat, lng, giorno) VALUES ('$quest', '$pkst', '$lat', '$lng', '$today')");
 			mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
 		}
 	}
