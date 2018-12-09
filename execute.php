@@ -408,7 +408,7 @@ elseif($status == 0) {
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
 		$currUserAlerts = $row['userAlerts'];
-		mysqli_query($conn,"UPDATE `pokeid` SET userAlerts = concat('$currUserAlerts', ',', '$userId') WHERE pokemon = '$quest'");
+		mysqli_query($conn,"UPDATE `pokeid` SET userAlerts = concat('$currUserAlerts', '$userId', ',') WHERE pokemon = '$quest'");
 	}
 
 	/////////////////
@@ -420,7 +420,7 @@ elseif($status == 0) {
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
 		$currUserAlerts = $row['userAlerts'];
-		mysqli_query($conn,"UPDATE `pokeid` SET userAlerts = replace('$currUserAlerts',concat('$userId',','),'') WHERE pokemon = '$quest'");
+		mysqli_query($conn,"UPDATE `pokeid` SET userAlerts = replace('$currUserAlerts',concat('$userId', ','), '') WHERE pokemon = '$quest'");
 	}
 
 }
