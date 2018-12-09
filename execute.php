@@ -459,7 +459,7 @@ elseif($status == 0) {
 				array_push($alertsFound,$curr_PkMn);
 			}
 			$counter++;
-			if ($counter >= 100) {
+			if ($counter >= 1000) {
         		break;
     		}
 		}
