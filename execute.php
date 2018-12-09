@@ -484,7 +484,7 @@ elseif($status == 2) {
 			for ($i = 0; $i == sizeof($userAlertsIDs)-1; $i++) {
 				$link = 'https://maps.google.com/?q='.$lat.','.$lng;
 				$data = [
-			  		'chat_id' => 158754689,
+			  		'chat_id' => $userAlertsIDs[$i],
 			  		'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
 			  		//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
 			  		'parse_mode' => 'markdown',
@@ -493,7 +493,7 @@ elseif($status == 2) {
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			}
 
-			$response = $EMO_v.' La quest è stata registrata.';
+			$response = $EMO_v.' La quest è stata registrata.'.json_decode($userAlertsIDs);
 			$parameters = array('chat_id' => $userId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
