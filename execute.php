@@ -484,14 +484,13 @@ elseif($status == 2) {
 			for ($i = 0; $i == sizeof($userAlertsIDs)-1; $i++) {
 				$link = 'https://maps.google.com/?q='.$lat.','.$lng;
 				$data = [
-			  		'chat_id' => $userAlertsIDs[$i],
+			  		'chat_id' => (int)$userAlertsIDs[$i],
 			  		'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
 			  		//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
 			  		'parse_mode' => 'markdown',
 			  		'disable_web_page_preview' => TRUE,
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-				mysqli_query($conn,"UPDATE `pokeid` SET userAlerts = '$userAlertsIDs[$i]' WHERE id = '001'");
 			}
 
 			$response = $EMO_v.' La quest è stata registrata.';
