@@ -414,12 +414,12 @@ elseif($status == 0) {
 			$response = $EMO_ERR.' Quest *'.$quest.'* non trovata.';
 		}
 		else {
-			if (!stristr($currUserAlerts,$userId)) {
-				$response = $EMO_ON.' Notifiche per le quest *'.$quest.'* attivate.';
-				mysqli_query($conn,"UPDATE `pokeid` SET userAlerts = concat('$currUserAlerts', '$userId', ',') WHERE pokemon = '$quest'");
+			if (stristr($currUserAlerts,$userId)) {
+				$response = 'Le notifiche per le quest *'.$quest.'* sono già attive.';
 			}
 			else {
-				$response = 'Le notifiche per le quest *'.$quest.'* sono già attive.';
+				$response = $EMO_ON.' Notifiche per le quest *'.$quest.'* attivate.';
+				mysqli_query($conn,"UPDATE `pokeid` SET userAlerts = concat('$currUserAlerts', '$userId', ',') WHERE pokemon = '$quest'");
 			}
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
