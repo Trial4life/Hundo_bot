@@ -414,7 +414,7 @@ elseif($status == 0) {
 			$response = $EMO_ERR.' Quest *'.$quest.'* non trovata.';
 		}
 		else {
-			if (stristr($currUserAlerts,$userId)) {
+			if (stristr($currUserAlerts,strval($userId))) {
 				$response = 'Le notifiche per le quest *'.$quest.'* sono già attive.';
 			}
 			else {
