@@ -183,7 +183,7 @@ elseif ($conn->connect_error and (strpos($text, "/annulla") === 0 or strpos($tex
 
 elseif(strpos($text, "/cancella") === 0 ) {
 	if (in_array($username, $admins)) {
-		$text = str_replace('/cancella ', '', $text);
+		$text = str_replace('/cancella ', '', str_replace("'","\'",$text));
 		$query = "SELECT * FROM `quests` WHERE `pokestop` = '$text'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
