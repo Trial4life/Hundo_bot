@@ -501,7 +501,7 @@ elseif($status == 2) {
 		$query = "SELECT * FROM `quests` WHERE `pokestop` = '$pkst'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
-		$om_pkst = $row['pokestop']);
+		$om_pkst = $row['pokestop'];
 		$om_lat = $row['lat'];
 		$om_lng = $row['lng'];
 		$link = 'https://maps.google.com/?q='.$lat.','.$lng;
