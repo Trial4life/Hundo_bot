@@ -602,7 +602,7 @@ elseif($status == 2) {
 			echo json_encode($parameters);
 
 			// INVIA MESSAGGIO NEL GRUPPO - DA AUTOMATIZZARE+SELEZIONARE GRUPPI IN BASE ALLE CELLE ASSOCIATE
-			$response = '@' . $username . ' ha segnalato una quest ' . $quest . " a [" . $pkst . "](" . $link . ")";
+			$response = '@' . $username . ' ha segnalato una quest ' . $quest . " presso [" . $pkst . "](" . $link . ")";
 			$parameters = array('chat_id' => $group_PogoTube42, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
