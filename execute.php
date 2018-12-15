@@ -605,7 +605,7 @@ elseif($status == 2) {
 			//$response = $firstname . ' ha segnalato una quest ' . $quest . " presso [" . $pkst . "](" . $link . ")";
 			$data = [
 			  	'chat_id' => $group_PogoTube42,
-			  	'text' => "NAME" . " ha segnalato una quest " . "QUEST" . " presso [" . "PKST" . "](" . "LINK" . ")",
+			  	'text' => $username . " ha segnalato una quest " . $quest . " presso [" . $pkst . "](" . $link . ")",
 			  	'parse_mode' => 'markdown',
 			  	'disable_web_page_preview' => TRUE,
 			];
