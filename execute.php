@@ -603,10 +603,13 @@ elseif($status == 2) {
 
 			// INVIA MESSAGGIO NEL GRUPPO - DA AUTOMATIZZARE+SELEZIONARE GRUPPI IN BASE ALLE CELLE ASSOCIATE
 			//$response = $firstname . ' ha segnalato una quest ' . $quest . " presso [" . $pkst . "](" . $link . ")";
-			$response = 'NAME' . ' ha segnalato una quest ' . 'QUEST' . " presso [" . 'PKST' . "](" . 'LINK' . ")";
-			$parameters = array('chat_id' => $bot_Exeggutor, "text" => $response, "parse_mode" => "markdown");
-			$parameters["method"] = "sendMessage";
-			echo json_encode($parameters);
+			$data = [
+			  	'chat_id' => $bot_Exeggutor,
+			  	'text' => "NAME" . " ha segnalato una quest " . "QUEST" . " presso [" . "PKST" . "](" . "LINK" . ")",
+			  	'parse_mode' => 'markdown',
+			  	'disable_web_page_preview' => TRUE,
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 
 			// REGISTRA LA QUEST NEL DATABASE E RESETTA LA SESSIONE DELL'UTENTE
 			mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, lat, lng, zona, giorno) VALUES ('$quest', '$pkst', '$lat', '$lng', 'TEST', '$today')");
