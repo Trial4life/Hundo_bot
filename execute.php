@@ -254,7 +254,7 @@ elseif(strpos($text, "/termina") === 0 ) {
 }
 
 elseif(strpos($text, "/quests ") === 0 ) {
-	$zona = ucfirst(str_replace('/quest ', '', $text));
+	$zona = ucfirst(str_replace('/quests ', '', $text));
 	// ELENCO QUESTS
 	mysqli_query($conn,"DELETE FROM `quests` WHERE giorno < '$today'");  // RIMUOVE LE QUEST DEL GIORNO PRECEDENTE
 	$query = "SELECT * FROM `quests` WHERE `zona` = '$zona' ORDER BY quest ASC";
