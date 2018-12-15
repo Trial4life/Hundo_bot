@@ -25,7 +25,7 @@
 		$idCellaLong = $idCella->pos();
 		$idCella64 = dechex($idCellaLong);
 
-		$query = "SELECT * FROM `zones` WHERE `cellId64` = $idCella64";
+		$query = "SELECT * FROM `zones` WHERE `cellId64` = '$idCella64'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
 		$zona = $row['name'];
