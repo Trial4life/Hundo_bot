@@ -603,7 +603,7 @@ elseif($status == 2) {
 
 			// INVIA MESSAGGIO NEL GRUPPO - DA AUTOMATIZZARE+SELEZIONARE GRUPPI IN BASE ALLE CELLE ASSOCIATE
 			$response = '@' . $username . ' ha segnalato una quest ' . $quest . " a [" . $pkst . "](" . $link . ")";
-			$parameters = array('chat_id' => $group_admin, "text" => $response, "parse_mode" => "markdown");
+			$parameters = array('chat_id' => $group_PogoTube42, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
 
 			// REGISTRA LA QUEST NEL DATABASE E RESETTA LA SESSIONE DELL'UTENTE
