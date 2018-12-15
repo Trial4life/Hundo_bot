@@ -602,10 +602,9 @@ elseif($status == 2) {
 			echo json_encode($parameters);
 
 			// INVIA MESSAGGIO NEL GRUPPO - DA AUTOMATIZZARE+SELEZIONARE GRUPPI IN BASE ALLE CELLE ASSOCIATE
-			//$response = $firstname . ' ha segnalato una quest ' . $quest . " presso [" . $pkst . "](" . $link . ")";
 			$data = [
-			  	'chat_id' => $group_PogoTube42,
-			  	'text' => $username . " ha segnalato una quest " . $quest . " presso [" . $pkst . "](" . $link . ")",
+			  	'chat_id' => $group_NordEstLegit,
+			  	'text' => $firstname . " ha segnalato una quest *" . $quest . "* presso [" . $pkst . "](" . $link . ")",
 			  	'parse_mode' => 'markdown',
 			  	'disable_web_page_preview' => TRUE,
 			];
