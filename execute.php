@@ -561,6 +561,13 @@ elseif($status == 2) {
 	}
 }
 
+elseif(strpos($text, "/debug") === 0 ) {
+	$response = PHP_INT_SIZE;
+	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
+	$parameters["method"] = "sendMessage";
+	echo json_encode($parameters);
+}
+
 //close the mySQL connection
 $conn->close();
 
