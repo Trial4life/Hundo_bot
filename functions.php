@@ -23,7 +23,7 @@
 
 		$idCella = $lXcell->id();
 		$idCellaLong = $idCella->pos();
-		$idCella64 = dechex($idCellaLong);
+		$idCella64 = hex_to_str(dechex($idCellaLong));
 
 		$query = "SELECT * FROM `zones` WHERE `cellId64` = '$idCella64'";
 		$result = mysqli_query($conn,$query);
@@ -32,6 +32,10 @@
 
 		return $zona;
    }
+
+   function hex_to_str($string) {
+		return hex2bin("$string");
+	}
 
    /*
    function copyDB() {
