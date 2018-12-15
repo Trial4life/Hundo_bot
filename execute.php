@@ -542,9 +542,10 @@ elseif($status == 0) {
 
 elseif($status == 2) {
 	$quest = $alert;
+	$level = 10;
 
 	list($pkst, $lat, $lng) = getPortalData($text, $URLs[1]['url']);
-	$zone = getPortalZone($lat, $lng, $conn);
+	$zone = getPortalZone($level, $lat, $lng, $conn);
 
 	if (!$lat or !$lng)	{
 		$data = [
