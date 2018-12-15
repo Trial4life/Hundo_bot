@@ -81,7 +81,14 @@ if(strpos($text, "/start") === 0 ) {
 }
 */
 
-if(strpos($text, "/exeggutorhelp") === 0 ) {
+if(strpos($text, "/debug") === 0 ) {
+	$response = 'debug';
+	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
+	$parameters["method"] = "sendMessage";
+	echo json_encode($parameters);
+}
+
+elseif(strpos($text, "/exeggutorhelp") === 0 ) {
 	$data = [
 	   'chat_id' => $chatId,
 	   'text' => $EMO_TRI . " *Per segnalare un pokémon selvatico*, utilizzare il comando `/100 <segnalazione>` (sia in chat privata, sia nel gruppo) e, dopo aver inviato il comando, condivedere la posizione dell'avvistamento direttamente tramite telegram.\n\n_Esempio:_\n`/100 Dratini 100% appena spawnato al Pincio`\n\n" . $EMO_TRI . " *Per segnalare una quest*, utilizzare in chat privata con il bot il comando `/quest <inserire-la-ricompensa>` e, dopo aver inviato il comando, condividere la posizione del pokéstop tramite @ingressportalbot (da utilizzare in modalità inline: dopo aver digitato `@ingressportalbot`, iniziare a digitare il nome del portale e selezionarlo dal menu a tendina una volta comparso - si consiglia di condividere la posizione con il bot in modo da rilevare i portali più vicini).\n\n_Esempio:_\n`/quest Dratini`\n`/quest 1 Caramella Rara, vinci 3 sfide`\n\n". $EMO_TRI . " *Per attivare/disattivare le notifiche per una quest* utilizzare i comandi `/addalert <inserire-la-ricompensa>` e `/delalert <inserire-la-ricompensa>` \n\n_Esempio_:\n`/addalert Larvitar`\n`/delalert Dratini`\n\n" .$EMO_TRI ." *Per mostrare le notifiche attive*, utilizzare il comando `/alerts`.",
@@ -559,13 +566,6 @@ elseif($status == 2) {
 			mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
 		}
 	}
-}
-
-elseif(strpos($text, "/debug") === 0 ) {
-	$response = 'debug';
-	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
-	$parameters["method"] = "sendMessage";
-	echo json_encode($parameters);
 }
 
 //close the mySQL connection
