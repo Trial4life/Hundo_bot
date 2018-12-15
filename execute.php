@@ -606,7 +606,7 @@ elseif($status == 2) {
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			}
 
-			$response = $EMO_v.' La quest è stata registrata. '.$zone;
+			$response = $EMO_v.' La quest è stata registrata. '.$zone. ' '. $idCella64;
 			$parameters = array('chat_id' => $userId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
