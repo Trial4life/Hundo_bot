@@ -28,9 +28,9 @@
 		$query = "SELECT * FROM `zones` WHERE `cellId64` = '$idCella64'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
-		$zona = $row2['name'];
+		$zona = $row['name'];
 
-		return $idCella64;
+		return $zona;
    }
 
    /*
@@ -49,7 +49,7 @@
     		$tmp[] = $val['id'];
 
 		mysqli_query($connS1, "
-   		INSERT INTO	tasks
+   	zona	INSERT INTO	tasks
    		VALUES (".implode(', ', $tmp).")"
    	);
    }
