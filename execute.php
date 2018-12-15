@@ -253,6 +253,43 @@ elseif(strpos($text, "/termina") === 0 ) {
 	}
 }
 
+elseif(strpos($text, "/quests ") === 0 ) {
+	$zona = ucfirst(str_replace('/quest ', '', $text));
+	// ELENCO QUESTS
+	mysqli_query($conn,"DELETE FROM `quests` WHERE giorno < '$today'");  // RIMUOVE LE QUEST DEL GIORNO PRECEDENTE
+	$query = "SELECT * FROM `quests` WHERE `zona` = '$zona' ORDER BY quest ASC";
+	$result_quest = mysqli_query($conn,$query);
+	$quest = $pokestop = $lat = $lng = array();
+	while ($row = mysqli_fetch_assoc($result_quest)) {
+		array_push($quest, $row['quest']);
+		array_push($pokestop, $row['pokestop']);
+		//$curr_pkst = end($pokestop);
+		//$query = "SELECT * FROM `pokestops` WHERE pokestop = '$curr_pkst'";
+		//$result_pkst = mysqli_query($conn,$query);
+		//$row2 = mysqli_fetch_assoc($result_pkst);
+		array_push($lat, $row['lat']);
+		array_push($lng, $row['lng']);
+	}
+
+	if (sizeof($quest)==0) {
+		$response = 'Non è stata segnalata nessuna quest per oggi.';
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
+	else {
+		$response = 'Elenco delle quest di oggi:';
+		for ($i = 0; $i <= sizeof($quest)-1; $i++){
+			$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i];
+			$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
+		}
+
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
+}
+
 elseif(strpos($text, "/quests") === 0 ) {
 	// ELENCO QUESTS
 	mysqli_query($conn,"DELETE FROM `quests` WHERE giorno < '$today'");  // RIMUOVE LE QUEST DEL GIORNO PRECEDENTE
@@ -565,7 +602,7 @@ elseif($status == 2) {
 			echo json_encode($parameters);
 
 			// REGISTRA LA QUEST NEL DATABASE E RESETTA LA SESSIONE DELL'UTENTE
-			mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, lat, lng, giorno) VALUES ('$quest', '$pkst', '$lat', '$lng', '$today')");
+			mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, lat, lng, zona, giorno) VALUES ('$quest', '$pkst', '$lat', '$lng', 'TEST', '$today')");
 			mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
 		}
 	}
