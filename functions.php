@@ -30,7 +30,7 @@
 		$row = mysqli_fetch_assoc($result);
 		$zona = $row2['name'];
 
-		return $zona;
+		return $idCella64;
    }
 
    /*
