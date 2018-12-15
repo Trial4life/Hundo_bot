@@ -604,7 +604,7 @@ elseif($status == 2) {
 			// INVIA MESSAGGIO NEL GRUPPO - DA AUTOMATIZZARE+SELEZIONARE GRUPPI IN BASE ALLE CELLE ASSOCIATE
 			//$response = $firstname . ' ha segnalato una quest ' . $quest . " presso [" . $pkst . "](" . $link . ")";
 			$response = 'NAME' . ' ha segnalato una quest ' . 'QUEST' . " presso [" . 'PKST' . "](" . 'LINK' . ")";
-			$parameters = array('chat_id' => $group_admin, "text" => $response, "parse_mode" => "markdown");
+			$parameters = array('chat_id' => $bot_Exeggutor, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
 
