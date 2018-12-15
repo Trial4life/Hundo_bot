@@ -544,7 +544,7 @@ elseif($status == 2) {
 	$quest = $alert;
 
 	list($pkst, $lat, $lng) = getPortalData($text, $URLs[1]['url']);
-	list($CELLID, $zone) = getPortalZone($lat, $lng);
+	$zone = getPortalZone($lat, $lng, $conn);
 
 	if (!$lat or !$lng)	{
 		$data = [

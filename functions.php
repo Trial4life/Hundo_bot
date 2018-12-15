@@ -16,7 +16,7 @@
    	return array($pkst, $lat, $lng);
    }
 
-   function getPortalZone($lat, $lng) {
+   function getPortalZone($lat, $lng, $conn) {
    	$level = 10;
    	$s2cell = new S2Cell(S2LatLng::fromDegrees($lat,$lng));
 		$lXcell = new S2Cell($s2cell->id()->parent($level));
