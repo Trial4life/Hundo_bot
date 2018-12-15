@@ -1,4 +1,11 @@
 <?php
+spl_autoload_register(
+    function ($class) {
+        $path = __DIR__ . "/classes/$class.php";
+        if (file_exists($path)) require_once $path;
+    }
+);
+
 date_default_timezone_set('Europe/Rome');
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
@@ -535,7 +542,10 @@ elseif($status == 0) {
 
 elseif($status == 2) {
 	$quest = $alert;
+
 	list($pkst, $lat, $lng) = getPortalData($text, $URLs[1]['url']);
+	$zone = getPortalZone($lat, $lng);
+
 	if (!$lat or !$lng)	{
 		$data = [
 	   	'chat_id' => $userId,
@@ -601,7 +611,7 @@ elseif($status == 2) {
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
 
-			// INVIA MESSAGGIO NEL GRUPPO - DA AUTOMATIZZARE+SELEZIONARE GRUPPI IN BASE ALLE CELLE ASSOCIATE
+/*			// INVIA MESSAGGIO NEL GRUPPO - DA AUTOMATIZZARE+SELEZIONARE GRUPPI IN BASE ALLE CELLE ASSOCIATE
 			$data = [
 			  	'chat_id' => $group_NordEstLegit,
 			  	'text' => $firstname . " ha segnalato una quest *" . $quest . "* presso [" . $pkst . "](" . $link . ")",
@@ -609,9 +619,9 @@ elseif($status == 2) {
 			  	'disable_web_page_preview' => TRUE,
 			];
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-
+*/
 			// REGISTRA LA QUEST NEL DATABASE E RESETTA LA SESSIONE DELL'UTENTE
-			mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, lat, lng, zona, giorno) VALUES ('$quest', '$pkst', '$lat', '$lng', 'TEST', '$today')");
+			mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, lat, lng, zona, giorno) VALUES ('$quest', '$pkst', '$lat', '$lng', '$zone', '$today')");
 			mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
 		}
 	}

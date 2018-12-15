@@ -16,6 +16,23 @@
    	return array($pkst, $lat, $lng);
    }
 
+   function getPortalZone($lat, $lng) {
+   	$level = 10;
+   	$s2cell = new S2Cell(S2LatLng::fromDegrees($lat,$lng));
+		$lXcell = new S2Cell($s2cell->id()->parent($level));
+
+		$idCella = $lXcell->id();
+		$idCellaLong = $idCella->pos();
+		$idCella64 = dechex($idCellaLong);
+
+		$query = "SELECT * FROM `zones` WHERE `cellId64` = '$idCella64'";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+		$zona = $row2['name'];
+
+		return $zona;
+   }
+
    /*
    function copyDB() {
    	$conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");
