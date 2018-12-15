@@ -596,15 +596,15 @@ elseif($status == 2) {
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			}
 
-			$response = 'NAME' . ' ha segnalato una quest ' . 'quest' . " presso [" . 'pkst' . "](" . 'link' . ")";
+			$response = $EMO_v.' La quest è stata registrata.';
 			$parameters = array('chat_id' => $userId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
 
 			// INVIA MESSAGGIO NEL GRUPPO - DA AUTOMATIZZARE+SELEZIONARE GRUPPI IN BASE ALLE CELLE ASSOCIATE
 			//$response = $firstname . ' ha segnalato una quest ' . $quest . " presso [" . $pkst . "](" . $link . ")";
-			$response = 'NAME' . ' ha segnalato una quest ' . 'quest' . " presso [" . 'pkst' . "](" . 'link' . ")";
-			$parameters = array('chat_id' => $group_PogoTube42, "text" => $response, "parse_mode" => "markdown");
+			$response = 'NAME' . ' ha segnalato una quest ' . 'QUEST' . " presso [" . 'PKST' . "](" . 'LINK' . ")";
+			$parameters = array('chat_id' => $group_admin, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
 
