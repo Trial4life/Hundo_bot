@@ -544,7 +544,7 @@ elseif($status == 2) {
 	$quest = $alert;
 
 	list($pkst, $lat, $lng) = getPortalData($text, $URLs[1]['url']);
-	$zone = getPortalZone($lat, $lng);
+	list($CELLID, $zone) = getPortalZone($lat, $lng);
 
 	if (!$lat or !$lng)	{
 		$data = [
@@ -606,7 +606,7 @@ elseif($status == 2) {
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			}
 
-			$response = $EMO_v.' La quest è stata registrata. '.$zone;
+			$response = $EMO_v.' La quest è stata registrata. '.$zone, ' '.$CELLID;
 			$parameters = array('chat_id' => $userId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
