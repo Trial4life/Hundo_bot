@@ -791,8 +791,7 @@ elseif($status == 2) {
 				$grp = intval($groupsIDs[$i]);
 				$data = [
 				  	'chat_id' => $grp,
-				  	//'text' => $firstname . " ha segnalato una quest *" . $quest . "* presso [" . $pkst . "](" . $link . ")",
-				  	'text' => 'Test'.$groupsIDs[$i],
+				  	'text' => $firstname . " ha segnalato una quest *" . $quest . "* presso [" . $pkst . "](" . $link . ")",
 				  	'parse_mode' => 'markdown',
 				  	'disable_web_page_preview' => TRUE,
 				];
