@@ -31,7 +31,7 @@
 		if ($row) {
 			$zona = $row['name'];
 		}
-
+		$zona = mysql_error($conn);
 		return $zona;
    }
 
