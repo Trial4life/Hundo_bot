@@ -608,9 +608,9 @@ elseif($status == 0) {
 
 		$link_all = "https://s2.sidewalklabs.com/regioncoverer/?center=41.891165%2C12.492826&zoom=12&cells=";
 		for ($i = 0; $i <= sizeof($cell)-1; $i++){
-			$link_tot = $link_all . "%2C" . $cell[$i];
+			$link_all = $link_all . "%2C" . $cell[$i];
 		}
-		$response = "Lista delle [celle attive](".$link_tot."):";
+		$response = "Lista delle [celle attive](".$link_all."):";
 		for ($i = 0; $i <= sizeof($cell)-1; $i++){
 			$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat[$i] ."%2C". $lng[$i] . "&zoom=" . $zoom[$i] . "&cells=" . $cell[$i];
 			$response = $response."\n*".$name[$i]."* − [".$cell[$i]."](".$link.")";
