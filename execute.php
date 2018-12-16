@@ -584,6 +584,28 @@ elseif($status == 0) {
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
 	}
+
+	///////////////
+	/// REGIONS ///
+	///////////////
+	elseif(strpos($text, "/regions") === 0) {
+		$query = "SELECT * FROM `zones`";
+		$result = mysqli_query($conn,$query);
+		$cell = $name = array();
+		while ($row = mysqli_fetch_assoc($result)) {
+			array_push($cell, $row['cellId']);
+			array_push($name, $row['name']);
+		}
+
+		$response = "Lista delle celle attive:";
+		for ($i = 0; $i <= sizeof($cell)-1; $i++){
+			$response = $response."\n*".$name[$i]."* − ".$cell[$i];
+		}
+
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
 }
 
 elseif($status == 2) {
