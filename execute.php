@@ -702,7 +702,7 @@ elseif($status == 2) {
 			while ($row = mysqli_fetch_assoc($result)) {
 				$groupSTR = $row['groups'];
 				$groupTMP = explode(',', $groupSTR);
-				for ($i = 0; $i = sizeof($groupTMP); $i++) {
+				for ($i = 0; $i = sizeof($groupTMP)-1; $i++) {
 					array_push($groupsIDs, $groupTMP[$i]);
 				}
 			}
