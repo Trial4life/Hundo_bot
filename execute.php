@@ -554,7 +554,7 @@ elseif($status == 0) {
 		if (!$row) {
 			$response = $EMO_v." La cella *".$cellId."* è stata registrata come *\"".$name."\"*.";
 			mysqli_query($conn,"INSERT INTO `zones` (cellId, cellId64, name) VALUES ('$cellId', '$cellId64', '$name')");
-			$response = mysqli_error($conn);
+			//$response = mysqli_error($conn);
 		}
 		else {
 			$response = $EMO_v.' La cella *'.$cellId.'* è già registrata.';
