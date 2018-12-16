@@ -662,14 +662,16 @@ elseif($status == 2) {
 			$userAlerts = $row3['userAlerts'];
 			$userAlertsIDs = explode(',', $userAlerts);
 			foreach ($userAlertsIDs as $userAlertsID) {
-				$data = [
-			  		'chat_id' => $userAlertsID,
-			  		'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
-			  		//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
-			  		'parse_mode' => 'markdown',
-			  		'disable_web_page_preview' => TRUE,
-				];
-				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+				if ($userAlertsID != $userId) {
+					$data = [
+			  			'chat_id' => $userAlertsID,
+			  			'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
+			  			//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
+			  			'parse_mode' => 'markdown',
+			  			'disable_web_page_preview' => TRUE,
+					];
+					$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+				}
 			}
 
 			// SEGNALA LA QUEST NEL CANALE - CONTROLLO FLAG MISSIONI RARE
