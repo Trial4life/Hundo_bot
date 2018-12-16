@@ -30,7 +30,6 @@
 
 		if ($row) {$zona = $row['name'];}
 
-
 		return $zona;
    }
 
