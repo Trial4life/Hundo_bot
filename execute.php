@@ -699,15 +699,27 @@ elseif($status == 2) {
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
 
-/*			// INVIA MESSAGGIO NEL GRUPPO - DA AUTOMATIZZARE+SELEZIONARE GRUPPI IN BASE ALLE CELLE ASSOCIATE
-			$data = [
-			  	'chat_id' => $group_NordEstLegit,
-			  	'text' => $firstname . " ha segnalato una quest *" . $quest . "* presso [" . $pkst . "](" . $link . ")",
-			  	'parse_mode' => 'markdown',
-			  	'disable_web_page_preview' => TRUE,
-			];
-			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-*/
+			// INVIA MESSAGGIO NEL GRUPPO - DA AUTOMATIZZARE+SELEZIONARE GRUPPI IN BASE ALLE CELLE ASSOCIATE
+
+			$query = "SELECT * FROM `zones` WHERE '$zone' LIKE CONCAT('%', name, '%')";
+			$result = mysqli_query($conn,$query);
+			$groupsIDs = array();
+			while ($row = mysqli_fetch_assoc($result)) {
+				$groupTMP = explode(',', $row['groups']);
+				array_merge($groupsIDs, $groupTMP);
+			}
+			$groupsIDs = array_unique($groupsIDs);
+
+			for ($i = 0; $i = sizeof($groupsIDs)-1; $i++) {
+				$data = [
+				  	'chat_id' => $groupsIDs[$i],
+				  	'text' => $firstname . " ha segnalato una quest *" . $quest . "* presso [" . $pkst . "](" . $link . ")",
+				  	'parse_mode' => 'markdown',
+				  	'disable_web_page_preview' => TRUE,
+				];
+				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+			}
+
 			// REGISTRA LA QUEST NEL DATABASE E RESETTA LA SESSIONE DELL'UTENTE
 			mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, lat, lng, zona, giorno) VALUES ('$quest', '$pkst', '$lat', '$lng', '$zone', '$today')");
 			mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
