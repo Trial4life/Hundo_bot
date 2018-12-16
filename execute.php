@@ -589,7 +589,7 @@ elseif($status == 0) {
 	/// REGIONS ///
 	///////////////
 	elseif(strpos($text, "/regions") === 0) {
-		$query = "SELECT * FROM `zones`";
+		$query = "SELECT * FROM `zones` ORDER BY name ASC";
 		$result = mysqli_query($conn,$query);
 		$cell = $name = array();
 		while ($row = mysqli_fetch_assoc($result)) {
