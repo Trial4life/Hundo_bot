@@ -623,12 +623,12 @@ elseif($status == 2) {
 	//$level = 10;
 
 	list($pkst, $lat, $lng) = getPortalData($text, $URLs[1]['url']);
-	$zone = '';
+	$zone = ', ';
 	for ($i = 10; $i ==13; $i++) {
 		$tmp = getPortalZone($i, $lat, $lng, $conn);
-
+		if ($tmp) {
 			$zone = $zone . $tmp . ', ';
-
+		}
 	}
 
 	if (!$lat or !$lng)	{
