@@ -626,9 +626,9 @@ elseif($status == 2) {
 	$zone = '-';
 	for ($i = 10; $i <=13; $i++) {
 		$tmp = getPortalZone($i, $lat, $lng, $conn);
-		//if ($tmp > '') {
+		if ($tmp != NULL) {
 			$zone = $zone . $tmp . ', ';
-		//}
+		}
 	}
 
 	if (!$lat or !$lng)	{
