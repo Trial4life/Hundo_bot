@@ -597,7 +597,8 @@ elseif($status == 0) {
 			array_push($name, $row['name']);
 			$cellIdObj = new S2CellId(hexdec($row['cellId64']));
 			$cellObj = new S2Cell($cellIdObj);
-			array_push($zoom, $cellObj->level()+2);
+			//array_push($zoom, $cellObj->level()+2);
+			array_push($zoom, 10);
 			array_push($lat, 41.891165  );
 			array_push($lng, 12.492826  );
 		}
