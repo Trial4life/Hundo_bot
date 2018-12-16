@@ -708,7 +708,7 @@ elseif($status == 2) {
 
 			for ($i = 0; $i = sizeof($groupsIDs)-1; $i++) {
 				$data = [
-				  	'chat_id' => $groupsIDs[$i][0],
+				  	'chat_id' => intval($groupsIDs[$i][0]),
 				  	'text' => $firstname . " ha segnalato una quest *" . $quest . "* presso [" . $pkst . "](" . $link . ")",
 				  	'parse_mode' => 'markdown',
 				  	'disable_web_page_preview' => TRUE,
