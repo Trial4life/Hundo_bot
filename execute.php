@@ -591,17 +591,26 @@ elseif($status == 0) {
 	elseif(strpos($text, "/regions") === 0) {
 		$query = "SELECT * FROM `zones` ORDER BY name ASC";
 		$result = mysqli_query($conn,$query);
-		$cell = $name = array();
+		$cell = $name = $lat = $lng = $zoom = array();
 		while ($row = mysqli_fetch_assoc($result)) {
 			array_push($cell, $row['cellId']);
 			array_push($name, $row['name']);
+			/*$cellIdObj = new S2CellId(hexdec($row['cellId64']));
+			$cellObj = new S2Cell($cellIdObj);
+			array_push($lat,   );
+			array_push($lng,   );
+			array_push($zoom, $cellObj->level());
+			*/
+			array_push($lat, 41.891165  );
+			array_push($lng, 12.492826  );
+			array_push($zoom, 10)
 		}
 
 		$response = "Lista delle celle attive:";
 		for ($i = 0; $i <= sizeof($cell)-1; $i++){
+			$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat[$i] ."%2C". $lng[$i] . "&zoom=" . $zoom[$i] . "&cells=" . $cell[$i];
 			$response = $response."\n*".$name[$i]."* − ".$cell[$i];
 		}
-
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
