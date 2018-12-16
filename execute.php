@@ -628,7 +628,7 @@ elseif($status == 0) {
 		$currGropus = $row['groups'];
 		$zona = $row['name'];
 		if (!$row) {
-			$response = $EMO_ERR.' Cella *'.$quest.'* non trovata. Registrarla prima con il comando /addregion.';
+			$response = $EMO_ERR.' Cella *'.$cell.'* non trovata. Registrarla prima con il comando /addregion.';
 		}
 		else {
 			if (stristr($currGropus,strval($chatId))) {
