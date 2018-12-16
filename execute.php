@@ -606,7 +606,7 @@ elseif($status == 0) {
 			array_push($zoom, $cellObj->level()+2);
 		}
 
-		$link_all = "https://s2.sidewalklabs.com/regioncoverer/?center=41.891165%2C12.492826&zoom=12&cells="
+		$link_all = "https://s2.sidewalklabs.com/regioncoverer/?center=41.891165%2C12.492826&zoom=12&cells=";
 		for ($i = 0; $i <= sizeof($cell)-1; $i++){
 			$link_tot = $link_all . "%2C" . $cell[$i];
 		}
