@@ -278,14 +278,26 @@ elseif(strpos($text, "/quests ") === 0 ) {
 		array_push($lng, $row['lng']);
 	}
 
+	$query = "SELECT * FROM `zones` WHERE `name` = '$zona'";
+	$result_quest = mysqli_query($conn,$query);
+	$row = mysqli_fetch_assoc($result_quest);
+	$cell = $row['cellId'];
+	$cellIdObj = new S2CellId(hexdec($row['cellId64']));
+	$cellObj = new S2Cell($cellIdObj);
+	$lat = 41.891165;
+	$lng = 12.492826;
+	$zoom = 12;
+	// $zoom = $cellObj->level()+2; 			// scommentare quando si fixa $lat e $lng (S2LatLng)
+	$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat ."%2C". $lng . "&zoom=" . $zoom . "&cells=" . $cell;
+
 	if (sizeof($quest)==0) {
-		$response = 'Non è stata segnalata nessuna quest nella zona *'.$zona.'* per oggi.';
+		$response = 'Non è stata segnalata nessuna quest nella cella ['.$zona.']('.$link.'):';
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
 	}
 	else {
-		$response = 'Elenco delle quest nella zona *'.$zona.'*:';
+		$response = 'Elenco delle quest nella cella ['.$zona.']('.$link.'):';
 		for ($i = 0; $i <= sizeof($quest)-1; $i++){
 			$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i];
 			$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
