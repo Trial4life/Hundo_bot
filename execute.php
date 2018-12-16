@@ -626,9 +626,9 @@ elseif($status == 2) {
 	$zone = '';
 	for ($i = 10; $i ==13; $i++) {
 		$tmp = getPortalZone($i, $lat, $lng, $conn);
-		if ($tmp) {
+
 			$zone = $zone . $tmp . ', ';
-		}
+
 	}
 
 	if (!$lat or !$lng)	{
@@ -694,7 +694,7 @@ elseif($status == 2) {
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			}
 
-			$response = $EMO_v.' La quest è stata registrata.'.$zone;
+			$response = $EMO_v.' La quest è stata registrata.';
 			$parameters = array('chat_id' => $userId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
