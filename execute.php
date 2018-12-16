@@ -702,7 +702,9 @@ elseif($status == 2) {
 			while ($row = mysqli_fetch_assoc($result)) {
 				$groupSTR = $row['groups'];
 				$groupTMP = explode(',', $groupSTR);
-				$groupsIDs[] = $groupTMP;
+				for ($i = 0; $i = sizeof($groupTMP)-1; $i++) {
+					$groupsIDs[] = $groupTMP[$i];
+				}
 			}
 			$groupsIDs = array_unique($groupsIDs);
 
@@ -717,7 +719,7 @@ elseif($status == 2) {
 			}
 //////
 
-			$response = $EMO_v.' La quest è stata registrata.'.json_encode($groupsIDs).$groupsIDs[0][0];
+			$response = $EMO_v.' La quest è stata registrata.'.json_encode($groupsIDs).$groupsIDs[0];
 			$parameters = array('chat_id' => $userId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
