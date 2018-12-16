@@ -620,10 +620,16 @@ elseif($status == 0) {
 
 elseif($status == 2) {
 	$quest = $alert;
-	$level = 10;
+	//$level = 10;
 
 	list($pkst, $lat, $lng) = getPortalData($text, $URLs[1]['url']);
-	$zone = getPortalZone($level, $lat, $lng, $conn);
+	$zone = array();
+	for ($i = 10; $i ==13; $i++) {
+		$tmp = getPortalZone($i, $lat, $lng, $conn);
+		if ($tmp) {
+			array_push($zone, getPortalZone($i, $lat, $lng, $conn));
+		}
+	}
 
 	if (!$lat or !$lng)	{
 		$data = [
@@ -642,6 +648,7 @@ elseif($status == 2) {
 		$om_lng = $row['lng'];
 		$link = 'https://maps.google.com/?q='.$lat.','.$lng;
 		if ($om_pkst == str_replace("\'","'",$pkst) and $om_lat == $lat and $om_lng == $lng) {				// IN REALTÀ BISOGNA FAR EIL CONFRONTO CON TUTTI GLI OMONINI! CI VUOLE while
+
 			// AVVISO DI QUEST GIÀ SEGNALATA
 			$response = $EMO_v.' La quest di questo pokéstop è stata già segnalata per oggi.';
 			$parameters = array('chat_id' => $userId, "text" => $response, "parse_mode" => "markdown");
