@@ -553,7 +553,7 @@ elseif($status == 0) {
 		$row = mysqli_fetch_assoc($result);
 		if (!$row) {
 			$response = $EMO_v." La cella *".$cellId."* è stata registrata come *\"".$name."\"*.";
-			mysqli_query($conn,"INSERT INTO `zones` (cellId, cellId64, name, groups) VALUES ('$cellId', '$cellId64', '$name', '')");
+			mysqli_query($conn,"INSERT INTO `zones` (cellId, cellId64, name) VALUES ('$cellId', '$cellId64', '$name')");
 			$response = mysqli_error($conn);
 		}
 		else {
