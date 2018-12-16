@@ -595,23 +595,18 @@ elseif($status == 0) {
 		while ($row = mysqli_fetch_assoc($result)) {
 			array_push($cell, $row['cellId']);
 			array_push($name, $row['name']);
-			/*$cellIdObj = new S2CellId(hexdec($row['cellId64']));
+			$cellIdObj = new S2CellId(hexdec($row['cellId64']));
 			$cellObj = new S2Cell($cellIdObj);
-			array_push($lat,   );
-			array_push($lng,   );
 			array_push($zoom, $cellObj->level()+2);
-			*/
 			array_push($lat, 41.891165  );
 			array_push($lng, 12.492826  );
-			array_push($zoom, $cellObj->level());
-			array_push($zoom, $zoom + 2);
 		}
 
 		$link_all = "https://s2.sidewalklabs.com/regioncoverer/?center=41.891165%2C12.492826&zoom=12&cells=";
 		for ($i = 0; $i <= sizeof($cell)-1; $i++){
 			$link_all = $link_all . "%2C" . $cell[$i];
 		}
-		$response = "Lista delle [celle attive](".$link_all."):";
+		$response = $EMO_GLO." Lista delle [celle attive](".$link_all."): ".$EMO_GLO;
 		for ($i = 0; $i <= sizeof($cell)-1; $i++){
 			$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat[$i] ."%2C". $lng[$i] . "&zoom=" . $zoom[$i] . "&cells=" . $cell[$i];
 			$response = $response."\n*".$name[$i]."* − [".$cell[$i]."](".$link.")";
