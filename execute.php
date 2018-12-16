@@ -779,10 +779,11 @@ elseif($status == 2) {
 			$query = "SELECT * FROM `zones` WHERE '$zone' LIKE CONCAT('%', name, '%')";
 			$result = mysqli_query($conn,$query);
 			$groupsIDs = array();
+			$strTMP = '';
 			while ($row = mysqli_fetch_assoc($result)) {
 				$groupSTR = $row['groups'];
-				$groupTMP = explode(',', $groupSTR);
-				$groupsIDs[] = $groupTMP; // FARE IN MODO DI APPENDERE ELEMENTO PER ELEMENTO
+				$strTMP = $strTMP . $groupSTR;
+				$groupsIDs = explode(',', $strTMP);
 			}
 			$groupsIDs = array_unique($groupsIDs);
 
