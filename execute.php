@@ -706,9 +706,10 @@ elseif($status == 2) {
 			}
 			$groupsIDs = array_unique($groupsIDs);
 
-			for ($i = 0; $i = sizeof($groupsIDs)-1; $i++) {
+			for ($i = 0; $i = sizeof($groupsIDs)-2; $i++) {
+				$grp = intval($groupsIDs[$i][0]);
 				$data = [
-				  	'chat_id' => intval($groupsIDs[$i][0]),
+				  	'chat_id' => $grp,
 				  	//'text' => $firstname . " ha segnalato una quest *" . $quest . "* presso [" . $pkst . "](" . $link . ")",
 				  	'text' => 'Test',
 				  	'parse_mode' => 'markdown',
