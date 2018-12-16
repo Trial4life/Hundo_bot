@@ -719,7 +719,7 @@ elseif($status == 2) {
 			}
 //////
 
-			$response = $EMO_v.' La quest è stata registrata.'.json_encode($groupsIDs).$groupsIDs[0];
+			$response = $EMO_v.' La quest è stata registrata.';
 			$parameters = array('chat_id' => $userId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
