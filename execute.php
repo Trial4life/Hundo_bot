@@ -603,7 +603,7 @@ elseif($status == 0) {
 			*/
 			array_push($lat, 41.891165  );
 			array_push($lng, 12.492826  );
-			array_push($zoom, $cellObj->level()+2);
+			array_push($zoom, 10);
 		}
 
 		$link_all = "https://s2.sidewalklabs.com/regioncoverer/?center=41.891165%2C12.492826&zoom=12&cells=";
