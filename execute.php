@@ -599,14 +599,18 @@ elseif($status == 0) {
 			$cellObj = new S2Cell($cellIdObj);
 			array_push($lat,   );
 			array_push($lng,   );
-			array_push($zoom, $cellObj->level());
+			array_push($zoom, $cellObj->level()+2);
 			*/
 			array_push($lat, 41.891165  );
 			array_push($lng, 12.492826  );
-			array_push($zoom, 10);
+			array_push($zoom, $cellObj->level()+2);
 		}
 
-		$response = "Lista delle celle attive:";
+		$link_all = "https://s2.sidewalklabs.com/regioncoverer/?center=41.891165%2C12.492826&zoom=12&cells="
+		for ($i = 0; $i <= sizeof($cell)-1; $i++){
+			$link_tot = $link_all . "%2C" . $cell[$i];
+		}
+		$response = "Lista delle [celle attive](".$link_tot."):";
 		for ($i = 0; $i <= sizeof($cell)-1; $i++){
 			$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat[$i] ."%2C". $lng[$i] . "&zoom=" . $zoom[$i] . "&cells=" . $cell[$i];
 			$response = $response."\n*".$name[$i]."* − [".$cell[$i]."](".$link.")";
