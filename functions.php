@@ -27,11 +27,10 @@
 		$query = "SELECT * FROM `zones` WHERE `cellId64` = '$idCella64'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
-		$zona = '-';
-		if ($row) {
-			$zona = $row['name'];
-		}
-		$zona = mysqli_error($conn);
+
+		$zona = $row['name'];
+		$zona = ' 1';
+
 		return $zona;
    }
 
