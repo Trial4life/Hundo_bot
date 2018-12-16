@@ -601,7 +601,7 @@ elseif($status == 0) {
 		for ($i = 0; $i <= sizeof($cell)-1; $i++){
 			$response = $response."\n*".$name[$i]."* − ".$cell[$i];
 		}
-$response = mysqli_error($conn);
+
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
