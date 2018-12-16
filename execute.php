@@ -660,7 +660,7 @@ elseif($status == 0) {
 		}
 		else {
 			$link = 0; ///REGIONCOVERER
-			$response = $EMO_OFF." Il gruppo è stato rimosso dalla cella [".$cell."](".$link.") (zona \"".$zona."\").";
+			$response = $EMO_x." Il gruppo è stato rimosso dalla cella [".$cell."](".$link.") (zona \"".$zona."\").";
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
