@@ -609,7 +609,7 @@ elseif($status == 0) {
 		$response = "Lista delle celle attive:";
 		for ($i = 0; $i <= sizeof($cell)-1; $i++){
 			$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat[$i] ."%2C". $lng[$i] . "&zoom=" . $zoom[$i] . "&cells=" . $cell[$i];
-			$response = $response."\n*".$name[$i]."* − ".$cell[$i];
+			$response = $response."\n*".$name[$i]."* − [".$cell[$i]."](".$link.")";
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
