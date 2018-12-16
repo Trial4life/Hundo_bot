@@ -546,14 +546,14 @@ elseif($status == 0) {
 		$data = explode(', ', str_replace('/addregion ', '', $text));
 		$cellId = $data[0];
 		$name = $data[1];
-		$cellId64 = $cellId ;
+		$cellId64 = $cellId . str_repeat("0",16-strlen($cellId));
 
 		$query = "SELECT * FROM `zones` WHERE cellId = '$cellId'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
 		if (!$row) {
 			$response = $EMO_v.' La cella *'.$cellId.'* è stata registrata.';
-			mysqli_query($conn,"INSERT INTO `zones` (cellId, cellId64, name) VALUES ('$cellId', '$cellId64', '$name')");
+			mysqli_query($conn,"INSERT INTO `zones` (cellId, cellId64, name, groups) VALUES ('$cellId', '$cellId64', '$name', '')");
 		}
 		else {
 			$response = $EMO_v.' La cella *'.$cellId.'* è già registrata.';
