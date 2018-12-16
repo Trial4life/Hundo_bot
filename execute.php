@@ -555,8 +555,8 @@ elseif($status == 0) {
 	//////////////////
 	/// ADD REGION ///
 	//////////////////
-	elseif(strpos($text, "/addregion") === 0 ) {
-		$data = explode(', ', str_replace('/addregion ', '', $text));
+	elseif(strpos($text, "/addcell") === 0 ) {
+		$data = explode(', ', str_replace('/addcell ', '', $text));
 		$cellId = $data[0];
 		$name = $data[1];
 		$cellId64 = $cellId . str_repeat("0",16-strlen($cellId));
@@ -580,8 +580,8 @@ elseif($status == 0) {
 	//////////////////
 	/// DEL REGION ///
 	//////////////////
-	elseif(strpos($text, "/delregion") === 0) {
-		$name = str_replace('/delregion ', '', $text);
+	elseif(strpos($text, "/delcell") === 0) {
+		$name = str_replace('/delcell ', '', $text);
 
 		$query = "SELECT * FROM `zones` WHERE name = '$name'";
 		$result = mysqli_query($conn,$query);
@@ -601,7 +601,7 @@ elseif($status == 0) {
 	///////////////
 	/// REGIONS ///
 	///////////////
-	elseif(strpos($text, "/regions") === 0) {
+	elseif(strpos($text, "/cells") === 0) {
 		$query = "SELECT * FROM `zones` ORDER BY name ASC";
 		$result = mysqli_query($conn,$query);
 		$cell = $name = $lat = $lng = $zoom = array();
@@ -634,67 +634,85 @@ elseif($status == 0) {
 	/// REGISTER ///
 	////////////////
 	elseif(strpos($text, "/register") === 0) {
-		$cell = strtolower(str_replace('/register ', '', $text));
-		$query = "SELECT * FROM `zones` WHERE cellId = '$cell'";
-		$result = mysqli_query($conn,$query);
-		$row = mysqli_fetch_assoc($result);
-		$currGropus = $row['groups'];
-		$zona = $row['name'];
-		$cellIdObj = new S2CellId(hexdec($row['cellId64']));
-		$cellObj = new S2Cell($cellIdObj);
+		if (in_array($username, $admins)) {
+			$cell = strtolower(str_replace('/register ', '', $text));
+			$query = "SELECT * FROM `zones` WHERE cellId = '$cell'";
+			$result = mysqli_query($conn,$query);
+			$row = mysqli_fetch_assoc($result);
+			$currGropus = $row['groups'];
+			$zona = $row['name'];
+			$cellIdObj = new S2CellId(hexdec($row['cellId64']));
+			$cellObj = new S2Cell($cellIdObj);
 
-		$lat = 41.891165;
-		$lng = 12.492826;
-		$zoom = 12;
-		// $zoom = $cellObj->level()+2; 			// scommentare quando si fixa $lat e $lng (S2LatLng)
+			$lat = 41.891165;
+			$lng = 12.492826;
+			$zoom = 12;
+			// $zoom = $cellObj->level()+2; 			// scommentare quando si fixa $lat e $lng (S2LatLng)
 
-		if (!$row) {
-			$response = $EMO_ERR.' Cella *'.$cell.'* non trovata. Registrala prima con il comando /addregion <IDcella>.';
-		}
-		else {
-			$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat ."%2C". $lng . "&zoom=" . $zoom . "&cells=" . $cell;
-			if (stristr($currGropus,strval($chatId))) {
-				$response = "Questo gruppo è già associato alla cella [".$cell."](".$link.") − \"".$zona."\".";
+			if (!$row) {
+				$response = $EMO_ERR.' Cella *'.$cell.'* non trovata. Registrala prima con il comando /addregion <IDcella>.';
 			}
 			else {
-				$response = $EMO_GLO." Il gruppo è stato associato alla cella [".$cell."](".$link.") − \"".$zona."\".";
-				mysqli_query($conn,"UPDATE `zones` SET `groups` = concat('$currGropus', '$chatId', ',') WHERE `cellId` = '$cell'");
+				$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat ."%2C". $lng . "&zoom=" . $zoom . "&cells=" . $cell;
+				if (stristr($currGropus,strval($chatId))) {
+					$response = "Questo gruppo è già associato alla cella [".$cell."](".$link.") − \"".$zona."\".";
+				}
+				else {
+					$response = $EMO_GLO." Il gruppo è stato associato alla cella [".$cell."](".$link.") − \"".$zona."\".";
+					mysqli_query($conn,"UPDATE `zones` SET `groups` = concat('$currGropus', '$chatId', ',') WHERE `cellId` = '$cell'");
+				}
 			}
+			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+			$parameters["method"] = "sendMessage";
+			echo json_encode($parameters);
 		}
-		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
-		$parameters["method"] = "sendMessage";
-		echo json_encode($parameters);
+		else {
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_ERR.'Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		}
 	}
 
 	//////////////////
 	/// UNREGISTER ///
 	//////////////////
 	elseif(strpos($text, "/unregister") === 0 ) {
-		$cell = ucfirst(str_replace('/unregister ', '', $text));
-		$query = "SELECT * FROM `zones` WHERE cellId = '$cell'";
-		$result = mysqli_query($conn,$query);
-		$row = mysqli_fetch_assoc($result);
-		$currGropus = $row['groups'];
-		$zona = $row['name'];
-		$cellIdObj = new S2CellId(hexdec($row['cellId64']));
-		$cellObj = new S2Cell($cellIdObj);
+		if (in_array($username, $admins)) {
+			$cell = ucfirst(str_replace('/unregister ', '', $text));
+			$query = "SELECT * FROM `zones` WHERE cellId = '$cell'";
+			$result = mysqli_query($conn,$query);
+			$row = mysqli_fetch_assoc($result);
+			$currGropus = $row['groups'];
+			$zona = $row['name'];
+			$cellIdObj = new S2CellId(hexdec($row['cellId64']));
+			$cellObj = new S2Cell($cellIdObj);
 
-		$lat = 41.891165;
-		$lng = 12.492826;
-		$zoom = 12;
-		// $zoom = $cellObj->level()+2; 			// scommentare quando si fixa $lat e $lng (S2LatLng)
+			$lat = 41.891165;
+			$lng = 12.492826;
+			$zoom = 12;
+			// $zoom = $cellObj->level()+2; 			// scommentare quando si fixa $lat e $lng (S2LatLng)
 
-		if (!$row) {
-			$response = $EMO_ERR.' Cella *'.$cell.'* non trovata.';
+			if (!$row) {
+				$response = $EMO_ERR.' Cella *'.$cell.'* non trovata.';
+			}
+			else {
+				$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat ."%2C". $lng . "&zoom=" . $zoom . "&cells=" . $cell;
+				$response = $EMO_x." Il gruppo è stato rimosso dalla cella [".$cell."](".$link.") − \"".$zona."\".";
+			}
+			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+			$parameters["method"] = "sendMessage";
+			echo json_encode($parameters);
+			mysqli_query($conn,"UPDATE `zones` SET `groups` = replace('$currGropus',concat('$chatId', ','), '') WHERE `cellId` = '$cell'");
 		}
 		else {
-			$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat ."%2C". $lng . "&zoom=" . $zoom . "&cells=" . $cell;
-			$response = $EMO_x." Il gruppo è stato rimosso dalla cella [".$cell."](".$link.") − \"".$zona."\".";
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_ERR.'Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}
-		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
-		$parameters["method"] = "sendMessage";
-		echo json_encode($parameters);
-		mysqli_query($conn,"UPDATE `zones` SET `groups` = replace('$currGropus',concat('$chatId', ','), '') WHERE `cellId` = '$cell'");
 	}
 }
 
@@ -775,7 +793,7 @@ elseif($status == 2) {
 			}
 
 			// INVIA MESSAGGIO NEL GRUPPO - DA AUTOMATIZZARE+SELEZIONARE GRUPPI IN BASE ALLE CELLE ASSOCIATE
-//////
+
 			$query = "SELECT * FROM `zones` WHERE '$zone' LIKE CONCAT('%', name, '%')";
 			$result = mysqli_query($conn,$query);
 			$groupsIDs = array();
@@ -797,7 +815,7 @@ elseif($status == 2) {
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			}
-//////
+
 			$response = $EMO_v.' La quest è stata registrata.';
 			$parameters = array('chat_id' => $userId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
