@@ -597,7 +597,7 @@ elseif($status == 0) {
 			array_push($name, $row['name']);
 			$cellIdObj = new S2CellId(hexdec($row['cellId64']));
 			$cellObj = new S2Cell($cellIdObj);
-			//array_push($zoom, $cellObj->level()+2);		// scommentare quando si fixa $lat e $lng
+			//array_push($zoom, $cellObj->level()+2);		// scommentare quando si fixa $lat e $lng (S2LatLng)
 			array_push($zoom, 12);
 			array_push($lat, 41.891165  );
 			array_push($lng, 12.492826  );
@@ -627,11 +627,19 @@ elseif($status == 0) {
 		$row = mysqli_fetch_assoc($result);
 		$currGropus = $row['groups'];
 		$zona = $row['name'];
+		$cellIdObj = new S2CellId(hexdec($row['cellId64']));
+		$cellObj = new S2Cell($cellIdObj);
+
+		$lat = 41.891165;
+		$lng = 12.492826;
+		$zoom = 12;
+		// $zoom = $cellObj->level()+2; 			// scommentare quando si fixa $lat e $lng (S2LatLng)
+
 		if (!$row) {
 			$response = $EMO_ERR.' Cella *'.$cell.'* non trovata. Registrala prima con il comando /addregion <IDcella>.';
 		}
 		else {
-			$link = 0; ///REGIONCOVERER
+			$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat ."%2C". $lng . "&zoom=" . $zoom . "&cells=" . $cell;
 			if (stristr($currGropus,strval($chatId))) {
 				$response = "Questo gruppo è già associato alla cella [".$cell."](".$link.") (zona \"".$zona."\").";
 			}
@@ -655,11 +663,19 @@ elseif($status == 0) {
 		$row = mysqli_fetch_assoc($result);
 		$currGropus = $row['groups'];
 		$zona = $row['name'];
+		$cellIdObj = new S2CellId(hexdec($row['cellId64']));
+		$cellObj = new S2Cell($cellIdObj);
+
+		$lat = 41.891165;
+		$lng = 12.492826;
+		$zoom = 12;
+		// $zoom = $cellObj->level()+2; 			// scommentare quando si fixa $lat e $lng (S2LatLng)
+
 		if (!$row) {
 			$response = $EMO_ERR.' Cella *'.$cell.'* non trovata.';
 		}
 		else {
-			$link = 0; ///REGIONCOVERER
+			$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat ."%2C". $lng . "&zoom=" . $zoom . "&cells=" . $cell;
 			$response = $EMO_x." Il gruppo è stato rimosso dalla cella [".$cell."](".$link.") (zona \"".$zona."\").";
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
