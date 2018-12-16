@@ -654,10 +654,10 @@ elseif($status == 0) {
 		else {
 			$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat ."%2C". $lng . "&zoom=" . $zoom . "&cells=" . $cell;
 			if (stristr($currGropus,strval($chatId))) {
-				$response = "Questo gruppo è già associato alla cella [".$cell."](".$link.") (zona \"".$zona."\").";
+				$response = "Questo gruppo è già associato alla cella [".$cell."](".$link.") − \"".$zona."\".";
 			}
 			else {
-				$response = $EMO_GLO." Il gruppo è stato associato alla cella ".$cell."](".$link.") (zona \"".$zona."\").";
+				$response = $EMO_GLO." Il gruppo è stato associato alla cella [".$cell."](".$link.") − \"".$zona."\".";
 				mysqli_query($conn,"UPDATE `zones` SET `groups` = concat('$currGropus', '$chatId', ',') WHERE `cellId` = '$cell'");
 			}
 		}
@@ -689,7 +689,7 @@ elseif($status == 0) {
 		}
 		else {
 			$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat ."%2C". $lng . "&zoom=" . $zoom . "&cells=" . $cell;
-			$response = $EMO_x." Il gruppo è stato rimosso dalla cella [".$cell."](".$link.") (zona \"".$zona."\").";
+			$response = $EMO_x." Il gruppo è stato rimosso dalla cella [".$cell."](".$link.") − \"".$zona."\".";
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
