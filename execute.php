@@ -786,7 +786,7 @@ elseif($status == 2) {
 			}
 			$groupsIDs = array_unique($groupsIDs);
 
-			for ($i = 0; $i <= sizeof($groupsIDs)-2; $i++) {
+			for ($i = 0; $i <= 1; $i++) {
 				$grp = intval($groupsIDs[$i][0]);
 				$data = [
 				  	'chat_id' => $grp,
@@ -806,7 +806,7 @@ elseif($status == 2) {
 
 			// REGISTRA LA QUEST NEL DATABASE E RESETTA LA SESSIONE DELL'UTENTE
 			mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, lat, lng, zona, giorno) VALUES ('$quest', '$pkst', '$lat', '$lng', '$zone', '$today')");
-			mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
+			mysqli_query($conn,"DELETE FROM `sessions` WHERE `userID` = $userId");
 		}
 	}
 }
