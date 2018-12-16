@@ -28,8 +28,8 @@
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
 
-		$zona = $row['name'];
-		$zona = ' 1';
+		if ($row) {$zona = $row['name'];}
+
 
 		return $zona;
    }
