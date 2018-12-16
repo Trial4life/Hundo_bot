@@ -700,13 +700,14 @@ elseif($status == 2) {
 			echo json_encode($parameters);
 
 			// INVIA MESSAGGIO NEL GRUPPO - DA AUTOMATIZZARE+SELEZIONARE GRUPPI IN BASE ALLE CELLE ASSOCIATE
-/*
+//////
 			$query = "SELECT * FROM `zones` WHERE '$zone' LIKE CONCAT('%', name, '%')";
 			$result = mysqli_query($conn,$query);
 			$groupsIDs = array();
 			while ($row = mysqli_fetch_assoc($result)) {
-				$groupTMP = explode(',', $row['groups']);
-				array_merge($groupsIDs, $groupTMP);
+				$groupSTR = $row['groups'];
+				$groupTMP = explode(',', $groupSTR);
+				array_push($groupsIDs, $groupTMP);
 			}
 			$groupsIDs = array_unique($groupsIDs);
 
@@ -719,7 +720,7 @@ elseif($status == 2) {
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			}
-*/
+//////
 			// REGISTRA LA QUEST NEL DATABASE E RESETTA LA SESSIONE DELL'UTENTE
 			mysqli_query($conn,"INSERT INTO `quests` (quest, pokestop, lat, lng, zona, giorno) VALUES ('$quest', '$pkst', '$lat', '$lng', '$zone', '$today')");
 			mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
