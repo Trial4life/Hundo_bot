@@ -631,17 +631,41 @@ elseif($status == 0) {
 			$response = $EMO_ERR.' Cella *'.$cell.'* non trovata. Registrala prima con il comando /addregion <IDcella>.';
 		}
 		else {
+			$link = 0; ///REGIONCOVERER
 			if (stristr($currGropus,strval($chatId))) {
-				$response = "Questo gruppo è già associato alla cella *".$cell."* (zona \"".$zona."\").";
+				$response = "Questo gruppo è già associato alla cella [".$cell."](".$link.") (zona \"".$zona."\").";
 			}
 			else {
-				$response = $EMO_GLO." Il gruppo è stato associato alla cella *".$cell."* (zona \"".$zona."\").";
+				$response = $EMO_GLO." Il gruppo è stato associato alla cella ".$cell."](".$link.") (zona \"".$zona."\").";
 				mysqli_query($conn,"UPDATE `zones` SET groups = concat('$currGropus', '$chatId', ',') WHERE cellId = '$cell'");
 			}
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
+	}
+
+	//////////////////
+	/// UNREGISTER ///
+	//////////////////
+	elseif(strpos($text, "/unregister") === 0 ) {
+		$cell = ucfirst(str_replace('/unregister ', '', $text));
+		$query = "SELECT * FROM `zones` WHERE cellId = '$cell'";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+		$currGropus = $row['groups'];
+		$zona = $row['name'];
+		if (!$row) {
+			$response = $EMO_ERR.' Cella *'.$cell.'* non trovata.';
+		}
+		else {
+			$link = 0; ///REGIONCOVERER
+			$response = $EMO_OFF." Il gruppo è stato rimosso dalla cella [".$cell."](".$link.") (zona \"".$zona."\").";
+		}
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+		mysqli_query($conn,"UPDATE `pokeid` SET userAlerts = replace('$currUserAlerts',concat('$userId', ','), '') WHERE pokemon = '$quest'");
 	}
 }
 
