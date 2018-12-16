@@ -616,6 +616,33 @@ elseif($status == 0) {
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
 	}
+
+	////////////////
+	/// REGISTER ///
+	////////////////
+	elseif(strpos($text, "/register") === 0) {
+		$cell = strtolower(str_replace('/register ', '', $text));
+		$query = "SELECT * FROM `zones` WHERE cellId = '$cell'";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+		$currGropus = $row['groups'];
+		$zona = $row['name'];
+		if (!$row) {
+			$response = $EMO_ERR.' Cella *'.$quest.'* non trovata. Registrarla prima con il comando /addregion.';
+		}
+		else {
+			if (stristr($currGropus,strval($chatId))) {
+				$response = "Questo gruppo è già associato alla cella *".$cell."* (zona \"".$zone.").";
+			}
+			else {
+				$response = $EMO_ON." Il gruppo aggiunto associato alla cella *".$cell."* (zona \"".$zone.").";
+				mysqli_query($conn,"UPDATE `zones` SET groups = concat('$currGropus', '$chatId', ',') WHERE cellId = '$cell'");
+			}
+		}
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
 }
 
 elseif($status == 2) {
