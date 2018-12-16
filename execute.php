@@ -371,7 +371,7 @@ elseif($status == 0) {
 				$quest = ucfirst(str_replace('/quest ', '', $text));
 				$data = [
 		   	 	'chat_id' => $chatId,
-		   	 	'text' => $EMO_PIN.' @'.$username.', mandami la posizione della quest *'.$quest.'* tramite @ingressportalbot.',
+		   	 	'text' => $EMO_PIN.' '.$firstname.', mandami la posizione della quest *'.$quest.'* tramite @ingressportalbot.',
 		   	 	'parse_mode' => 'markdown',
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
