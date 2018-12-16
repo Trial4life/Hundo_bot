@@ -628,14 +628,14 @@ elseif($status == 0) {
 		$currGropus = $row['groups'];
 		$zona = $row['name'];
 		if (!$row) {
-			$response = $EMO_ERR.' Cella *'.$cell.'* non trovata. Registrarla prima con il comando /addregion <IDcella>.';
+			$response = $EMO_ERR.' Cella *'.$cell.'* non trovata. Registrala prima con il comando /addregion <IDcella>.';
 		}
 		else {
 			if (stristr($currGropus,strval($chatId))) {
-				$response = "Questo gruppo è già associato alla cella *".$cell."* (zona \"".$zona."\").";
+				$response = "Questo gruppo è già associato alla cella *".$cell."* (zona \"_".$zona."_\").";
 			}
 			else {
-				$response = $EMO_ON." Il gruppo aggiunto associato alla cella *".$cell."* (zona \"".$zona.").";
+				$response = $EMO_ON." Il gruppo è stato associato alla cella *".$cell."* (zona \"_".$zona."_\").";
 				mysqli_query($conn,"UPDATE `zones` SET groups = concat('$currGropus', '$chatId', ',') WHERE cellId = '$cell'");
 			}
 		}
