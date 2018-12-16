@@ -603,7 +603,7 @@ elseif($status == 0) {
 			*/
 			array_push($lat, 41.891165  );
 			array_push($lng, 12.492826  );
-			array_push($zoom, 10)
+			array_push($zoom, 10);
 		}
 
 		$response = "Lista delle celle attive:";
