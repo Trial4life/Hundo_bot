@@ -57,7 +57,8 @@ $EMO_ALR = json_decode('"'."\u203c".'"');
 $EMO_ERR = json_decode('"'."\u26d4".'"');
 
 // MySQL -> Create connection
-$conn = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
+//$conn = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
+$conn = new mysqli("2.227.251.71:3306", "root", "", "tradepkmn");
 // $conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");   [OLD freemysqlhosting account]
 // Check connection
 
