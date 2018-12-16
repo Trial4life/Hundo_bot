@@ -786,7 +786,7 @@ elseif($status == 2) {
 			}
 			$groupsIDs = array_unique($groupsIDs);
 
-			for ($i = 0; $i <= sizeof($groupsIDs)-2; $i++) {
+		//	for ($i = 0; $i <= sizeof($groupsIDs)-2; $i++) {
 				$grp = -1001204753064;
 				$data = [
 				  	'chat_id' => $grp,
@@ -796,7 +796,7 @@ elseif($status == 2) {
 				  	'disable_web_page_preview' => TRUE,
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-			}
+		//	}
 //////
 
 			$response = $EMO_v.' La quest è stata registrata.';
