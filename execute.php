@@ -264,7 +264,7 @@ elseif(strpos($text, "/quests ") === 0 ) {
 	$zona = ucfirst(str_replace('/quests ', '', $text));
 	// ELENCO QUESTS
 	mysqli_query($conn,"DELETE FROM `quests` WHERE giorno < '$today'");  // RIMUOVE LE QUEST DEL GIORNO PRECEDENTE
-	$query = "SELECT * FROM `quests` WHERE `zona` = '$zona' ORDER BY quest ASC";
+	$query = "SELECT * FROM `quests` WHERE INSTR(`zona`,'$zona')>0 ORDER BY quest ASC";
 	$result_quest = mysqli_query($conn,$query);
 	$quest = $pokestop = $lat = $lng = array();
 	while ($row = mysqli_fetch_assoc($result_quest)) {
