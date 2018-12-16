@@ -635,7 +635,7 @@ elseif($status == 0) {
 				$response = "Questo gruppo è già associato alla cella *".$cell."* (zona \"_".$zona."_\").";
 			}
 			else {
-				$response = $EMO_ON." Il gruppo è stato associato alla cella *".$cell."* (zona \"_".$zona."_\").";
+				$response = $EMO_GLO." Il gruppo è stato associato alla cella *".$cell."* (zona \"_".$zona."_\").";
 				mysqli_query($conn,"UPDATE `zones` SET groups = concat('$currGropus', '$chatId', ',') WHERE cellId = '$cell'");
 			}
 		}
