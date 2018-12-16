@@ -632,10 +632,10 @@ elseif($status == 0) {
 		}
 		else {
 			if (stristr($currGropus,strval($chatId))) {
-				$response = "Questo gruppo è già associato alla cella *".$cell."* (zona \"_".$zona."_\").";
+				$response = "Questo gruppo è già associato alla cella *".$cell."* (zona \"".$zona."\").";
 			}
 			else {
-				$response = $EMO_GLO." Il gruppo è stato associato alla cella *".$cell."* (zona \"_".$zona."_\").";
+				$response = $EMO_GLO." Il gruppo è stato associato alla cella *".$cell."* (zona \"".$zona."\").";
 				mysqli_query($conn,"UPDATE `zones` SET groups = concat('$currGropus', '$chatId', ',') WHERE cellId = '$cell'");
 			}
 		}
