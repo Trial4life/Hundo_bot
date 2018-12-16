@@ -538,6 +538,42 @@ elseif($status == 0) {
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
 	}
+
+	//////////////////
+	/// ADD REGION ///
+	//////////////////
+	elseif(strpos($text, "/addregion") === 0 ) {
+		$data = explode(', ', str_replace('/addregion ', '', $text));
+		$cellId = $data[0];
+		$name = $data[1];
+		$cellId64 = $cellId . str_repeat("0",16-strlen($cellId));
+
+		$query = "SELECT * FROM `zones` WHERE cellId64 = '$cellId'";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+		if (!$row) {
+			$response = $EMO_v.' La cella *'.$cellId.'* è stata registrata.';
+			mysqli_query($conn,"INSERT INTO `zones` (cellId, cellId64, name) VALUES ('$cellId', '$cellId64', '$name')");
+		}
+		else {
+			$response = $EMO_v.' La cella *'.$cellId.'* è già registrata.';
+		}
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
+
+	//////////////////
+	/// DEL REGION ///
+	//////////////////
+	elseif(strpos($text, "/delregion") === 0) {
+		$name = str_replace('/delregion ', '', $text);
+		mysqli_query($conn,"DELETE FROM `zones` WHERE name = '$name'");
+		$response = $EMO_x.' La cella *'.$name.'* è stata rimossa.';
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
 }
 
 elseif($status == 2) {
