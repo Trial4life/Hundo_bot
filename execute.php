@@ -681,7 +681,7 @@ elseif($status == 0) {
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
-		mysqli_query($conn,"UPDATE `zones` SET groups = replace('$currGropus',concat('$chatId', ','), '') WHERE `cellId` = '$cell'");
+		mysqli_query($conn,"UPDATE `zones` SET `groups` = replace('$currGropus',concat('$chatId', ','), '') WHERE `cellId` = '$cell'");
 	}
 }
 
