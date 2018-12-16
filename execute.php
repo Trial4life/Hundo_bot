@@ -569,8 +569,17 @@ elseif($status == 0) {
 	//////////////////
 	elseif(strpos($text, "/delregion") === 0) {
 		$name = str_replace('/delregion ', '', $text);
-		mysqli_query($conn,"DELETE FROM `zones` WHERE name = '$name'");
-		$response = $EMO_x.' La cella *'.$name.'* è stata rimossa.';
+
+		$query = "SELECT * FROM `zones` WHERE name = '$name'";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+		if (!$row) {
+			$response = $EMO_ERR.' Cella *'.$name.'* non trovata.';
+		}
+		else {
+			mysqli_query($conn,"DELETE FROM `zones` WHERE name = '$name'");
+			$response = $EMO_x.' La cella *'.$name.'* è stata rimossa.';
+		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
