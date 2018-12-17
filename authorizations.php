@@ -13,7 +13,7 @@ $conn2 = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
 	$authorizedChats = $authorizedChatsNames = array();
 	while ($row = mysqli_fetch_assoc($result)) {
 		array_push($authorizedChats, $row['groupID']);
-		array_push($authorizedChatsNames, '@'.$row['groupID']);
+		array_push($authorizedChatsNames, $row['groupID']);
 	}
 
 	$query = "SELECT * FROM `admins`";
