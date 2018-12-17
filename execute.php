@@ -792,7 +792,7 @@ elseif($status == 0) {
 			$admin = str_replace('/deladmin ', '', $text);
 			mysqli_query($conn,"DELETE FROM `admins` WHERE `username` = '$admin'");
 
-			$response = $EMO_v.' *'.$admin.'* rimosso dagli amministratori del bot.';
+			$response = $EMO_x.' *'.$admin.'* rimosso dagli amministratori del bot.';
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
@@ -809,9 +809,9 @@ elseif($status == 0) {
 	/// ADMINS ///
 	//////////////
 	elseif(strpos($text, "/admins") === 0 ) {
-		$response = "Elenco degli admin del bot:\n";
+		$response = "Elenco degli amministratori del bot:\n";
 		foreach ($admins as $key => $value) {
-			$response = $response . "− " . $value . "\n";
+			$response = $response . "− " . $key . "\n";
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
@@ -824,7 +824,7 @@ elseif($status == 0) {
 	elseif(strpos($text, "/groups") === 0 ) {
 		$response = "Elenco dei gruppi attivi:\n";
 		foreach ($authorizedChatsNames as $key => $value) {
-			$response = $response . "− " . $value . "\n";
+			$response = $response . "− " . $key . "\n";
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
