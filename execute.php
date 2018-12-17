@@ -811,7 +811,7 @@ elseif($status == 0) {
 	elseif(strpos($text, "/admins") === 0 ) {
 		$response = "Elenco degli amministratori del bot:\n";
 		foreach ($admins as $key => $value) {
-			$response = $response . "− " . $value . "\n";
+			$response = $response . "− " . json_encode($value) . "\n";
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
