@@ -552,9 +552,9 @@ elseif($status == 0) {
 		echo json_encode($parameters);
 	}
 
-	//////////////////
-	/// ADD REGION ///
-	//////////////////
+	////////////////
+	/// ADD CELL ///
+	////////////////
 	elseif(strpos($text, "/addcell") === 0 ) {
 		$data = explode(', ', str_replace('/addcell ', '', $text));
 		$cellId = $data[0];
@@ -577,9 +577,9 @@ elseif($status == 0) {
 		echo json_encode($parameters);
 	}
 
-	//////////////////
-	/// DEL REGION ///
-	//////////////////
+	////////////////
+	/// DEL CELL ///
+	////////////////
 	elseif(strpos($text, "/delcell") === 0) {
 		$name = str_replace('/delcell ', '', $text);
 
@@ -598,9 +598,9 @@ elseif($status == 0) {
 		echo json_encode($parameters);
 	}
 
-	///////////////
-	/// REGIONS ///
-	///////////////
+	/////////////
+	/// CELLS ///
+	/////////////
 	elseif(strpos($text, "/cells") === 0) {
 		$query = "SELECT * FROM `zones` ORDER BY name ASC";
 		$result = mysqli_query($conn,$query);
@@ -621,6 +621,38 @@ elseif($status == 0) {
 			$link_all = $link_all . "%2C" . $cell[$i];
 		}
 		$response = $EMO_GLO." Lista delle [celle attive](".$link_all."): ".$EMO_GLO;
+		for ($i = 0; $i <= sizeof($cell)-1; $i++){
+			$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat[$i] ."%2C". $lng[$i] . "&zoom=" . $zoom[$i] . "&cells=" . $cell[$i];
+			$response = $response."\n*".$name[$i]."* − [".$cell[$i]."](".$link.")";
+		}
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
+
+	//////////////////
+	/// GROUPCELLS ///
+	//////////////////
+	elseif(strpos($text, "/groupcells") === 0) {
+		$query = "SELECT * FROM `zones` WHERE `groups` LIKE CONCAT('%','$chatId','%') ORDER BY name ASC";
+		$result = mysqli_query($conn,$query);
+		$cell = $name = $lat = $lng = $zoom = array();
+		while ($row = mysqli_fetch_assoc($result)) {
+			array_push($cell, $row['cellId']);
+			array_push($name, $row['name']);
+			$cellIdObj = new S2CellId(hexdec($row['cellId64']));
+			$cellObj = new S2Cell($cellIdObj);
+			//array_push($zoom, $cellObj->level()+2);		// scommentare quando si fixa $lat e $lng (S2LatLng)
+			array_push($zoom, 12);
+			array_push($lat, 41.891165  );
+			array_push($lng, 12.492826  );
+		}
+
+		$link_all = "https://s2.sidewalklabs.com/regioncoverer/?center=41.891165%2C12.492826&zoom=12&cells=";
+		for ($i = 0; $i <= sizeof($cell)-1; $i++){
+			$link_all = $link_all . "%2C" . $cell[$i];
+		}
+		$response = $EMO_GLO." Lista delle [celle attive](".$link_all.") per le quest del gruppo: ".$EMO_GLO;
 		for ($i = 0; $i <= sizeof($cell)-1; $i++){
 			$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat[$i] ."%2C". $lng[$i] . "&zoom=" . $zoom[$i] . "&cells=" . $cell[$i];
 			$response = $response."\n*".$name[$i]."* − [".$cell[$i]."](".$link.")";
