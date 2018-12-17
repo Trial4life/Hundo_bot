@@ -832,6 +832,7 @@ elseif($status == 0) {
 			mysqli_query($conn,"INSERT INTO `auth_groups` VALUES ('$groupName', $groupID)");
 
 			$response = $EMO_v.' *'.$group[0].'* aggiunto ai gruppi di competenza del bot.';
+			$response = mysqli_error($conn);
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
