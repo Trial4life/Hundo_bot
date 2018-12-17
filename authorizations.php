@@ -21,7 +21,7 @@
 
 	$admins = array();
 	while ($row = mysqli_fetch_assoc($result)) {
-		array_push($admins, '@'.$row['username']);
+		array_push($admins, $row['username']);
 	}
 /*
 	$authorizedChats = array(
