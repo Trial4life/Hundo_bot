@@ -767,17 +767,18 @@ elseif($status == 0) {
 
 elseif($status == 2) {
 	$quest = $alert;
-	//$level = 10;
+	$minlevel = 10;
+	$maxlevel = 13;
 
 	list($pkst, $lat, $lng) = getPortalData($text, $URLs[1]['url']);
-/*	$zone = '';
-	for ($i = 10; $i <=13; $i++) {
+	$zone = '';
+	for ($i = $minlevel; $i <=$maxlevel; $i++) {
 		$tmp = getPortalZone($i, $lat, $lng, $conn);
-		if ($tmp != NULL) {
+		//if ($tmp != NULL) {
 			$zone = $zone . $tmp . ', ';
-		}
+		//}
 	}
-*///DEBUG
+
 	if (!$lat or !$lng)	{
 		$data = [
 	   	'chat_id' => $userId,
