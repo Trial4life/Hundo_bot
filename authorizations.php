@@ -25,12 +25,17 @@ $conn2 = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
 		array_push($admins, $row['username']);
 	}
 
-	$authorizedChatsNames = array(
+	$authorizedChats = array(
 		$group_PogoTube42,
 		$group_NordEstLegit,
 		//$bot_Exeggutor,
 		$group_admin,
 		$group_SalarioParioli,
+	);
+
+	$authorizedChatsNames = array(
+		'PoGoNordEstLegit',
+		' w',
 	);
 
 
