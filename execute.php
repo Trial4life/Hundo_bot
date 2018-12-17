@@ -839,9 +839,9 @@ elseif($status == 2) {
 			$zone = '';
 			for ($i = $minlevel; $i <=$maxlevel; $i++) {
 				$tmp = getPortalZone($i, $lat, $lng, $conn);
-				//if ($tmp != NULL) {
+				if ($tmp != NULL) {
 					$zone = $zone . $tmp . ', ';
-				//}
+				}
 			}
 
 			$query = "SELECT * FROM `zones` WHERE '$zone' LIKE CONCAT('%', name, '%')";

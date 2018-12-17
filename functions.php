@@ -28,7 +28,6 @@
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
 
-		$zona = '';
 		if ($row != NULL) {$zona = $row['name'];}
 
 		return $zona;
