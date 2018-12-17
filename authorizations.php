@@ -25,5 +25,6 @@
 		'Giulia_Valorosi',
 		'MenoMenotti',
 		'Illidanrex',
+		'ProtusPrime',
 	);
 ?>
