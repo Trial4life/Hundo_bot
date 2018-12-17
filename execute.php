@@ -805,6 +805,7 @@ elseif($status == 0) {
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}
 	}
+
 	//////////////
 	/// ADMINS ///
 	//////////////
@@ -818,10 +819,52 @@ elseif($status == 0) {
 		  	'text' => $response,
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-		//$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
-		//$parameters["method"] = "sendMessage";
-		//echo json_encode($parameters);
 	}
+
+	//////////////////
+	/// ADD GROUPS ///
+	//////////////////
+	elseif(strpos($text, "/addgroup") === 0 ) {
+		if (in_array($username, $admins)) {
+			$group = explode(', ', str_replace('/addgroup ', '', $text));
+			mysqli_query($conn,"INSERT INTO `auth_groups` VALUES ('$group[0]', '$group[1]')");
+
+			$response = $EMO_v.' *'.$group[0].'* aggiunto ai gruppi di competenza del bot.';
+			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+			$parameters["method"] = "sendMessage";
+			echo json_encode($parameters);
+		}
+		else {
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR.json_encode($admins),
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		}
+	}
+
+	//////////////////
+	/// DEL GROUPS ///
+	//////////////////
+	elseif(strpos($text, "/delgroup") === 0 ) {
+		if (in_array($username, $admins)) {
+			$group = str_replace('/delgroup ', '', $text);
+			mysqli_query($conn,"DELETE FROM `auth_groups` WHERE `groupName` = '$group'");
+
+			$response = $EMO_x.' *'.$group.'* rimosso dai gruppi di competenza del bot.';
+			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+			$parameters["method"] = "sendMessage";
+			echo json_encode($parameters);
+		}
+		else {
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR.json_encode($admins),
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		}
+	}
+
 
 	//////////////
 	/// GROUPS ///
@@ -831,9 +874,11 @@ elseif($status == 0) {
 		foreach ($authorizedChatsNames as $key => $value) {
 			$response = $response . "− @" . $value . "\n";
 		}
-		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
-		$parameters["method"] = "sendMessage";
-		echo json_encode($parameters);
+		$data = [
+		  	'chat_id' => $chatId,
+		  	'text' => $response,
+		];
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
 }
 
