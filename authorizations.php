@@ -26,5 +26,6 @@
 		'MenoMenotti',
 		'Illidanrex',
 		'ProtusPrime',
+		'HarlockHrk',
 	);
 ?>
