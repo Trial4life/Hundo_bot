@@ -39,7 +39,7 @@
 		$cellCenter = new S2LatLng($cellObj->getCenter());
 		$zoom = $cellObj->level()+$add;
 		$lat = $cellCenter->latDegrees();
-		$lng, $cellCenter->lngDegrees();
+		$lng = $cellCenter->lngDegrees();
 
 		return array($lat, $lng, $zoom);
    }
