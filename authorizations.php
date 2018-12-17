@@ -24,15 +24,15 @@ $conn2 = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
 	while ($row = mysqli_fetch_assoc($result)) {
 		array_push($admins, $row['username']);
 	}
-/*
-	$authorizedChats = array(
+
+	$authorizedChatsNames = array(
 		$group_PogoTube42,
 		$group_NordEstLegit,
 		//$bot_Exeggutor,
 		$group_admin,
 		$group_SalarioParioli,
 	);
-*/
+
 
 	$admins = array(
 		'Trial4life',
