@@ -559,7 +559,7 @@ elseif($status == 0) {
 		if (in_array($username, $admins)) {
 			$data = explode(', ', str_replace('/addcell ', '', $text));
 			$cellId = $data[0];
-			$name = str_replace("'","\'",$data[1]);
+			$name = ucfirst(str_replace("'","\'",$data[1]));
 			$cellId64 = $cellId . str_repeat("0",16-strlen($cellId));
 
 			$query = "SELECT * FROM `zones` WHERE cellId = '$cellId'";
