@@ -410,7 +410,7 @@ elseif($status == 0) {
 		else {
 			$data = [
 		  		'chat_id' => $chatId,
-		  		'text' => $EMO_ERR.'Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
 			];
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}
@@ -432,7 +432,7 @@ elseif($status == 0) {
 		else {
 			$data = [
 		  		'chat_id' => $chatId,
-		  		'text' => $EMO_ERR.'Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
 			];
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}
@@ -442,7 +442,7 @@ elseif($status == 0) {
 	/// QUESTLIST ///
 	/////////////////
 	elseif(strpos($text, "/listquests") === 0 )	{
-		if (in_array($username, $admins)) {
+		//if (in_array($username, $admins)) {
 			$query = "SELECT * FROM `tasks`";
 			$result = mysqli_query($conn,$query);
 			$reward = $task = array();
@@ -451,7 +451,7 @@ elseif($status == 0) {
 				array_push($task, $row['task']);
 			}
 
-			$response = "Lista delle quest con notifica:";
+			$response = "Lista delle quest di questo mese:";
 			for ($i = 0; $i <= sizeof($reward)-1; $i++){
 				$response = $response."\n*".$reward[$i]."* − ".$task[$i];
 			}
@@ -459,14 +459,14 @@ elseif($status == 0) {
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
-		}
-		else {
+		//}
+		/*else {
 			$data = [
 		  		'chat_id' => $chatId,
-		  		'text' => $EMO_ERR.'Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
 			];
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-		}
+		}*/
 	}
 
 	/////////////////
@@ -778,7 +778,7 @@ elseif($status == 0) {
 		else {
 			$data = [
 		  		'chat_id' => $chatId,
-		  		'text' => $EMO_ERR.'Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR.json_encode($admins),
 			];
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}
