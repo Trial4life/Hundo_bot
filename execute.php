@@ -559,7 +559,7 @@ elseif($status == 0) {
 		if (in_array($username, $admins)) {
 			$data = explode(', ', str_replace('/addcell ', '', $text));
 			$cellId = $data[0];
-			$name = $data[1];
+			$name = str_replace("'","\'",$data[1]);
 			$cellId64 = $cellId . str_repeat("0",16-strlen($cellId));
 
 			$query = "SELECT * FROM `zones` WHERE cellId = '$cellId'";
@@ -591,7 +591,7 @@ elseif($status == 0) {
 	////////////////
 	elseif(strpos($text, "/delcell") === 0) {
 		if (in_array($username, $admins)) {
-			$name = str_replace('/delcell ', '', $text);
+			$name = str_replace('/delcell ', '', str_replace("'","\'",$text));
 
 			$query = "SELECT * FROM `zones` WHERE name = '$name'";
 			$result = mysqli_query($conn,$query);
@@ -625,7 +625,7 @@ elseif($status == 0) {
 		$cell = $name = $lat = $lng = $zoom = array();
 		while ($row = mysqli_fetch_assoc($result)) {
 			array_push($cell, $row['cellId']);
-			array_push($name, $row['name']);
+			array_push($name, str_replace("'","\'",$row['name']));
 			$cellIdObj = new S2CellId(hexdec($row['cellId64']));
 			$cellObj = new S2Cell($cellIdObj);
 			//array_push($zoom, $cellObj->level()+2);		// scommentare quando si fixa $lat e $lng (S2LatLng)
@@ -662,7 +662,7 @@ elseif($status == 0) {
 		$cell = $name = $lat = $lng = $zoom = array();
 		while ($row = mysqli_fetch_assoc($result)) {
 			array_push($cell, $row['cellId']);
-			array_push($name, $row['name']);
+			array_push($name, str_replace("'","\'",$row['name']));
 			$cellIdObj = new S2CellId(hexdec($row['cellId64']));
 			$cellObj = new S2Cell($cellIdObj);
 			//array_push($zoom, $cellObj->level()+2);		// scommentare quando si fixa $lat e $lng (S2LatLng)
@@ -700,7 +700,7 @@ elseif($status == 0) {
 			$result = mysqli_query($conn,$query);
 			$row = mysqli_fetch_assoc($result);
 			$currGropus = $row['groups'];
-			$zona = $row['name'];
+			$zona = str_replace("'","\'",$row['name']);
 			$cellIdObj = new S2CellId(hexdec($row['cellId64']));
 			$cellObj = new S2Cell($cellIdObj);
 
@@ -745,7 +745,7 @@ elseif($status == 0) {
 			$result = mysqli_query($conn,$query);
 			$row = mysqli_fetch_assoc($result);
 			$currGropus = $row['groups'];
-			$zona = $row['name'];
+			$zona = str_replace("'","\'",$row['name']);
 			$cellIdObj = new S2CellId(hexdec($row['cellId64']));
 			$cellObj = new S2Cell($cellIdObj);
 

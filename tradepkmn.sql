@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Dic 15, 2018 alle 10:19
+-- Creato il: Dic 17, 2018 alle 10:53
 -- Versione del server: 8.0.13
 -- Versione PHP: 7.2.10-0ubuntu0.18.04.1
 
@@ -1431,6 +1431,7 @@ CREATE TABLE `quests` (
   `pokestop` varchar(50) NOT NULL,
   `lat` varchar(15) NOT NULL,
   `lng` varchar(15) NOT NULL,
+  `zona` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `giorno` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -1438,14 +1439,8 @@ CREATE TABLE `quests` (
 -- Dump dei dati per la tabella `quests`
 --
 
-INSERT INTO `quests` (`quest`, `pokestop`, `lat`, `lng`, `giorno`) VALUES
-('Feebas', 'Associazione Bocciofila S. Anastasio', '41.912887', '12.542753', '2018-12-15'),
-('Gastly', 'Circolo Bocciofilo R. Falconi', '41.913794', '12.545917', '2018-12-15'),
-('1 caramelle, 3 palle curve', 'Istituto MARYMOUNT', '41.923395', '12.519794', '2018-12-15'),
-('Exeggcute/Lanturn', 'Ambasciata Iran', '41.923652', '12.520081', '2018-12-15'),
-('Misdreavus', 'Targa Cesare Zavattini', '41.924002', '12.523730', '2018-12-15'),
-('Spinda', 'Chiesa S. Angela Merici', '41.923411', '12.525061', '2018-12-15'),
-('Vulpix', 'Parco Giochi di Villa Blanc', '41.922737', '12.523774', '2018-12-15');
+INSERT INTO `quests` (`quest`, `pokestop`, `lat`, `lng`, `zona`, `giorno`) VALUES
+('Bulbasaur', 'Lupo Meda', '41.913965', '12.546062', 'Est, ', '2018-12-17');
 
 -- --------------------------------------------------------
 
@@ -1503,6 +1498,35 @@ INSERT INTO `tasks` (`reward`, `task`, `flag`) VALUES
 ('Squirtle', 'Potenzia i Pokemon 5 volte/Vinci una sfida in palestra', 0),
 ('Voltorb', 'Effettua 5 bei tiri', 0),
 ('Vulpix', 'Cattura 5 Pokemon potenziati dalle condizioni atmosferiche', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `zones`
+--
+
+CREATE TABLE `zones` (
+  `cellId` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `cellId64` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `groups` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dump dei dati per la tabella `zones`
+--
+
+INSERT INTO `zones` (`cellId`, `cellId64`, `name`, `groups`) VALUES
+('132f5d', '132f5d0000000000', 'Nord-Ovest', ''),
+('132f67', '132f670000000000', 'Nord', ''),
+('132f65', '132f650000000000', 'Nord-Est', ''),
+('132f5f', '132f5f0000000000', 'Ovest', ''),
+('132f61', '132f610000000000', 'Centro', '-1001205498567,'),
+('132f63', '132f630000000000', 'Est', ''),
+('1325f5', '1325f50000000000', 'Sud-Ovest', ''),
+('13258b', '13258b0000000000', 'Sud', ''),
+('132589', '1325890000000000', 'Sud-Est', ''),
+('132f615', '132f615000000000', 'Libia', '-1001205498567,');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
