@@ -406,8 +406,6 @@ elseif($status == 0) {
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
-
-
 		}
 		else {
 			$data = [
@@ -762,6 +760,54 @@ elseif($status == 0) {
 			];
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}
+	}
+
+	//////////////////
+	/// ADD ADMINS ///
+	//////////////////
+	elseif(strpos($text, "/addadmin") === 0 ) {
+		if (in_array($username, $admins)) {
+			$admin = explode(', ', str_replace('/addadmin ', '', $text));
+			mysqli_query($conn,"INSERT INTO `admins` VALUES ('$admin')");
+
+			$response = $EMO_v.' '.$admin.' aggiunto come admin.';
+			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+			$parameters["method"] = "sendMessage";
+			echo json_encode($parameters);
+		}
+		else {
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_ERR.'Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		}
+	}
+
+	//////////////
+	/// ADMINS ///
+	//////////////
+	elseif(strpos($text, "/admins") === 0 ) {
+		$response = "Elenco degli admin del bot:\n";
+		foreach ($admins as $key => $value) {
+			$response = $response . "− " . $value . "\n";
+		}
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
+
+	//////////////
+	/// GROUPS ///
+	//////////////
+	elseif(strpos($text, "/groups") === 0 ) {
+		$response = "Elenco dei gruppi attivi:\n";
+		foreach ($authorizedChatsNames as $key => $value) {
+			$response = $response . "− " . $value . "\n";
+		}
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
 	}
 }
 
