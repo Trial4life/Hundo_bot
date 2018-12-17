@@ -61,7 +61,14 @@ $conn = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
 //$conn = new mysqli("2.227.251.71:3306", "root", "", "tradepkmn");
 // $conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");   [OLD freemysqlhosting account]
 // Check connection
+	$query = "SELECT * FROM `admins`";
+	$result = mysqli_query($conn2,$query);
+	$row = mysqli_fetch_assoc($result);
 
+	$admins = array();
+	while ($row = mysqli_fetch_assoc($result)) {
+		array_push($admins, $row['username']);
+	}
 // CONTROLLA SESSIONE UTENTE
 $query = "SELECT * FROM `sessions` WHERE `userID` = $userId";
 $result = mysqli_query($conn,$query);
