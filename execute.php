@@ -569,7 +569,7 @@ elseif($status == 0) {
 			$result = mysqli_query($conn,$query);
 			$row = mysqli_fetch_assoc($result);
 			if (!$row) {
-				$response = $EMO_v." La cella *".$cellId."* è stata registrata come *\"".$name."\"*.";
+				$response = $EMO_v." La cella *".$cellId."* è stata registrata come *\"".str_replace("\'","'",$name)."\"*.";
 				mysqli_query($conn,"INSERT INTO `zones` (cellId, cellId64, name) VALUES ('$cellId', '$cellId64', '$name')");
 				//$response = mysqli_error($conn);
 			}
@@ -600,10 +600,10 @@ elseif($status == 0) {
 			$result = mysqli_query($conn,$query);
 			$row = mysqli_fetch_assoc($result);
 			if (!$row) {
-				$response = $EMO_ERR.' Cella *'.$name.'* non trovata.';
+				$response = $EMO_ERR.' Cella *'.str_replace("\'","'",$name).'* non trovata.';
 			}
 			else {
-				$response = $EMO_x.' La cella *'.$name.'* è stata rimossa.';
+				$response = $EMO_x.' La cella *'.str_replace("\'","'",$name).'* è stata rimossa.';
 				mysqli_query($conn,"DELETE FROM `zones` WHERE name = '$name'");
 			}
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
