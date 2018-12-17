@@ -39,7 +39,7 @@ $conn2 = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
 		' w',
 	);
 */
-
+/*
 	$admins = array(
 		'Trial4life',
 		'DadyGC',
@@ -51,7 +51,7 @@ $conn2 = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
 		'ProtusPrime',
 		'HarlockHrk',
 	);
-
+*/
 
 	$bannedUsers = array(
 
