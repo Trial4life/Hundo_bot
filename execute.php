@@ -842,7 +842,7 @@ elseif($status == 2) {
 			}
 
 			// INVIA MESSAGGIO NEL GRUPPO - DA AUTOMATIZZARE+SELEZIONARE GRUPPI IN BASE ALLE CELLE ASSOCIATE
-
+/*
 			$query = "SELECT * FROM `zones` WHERE '$zone' LIKE CONCAT('%', name, '%')";
 			$result = mysqli_query($conn,$query);
 			$groupsIDs = array();
@@ -864,7 +864,7 @@ elseif($status == 2) {
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			}
-
+*/
 			$response = $EMO_v.' La quest è stata registrata.';
 			$parameters = array('chat_id' => $userId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
