@@ -665,12 +665,11 @@ elseif($status == 0) {
 		while ($row = mysqli_fetch_assoc($result)) {
 			array_push($cell, $row['cellId']);
 			array_push($name, str_replace("\'","'",$row['name']));
-			$cellIdObj = new S2CellId(hexdec($row['cellId64']));
-			$cellObj = new S2Cell($cellIdObj);
-			$cellCenter = new S2LatLng($cellObj->getCenter());
-			array_push($zoom, $cellObj->level()+2);
-			array_push($lat, $cellCenter->latDegrees());
-			array_push($lng, $cellCenter->lngDegrees());
+
+			list($_lat, $_lng, $_zoom) = getCellData(hexdec($row['cellId64']), 2);
+			array_push($zoom, $_zoom);
+			array_push($lat, $_lat);
+			array_push($lng, $_lng);
 		}
 
 		if (!$cell) {
@@ -703,12 +702,7 @@ elseif($status == 0) {
 			$row = mysqli_fetch_assoc($result);
 			$currGropus = $row['groups'];
 			$zona = str_replace("'","\'",$row['name']);
-			$cellIdObj = new S2CellId(hexdec($row['cellId64']));
-			$cellObj = new S2Cell($cellIdObj);
-			$cellCenter = new S2LatLng($cellObj->getCenter());
-			$lat = $cellCenter->latDegrees();
-			$lng = $cellCenter->lngDegrees();
-			$zoom = $cellObj->level()+2;
+			list($lat, $lng, $zoom) = getCellData(hexdec($row['cellId64']), 2);
 
 			if (!$row) {
 				$response = $EMO_ERR.' Cella *'.$cell.'* non trovata. Registrala prima con il comando `/addcell <IDcella>`.';
@@ -747,12 +741,7 @@ elseif($status == 0) {
 			$row = mysqli_fetch_assoc($result);
 			$currGropus = $row['groups'];
 			$zona = str_replace("'","\'",$row['name']);
-			$cellIdObj = new S2CellId(hexdec($row['cellId64']));
-			$cellObj = new S2Cell($cellIdObj);
-			$cellCenter = new S2LatLng($cellObj->getCenter());
-			$lat = $cellCenter->latDegrees();
-			$lng = $cellCenter->lngDegrees();
-			$zoom = $cellObj->level()+2;
+			list($lat, $lng, $zoom) = getCellData(hexdec($row['cellId64']), 2);
 
 			if (!$row) {
 				$response = $EMO_ERR.' Cella *'.$cell.'* non trovata.';
