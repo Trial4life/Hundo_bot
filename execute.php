@@ -648,14 +648,19 @@ elseif($status == 0) {
 			array_push($lng, 12.492826  );
 		}
 
-		$link_all = "https://s2.sidewalklabs.com/regioncoverer/?center=41.891165%2C12.492826&zoom=12&cells=";
-		for ($i = 0; $i <= sizeof($cell)-1; $i++){
-			$link_all = $link_all . "%2C" . $cell[$i];
+		if (!$cell) {
+			$response = 'Nessuna cella è attiva per le notifiche quest in questo gruppo.';
 		}
-		$response = $EMO_GLO." Lista delle [celle attive](".$link_all.") per le quest del gruppo: ".$EMO_GLO;
-		for ($i = 0; $i <= sizeof($cell)-1; $i++){
-			$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat[$i] ."%2C". $lng[$i] . "&zoom=" . $zoom[$i] . "&cells=" . $cell[$i];
-			$response = $response."\n*".$name[$i]."* − [".$cell[$i]."](".$link.")";
+		else {
+			$link_all = "https://s2.sidewalklabs.com/regioncoverer/?center=41.891165%2C12.492826&zoom=12&cells=";
+			for ($i = 0; $i <= sizeof($cell)-1; $i++){
+				$link_all = $link_all . "%2C" . $cell[$i];
+			}
+			$response = $EMO_GLO." Lista delle [celle attive](".$link_all.") per le quest del gruppo: ".$EMO_GLO;
+			for ($i = 0; $i <= sizeof($cell)-1; $i++){
+				$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat[$i] ."%2C". $lng[$i] . "&zoom=" . $zoom[$i] . "&cells=" . $cell[$i];
+				$response = $response."\n*".$name[$i]."* − [".$cell[$i]."](".$link.")";
+			}
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
