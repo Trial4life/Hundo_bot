@@ -132,6 +132,7 @@ elseif(strpos($text, "/annulla") === 0 ) {
 elseif($status == 0 and strpos($text, "/100 ") === 0 ) {
 	if (!in_array($username, $bannedUsers)) {
 		if(isset($message['reply_to_message']['text']))	{
+			$reply = str_replace("'","\'",$reply);
 			$data = [
    	 		'chat_id' => $chatId,
    	 		'text' => $EMO_PIN.' Mandami la posizione di *'.$reply.'*.',
@@ -142,6 +143,7 @@ elseif($status == 0 and strpos($text, "/100 ") === 0 ) {
 		}
 		else {
 			$text = str_replace('/100', '', $text);
+			$text = str_replace("'","\'",$text);
 			$data = [
    		 	'chat_id' => $chatId,
    		 	'text' => $EMO_PIN.' Mandami la posizione di*'.$text.'*.',
@@ -161,6 +163,7 @@ elseif($status == 0 and strpos($text, "/100 ") === 0 ) {
 }
 
 elseif($status == 1) {
+	$alert = str_replace("\'","'",$alert);
 	if (!$lat or !$lng) {
 		list($pkst, $lat, $lng) = getPortalData($text, $URLs[1]['url']);
 	}
