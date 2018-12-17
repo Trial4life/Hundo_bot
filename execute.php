@@ -767,10 +767,10 @@ elseif($status == 0) {
 	//////////////////
 	elseif(strpos($text, "/addadmin") === 0 ) {
 		if (in_array($username, $admins)) {
-			$admin = explode(', ', str_replace('/addadmin ', '', $text));
-			mysqli_query($conn,"INSERT INTO `admins` VALUES ('$admin[1]')");
+			$admin = str_replace('/addadmin ', '', $text);
+			mysqli_query($conn,"INSERT INTO `admins` VALUES ('$admin')");
 
-			$response = $EMO_v.' '.$admin[1].' aggiunto come admin.';
+			$response = $EMO_v.' '.$admin.' aggiunto come admin.';
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
