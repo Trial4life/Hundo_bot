@@ -828,7 +828,7 @@ elseif($status == 0) {
 		if (in_array($username, $admins)) {
 			$group = explode(', ', str_replace('/addgroup ', '', $text));
 			$groupName = $group[0];
-			$groupID = strval($group[1]);
+			$groupID = intval($group[1]);
 			mysqli_query($conn,"INSERT INTO `auth_groups` VALUES ('$groupName', $groupID)");
 
 			$response = $EMO_v.' *'.$group[0].'* aggiunto ai gruppi di competenza del bot.';
