@@ -828,10 +828,10 @@ elseif($status == 0) {
 		if (in_array($username, $admins)) {
 			$group = explode(', ', str_replace('/addgroup ', '', $text));
 			$groupName = $group[0];
-			$groupID = intval($group[1]);
-			mysqli_query($conn,"INSERT INTO `auth_groups` VALUES ('$groupName', $groupID)");
+			$groupID = $group[1];
+			mysqli_query($conn,"INSERT INTO `auth_groups` VALUES ('$groupName', '$groupID')");
 
-			$response = $EMO_v.' *'.$group[0].'* aggiunto ai gruppi di competenza del bot.';
+			$response = $EMO_v.' *'.$groupName.'* aggiunto ai gruppi di competenza del bot.';
 			$response = mysqli_error($conn);
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 			$parameters["method"] = "sendMessage";
