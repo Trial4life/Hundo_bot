@@ -95,16 +95,17 @@ class S2CellId {
         return self::fromFaceIJ($face, $i, $j);
     }
 
-    /** Return the leaf cell containing the given S2LatLng. *#/
-     * public static S2CellId fromLatLng(S2LatLng ll) {
-     * return fromPoint(ll.toPoint());
-     * }
-     *
-     * public S2Point toPoint() {
-     * return S2Point.normalize(toPointRaw());
-     * }
-     *
-     * /**
+    /** Return the leaf cell containing the given S2LatLng. */
+    public static function fromLatLng(S2LatLng $ll)
+    {
+        return self::fromPoint($ll->toPoint());
+    }
+
+    /*public S2Point toPoint() {
+        return S2Point.normalize(toPointRaw());
+    }*/
+
+     /**
      * Return the direction vector corresponding to the center of the given cell.
      * The vector returned by ToPointRaw is not necessarily unit length.
      */
