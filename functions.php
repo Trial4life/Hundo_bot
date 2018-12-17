@@ -33,6 +33,16 @@
 		return $zona;
    }
 
+   function getCellData($ID, $add) {
+ 		$cellIdObj = new S2CellId($ID);
+		$cellObj = new S2Cell($cellIdObj);
+		$cellCenter = new S2LatLng($cellObj->getCenter());
+		$zoom = $cellObj->level()+$add);
+		$lat = $cellCenter->latDegrees();
+		$lng, $cellCenter->lngDegrees();
+
+		return array($lat, $lng, $zoom);
+   }
    /*
    function copyDB() {
    	$conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");
