@@ -631,10 +631,10 @@ elseif($status == 0) {
 			array_push($name, str_replace("\'","'",$row['name']));
 			$cellIdObj = new S2CellId(hexdec($row['cellId64']));
 			$cellObj = new S2Cell($cellIdObj);
-			//array_push($zoom, $cellObj->level()+2);		// scommentare quando si fixa $lat e $lng (S2LatLng)
-			array_push($zoom, 12);
-			array_push($lat, 41.891165  );
-			array_push($lng, 12.492826  );
+			$cellCenter = new S2LatLng($cellObj->getCenter());
+			array_push($zoom, $cellObj->level()+2);
+			array_push($lat, $cellCenter->latDegrees());
+			array_push($lng, $cellCenter->lngDegrees());
 		}
 
 		if (!$cell) {
@@ -668,10 +668,10 @@ elseif($status == 0) {
 			array_push($name, str_replace("\'","'",$row['name']));
 			$cellIdObj = new S2CellId(hexdec($row['cellId64']));
 			$cellObj = new S2Cell($cellIdObj);
-			//array_push($zoom, $cellObj->level()+2);		// scommentare quando si fixa $lat e $lng (S2LatLng)
-			array_push($zoom, 12);
-			array_push($lat, 41.891165  );
-			array_push($lng, 12.492826  );
+			$cellCenter = new S2LatLng($cellObj->getCenter());
+			array_push($zoom, $cellObj->level()+2);
+			array_push($lat, $cellCenter->latDegrees());
+			array_push($lng, $cellCenter->lngDegrees());
 		}
 
 		if (!$cell) {
@@ -706,11 +706,10 @@ elseif($status == 0) {
 			$zona = str_replace("'","\'",$row['name']);
 			$cellIdObj = new S2CellId(hexdec($row['cellId64']));
 			$cellObj = new S2Cell($cellIdObj);
-
-			$lat = 41.891165;
-			$lng = 12.492826;
-			$zoom = 12;
-			// $zoom = $cellObj->level()+2; 			// scommentare quando si fixa $lat e $lng (S2LatLng)
+			$cellCenter = new S2LatLng($cellObj->getCenter());
+			$lat = $cellCenter->latDegrees();
+			$lng = $cellCenter->lngDegrees();
+			$zoom = $cellObj->level()+2;
 
 			if (!$row) {
 				$response = $EMO_ERR.' Cella *'.$cell.'* non trovata. Registrala prima con il comando `/addcell <IDcella>`.';
@@ -751,11 +750,10 @@ elseif($status == 0) {
 			$zona = str_replace("'","\'",$row['name']);
 			$cellIdObj = new S2CellId(hexdec($row['cellId64']));
 			$cellObj = new S2Cell($cellIdObj);
-
-			$lat = 41.891165;
-			$lng = 12.492826;
-			$zoom = 12;
-			// $zoom = $cellObj->level()+2; 			// scommentare quando si fixa $lat e $lng (S2LatLng)
+			$cellCenter = new S2LatLng($cellObj->getCenter());
+			$lat = $cellCenter->latDegrees();
+			$lng = $cellCenter->lngDegrees();
+			$zoom = $cellObj->level()+2;
 
 			if (!$row) {
 				$response = $EMO_ERR.' Cella *'.$cell.'* non trovata.';
