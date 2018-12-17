@@ -625,7 +625,7 @@ elseif($status == 0) {
 		$cell = $name = $lat = $lng = $zoom = array();
 		while ($row = mysqli_fetch_assoc($result)) {
 			array_push($cell, $row['cellId']);
-			array_push($name, str_replace("'","\'",$row['name']));
+			array_push($name, str_replace("\'","'",$row['name']));
 			$cellIdObj = new S2CellId(hexdec($row['cellId64']));
 			$cellObj = new S2Cell($cellIdObj);
 			//array_push($zoom, $cellObj->level()+2);		// scommentare quando si fixa $lat e $lng (S2LatLng)
@@ -662,7 +662,7 @@ elseif($status == 0) {
 		$cell = $name = $lat = $lng = $zoom = array();
 		while ($row = mysqli_fetch_assoc($result)) {
 			array_push($cell, $row['cellId']);
-			array_push($name, str_replace("'","\'",$row['name']));
+			array_push($name, str_replace("\'","'",$row['name']));
 			$cellIdObj = new S2CellId(hexdec($row['cellId64']));
 			$cellObj = new S2Cell($cellIdObj);
 			//array_push($zoom, $cellObj->level()+2);		// scommentare quando si fixa $lat e $lng (S2LatLng)
