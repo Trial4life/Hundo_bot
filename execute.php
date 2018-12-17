@@ -635,7 +635,7 @@ elseif($status == 0) {
 		}
 
 		if (!$cell) {
-			$response = 'Non è stata attivata ancora nessuna cella per le notifiche quest. Aggiungine una con il comando /register <ID-cella>.';
+			$response = 'Non è stata attivata ancora nessuna cella per le notifiche quest. Aggiungine una con il comando `/register <ID-cella>`.';
 		}
 		else {
 			$link_all = "https://s2.sidewalklabs.com/regioncoverer/?center=41.891165%2C12.492826&zoom=12&cells=";
@@ -672,7 +672,7 @@ elseif($status == 0) {
 		}
 
 		if (!$cell) {
-			$response = 'Nessuna cella è attiva per le notifiche quest in questo gruppo. Aggiungine una con il comando /register <ID-cella>.';
+			$response = 'Nessuna cella è attiva per le notifiche quest in questo gruppo. Aggiungine una con il comando /register `<ID-cella>`.';
 		}
 		else {
 			$link_all = "https://s2.sidewalklabs.com/regioncoverer/?center=41.891165%2C12.492826&zoom=12&cells=";
@@ -710,7 +710,7 @@ elseif($status == 0) {
 			// $zoom = $cellObj->level()+2; 			// scommentare quando si fixa $lat e $lng (S2LatLng)
 
 			if (!$row) {
-				$response = $EMO_ERR.' Cella *'.$cell.'* non trovata. Registrala prima con il comando /addregion <IDcella>.';
+				$response = $EMO_ERR.' Cella *'.$cell.'* non trovata. Registrala prima con il comando `/addcell <IDcella>`.';
 			}
 			else {
 				$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat ."%2C". $lng . "&zoom=" . $zoom . "&cells=" . $cell;
