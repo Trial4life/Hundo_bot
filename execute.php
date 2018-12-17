@@ -869,7 +869,7 @@ elseif($status == 0) {
 	elseif(strpos($text, "/groups") === 0 ) {
 		$response = "Elenco dei gruppi attivi:\n";
 		foreach ($authorizedChatsNames as $key => $value) {
-			$response = $response . "− @" . $value . "\n";
+			$response = $response . "− " . $value . "\n";
 		}
 		$data = [
 		  	'chat_id' => $chatId,
