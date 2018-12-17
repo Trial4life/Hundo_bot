@@ -770,14 +770,14 @@ elseif($status == 2) {
 	//$level = 10;
 
 	list($pkst, $lat, $lng) = getPortalData($text, $URLs[1]['url']);
-	$zone = '';
+/*	$zone = '';
 	for ($i = 10; $i <=13; $i++) {
 		$tmp = getPortalZone($i, $lat, $lng, $conn);
 		if ($tmp != NULL) {
 			$zone = $zone . $tmp . ', ';
 		}
 	}
-
+*///DEBUG
 	if (!$lat or !$lng)	{
 		$data = [
 	   	'chat_id' => $userId,
@@ -842,7 +842,7 @@ elseif($status == 2) {
 			}
 
 			// INVIA MESSAGGIO NEL GRUPPO - DA AUTOMATIZZARE+SELEZIONARE GRUPPI IN BASE ALLE CELLE ASSOCIATE
-/*
+/*DEBUG
 			$query = "SELECT * FROM `zones` WHERE '$zone' LIKE CONCAT('%', name, '%')";
 			$result = mysqli_query($conn,$query);
 			$groupsIDs = array();
@@ -864,7 +864,7 @@ elseif($status == 2) {
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			}
-*/
+*///DEBUG
 			$response = $EMO_v.' La quest è stata registrata.';
 			$parameters = array('chat_id' => $userId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
