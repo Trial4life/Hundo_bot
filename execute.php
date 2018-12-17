@@ -767,17 +767,8 @@ elseif($status == 0) {
 
 elseif($status == 2) {
 	$quest = $alert;
-	$minlevel = 10;
-	$maxlevel = 13;
 
 	list($pkst, $lat, $lng) = getPortalData($text, $URLs[1]['url']);
-	$zone = '';
-	for ($i = $minlevel; $i <=$maxlevel; $i++) {
-		$tmp = getPortalZone($i, $lat, $lng, $conn);
-		//if ($tmp != NULL) {
-			$zone = $zone . $tmp . ', ';
-		//}
-	}
 
 	if (!$lat or !$lng)	{
 		$data = [
@@ -840,6 +831,16 @@ elseif($status == 2) {
 			  		'disable_web_page_preview' => TRUE,
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+			}
+
+			$minlevel = 10;
+			$maxlevel = 13;
+			$zone = '';
+			for ($i = $minlevel; $i <=$maxlevel; $i++) {
+				$tmp = getPortalZone($i, $lat, $lng, $conn);
+				//if ($tmp != NULL) {
+					$zone = $zone . $tmp . ', ';
+				//}
 			}
 
 			// INVIA MESSAGGIO NEL GRUPPO - DA AUTOMATIZZARE+SELEZIONARE GRUPPI IN BASE ALLE CELLE ASSOCIATE
