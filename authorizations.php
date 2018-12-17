@@ -25,6 +25,7 @@ $conn2 = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
 		array_push($admins, $row['username']);
 	}
 
+/*
 	$authorizedChats = array(
 		$group_PogoTube42,
 		$group_NordEstLegit,
@@ -37,8 +38,8 @@ $conn2 = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
 		'PoGoRaidRomaNordEst',
 		' w',
 	);
-
-
+*/
+/*
 	$admins = array(
 		'Trial4life',
 		'DadyGC',
@@ -50,6 +51,7 @@ $conn2 = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
 		'ProtusPrime',
 		'HarlockHrk',
 	);
+*/
 
 	$bannedUsers = array(
 
