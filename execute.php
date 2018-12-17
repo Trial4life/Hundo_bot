@@ -556,46 +556,64 @@ elseif($status == 0) {
 	/// ADD CELL ///
 	////////////////
 	elseif(strpos($text, "/addcell") === 0 ) {
-		$data = explode(', ', str_replace('/addcell ', '', $text));
-		$cellId = $data[0];
-		$name = $data[1];
-		$cellId64 = $cellId . str_repeat("0",16-strlen($cellId));
+		if (in_array($username, $admins)) {
+			$data = explode(', ', str_replace('/addcell ', '', $text));
+			$cellId = $data[0];
+			$name = $data[1];
+			$cellId64 = $cellId . str_repeat("0",16-strlen($cellId));
 
-		$query = "SELECT * FROM `zones` WHERE cellId = '$cellId'";
-		$result = mysqli_query($conn,$query);
-		$row = mysqli_fetch_assoc($result);
-		if (!$row) {
-			$response = $EMO_v." La cella *".$cellId."* è stata registrata come *\"".$name."\"*.";
-			mysqli_query($conn,"INSERT INTO `zones` (cellId, cellId64, name) VALUES ('$cellId', '$cellId64', '$name')");
-			//$response = mysqli_error($conn);
+			$query = "SELECT * FROM `zones` WHERE cellId = '$cellId'";
+			$result = mysqli_query($conn,$query);
+			$row = mysqli_fetch_assoc($result);
+			if (!$row) {
+				$response = $EMO_v." La cella *".$cellId."* è stata registrata come *\"".$name."\"*.";
+				mysqli_query($conn,"INSERT INTO `zones` (cellId, cellId64, name) VALUES ('$cellId', '$cellId64', '$name')");
+				//$response = mysqli_error($conn);
+			}
+			else {
+				$response = $EMO_v.' La cella *'.$cellId.'* è già registrata.';
+			}
+			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+			$parameters["method"] = "sendMessage";
+			echo json_encode($parameters);
 		}
 		else {
-			$response = $EMO_v.' La cella *'.$cellId.'* è già registrata.';
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_ERR.'Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}
-		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
-		$parameters["method"] = "sendMessage";
-		echo json_encode($parameters);
 	}
 
 	////////////////
 	/// DEL CELL ///
 	////////////////
 	elseif(strpos($text, "/delcell") === 0) {
-		$name = str_replace('/delcell ', '', $text);
+		if (in_array($username, $admins)) {
+			$name = str_replace('/delcell ', '', $text);
 
-		$query = "SELECT * FROM `zones` WHERE name = '$name'";
-		$result = mysqli_query($conn,$query);
-		$row = mysqli_fetch_assoc($result);
-		if (!$row) {
-			$response = $EMO_ERR.' Cella *'.$name.'* non trovata.';
+			$query = "SELECT * FROM `zones` WHERE name = '$name'";
+			$result = mysqli_query($conn,$query);
+			$row = mysqli_fetch_assoc($result);
+			if (!$row) {
+				$response = $EMO_ERR.' Cella *'.$name.'* non trovata.';
+			}
+			else {
+				$response = $EMO_x.' La cella *'.$name.'* è stata rimossa.';
+				mysqli_query($conn,"DELETE FROM `zones` WHERE name = '$name'");
+			}
+			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+			$parameters["method"] = "sendMessage";
+			echo json_encode($parameters);
 		}
 		else {
-			$response = $EMO_x.' La cella *'.$name.'* è stata rimossa.';
-			mysqli_query($conn,"DELETE FROM `zones` WHERE name = '$name'");
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_ERR.'Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}
-		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
-		$parameters["method"] = "sendMessage";
-		echo json_encode($parameters);
 	}
 
 	/////////////
