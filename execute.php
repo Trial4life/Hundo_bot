@@ -811,10 +811,15 @@ elseif($status == 0) {
 	elseif(strpos($text, "/admins") === 0 ) {
 		$response = "Elenco degli amministratori del bot:\n";
 		foreach ($admins as $key => $value) {
-			$response = $response . "- @" . $value ;
+			$response = $response . "− @" . $value . "\n";
 		}
-		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
-		$parameters["method"] = "sendMessage";
+		$data = [
+		  	'chat_id' => $chatId,
+		  	'text' => $response,
+		];
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		//$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
+		//$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
 	}
 
