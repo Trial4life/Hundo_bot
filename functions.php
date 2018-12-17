@@ -44,7 +44,7 @@
 		return array($lat, $lng, $zoom);
    }
 
-   /*
+   /* FUNZIONE BETA PER COPIAR EI DATABASE
    function copyDB() {
    	$conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");
    	$connS1 = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");

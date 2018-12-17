@@ -2,7 +2,6 @@
 $conn2 = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
 	$query = "SELECT * FROM `auth_groups`";
 	$result = mysqli_query($conn2,$query);
-
 	$authorizedChats = $authorizedChatsNames = array();
 	while ($row = mysqli_fetch_assoc($result)) {
 		array_push($authorizedChats, intval($row['groupID']));
@@ -11,7 +10,6 @@ $conn2 = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
 
 	$query = "SELECT * FROM `admins`";
 	$result = mysqli_query($conn2,$query);
-
 	$admins = array();
 	while ($row = mysqli_fetch_assoc($result)) {
 		array_push($admins, $row['username']);
