@@ -697,7 +697,7 @@ elseif($status == 0) {
 	elseif(strpos($text, "/register") === 0) {
 		if (in_array($username, $admins)) {
 			$cell = strtolower(str_replace('/register ', '', $text));
-			$query = "SELECT * FROM `zones` WHERE cellId = '$cell'";
+			$query = "SELECT * FROM `zones` WHERE name = '$cell'";
 			$result = mysqli_query($conn,$query);
 			$row = mysqli_fetch_assoc($result);
 			$currGropus = $row['groups'];
@@ -714,7 +714,7 @@ elseif($status == 0) {
 				}
 				else {
 					$response = $EMO_GLO." Il gruppo è stato associato alla cella [".$cell."](".$link.") − \"".$zona."\".";
-					mysqli_query($conn,"UPDATE `zones` SET `groups` = concat('$currGropus', '$chatId', ',') WHERE `cellId` = '$cell'");
+					mysqli_query($conn,"UPDATE `zones` SET `groups` = concat('$currGropus', '$chatId', ',') WHERE `name` = '$cell'");
 				}
 			}
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
@@ -736,7 +736,7 @@ elseif($status == 0) {
 	elseif(strpos($text, "/unregister") === 0 ) {
 		if (in_array($username, $admins)) {
 			$cell = ucfirst(str_replace('/unregister ', '', $text));
-			$query = "SELECT * FROM `zones` WHERE cellId = '$cell'";
+			$query = "SELECT * FROM `zones` WHERE name = '$cell'";
 			$result = mysqli_query($conn,$query);
 			$row = mysqli_fetch_assoc($result);
 			$currGropus = $row['groups'];
@@ -753,7 +753,7 @@ elseif($status == 0) {
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
-			mysqli_query($conn,"UPDATE `zones` SET `groups` = replace('$currGropus',concat('$chatId', ','), '') WHERE `cellId` = '$cell'");
+			mysqli_query($conn,"UPDATE `zones` SET `groups` = replace('$currGropus',concat('$chatId', ','), '') WHERE `name` = '$cell'");
 		}
 		else {
 			$data = [
