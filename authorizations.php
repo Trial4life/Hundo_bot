@@ -34,7 +34,7 @@ $conn2 = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
 	);
 
 	$authorizedChatsNames = array(
-		'PoGoNordEstLegit',
+		'PoGoRaidRomaNordEst',
 		' w',
 	);
 
