@@ -770,7 +770,7 @@ elseif($status == 0) {
 			$admin = str_replace('/addadmin ', '', $text);
 			mysqli_query($conn,"INSERT INTO `admins` VALUES ('$admin')");
 
-			$response = $EMO_v.' *'.$admin.'* aggiunto come admin.';
+			$response = $EMO_v.' *'.$admin.'* aggiunto come amministratore del bot.';
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
@@ -784,6 +784,27 @@ elseif($status == 0) {
 		}
 	}
 
+	//////////////////
+	/// DEL ADMINS ///
+	//////////////////
+	elseif(strpos($text, "/deladmin") === 0 ) {
+		if (in_array($username, $admins)) {
+			$admin = str_replace('/deladmin ', '', $text);
+			mysqli_query($conn,"DELETE FROM `admins` WHERE `username` = '$admin'");
+
+			$response = $EMO_v.' *'.$admin.'* rimosso dagli amministratori del bot.';
+			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+			$parameters["method"] = "sendMessage";
+			echo json_encode($parameters);
+		}
+		else {
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR.json_encode($admins),
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		}
+	}
 	//////////////
 	/// ADMINS ///
 	//////////////
