@@ -113,7 +113,7 @@ if(strpos($text, "/adminhelp") === 0 ) {
 		   	$EMO_TRI	. " *Per visualizzare tutte le quest disponibili* per il mese corrente, utilizzare il comando `/listquests`\n\n" .
 		   	$EMO_TRI . " *Per aggiungere una cella S2 al bot*, utilizzare il comando `/addcell <ID-cella>, <nome-cella>`.\n\n_Esempio:_\n`/addcell 132f61, Roma-Centro`.\n\n" .
 		   	$EMO_TRI . " *Per rimuovere una cella S2 dal bot*, utilizzare il comando `/delcell <nome-cella>`.\n\n_Esempio:_\n`/delcell Roma-Centro`.\n\n" .
-		   	$EMO_TRI . " *Per elencare le celle S2 disponibili*, utilizzare il comando `/cells`." .
+		   	$EMO_TRI . " *Per elencare le celle S2 disponibili*, utilizzare il comando `/cells`.\n\n" .
 		   	$EMO_TRI . " *Per registrare un gruppo ad una cella S2*, utilizzare il comando `/register <nome-cella>` all'interno della chat del gruppo.\n\n_Esempio:_\n`/register Roma-Centro`.\n\n" .
 		   	$EMO_TRI . " *Per rimuovere un gruppo da una cella S2*, utilizzare il comando `/unregister <nome-cella>` all'interno della chat del gruppo.\n\n_Esempio:_\n`/unregister Roma-Centro`.\n\n" .
 		   	$EMO_TRI . " *Per elencare le celle S2 associate ad un gruppo*, utilizzare il comando `/groupcells` all'interno della chat del gruppo.\n\n" .
