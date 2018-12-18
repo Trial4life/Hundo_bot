@@ -771,15 +771,15 @@ elseif($status == 0) {
 			$result = mysqli_query($conn,$query);
 			$row = mysqli_fetch_assoc($result);
 			$currGropus = $row['groups'];
-			$zona = str_replace("'","\'",$row['name']);
+			$cellId = str_replace("'","\'",$row['cellId']);
 			list($lat, $lng, $zoom) = getCellData(hexdec($row['cellId64']), 2);
 
 			if (!$row) {
 				$response = $EMO_ERR.' Cella *'.$cell.'* non trovata.';
 			}
 			else {
-				$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat ."%2C". $lng . "&zoom=" . $zoom . "&cells=" . $cell;
-				$response = $EMO_x." Il gruppo è stato rimosso dalla cella [".$cell."](".$link.") − \"".$zona."\".";
+				$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat ."%2C". $lng . "&zoom=" . $zoom . "&cells=" . $cellId;
+				$response = $EMO_x." Il gruppo è stato rimosso dalla cella [".$cell."](".$link.").";
 			}
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 			$parameters["method"] = "sendMessage";
