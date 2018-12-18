@@ -107,7 +107,23 @@ if(strpos($text, "/adminhelp") === 0 ) {
 	if ((in_array($username, $admins)) and ($chatId == $userId)) {
 		$data = [
 		   'chat_id' => $chatId,
-		   'text' => $EMO_TRI . " *Per segnalare un pokémon selvatico*, utilizzare il comando `/100 <segnalazione>` (sia in chat privata, sia nel gruppo) e, dopo 	aver inviato il comando, condivedere la posizione dell'avvistamento direttamente tramite telegram.\n\n_Esempio:_\n`/100 Dratini 100% appena spawnato al 	Pincio`\n\n" . $EMO_TRI . " *Per segnalare una quest*, utilizzare in chat privata con il bot il comando `/quest <inserire-la-ricompensa>` e, dopo aver 	inviato il comando, condividere la posizione del pokéstop tramite @ingressportalbot (da utilizzare in modalità inline: dopo aver digitato 	`@ingressportalbot`, iniziare a digitare il nome del portale e selezionarlo dal menu a tendina una volta comparso - si consiglia di condividere la 	posizione con il bot in modo da rilevare i portali più vicini).\n\n_Esempio:_\n`/quest Dratini`\n`/quest 1 Caramella Rara, vinci 3 sfide`\n\n". $EMO_TRI	 . " *Per attivare/disattivare le notifiche per una quest* utilizzare i comandi `/addalert <inserire-la-ricompensa>` e `/delalert <	inserire-la-ricompensa>` \n\n_Esempio_:\n`/addalert Larvitar`\n`/delalert Dratini`\n\n" .$EMO_TRI ." *Per mostrare le notifiche attive*, utilizzare il 	comando `/alerts`.",
+		   'text' =>
+		   	$EMO_TRI . " *Per aggiungere una nuova quest*, utilizzare il comando `/newquest <ricompensa>, <task>, <flag>` (il flag può essere 0, se non si vogliono le notifiche nel canale @PokeradarRoma, o 1, se si desiderano le notifiche per la quest).\n\n_Esempio:_\n`/newquest Nincada, Cattura 5 Pokémon di tipo Coleottero, 1`\n`/newquest Gastly, Effettua 3 tiri ottimi, 0`\n\n" .
+		   	$EMO_TRI . " *Per rimuovere una quest*, utilizzare il comando `/delquest <ricompensa>`.\n\n_Esempio:_\n`/delquest Nincada`\n\n".
+		   	$EMO_TRI	. " *Per visualizzare tutte le quest disponibili* per il mese corrente, utilizzare il comando `/listquests`\n\n" .
+		   	$EMO_TRI . " *Per mostrare le notifiche attive*, utilizzare il comando `/alerts`.\n\n",
+		   	$EMO_TRI . " *Per aggiungere una cella S2 al bot*, utilizzare il comando `/addcell <ID-cella>, <nome-cella>`.\n\n_Esempio:_\n`/addcell 132f61, Roma-Centro`.\n\n",
+		   	$EMO_TRI . " *Per rimuovere una cella S2 dal bot*, utilizzare il comando `/delcell <nome-cella>`.\n\n_Esempio:_\n`/delcell Roma-Centro`.\n\n",
+		   	$EMO_TRI . " *Per elencare le celle S2 disponibili*, utilizzare il comando `/cells`.",
+		   	$EMO_TRI . " *Per registrare un gruppo ad una cella S2*, utilizzare il comando `/register <nome-cella>` all'interno della chat del gruppo.\n\n_Esempio:_\n`/register Roma-Centro`.\n\n",
+		   	$EMO_TRI . " *Per rimuovere un gruppo da una cella S2*, utilizzare il comando `/unregister <nome-cella>` all'interno della chat del gruppo.\n\n_Esempio:_\n`/unregister Roma-Centro`.\n\n",
+		   	$EMO_TRI . " *Per elencare le celle S2 associate ad un gruppo*, utilizzare il comando `/groupcells` all'interno della chat del gruppo.\n\n",
+		   	//$EMO_TRI . " *Per aggiungere un admin al bot*, utilizzare il comando `/addadmin <username>`.\n\n_Esempio:_\n`/addadmin Exeggutor`.\n\n",
+		   	//$EMO_TRI . " *Per rimuovere un admin dal bot*, utilizzare il comando `/deladmin <username>`.\n\n_Esempio:_\n`/deladmin Exeggutor`.\n\n",
+		   	$EMO_TRI . " *Per elencare gli admin del bot*, utilizzare il comando `/admins`.\n\n",
+		   	$EMO_TRI . " *Per aggiungere un gruppo al bot*, utilizzare il comando `/addgroup <ID-gruppo>, <nome-gruppo>`.\n\n_Esempio:_\n`/addgroup -123456, Exeggutor-group`.\n\n",
+		   	$EMO_TRI . " *Per rimuovere un gruppo dal bot*, utilizzare il comando `/delgroup <nome-gruppo>`.\n\n_Esempio:_\n`/delgroup Exeggutor-group`.\n\n",
+		   	$EMO_TRI . " *Per elencare i gruppi autorizzati dal bot*, utilizzare il comando `/groups`.\n\n",
 		   'parse_mode' => 'markdown',
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
