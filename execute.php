@@ -111,7 +111,6 @@ if(strpos($text, "/adminhelp") === 0 ) {
 		   	$EMO_TRI . " *Per aggiungere una nuova quest*, utilizzare il comando `/newquest <ricompensa>, <task>, <flag>` (il flag può essere 0, se non si vogliono le notifiche nel canale @PokeradarRoma, o 1, se si desiderano le notifiche per la quest).\n\n_Esempio:_\n`/newquest Nincada, Cattura 5 Pokémon di tipo Coleottero, 1`\n`/newquest Gastly, Effettua 3 tiri ottimi, 0`\n\n" .
 		   	$EMO_TRI . " *Per rimuovere una quest*, utilizzare il comando `/delquest <ricompensa>`.\n\n_Esempio:_\n`/delquest Nincada`\n\n".
 		   	$EMO_TRI	. " *Per visualizzare tutte le quest disponibili* per il mese corrente, utilizzare il comando `/listquests`\n\n" .
-		   	$EMO_TRI . " *Per mostrare le notifiche attive*, utilizzare il comando `/alerts`.\n\n" .
 		   	$EMO_TRI . " *Per aggiungere una cella S2 al bot*, utilizzare il comando `/addcell <ID-cella>, <nome-cella>`.\n\n_Esempio:_\n`/addcell 132f61, Roma-Centro`.\n\n" .
 		   	$EMO_TRI . " *Per rimuovere una cella S2 dal bot*, utilizzare il comando `/delcell <nome-cella>`.\n\n_Esempio:_\n`/delcell Roma-Centro`.\n\n" .
 		   	$EMO_TRI . " *Per elencare le celle S2 disponibili*, utilizzare il comando `/cells`." .
