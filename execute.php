@@ -120,9 +120,9 @@ if(strpos($text, "/adminhelp") === 0 ) {
 		   	//$EMO_TRI . " *Per aggiungere un admin al bot*, utilizzare il comando `/addadmin <username>`.\n\n_Esempio:_\n`/addadmin Exeggutor`.\n\n" .
 		   	//$EMO_TRI . " *Per rimuovere un admin dal bot*, utilizzare il comando `/deladmin <username>`.\n\n_Esempio:_\n`/deladmin Exeggutor`.\n\n" .
 		   	$EMO_TRI . " *Per elencare gli admin del bot*, utilizzare il comando `/admins`.\n\n" .
-		   	$EMO_TRI . " *Per aggiungere un gruppo al bot*, utilizzare il comando `/addgroup <ID-gruppo>, <nome-gruppo>`.\n\n_Esempio:_\n`/addgroup -123456, Exeggutor-group`.\n\n" .
-		   	$EMO_TRI . " *Per rimuovere un gruppo dal bot*, utilizzare il comando `/delgroup <nome-gruppo>`.\n\n_Esempio:_\n`/delgroup Exeggutor-group`.\n\n" .
-		   	$EMO_TRI . " *Per elencare i gruppi autorizzati dal bot*, utilizzare il comando `/groups`.\n\n",
+		   	//$EMO_TRI . " *Per aggiungere un gruppo al bot*, utilizzare il comando `/addgroup <ID-gruppo>, <nome-gruppo>`.\n\n_Esempio:_\n`/addgroup -123456, Exeggutor-group`.\n\n" .
+		   	//$EMO_TRI . " *Per rimuovere un gruppo dal bot*, utilizzare il comando `/delgroup <nome-gruppo>`.\n\n_Esempio:_\n`/delgroup Exeggutor-group`.\n\n" .
+		   	//$EMO_TRI . " *Per elencare i gruppi autorizzati dal bot*, utilizzare il comando `/groups`.\n\n",
 		   'parse_mode' => 'markdown',
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
