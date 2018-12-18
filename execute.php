@@ -117,9 +117,9 @@ if(strpos($text, "/adminhelp") === 0 ) {
 		   	$EMO_TRI . " *Per registrare un gruppo ad una cella S2*, utilizzare il comando `/register <nome-cella>` all'interno della chat del gruppo.\n\n_Esempio:_\n`/register Roma-Centro`.\n\n" .
 		   	$EMO_TRI . " *Per rimuovere un gruppo da una cella S2*, utilizzare il comando `/unregister <nome-cella>` all'interno della chat del gruppo.\n\n_Esempio:_\n`/unregister Roma-Centro`.\n\n" .
 		   	$EMO_TRI . " *Per elencare le celle S2 associate ad un gruppo*, utilizzare il comando `/groupcells` all'interno della chat del gruppo.\n\n" .
+		   	$EMO_TRI . " *Per elencare gli admin del bot*, utilizzare il comando `/admins`.",
 		   	//$EMO_TRI . " *Per aggiungere un admin al bot*, utilizzare il comando `/addadmin <username>`.\n\n_Esempio:_\n`/addadmin Exeggutor`.\n\n" .
 		   	//$EMO_TRI . " *Per rimuovere un admin dal bot*, utilizzare il comando `/deladmin <username>`.\n\n_Esempio:_\n`/deladmin Exeggutor`.\n\n" .
-		   	$EMO_TRI . " *Per elencare gli admin del bot*, utilizzare il comando `/admins`.\n\n" .
 		   	//$EMO_TRI . " *Per aggiungere un gruppo al bot*, utilizzare il comando `/addgroup <ID-gruppo>, <nome-gruppo>`.\n\n_Esempio:_\n`/addgroup -123456, Exeggutor-group`.\n\n" .
 		   	//$EMO_TRI . " *Per rimuovere un gruppo dal bot*, utilizzare il comando `/delgroup <nome-gruppo>`.\n\n_Esempio:_\n`/delgroup Exeggutor-group`.\n\n" .
 		   	//$EMO_TRI . " *Per elencare i gruppi autorizzati dal bot*, utilizzare il comando `/groups`.\n\n",
