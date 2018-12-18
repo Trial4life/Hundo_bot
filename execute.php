@@ -114,7 +114,6 @@ if(strpos($text, "/adminhelp") === 0 ) {
 		  	'text' => $EMO_ERR.' Questo comando può essere usato solo dagli admin e solo in chat privata. '.$EMO_ERR,
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-		}
 	}
 }
 
