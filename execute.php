@@ -704,7 +704,7 @@ elseif($status == 0) {
 		}
 
 		if (!$cell) {
-			$response = 'Nessuna cella è attiva per le notifiche quest in questo gruppo. Aggiungine una con il comando `/register <ID-cella>`.';
+			$response = 'Nessuna cella è attiva per le notifiche quest in questo gruppo. Aggiungine una con il comando `/register <nome-cella>`.';
 		}
 		else {
 			$link_all = "https://s2.sidewalklabs.com/regioncoverer/?center=41.891165%2C12.492826&zoom=12&cells=";
