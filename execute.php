@@ -727,7 +727,7 @@ elseif($status == 0) {
 	////////////////
 	elseif(strpos($text, "/register") === 0) {
 		if (in_array($username, $admins)) {
-			$cell = strtolower(str_replace('/register ', '', $text));
+			$cell = ucfirst(str_replace('/register ', '', $text));
 			$query = "SELECT * FROM `zones` WHERE name = '$cell'";
 			$result = mysqli_query($conn,$query);
 			$row = mysqli_fetch_assoc($result);
