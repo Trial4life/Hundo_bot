@@ -732,6 +732,7 @@ elseif($status == 0) {
 			$result = mysqli_query($conn,$query);
 			$row = mysqli_fetch_assoc($result);
 			$currGropus = $row['groups'];
+			$cellId = $row['groups'];
 			$zona = str_replace("'","\'",$row['name']);
 			list($lat, $lng, $zoom) = getCellData(hexdec($row['cellId64']), 2);
 
@@ -739,12 +740,12 @@ elseif($status == 0) {
 				$response = $EMO_ERR.' Cella *'.$cell.'* non trovata. Registrala prima con il comando `/addcell <IDcella>`.';
 			}
 			else {
-				$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat ."%2C". $lng . "&zoom=" . $zoom . "&cells=" . $cell;
+				$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat ."%2C". $lng . "&zoom=" . $zoom . "&cells=" . $cellId;
 				if (stristr($currGropus,strval($chatId))) {
 					$response = "Questo gruppo è già associato alla cella [".$cell."](".$link.") − \"".$zona."\".";
 				}
 				else {
-					$response = $EMO_GLO." Il gruppo è stato associato alla cella [".$cell."](".$link.") − \"".$zona."\".";
+					$response = $EMO_GLO." Il gruppo è stato associato alla cella [".$cell."](".$link.").";
 					mysqli_query($conn,"UPDATE `zones` SET `groups` = concat('$currGropus', '$chatId', ',') WHERE `name` = '$cell'");
 				}
 			}
@@ -771,7 +772,7 @@ elseif($status == 0) {
 			$result = mysqli_query($conn,$query);
 			$row = mysqli_fetch_assoc($result);
 			$currGropus = $row['groups'];
-			$cellId = str_replace("'","\'",$row['cellId']);
+			$cellId = $row['cellId'];
 			list($lat, $lng, $zoom) = getCellData(hexdec($row['cellId64']), 2);
 
 			if (!$row) {
