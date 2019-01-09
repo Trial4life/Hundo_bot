@@ -538,7 +538,7 @@ elseif($status == 0) {
 				}
 			}
 		*/
-			if ($check == FALSE) { $response = 'Nessuna quest segnalata nel raggio di *'.$rad.' km*:'; }
+		//	if ($check == FALSE) { $response = 'Nessuna quest segnalata nel raggio di *'.$rad.' km*.'; }
 
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 			$parameters["method"] = "sendMessage";
