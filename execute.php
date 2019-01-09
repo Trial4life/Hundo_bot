@@ -540,7 +540,7 @@ elseif($status == 0) {
 
 			if ($check == FALSE) { $response = 'Nessuna quest segnalata nel raggio di *'.$rad.' km*.'; }
 
-			$response = error_get_last();
+			$response = json_encode(error_get_last());
 
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 			$parameters["method"] = "sendMessage";
