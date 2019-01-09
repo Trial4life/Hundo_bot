@@ -44,6 +44,23 @@
 		return array($lat, $lng, $zoom);
    }
 
+   function computeDistance($latA,$lngA,$latB,$lngB) {
+		$lngA     = $lngA*(M_PI/180);
+		$latA     = $latA*(M_PI/180);
+		$lngB     = $lngB*(M_PI/180);
+		$latB     = $latB*(M_PI/180);
+
+		$subBA       = bcsub ($lngB, $lngA, 20);
+		$cosLatA     = cos($latA);
+		$cosLatB     = cos($latB);
+		$sinLatA     = sin($latA);
+		$sinLatB     = sin($latB);
+
+		$distance = 6371*acos($cosLatA*$cosLatB*cos($subBA)+$sinLatA*$sinLatB);
+
+		return $distance;
+   }
+
    /* FUNZIONE BETA PER COPIAR EI DATABASE
    function copyDB() {
    	$conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");

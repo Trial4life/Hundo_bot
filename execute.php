@@ -506,10 +506,40 @@ elseif($status == 0) {
 	/// LAT-LNG ///
 	///////////////
 	elseif ($lat and $lng and !$text and $chatId == $userId) {
-		$response = "Funzione in costruzione...";
-		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
-		$parameters["method"] = "sendMessage";
-		echo json_encode($parameters);
+		$query = "SELECT * FROM `usersettings` WHERE `username` = '$username'";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+		$rad = $row['radius'];
+
+		$query = "SELECT * FROM `quests` ORDER BY quest ASC";
+		$result = mysqli_query($conn,$query);
+		$quest = $pokestop = $questLat = $questLng = array();
+		while ($row = mysqli_fetch_assoc($result)) {
+			array_push($quest, $row['quest']);
+			array_push($pokestop, $row['pokestop']);
+			array_push($questLat, $row['lat']);
+			array_push($questLng, $row['lng']);
+		}
+
+		if (sizeof($quest)==0) {
+			$response = 'Non è stata segnalata nessuna quest per oggi.';
+			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+			$parameters["method"] = "sendMessage";
+			echo json_encode($parameters);
+		}
+		else {
+			$response = 'Elenco delle quest di oggi:';
+			for ($i = 0; $i <= sizeof($quest)-1; $i++){
+				if (computeDistance($lat,$lng,$questLat,$questLng) <= $rad) {
+					$link = 'https://maps.google.com/?q='.$questLat[$i].','.$questLng[$i];
+					$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
+				}
+			}
+
+			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+			$parameters["method"] = "sendMessage";
+			echo json_encode($parameters);
+		}
 	}
 
 	//////////////
@@ -522,7 +552,7 @@ elseif($status == 0) {
 		mysqli_query($conn,"DELETE FROM `usersettings` WHERE username = '$username'");
 		mysqli_query($conn,"INSERT INTO `usersettings` (`username`,`radius`) VALUES ('$username',$rad)");
 
-		$response = "Raggio delle quest impostato a ".$rad." km.";
+		$response = $EMO_GLO." Raggio delle quest impostato a *".$rad." km*.";
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
