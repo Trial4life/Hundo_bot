@@ -528,7 +528,7 @@ elseif($status == 0) {
 			echo json_encode($parameters);
 		}
 		else {
-			$response = 'Elenco delle quest nel raggio di *'.$rad.' km*:'.json_encode($questLat[$i]).json_encode($lat);
+			$response = 'Elenco delle quest nel raggio di *'.$rad.' km*:'.json_encode($questLat[1]).json_encode($lat);
 		/*	$check = TRUE;
 			for ($i = 0; $i <= sizeof($quest)-1; $i++){
 				if (computeDistance($lat,$lng,intval($questLat[$i]),intval($questLng[$i])) <= $rad*1000) {
