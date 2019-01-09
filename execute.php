@@ -519,7 +519,10 @@ elseif($status == 0) {
 		$str = explode(' ', $text);
 		$rad = $str[1];
 
-		$response = "Funzione in costruzione...".$rad;
+		mysqli_query($conn,"DELETE FROM `usersettings` WHERE username = '$username'");
+		mysqli_query($conn,"INSERT INTO `usersettings` (`username`,`radius`) VALUES ('$username',$rad)");
+
+		$response = "Raggio delle quest impostato a ".$rad." km.";
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
