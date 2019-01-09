@@ -505,7 +505,7 @@ elseif($status == 0) {
 	///////////////
 	/// LAT-LNG ///
 	///////////////
-	elseif ($lat and $lng and $chatId == $userId) {
+	elseif ($lat and $lng and !$text and $chatId == $userId) {
 		$response = "Funzione in costruzione...";
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
