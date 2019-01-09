@@ -528,13 +528,13 @@ elseif($status == 0) {
 			echo json_encode($parameters);
 		}
 		else {
-			$response = 'Elenco delle quest di oggi:';
+			$response = 'Elenco delle quest di oggi:'.$rad;/*
 			for ($i = 0; $i <= sizeof($quest)-1; $i++){
 				if (computeDistance($lat,$lng,$questLat,$questLng) <= $rad) {
 					$link = 'https://maps.google.com/?q='.$questLat[$i].','.$questLng[$i];
 					$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
 				}
-			}
+			}*/
 
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 			$parameters["method"] = "sendMessage";
