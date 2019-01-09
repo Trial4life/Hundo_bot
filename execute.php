@@ -474,7 +474,7 @@ elseif($status == 0) {
 	/////////////////
 	/// QUESTLIST ///
 	/////////////////
-	elseif(strpos($text, "/listquests") === 0 )	{
+	elseif(strpos($text, "/listquests") === 0 ) {
 		//if (in_array($username, $admins)) {
 			$query = "SELECT * FROM `tasks`";
 			$result = mysqli_query($conn,$query);
@@ -507,6 +507,19 @@ elseif($status == 0) {
 	///////////////
 	elseif ($lat and $lng and !$text and $chatId == $userId) {
 		$response = "Funzione in costruzione...";
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
+
+	//////////////
+	/// RADIUS ///
+	//////////////
+	elseif(strpos($text, "/radius") === 0 ){
+		$str = explode(' ', $text);
+		$rad = $str[1];
+
+		$response = "Funzione in costruzione...".$rad;
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
