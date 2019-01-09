@@ -45,10 +45,10 @@
    }
 
    function computeDistance($latA,$lngA,$latB,$lngB) {
+   	$latA     = $latA*(M_PI/180);
 		$lngA     = $lngA*(M_PI/180);
-		$latA     = $latA*(M_PI/180);
-		$lngB     = $lngB*(M_PI/180);
 		$latB     = $latB*(M_PI/180);
+		$lngB     = $lngB*(M_PI/180);
 
 		$subBA       = bcsub ($lngB, $lngA, 20);
 		$cosLatA     = cos($latA);
