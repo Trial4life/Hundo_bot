@@ -45,16 +45,16 @@
    }
 
    function computeDistance($latA,$lngA,$latB,$lngB) {
-   	$latA     = $latA*(M_PI/180);
-		$lngA     = $lngA*(M_PI/180);
-		$latB     = $latB*(M_PI/180);
-		$lngB     = $lngB*(M_PI/180);
+   	$latA = intval($latA)*(M_PI/180);
+		$lngA = intval($lngA)*(M_PI/180);
+		$latB = intval($latB)*(M_PI/180);
+		$lngB = intval($lngB)*(M_PI/180);
 
-		$subBA       = bcsub ($lngB, $lngA, 20);
-		$cosLatA     = cos($latA);
-		$cosLatB     = cos($latB);
-		$sinLatA     = sin($latA);
-		$sinLatB     = sin($latB);
+		$subBA   = bcsub ($lngB, $lngA, 20);
+		$cosLatA = cos($latA);
+		$cosLatB = cos($latB);
+		$sinLatA = sin($latA);
+		$sinLatB = sin($latB);
 
 		$distance = 6371*acos($cosLatA*$cosLatB*cos($subBA)+$sinLatA*$sinLatB);
 
