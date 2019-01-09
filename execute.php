@@ -528,7 +528,7 @@ elseif($status == 0) {
 			echo json_encode($parameters);
 		}
 		else {
-			$response = 'Elenco delle quest nel raggio di *'.$rad.' km*:'.json_encode($questLat[1]).json_encode($lat);
+			$response = 'Elenco delle quest nel raggio di *'.$rad.' km*:'.json_encode(intval($questLat[1])).json_encode($lat);
 		/*	$check = TRUE;
 			for ($i = 0; $i <= sizeof($quest)-1; $i++){
 				if (computeDistance($lat,$lng,intval($questLat[$i]),intval($questLng[$i])) <= $rad*1000) {
@@ -537,9 +537,9 @@ elseif($status == 0) {
 					$check = TRUE;
 				}
 			}
-		*/
-		//	if ($check == FALSE) { $response = 'Nessuna quest segnalata nel raggio di *'.$rad.' km*.'; }
 
+			if ($check == FALSE) { $response = 'Nessuna quest segnalata nel raggio di *'.$rad.' km*.'; }
+		*/
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
