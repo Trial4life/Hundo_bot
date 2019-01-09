@@ -528,18 +528,18 @@ elseif($status == 0) {
 			echo json_encode($parameters);
 		}
 		else {
-			$response = 'Elenco delle quest nel raggio di *'.$rad.' km*:'; //.json_encode(floatval($questLat[1])).json_encode($lat);
-	/*		$check = TRUE;
+			$response = 'Elenco delle quest nel raggio di *'.$rad.' km*:';
+			$check = TRUE;
 			for ($i = 0; $i <= sizeof($quest)-1; $i++){
-				if (computeDistance($lat,$lng,floatval($questLat[$i]),floatval($questLng[$i])) <= $rad*1000) {
+				//if (computeDistance($lat,$lng,floatval($questLat[$i]),floatval($questLng[$i])) <= $rad*1000) {
 					$link = 'https://maps.google.com/?q='.$questLat[$i].','.$questLng[$i];
 					$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
 					$check = TRUE;
-				}
+				//}
 			}
 
 			if ($check == FALSE) { $response = 'Nessuna quest segnalata nel raggio di *'.$rad.' km*.'; }
-*/
+
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
