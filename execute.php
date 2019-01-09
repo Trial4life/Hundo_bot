@@ -530,7 +530,7 @@ elseif($status == 0) {
 		else {
 			$response = 'Elenco delle quest nel raggio di *'.$rad.'*:';
 			for ($i = 0; $i <= sizeof($quest)-1; $i++){
-				if (computeDistance($lat,$lng,$questLat,$questLng) <= $rad*1000) {
+				if (1 <= $rad*1000) {
 					$link = 'https://maps.google.com/?q='.$questLat[$i].','.$questLng[$i];
 					$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
 				}
