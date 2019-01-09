@@ -530,12 +530,12 @@ elseif($status == 0) {
 		else {
 			$response = 'Elenco delle quest nel raggio di *'.$rad.' km*:';
 			$check = TRUE;
-			for ($i = 0; $i <= sizeof($quest)-1; $i++){
-				//if (computeDistance($lat,$lng,floatval($questLat[$i]),floatval($questLng[$i])) <= $rad*1000) {
+			for ($i = 0; $i <= 1; $i++){
+				if (computeDistance($lat,$lng,floatval($questLat[$i]),floatval($questLng[$i])) <= $rad*1000) {
 					$link = 'https://maps.google.com/?q='.$questLat[$i].','.$questLng[$i];
 					$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
 					$check = TRUE;
-				//}
+				}
 			}
 
 			if ($check == FALSE) { $response = 'Nessuna quest segnalata nel raggio di *'.$rad.' km*.'; }
