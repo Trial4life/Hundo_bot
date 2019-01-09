@@ -535,9 +535,9 @@ elseif($status == 0) {
 					$link = 'https://maps.google.com/?q='.$questLat[$i].','.$questLng[$i];
 					$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
 					$check = TRUE;
-		*/		}
+				}
 			}
-
+		*/
 			if ($check == FALSE) { $response = 'Nessuna quest segnalata nel raggio di *'.$rad.' km*:'; }
 
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
