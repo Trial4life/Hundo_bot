@@ -502,7 +502,7 @@ elseif($status == 0) {
 		}*/
 	}
 
-	/*///////////////
+	///////////////
 	/// LAT-LNG ///
 	///////////////
 	elseif ($lat and $lng and !$text and $chatId == $userId) {
@@ -532,7 +532,7 @@ elseif($status == 0) {
 			$check = FALSE;
 																										$data = [
 		  																									'chat_id' => $chatId,
-		  																									'text' => $EMO_ERR.' DEBUG START '.$EMO_ERR,
+		  																									'text' => $EMO_ERR.' DEBUG START, prima del ciclo for '.$EMO_ERR,
 																										];
 																										$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			for ($i = 0; $i <= sizeof($quest)-1; $i++){
@@ -550,7 +550,7 @@ elseif($status == 0) {
 			echo json_encode($parameters);
 		}
 	}
-*/
+
 	//////////////
 	/// RADIUS ///
 	//////////////
