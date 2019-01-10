@@ -579,7 +579,7 @@ elseif($status == 0) {
 											];
 											$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 
-		$subBA   = bcsub ($lngB, $lngA, 20);
+		$subBA   = $lngB - $lngA;
 
 											$data = [
 		  										'chat_id' => $chatId,
