@@ -561,13 +561,13 @@ elseif($status == 0) {
 		  																									'text' => $EMO_ERR.' DEBUG START, prima del ciclo for '.$EMO_ERR . "\nError: ".json_encode(error_get_last()),
 																										];
 																										$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-			for ($i = 0; $i <= sizeof($quest)-1; $i++){
-				if (computeDistance($lat,$lng,floatval($questLat[$i]),floatval($questLng[$i])) <= $rad*1000) {
+			//for ($i = 0; $i <= sizeof($quest)-1; $i++){
+				$response = (computeDistance($lat,$lng,floatval($questLat[$i]),floatval($questLng[$i]))) ;
 					$link = 'https://maps.google.com/?q='.$questLat[$i].','.$questLng[$i];
-					$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
+				//	$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
 					$check = TRUE;
-				}
-			}
+			//	}
+		//	}
 
 			if ($check == FALSE) { $response = 'Nessuna quest segnalata nel raggio di *'.$rad.' km*.'; }
 
