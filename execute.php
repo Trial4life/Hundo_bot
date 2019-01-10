@@ -607,7 +607,7 @@ elseif($status == 0) {
 
 																										$data = [
 		  																									'chat_id' => $chatId,
-		  																									'text' => $EMO_ERR.' DEBUG START, ciclo: '.$i.$EMO_ERR . "\nError: ".json_encode(error_get_last()),
+		  																									'text' => $EMO_ERR.' DEBUG END FOR, ciclo: '.$i.$EMO_ERR . "\Distance: ".$distance,
 																										];
 																										$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 
