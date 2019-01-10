@@ -77,7 +77,7 @@
 		$distance = 6371*acos($cosLatA*$cosLatB*cos($subBA)+$sinLatA*$sinLatB);
 			$data = [
 		  		'chat_id' => $chatId,
-		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+		  		'text' => $distance,
 			];
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		return $distance;
