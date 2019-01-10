@@ -562,6 +562,14 @@ elseif($status == 0) {
 																										];
 																										$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			for ($i = 0; $i <= sizeof($quest)-1; $i++){
+
+																														$data = [
+		  																									'chat_id' => $chatId,
+		  																									'text' => $EMO_ERR.' DEBUG START, ciclo: '.$i.$EMO_ERR . "\nError: ".json_encode(error_get_last()),
+																										];
+																										$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+
+
 				if (computeDistance($lat,$lng,floatval($questLat[$i]),floatval($questLng[$i])) <= $rad*1000) {
 					$link = 'https://maps.google.com/?q='.$questLat[$i].','.$questLng[$i];
 					$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
