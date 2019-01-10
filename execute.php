@@ -527,7 +527,7 @@ elseif($status == 0) {
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}*/
 	}
-
+/*
 	///////////////
 	/// LAT-LNG ///
 	///////////////
@@ -577,7 +577,7 @@ elseif($status == 0) {
 			echo json_encode($parameters);
 		}
 	}
-
+*/
 	//////////////
 	/// RADIUS ///
 	//////////////
