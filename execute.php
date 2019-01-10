@@ -583,7 +583,7 @@ elseif($status == 0) {
 
 				if ($distance <= $rad*1000) {
 					$link = 'https://maps.google.com/?q='.$questLat[$i].','.$questLng[$i];
-					$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
+					$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")".$distance;
 					$check = TRUE;
 				}
 			}
