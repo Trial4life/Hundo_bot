@@ -527,16 +527,15 @@ elseif($status == 0) {
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}*/
 	}
-/*
+
 	///////////////
 	/// LAT-LNG ///
 	///////////////
 	elseif ($lat and $lng and !$text and $chatId == $userId) {
-		$rad = 1;
 		$query = "SELECT * FROM `usersettings` WHERE `username` = '$username'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
-		//$row != NULL ? $rad = $row['radius'] : $rad = 1;
+		$row == NULL ? $rad = 1 : $rad = $row['radius'];
 
 		$query = "SELECT * FROM `quests` ORDER BY quest ASC";
 		$result = mysqli_query($conn,$query);
@@ -577,7 +576,7 @@ elseif($status == 0) {
 			echo json_encode($parameters);
 		}
 	}
-*/
+
 	//////////////
 	/// RADIUS ///
 	//////////////
