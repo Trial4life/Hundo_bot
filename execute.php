@@ -562,15 +562,57 @@ elseif($status == 0) {
 																										];
 																										$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			for ($i = 0; $i <= sizeof($quest)-1; $i++){
+															$data = [
+		  										'chat_id' => $chatId,
+		  										'text' => $EMO_ERR.' Entrata \'computeDistance\' '.$i.$EMO_ERR . "\nError: ". json_encode(error_get_last()),
+											];
+											$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 
-																														$data = [
+   	$latA = $lat*(M_PI/180);
+		$lngA = $lng*(M_PI/180);
+		$latB = $questLat[$i]*(M_PI/180);
+		$lngB = $questLng[$i]*(M_PI/180);
+
+											$data = [
+		  										'chat_id' => $chatId,
+		  										'text' => $EMO_ERR.' Prima di `bcsub` '.$EMO_ERR . "\nError: ". json_encode(error_get_last()),
+											];
+											$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+
+		$subBA   = bcsub ($lngB, $lngA, 20);
+
+											$data = [
+		  										'chat_id' => $chatId,
+		  										'text' => $EMO_ERR.' Dopo di `bcsub`, prima di `cos`/`sin` '.$EMO_ERR . "\nError: ". json_encode(error_get_last()),
+											];
+											$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		$cosLatA = cos($latA);
+		$cosLatB = cos($latB);
+		$sinLatA = sin($latA);
+		$sinLatB = sin($latB);
+
+											$data = [
+		  										'chat_id' => $chatId,
+		  										'text' => $EMO_ERR.' Dopo di `cos`/`sin`, prima di `distance` '.$EMO_ERR . "\nError: ". json_encode(error_get_last()),
+											];
+											$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+
+		$distance = 6371*acos($cosLatA*$cosLatB*cos($subBA)+$sinLatA*$sinLatB);
+
+											$data = [
+		  										'chat_id' => $chatId,
+		  										'text' => $EMO_ERR.' Uscita funzione '.$EMO_ERR . "\nError: ". json_encode(error_get_last()),
+											];
+											$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+
+																										$data = [
 		  																									'chat_id' => $chatId,
 		  																									'text' => $EMO_ERR.' DEBUG START, ciclo: '.$i.$EMO_ERR . "\nError: ".json_encode(error_get_last()),
 																										];
 																										$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 
 
-				if (computeDistance($lat,$lng,floatval($questLat[$i]),floatval($questLng[$i])) <= $rad*1000) {
+				if ($distance <= $rad*1000) {
 					$link = 'https://maps.google.com/?q='.$questLat[$i].','.$questLng[$i];
 					$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
 					$check = TRUE;
