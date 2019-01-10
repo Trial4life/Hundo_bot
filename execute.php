@@ -407,7 +407,7 @@ elseif($status == 0) {
 			if (!in_array($username, $bannedUsers)) {
 				$data = [
 		   	 	'chat_id' => $chatId,
-		   	 	'text' => "Il comando per segnalare le quest è stato abbreviato in; \n`\q <nome-quest>`.",
+		   	 	'text' => "Il comando per segnalare le quest è stato abbreviato in: \n`\q <nome-quest>`.",
 		   	 	'parse_mode' => 'markdown',
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
@@ -527,11 +527,12 @@ elseif($status == 0) {
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}*/
 	}
-/*
+
 	///////////////
 	/// LAT-LNG ///
 	///////////////
 	elseif ($lat and $lng and !$text and $chatId == $userId) {
+		$rad = 1;
 		$query = "SELECT * FROM `usersettings` WHERE `username` = '$username'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
@@ -576,7 +577,7 @@ elseif($status == 0) {
 			echo json_encode($parameters);
 		}
 	}
-*/
+
 	//////////////
 	/// RADIUS ///
 	//////////////
