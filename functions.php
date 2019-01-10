@@ -45,41 +45,48 @@
    }
 
    function computeDistance($latA,$lngA,$latB,$lngB) {
-			$data = [
-		  		'chat_id' => $chatId,
-		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando111. '.$EMO_ERR,
-			];
-			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+											$data = [
+		  										'chat_id' => $chatId,
+		  										'text' => $EMO_ERR.' DEBUG 1 '.$EMO_ERR,
+											];
+											$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+
    	$latA = $latA*(M_PI/180);
 		$lngA = $lngA*(M_PI/180);
 		$latB = $latB*(M_PI/180);
 		$lngB = $lngB*(M_PI/180);
-			$data = [
-		  		'chat_id' => $chatId,
-		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando222. '.$EMO_ERR,
-			];
-			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+
+											$data = [
+		  										'chat_id' => $chatId,
+		  										'text' => $EMO_ERR.' DEBUG 2 '.$EMO_ERR,
+											];
+											$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+
 		$subBA   = bcsub ($lngB, $lngA, 20);
-			$data = [
-		  		'chat_id' => $chatId,
-		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando333. '.$EMO_ERR,
-			];
-			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+
+											$data = [
+		  										'chat_id' => $chatId,
+		  										'text' => $EMO_ERR.' DEBUG 3 '.$EMO_ERR,
+											];
+											$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		$cosLatA = cos($latA);
 		$cosLatB = cos($latB);
 		$sinLatA = sin($latA);
 		$sinLatB = sin($latB);
-			$data = [
-		  		'chat_id' => $chatId,
-		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando444. '.$EMO_ERR,
-			];
-			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+
+											$data = [
+		  										'chat_id' => $chatId,
+		  										'text' => $EMO_ERR.' DEBUG 4 '.$EMO_ERR,
+											];
+											$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+
 		$distance = 6371*acos($cosLatA*$cosLatB*cos($subBA)+$sinLatA*$sinLatB);
-			$data = [
-		  		'chat_id' => $chatId,
-		  		'text' => $distance,
-			];
-			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+
+											$data = [
+		  										'chat_id' => $chatId,
+		  										'text' => $EMO_ERR.' DEBUG END '.$EMO_ERR,
+											];
+											$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		return $distance;
    }
 

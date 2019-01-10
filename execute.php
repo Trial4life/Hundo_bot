@@ -530,11 +530,11 @@ elseif($status == 0) {
 		else {
 			$response = 'Elenco delle quest nel raggio di *'.$rad.' km*:';
 			$check = FALSE;
-			$data = [
-		  		'chat_id' => $chatId,
-		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando000. '.$EMO_ERR,
-			];
-			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+																										$data = [
+		  																									'chat_id' => $chatId,
+		  																									'text' => $EMO_ERR.' DEBUG START '.$EMO_ERR,
+																										];
+																										$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			for ($i = 0; $i <= sizeof($quest)-1; $i++){
 				if (computeDistance($lat,$lng,floatval($questLat[$i]),floatval($questLng[$i])) <= $rad*1000) {
 					$link = 'https://maps.google.com/?q='.$questLat[$i].','.$questLng[$i];
