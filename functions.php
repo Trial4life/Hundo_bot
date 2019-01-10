@@ -45,31 +45,41 @@
    }
 
    function computeDistance($latA,$lngA,$latB,$lngB) {
-   	$response = $response.'2-';			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
-			$parameters["method"] = "sendMessage";
-			echo json_encode($parameters);
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
    	$latA = $latA*(M_PI/180);
 		$lngA = $lngA*(M_PI/180);
 		$latB = $latB*(M_PI/180);
 		$lngB = $lngB*(M_PI/180);
-		$response = $response.'3-';			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
-			$parameters["method"] = "sendMessage";
-			echo json_encode($parameters);
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		$subBA   = bcsub ($lngB, $lngA, 20);
-		$response = $response.'4-';			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
-			$parameters["method"] = "sendMessage";
-			echo json_encode($parameters);
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		$cosLatA = cos($latA);
 		$cosLatB = cos($latB);
 		$sinLatA = sin($latA);
 		$sinLatB = sin($latB);
-		$response = $response.'5-';			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
-			$parameters["method"] = "sendMessage";
-			echo json_encode($parameters);
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		$distance = 6371*acos($cosLatA*$cosLatB*cos($subBA)+$sinLatA*$sinLatB);
-		$response = $response.'6-';			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
-			$parameters["method"] = "sendMessage";
-			echo json_encode($parameters);
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		return $distance;
    }
 
