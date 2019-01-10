@@ -556,11 +556,11 @@ elseif($status == 0) {
 		else {
 			$response = 'Elenco delle quest nel raggio di *'.$rad.' km*:';
 			$check = FALSE;
-																										/*$data = [
+																										$data = [
 		  																									'chat_id' => $chatId,
 		  																									'text' => $EMO_ERR.' DEBUG START, prima del ciclo for '.$EMO_ERR . "\nError: ".json_encode(error_get_last()),
 																										];
-																										$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );*/
+																										$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			for ($i = 0; $i <= sizeof($quest)-1; $i++){
 				if (computeDistance($lat,$lng,floatval($questLat[$i]),floatval($questLng[$i])) <= $rad*1000) {
 					$link = 'https://maps.google.com/?q='.$questLat[$i].','.$questLng[$i];
