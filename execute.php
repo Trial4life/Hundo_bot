@@ -405,7 +405,34 @@ elseif($status == 0) {
 		}
 		else {
 			if (!in_array($username, $bannedUsers)) {
-				$quest = ucfirst(str_replace('/quest ', '', $text));
+				$data = [
+		   	 	'chat_id' => $chatId,
+		   	 	'text' => 'Il comando per segnalare le quest è stato abbreviato in `\q <nome-quest>`.';
+		   	 	'parse_mode' => 'markdown',
+				];
+				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+			}
+			else {
+				$data = [
+		   	 	'chat_id' => $chatId,
+		   	 	'text' => $EMO_ERR.' Non sei autorizzato alle segnalazioni. Contatta un admin. '.$EMO_ERR,
+				];
+				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+			}
+		}
+	}
+
+	if(strpos($text, "/q ") === 0 )	{
+		//if (in_array($chatId, $authorizedChats)) {
+		if ($chatType == 'group' or $chatType == 'supergroup') {
+			$response = $EMO_EXE." Per segnalare le quest, utilizza il comando /quest in chat privata con il bot.";
+			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown",);
+			$parameters["method"] = "sendMessage";
+			echo json_encode($parameters);
+		}
+		else {
+			if (!in_array($username, $bannedUsers)) {
+				$quest = ucfirst(str_replace('/q ', '', $text));
 				$data = [
 		   	 	'chat_id' => $chatId,
 		   	 	'text' => $EMO_PIN.' Mandami la posizione della quest *'.$quest.'* tramite @ingressportalbot.',
@@ -423,7 +450,6 @@ elseif($status == 0) {
 			}
 		}
 	}
-
 	/////////////////
 	/// NEW QUEST ///
 	/////////////////
@@ -501,7 +527,7 @@ elseif($status == 0) {
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}*/
 	}
-
+/*
 	///////////////
 	/// LAT-LNG ///
 	///////////////
@@ -550,7 +576,7 @@ elseif($status == 0) {
 			echo json_encode($parameters);
 		}
 	}
-
+*/
 	//////////////
 	/// RADIUS ///
 	//////////////
