@@ -51,10 +51,10 @@
 											];
 											$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 
-   	$latA = $latA*(M_PI/180);
-		$lngA = $lngA*(M_PI/180);
-		$latB = $latB*(M_PI/180);
-		$lngB = $lngB*(M_PI/180);
+   	$latA = $latA*(3.14/180);
+		$lngA = $lngA*(3.14/180);
+		$latB = $latB*(3.14/180);
+		$lngB = $lngB*(3.14/180);
 
 											$data = [
 		  										'chat_id' => $chatId,
