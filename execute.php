@@ -536,7 +536,7 @@ elseif($status == 0) {
 		$query = "SELECT * FROM `usersettings` WHERE `username` = '$username'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
-		$rad = $row['radius'];
+		//$row != NULL ? $rad = $row['radius'] : $rad = 1;
 
 		$query = "SELECT * FROM `quests` ORDER BY quest ASC";
 		$result = mysqli_query($conn,$query);
