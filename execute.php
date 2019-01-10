@@ -502,7 +502,7 @@ elseif($status == 0) {
 		}*/
 	}
 
-	///////////////
+	/*///////////////
 	/// LAT-LNG ///
 	///////////////
 	elseif ($lat and $lng and !$text and $chatId == $userId) {
@@ -550,7 +550,7 @@ elseif($status == 0) {
 			echo json_encode($parameters);
 		}
 	}
-
+*/
 	//////////////
 	/// RADIUS ///
 	//////////////
