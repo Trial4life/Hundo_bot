@@ -62,17 +62,17 @@
 											];
 											$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 
-		$subBA   = bcsub ($lngB, $lngA, 20);
+		$subBA   = $lngB * $lngA;
 
 											$data = [
 		  										'chat_id' => $chatId,
 		  										'text' => $EMO_ERR.' Dopo di `bcsub`, prima di `cos`/`sin` '.$EMO_ERR . "\nError: ". json_encode(error_get_last()),
 											];
 											$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-		$cosLatA = cos($latA);
-		$cosLatB = cos($latB);
-		$sinLatA = sin($latA);
-		$sinLatB = sin($latB);
+		$cosLatA = ($latA);
+		$cosLatB = ($latB);
+		$sinLatA = ($latA);
+		$sinLatB = ($latB);
 
 											$data = [
 		  										'chat_id' => $chatId,
@@ -80,7 +80,7 @@
 											];
 											$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 
-		$distance = 6371*acos($cosLatA*$cosLatB*cos($subBA)+$sinLatA*$sinLatB);
+		$distance = 6371*($cosLatA*$cosLatB*($subBA)+$sinLatA*$sinLatB);
 
 											$data = [
 		  										'chat_id' => $chatId,
