@@ -407,7 +407,7 @@ elseif($status == 0) {
 			if (!in_array($username, $bannedUsers)) {
 				$data = [
 		   	 	'chat_id' => $chatId,
-		   	 	'text' => 'Il comando per segnalare le quest è stato abbreviato in `\q <nome-quest>`.',
+		   	 	'text' => "Il comando per segnalare le quest è stato abbreviato in; \n`\q <nome-quest>`.",
 		   	 	'parse_mode' => 'markdown',
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
