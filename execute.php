@@ -558,32 +558,25 @@ elseif($status == 0) {
 			$check = FALSE;
 
 			for ($i = 0; $i <= sizeof($quest)-1; $i++){
+/*
+   			$latA = $lat*(M_PI/180);
+				$lngA = $lng*(M_PI/180);
+				$latB = $questLat[$i]*(M_PI/180);
+				$lngB = $questLng[$i]*(M_PI/180);
 
+				$subBA   = $lngB - $lngA;
 
-   	$latA = $lat*(M_PI/180);
-		$lngA = $lng*(M_PI/180);
-		$latB = $questLat[$i]*(M_PI/180);
-		$lngB = $questLng[$i]*(M_PI/180);
+				$cosLatA = cos($latA);
+				$cosLatB = cos($latB);
+				$sinLatA = sin($latA);
+				$sinLatB = sin($latB);
 
-
-
-		$subBA   = $lngB - $lngA;
-
-		$cosLatA = cos($latA);
-		$cosLatB = cos($latB);
-		$sinLatA = sin($latA);
-		$sinLatB = sin($latB);
-
-
-
-		$distance = 6371*acos($cosLatA*$cosLatB*cos($subBA)+$sinLatA*$sinLatB);
-
-
-
-
+				$distance = 6371*acos($cosLatA*$cosLatB*cos($subBA)+$sinLatA*$sinLatB);
+*/
+				$distance = computeDistance($lat,$lng,$questLat[$i],$questLng[$i]);
 				if ($distance <= $rad) {
 					$link = 'https://maps.google.com/?q='.$questLat[$i].','.$questLng[$i];
-					$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ") - Distanza = ".$distance;
+					$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
 					$check = TRUE;
 				}
 			}
