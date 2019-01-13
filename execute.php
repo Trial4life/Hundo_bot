@@ -185,7 +185,7 @@ elseif($status == 0 and strpos($text, "/100") === 0 ) {
 			$text = str_replace("'","\'",$text);
 			$data = [
    		 	'chat_id' => $chatId,
-   		 	'text' => $EMO_PIN.' Mandami la posizione di*'.$text.'*.',
+   		 	'text' => $EMO_PIN.' Mandami la posizione di *'.$text.'*.',
    	 		'parse_mode' => 'markdown',
    		];
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
