@@ -1054,7 +1054,7 @@ elseif($status == 2) {
 			$userAlerts = $row3['userAlerts'];
 			$userAlertsIDs = explode(',', $userAlerts);
 			foreach ($userAlertsIDs as $userAlertsID) {
-				if ($userAlertsID != $userId) {
+				if ($userAlertsID == $userId) {
 					$data = [
 			  			'chat_id' => $userAlertsID,
 			  			'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . str_replace("\'","'",$pkst) . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
