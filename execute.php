@@ -1029,7 +1029,7 @@ elseif($status == 2) {
 		$om_pkst = $row['pokestop'];
 		$om_lat = $row['lat'];
 		$om_lng = $row['lng'];
-		$link = urldecode('https://maps.google.com/?q='.$lat.','.$lng.'%28'.str_replace("\'","'",$pkst).'%29%20');		// BETA
+		$link = urldecode('https://maps.google.com/?q='.$lat.','.$lng.'%28'.$pkst.'%29%20');		// BETA
 		// $link = 'https://maps.google.com/?q='.$lat.','.$lng;
 		if ($om_pkst == str_replace("\'","'",$pkst) and $om_lat == $lat and $om_lng == $lng) {				// IN REALTÀ BISOGNEREBBE FAR EIL CONFRONTO CON TUTTI GLI OMONINI! CI VUOLE while
 			// AVVISO DI QUEST GIÀ SEGNALATA
