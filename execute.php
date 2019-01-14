@@ -338,7 +338,7 @@ elseif(strpos($text, "/quests ") === 0 ) {
 	else {
 		$response = 'Elenco delle quest nella cella ['.$zona.']('.$link.'):';
 		for ($i = 0; $i <= sizeof($quest)-1; $i++){
-			$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i];
+			$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i]."(".$pokestop[$i].")";
 			$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
 		}
 
@@ -374,7 +374,7 @@ elseif(strpos($text, "/quests") === 0 ) {
 	else {
 		$response = 'Elenco delle quest di oggi:';
 		for ($i = 0; $i <= sizeof($quest)-1; $i++){
-			$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i];
+			$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i]."(".$pokestop[$i].")";
 			$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
 		}
 
