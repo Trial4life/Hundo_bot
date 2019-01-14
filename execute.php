@@ -338,7 +338,8 @@ elseif(strpos($text, "/quests ") === 0 ) {
 	else {
 		$response = 'Elenco delle quest nella cella ['.$zona.']('.$link.'):';
 		for ($i = 0; $i <= sizeof($quest)-1; $i++){
-			$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i].'%28'.$pokestop[$i].'%29';
+			// $link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i].'%28'.$pokestop[$i].'%29';    // BETA
+			$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i];
 			$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
 		}
 
@@ -374,7 +375,8 @@ elseif(strpos($text, "/quests") === 0 ) {
 	else {
 		$response = 'Elenco delle quest di oggi:';
 		for ($i = 0; $i <= sizeof($quest)-1; $i++){
-			$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i].'%28'.$pokestop[$i].'%29';
+			// $link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i].'%28'.$pokestop[$i].'%29';			// BETA
+			$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i];
 			$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
 		}
 
@@ -1054,7 +1056,7 @@ elseif($status == 2) {
 				if ($userAlertsID != $userId) {
 					$data = [
 			  			'chat_id' => $userAlertsID,
-			  			'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
+			  			'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . str_replace("\'","'",$pkst) . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
 			  			//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
 			  			'parse_mode' => 'markdown',
 			  			'disable_web_page_preview' => TRUE,
@@ -1067,7 +1069,7 @@ elseif($status == 2) {
 			if ($flag == 1) {
 				$data = [
 			  		'chat_id' => $channel,
-			  		'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
+			  		'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . str_replace("\'","'",$pkst) . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
 			  		//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
 			  		'parse_mode' => 'markdown',
 			  		'disable_web_page_preview' => TRUE,
@@ -1101,7 +1103,7 @@ elseif($status == 2) {
 				$grp = intval($groupsIDs[$i]);
 				$data = [
 				  	'chat_id' => $grp,
-				  	'text' => $firstname . " ha segnalato una quest *" . $quest . "* presso [" . $pkst . "](" . $link . ").",
+				  	'text' => $firstname . " ha segnalato una quest *" . $quest . "* presso [" . str_replace("\'","'",$pkst) . "](" . $link . ").",
 				  	'parse_mode' => 'markdown',
 				  	'disable_web_page_preview' => TRUE,
 				];
