@@ -1029,7 +1029,7 @@ elseif($status == 2) {
 		$om_pkst = $row['pokestop'];
 		$om_lat = $row['lat'];
 		$om_lng = $row['lng'];
-		$link = urldecode('https://maps.google.com/?q='.$lat.','.$lng.'%28'.str_replace("\'","'",$pkst).'%29%20');		// BETA
+		$link = urldecode('https://maps.google.com/?q='.$lat.','.$lng.'('.str_replace("\'","'",$pkst).')');		// BETA
 		// $link = 'https://maps.google.com/?q='.$lat.','.$lng;
 		if ($om_pkst == str_replace("\'","'",$pkst) and $om_lat == $lat and $om_lng == $lng) {				// IN REALTÀ BISOGNEREBBE FAR EIL CONFRONTO CON TUTTI GLI OMONINI! CI VUOLE while
 			// AVVISO DI QUEST GIÀ SEGNALATA
@@ -1057,9 +1057,11 @@ elseif($status == 2) {
 				if ($userAlertsID == $userId) {
 					$data = [
 			  			'chat_id' => $userAlertsID,
-			  			'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . str_replace("\'","'",$pkst) . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
+			  			//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . str_replace("\'","'",$pkst) . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
+			  			'text' => "<code>Quest:   </code> *". $quest . "*<br><code>Pokéstop:</code> <a href =" . $link .">". str_replace("\'","'",$pkst) . "</a><br><code>Giorno:  </code> ".$today2."<br><code>Task:    <br> ". $task,
+
 			  			//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
-			  			'parse_mode' => 'markdown',
+			  			'parse_mode' => 'html',
 			  			'disable_web_page_preview' => TRUE,
 					];
 					$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
