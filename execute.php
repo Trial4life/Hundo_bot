@@ -1061,7 +1061,7 @@ elseif($status == 2) {
 			  			'text' => "<code>Quest:   </code> *". $quest . "*<br><code>Pokéstop:</code> <a href =" . $link .">". str_replace("\'","'",$pkst) . "</a><br><code>Giorno:  </code> ".$today2."<br><code>Task:    </code><br> ". $task,
 
 			  			//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
-			  			'parse_mode' => 'html',
+			  			'parse_mode' => 'HTML',
 			  			'disable_web_page_preview' => TRUE,
 					];
 					$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
