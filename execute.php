@@ -1059,7 +1059,7 @@ elseif($status == 2) {
 			  			'chat_id' => $userAlertsID,
 			  			 //'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . str_replace("\'","'",$pkst) . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
 			  			//'text' => "<code>Quest:</code>". $quest ."<br><code>Pokéstop:</code>".str_replace("\'","'",$pkst)."<br><code>Giorno:</code>".$today2."<br><code>Task:</code>".$task,
-			  			'text' => "<code>Quest:    </code><b>". $quest ."</b>\n<code>Pokéstop: </code><a href=".json_encode($link).">".str_replace("\'","'",$pkst)."</a>\n<code>Giorno:   </code>".$today2."\n<code>Task:     </code>".$task,
+			  			'text' => "<code>Quest:    </code><b>". $quest ."</b>\n<code>Pokéstop: </code><a href='".json_encode($link)."'>".str_replace("\'","'",$pkst)."</a>\n<code>Giorno:   </code>".$today2."\n<code>Task:     </code>".$task,
 
 			  			//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
 			  			'parse_mode' => 'HTML',
@@ -1115,7 +1115,7 @@ elseif($status == 2) {
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			}
 
-			$response = $EMO_v.' La quest è stata registrata.'.$link;
+			$response = $EMO_v.' La quest è stata registrata.';
 			$parameters = array('chat_id' => $userId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
