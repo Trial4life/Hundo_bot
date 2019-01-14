@@ -1029,7 +1029,7 @@ elseif($status == 2) {
 		$om_pkst = $row['pokestop'];
 		$om_lat = $row['lat'];
 		$om_lng = $row['lng'];
-		$link = 'https://maps.google.com/?q='.$lat.','.$lng."\(".str_replace("\'","'",$pkst)."\)";		// BETA
+		$link = 'https://maps.google.com/?q='.$lat.','.$lng."(".str_replace("\'","'",$pkst).")";		// BETA
 		// $link = 'https://maps.google.com/?q='.$lat.','.$lng;
 		if ($om_pkst == str_replace("\'","'",$pkst) and $om_lat == $lat and $om_lng == $lng) {				// IN REALTÀ BISOGNEREBBE FAR EIL CONFRONTO CON TUTTI GLI OMONINI! CI VUOLE while
 			// AVVISO DI QUEST GIÀ SEGNALATA
@@ -1057,7 +1057,7 @@ elseif($status == 2) {
 				if ($userAlertsID == $userId) {
 					$data = [
 			  			'chat_id' => $userAlertsID,
-			  			'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . str_replace("\'","'",$pkst) . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
+			  			'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . str_replace("\'","'",$pkst) . "](<" . $link . ">)\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
 			  			//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
 			  			'parse_mode' => 'markdown',
 			  			'disable_web_page_preview' => TRUE,
