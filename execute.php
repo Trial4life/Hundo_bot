@@ -1029,7 +1029,7 @@ elseif($status == 2) {
 		$om_pkst = $row['pokestop'];
 		$om_lat = $row['lat'];
 		$om_lng = $row['lng'];
-		$link = "https://maps.google.com/?q=".$lat.",".$lng."(".$pkst.")";		// BETA
+		$link = "https://maps.google.com/?q=".$lat.",".$lng."(".str_replace("\'","'",$pkst).")";		// BETA
 		// $link = 'https://maps.google.com/?q='.$lat.','.$lng;
 		if ($om_pkst == str_replace("\'","'",$pkst) and $om_lat == $lat and $om_lng == $lng) {				// IN REALTÀ BISOGNEREBBE FAR EIL CONFRONTO CON TUTTI GLI OMONINI! CI VUOLE while
 			// AVVISO DI QUEST GIÀ SEGNALATA
@@ -1059,7 +1059,7 @@ elseif($status == 2) {
 			  			'chat_id' => $userAlertsID,
 			  			 //'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . str_replace("\'","'",$pkst) . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
 			  			//'text' => "<code>Quest:</code>". $quest ."<br><code>Pokéstop:</code>".str_replace("\'","'",$pkst)."<br><code>Giorno:</code>".$today2."<br><code>Task:</code>".$task,
-			  			'text' => "<code>Quest:    </code><b>". $quest ."</b>\n<code>Pokéstop: </code><a href='".$link."'>".str_replace("\'","'",$pkst)."</a>\n<code>Giorno:   </code>".$today2."\n<code>Task:     </code>".$task,
+			  			'text' => "<code>Quest:    </code><b>". $quest ."</b>\n<code>Pokéstop: </code><a href=".json_encode($link).">".str_replace("\'","'",$pkst)."</a>\n<code>Giorno:   </code>".$today2."\n<code>Task:     </code>".$task,
 
 			  			//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
 			  			'parse_mode' => 'HTML',
@@ -1115,7 +1115,7 @@ elseif($status == 2) {
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			}
 
-			$response = $EMO_v.' La quest è stata registrata.';
+			$response = $EMO_v.' La quest è stata registrata.'.json_encode($link);
 			$parameters = array('chat_id' => $userId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
