@@ -1045,7 +1045,8 @@ elseif($status == 2) {
 			$task = $row2['task'];
 
 			// NOTIFICA UTENTI CON NOTIFICHE ATTIVE NELLA CHAT DEL BOT
-			$query = "SELECT * FROM `pokeid` WHERE `pokemon` = '$quest'";
+			// $query = "SELECT * FROM `pokeid` WHERE `pokemon` = '$quest'"; 		// Old query
+			$query = "SELECT * FROM `pokeid` WHERE '$quest' LIKE CONCAT('%',`pokemon`,'%')";
 			$result = mysqli_query($conn,$query);
 			$row3 = mysqli_fetch_assoc($result);
 			$userAlerts = $row3['userAlerts'];
