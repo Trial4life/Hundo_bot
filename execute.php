@@ -338,7 +338,7 @@ elseif(strpos($text, "/quests ") === 0 ) {
 	else {
 		$response = 'Elenco delle quest nella cella ['.$zona.']('.$link.'):';
 		for ($i = 0; $i <= sizeof($quest)-1; $i++){
-			$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i]."(".$pokestop[$i].")";
+			$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i].'%28'.$pokestop[$i].'%29';
 			$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
 		}
 
@@ -374,7 +374,7 @@ elseif(strpos($text, "/quests") === 0 ) {
 	else {
 		$response = 'Elenco delle quest di oggi:';
 		for ($i = 0; $i <= sizeof($quest)-1; $i++){
-			$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i]."(".$pokestop[$i].")";
+			$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i].'%28'.$pokestop[$i].'%29';
 			$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
 		}
 
@@ -1027,7 +1027,7 @@ elseif($status == 2) {
 		$om_pkst = $row['pokestop'];
 		$om_lat = $row['lat'];
 		$om_lng = $row['lng'];
-		$link = 'https://maps.google.com/?q='.$lat.','.$lng."(".$pkst.")";
+		$link = 'https://maps.google.com/?q='.$lat.','.$lng.'%28'.$pkst.'%29';
 		if ($om_pkst == str_replace("\'","'",$pkst) and $om_lat == $lat and $om_lng == $lng) {				// IN REALTÀ BISOGNEREBBE FAR EIL CONFRONTO CON TUTTI GLI OMONINI! CI VUOLE while
 			// AVVISO DI QUEST GIÀ SEGNALATA
 			$response = $EMO_v.' La quest di questo pokéstop è stata già segnalata per oggi.';
