@@ -625,6 +625,11 @@ elseif($status == 0) {
 		$query = "SELECT * FROM `nestEnd`";
 		$result = mysqli_query($conn,$query);
 		$endDate = $row['endDate'];
+		if ($today >= $endDate) {
+			mysqli_query($conn,"TRUNCATE `nests`");
+			$newEnd = date('Y-m-d', strtotime($endDate. ' + 14 days'));
+			mysqli_query($conn,"UPDATE `nestEnd` SET `endDate` = '$newEnd' WHERE `endDate` = '$endDate'");
+		}
 
 		$strArr = explode(", ",$str);
 		$pkmn = ucfirst($strArr[0]);
@@ -647,9 +652,9 @@ elseif($status == 0) {
 		echo json_encode($parameters);
 	}
 
-	//////////////////
-	//// DELNIEST ////
-	//////////////////
+	/////////////////
+	//// DELNEST ////
+	/////////////////
 	elseif(strpos($text, "/delnest") === 0 ) {
 		$nest = ucfirst(str_replace('/delnest ', '', $text));
 		$query = "SELECT * FROM `nests` WHERE `nido` = '$nest'";
