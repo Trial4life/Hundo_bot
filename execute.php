@@ -374,13 +374,19 @@ elseif(strpos($text, "/quests") === 0 ) {
 	}
 	else {
 		$response = 'Elenco delle quest di oggi:';
+		/* MARKDOWN
 		for ($i = 0; $i <= sizeof($quest)-1; $i++){
 			$link = urldecode('https://maps.google.com/?q='.$lat[$i].','.$lng[$i].'%28'.$pokestop[$i].'%29');			// BETA
 			// $link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i];
 			$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
 		}
-
-		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		*/
+		for ($i = 0; $i <= sizeof($quest)-1; $i++){
+			$link = "https://maps.google.com/?q=".$lat[$i].",".$lng[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$pokestop[$i]))).")";
+			// $link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i];
+			$response = $response . "\n<b>" . ucfirst($quest[$i]) . '</b> − <a href = "' .$link.'"</a>'.$pokestop[$i];
+		}
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "HTML", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
 	}
@@ -1108,7 +1114,7 @@ elseif($status == 2) {
 				$data = [
 				  	'chat_id' => $grp,
 				  	//'text' => $firstname . " ha segnalato una quest *" . $quest . "* presso [" . str_replace("\'","'",$pkst) . "](" . $link . ").",
-				  	'text' => $firstname . " ha segnalato una quest <b>" . $quest . "</b> presso ".'<a href = "'. $link .'">' . str_replace("\'","'",$pkst) . ".",
+				  	'text' => $firstname . " ha segnalato una quest <b>" . $quest . "</b> presso ".'<a href = "'. $link .'">' . str_replace("\'","'",$pkst)."</a>.",
 				  	'parse_mode' => 'HTML',
 				  	'disable_web_page_preview' => TRUE,
 				];
