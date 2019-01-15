@@ -627,7 +627,7 @@ elseif($status == 0) {
 	////// NIDI //////
 	//////////////////
 	elseif(strpos($text, "/nidi") === 0 ) {
-				$query = "SELECT * FROM `nests` ORDER BY name ASC";
+		$query = "SELECT * FROM `nests` ORDER BY `pokemon` ASC";
 		$result = mysqli_query($conn,$query);
 		$nest = $pkmn = array();
 		while ($row = mysqli_fetch_assoc($result)) {
@@ -639,7 +639,7 @@ elseif($status == 0) {
 		$dateEnd = '17 gennaio';
 		$response = $EMO_TREE .' Nidi dal *'.$dateStart.'* al *'.$dateEnd.':';
 		for ($i = 0; $i <= sizeof($nest)-1; $i++){
-			$response = $response."\n".$nest[$i]." − *".$pkmn[$i]."*";
+			$response = $response."\n*".$pkmn[$i]."* - ".$nest[$i];
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
