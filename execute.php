@@ -615,6 +615,57 @@ elseif($status == 0) {
 		echo json_encode($parameters);
 	}
 
+	//////////////////
+	////// NIDO //////
+	//////////////////
+	elseif(strpos($text, "/nido") === 0 ) {
+
+	}
+
+	//////////////////
+	////// NIDI //////
+	//////////////////
+	elseif(strpos($text, "/nidi") === 0 ) {
+				$query = "SELECT * FROM `nests` ORDER BY name ASC";
+		$result = mysqli_query($conn,$query);
+		$nest = $pkmn = array();
+		while ($row = mysqli_fetch_assoc($result)) {
+			array_push($nest, $row['nido']);
+			array_push($pkmn, $row['pokemon']);
+		}
+
+		$dateStart = '10 gennaio';
+		$dateEnd = '17 gennaio';
+		$response = $EMO_GLO .' Nidi dal *'.$dateStart.'* al *'.$dateEnd.':';
+		for ($i = 0; $i <= sizeof($nest)-1; $i++){
+			$response = $response."\n".$nest[$i]." − *".$pkmn[$i]."*";
+		}
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
+
+	/////////////////
+	/// RESETNIDI ///
+	/////////////////
+	elseif(strpos($text, "/resetnidi") === 0 ) {
+		if (in_array($username, $admins)) {
+			mysqli_query($conn,"TRUNCATE `nests`");
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_x.' Nidi resettati.',
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		}
+		else {
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		}
+	}
+
 	/////////////////
 	/// ADD ALERT ///
 	/////////////////
@@ -727,7 +778,7 @@ elseif($status == 0) {
 		else {
 			$data = [
 		  		'chat_id' => $chatId,
-		  		'text' => $EMO_ERR.'Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
 			];
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}
@@ -757,7 +808,7 @@ elseif($status == 0) {
 		else {
 			$data = [
 		  		'chat_id' => $chatId,
-		  		'text' => $EMO_ERR.'Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
 			];
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}
@@ -869,7 +920,7 @@ elseif($status == 0) {
 		else {
 			$data = [
 		  		'chat_id' => $chatId,
-		  		'text' => $EMO_ERR.'Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
 			];
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}
@@ -903,7 +954,7 @@ elseif($status == 0) {
 		else {
 			$data = [
 		  		'chat_id' => $chatId,
-		  		'text' => $EMO_ERR.'Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
 			];
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}
