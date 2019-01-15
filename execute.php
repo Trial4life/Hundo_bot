@@ -641,6 +641,9 @@ elseif($status == 0) {
 		$row = mysqli_fetch_assoc($result);
 		$currNest = $row['nido'];
 
+		setlocale(LC_TIME, 'ita');
+		$endDate str_replace('0','', strftime("%d %B", strtotime(str_replace('-','/', '2019-01-01'))));
+
 		if ($currNest == $nest) {
 			$response = 'Il nido a *'.$nest.'* è stato già segnalato fino al *'.$endDate.'*.';
 		}
@@ -697,6 +700,9 @@ elseif($status == 0) {
 			array_push($nest, $row['nido']);
 			array_push($pkmn, $row['pokemon']);
 		}
+
+		setlocale(LC_TIME, 'ita');
+		$endDate str_replace('0','', strftime("%d %B", strtotime(str_replace('-','/', '2019-01-01'))));
 
 		$response = $EMO_TREE .' Nidi fino al *'.$endDate.'*:';
 		for ($i = 0; $i <= sizeof($nest)-1; $i++){
