@@ -576,16 +576,23 @@ elseif($status == 0) {
 
 			for ($i = 0; $i <= sizeof($quest)-1; $i++){
 				$distance = computeDistance($lat,$lng,$questLat[$i],$questLng[$i]);
+				/* MARKDOWN
 				if ($distance <= $rad) {
 					$link = 'https://maps.google.com/?q='.$questLat[$i].','.$questLng[$i];
 					$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
 					$check = TRUE;
 				}
+				*/
+				if ($distance <= $rad) {
+					$link = 'https://maps.google.com/?q='.$questLat[$i].','.$questLng[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$pokestop[$i]))).")";
+					$response = $response . "\n<b>" . ucfirst($quest[$i]) . '</b> − <a href = "' .$link.'">'.str_replace("\'","'",$pokestop[$i]).'</a>';
+					$check = TRUE;
+				}
 			}
 
-			if ($check == FALSE) { $response = 'Nessuna quest segnalata nel raggio di *'.$rad.' km*.'; }
+			if ($check == FALSE) { $response = 'Nessuna quest segnalata nel raggio di <b>'.$rad.' km</b>.'; }
 
-			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "HTML", "disable_web_page_preview" => TRUE);
 			$parameters["method"] = "sendMessage";
 			echo json_encode($parameters);
 		}
