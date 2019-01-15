@@ -629,11 +629,12 @@ elseif($status == 0) {
 		$row = mysqli_fetch_assoc($result);
 		$currNest = $row['nido'];
 		$nextDate = 'TMP_Date';
+
 		if ($currNest == $nest) {
 			$response = 'Il nido a *'.$nest.'* è stato già segnalato fino al *'.$nextDate.'*.';
 		}
 		else {
-			$response = $EMO_v.' Nido a *'.$nest.'* segnalato fino al *'.$nextDate.'*.';
+			$response = $EMO_v.' Nido a *'.$nest.'* segnalato fino al *'.$nextDate.'*.'.$currNest.$nest;
 			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn')");
 		}
 
