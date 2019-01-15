@@ -658,7 +658,7 @@ elseif($status == 0) {
 
 		$dateStart = '10 gennaio';
 		$dateEnd = '17 gennaio';
-		$response = $EMO_TREE .' Nidi dal *'.$dateStart.'* al *'.$dateEnd.'*:';
+		$response = ' Nidi dal *'.$dateStart.'* al *'.$dateEnd.'*:';
 		for ($i = 0; $i <= sizeof($nest)-1; $i++){
 			$response = $response."\n*".$pkmn[$i]."* - ".$nest[$i];
 		}
