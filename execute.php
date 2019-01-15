@@ -641,8 +641,8 @@ elseif($status == 0) {
 		$row = mysqli_fetch_assoc($result);
 		$currNest = $row['nido'];
 
-		setlocale(LC_ALL, "ita");
-		$endDate = str_replace('0','', strftime("%d %B", strtotime(str_replace('-','/', $endDate))));
+		// setlocale(LC_ALL, "ita");
+		$endDate = str_replace('0','', strftime("%d/%b", strtotime(str_replace('-','/', $endDate))));
 
 		if ($currNest == $nest) {
 			$response = 'Il nido a *'.$nest.'* è stato già segnalato fino al *'.$endDate.'*.';
@@ -701,8 +701,8 @@ elseif($status == 0) {
 			array_push($pkmn, $row['pokemon']);
 		}
 
-		setlocale(LC_ALL, "ita");
-		$endDate = str_replace('0','', strftime("%d %B", strtotime(str_replace('-','/', $endDate))));
+		// setlocale(LC_ALL, "ita");
+		$endDate = str_replace('0','', strftime("%d/%b", strtotime(str_replace('-','/', $endDate))));
 
 		if (!$nest) {
 			$response = 'Nessun nido segnalato fino al *'.$endDate.'*.';
