@@ -641,7 +641,7 @@ elseif($status == 0) {
 		$row = mysqli_fetch_assoc($result);
 		$currNest = $row['nido'];
 
-		setlocale(LC_ALL, "it", "it_IT");
+		setlocale(LC_ALL, "ita");
 		$endDate = str_replace('0','', strftime("%d %B", strtotime(str_replace('-','/', $endDate))));
 
 		if ($currNest == $nest) {
@@ -701,7 +701,7 @@ elseif($status == 0) {
 			array_push($pkmn, $row['pokemon']);
 		}
 
-		setlocale(LC_ALL, "it", "it_IT");
+		setlocale(LC_ALL, "ita");
 		$endDate = str_replace('0','', strftime("%d %B", strtotime(str_replace('-','/', $endDate))));
 
 		if (!$nest) {
