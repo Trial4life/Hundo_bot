@@ -624,7 +624,7 @@ elseif($status == 0) {
 		$strArr = explode(", ",$str);
 		$pkmn = ucfirst($strArr[0]);
 		$nest = ucwords($strArr[1]);
-		$query = "SELECT * FROM `nest` WHERE `nido` = '$nest'";
+		$query = "SELECT * FROM `nests` WHERE `nido` = '$nest'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
 		$currNest = $row['nido'];
@@ -634,7 +634,7 @@ elseif($status == 0) {
 			$response = 'Il nido a *'.$nest.'* è stato già segnalato fino al *'.$nextDate.'*.';
 		}
 		else {
-			$response = $EMO_v.' Nido a *'.$nest.'* segnalato fino al *'.$nextDate.'*.'.$currNest.$nest;
+			$response = $EMO_v.' Nido a *'.$nest.'* segnalato fino al *'.$nextDate.'*.';
 			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn')");
 		}
 
