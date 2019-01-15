@@ -641,7 +641,7 @@ elseif($status == 0) {
 		$row = mysqli_fetch_assoc($result);
 		$currNest = $row['nido'];
 
-		setlocale(LC_TIME, 'ita');
+		setlocale(LC_TIME, 'it_IT');
 		$endDate = str_replace('0','', strftime("%d %B", strtotime(str_replace('-','/', '2019-01-01'))));
 
 		if ($currNest == $nest) {
@@ -701,7 +701,7 @@ elseif($status == 0) {
 			array_push($pkmn, $row['pokemon']);
 		}
 
-		setlocale(LC_TIME, 'ita');
+		setlocale(LC_TIME, 'it_IT');
 		$endDate = str_replace('0','', strftime("%d %B", strtotime(str_replace('-','/', '2019-01-01'))));
 
 		$response = $EMO_TREE .' Nidi fino al *'.$endDate.'*:';
