@@ -649,10 +649,10 @@ elseif($status == 0) {
 		$endDate = str_replace(" ","",date("j/m", strtotime(str_replace('-','/', $endDate))));
 
 		if ($currNest == $nest) {
-			$response = 'Il nido a *'.$nest.'* è stato già segnalato fino al *'.$endDate.'*.';
+			$response = 'Il nido a *'.$nest.'* è stato già registrato fino al *'.$endDate.'*.';
 		}
 		else {
-			$response = $EMO_v.' Nido a *'.$nest.'* segnalato fino al *'.$endDate.'*.';
+			$response = $EMO_v.' Nido *'.$nest.'* registrato fino al *'.$endDate.'*.';
 			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn')");
 		}
 

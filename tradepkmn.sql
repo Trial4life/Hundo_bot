@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Dic 17, 2018 alle 10:53
+-- Creato il: Gen 15, 2019 alle 12:42
 -- Versione del server: 8.0.13
 -- Versione PHP: 7.2.10-0ubuntu0.18.04.1
 
@@ -21,6 +21,49 @@ SET time_zone = "+00:00";
 --
 -- Database: `tradepkmn`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `admins`
+--
+
+CREATE TABLE `admins` (
+  `username` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dump dei dati per la tabella `admins`
+--
+
+INSERT INTO `admins` (`username`) VALUES
+('Trial4life'),
+('medix93'),
+('DadyGC'),
+('Barrazar'),
+('Illidanrex'),
+('MenoMenotti'),
+('ProtusPrime'),
+('HarlockHrk');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `auth_groups`
+--
+
+CREATE TABLE `auth_groups` (
+  `groupName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `groupID` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dump dei dati per la tabella `auth_groups`
+--
+
+INSERT INTO `auth_groups` (`groupName`, `groupID`) VALUES
+('PoGoRaidRomaNordEst', '-1001119443518'),
+('LegitGo Salario-Pinciano-Parioli', '-1001369640732');
 
 -- --------------------------------------------------------
 
@@ -603,6 +646,45 @@ INSERT INTO `IVtable` (`pokemon`, `pl`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `nestEnd`
+--
+
+CREATE TABLE `nestEnd` (
+  `endDate` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dump dei dati per la tabella `nestEnd`
+--
+
+INSERT INTO `nestEnd` (`endDate`) VALUES
+('2019-01-24');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `nests`
+--
+
+CREATE TABLE `nests` (
+  `nido` varchar(50) NOT NULL,
+  `pokemon` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dump dei dati per la tabella `nests`
+--
+
+INSERT INTO `nests` (`nido`, `pokemon`) VALUES
+('Piazza Bologna', 'Skarmory'),
+('Villa Borghese', 'Charmander'),
+('Pincio', 'Electabuzz'),
+('Villa Leopardi', 'Poliwag'),
+('Villa Glori', 'Magnemite');
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `pokeid`
 --
 
@@ -697,7 +779,7 @@ INSERT INTO `pokeid` (`id`, `pokemon`, `userAlerts`) VALUES
 ('078', 'Rapidash', ''),
 ('079', 'Slowpoke', ''),
 ('080', 'Slowbro', ''),
-('081', 'Magnemite', ''),
+('081', 'Magnemite', '158754689,'),
 ('082', 'Magneton', ''),
 ('083', 'Farfetch\'d', ''),
 ('084', 'Doduo', ''),
@@ -741,7 +823,7 @@ INSERT INTO `pokeid` (`id`, `pokemon`, `userAlerts`) VALUES
 ('122', 'Mr. Mime', ''),
 ('123', 'Scyther', ''),
 ('124', 'Jynx', ''),
-('125', 'Electabuzz', '158754689,'),
+('125', 'Electabuzz', ''),
 ('126', 'Magmar', ''),
 ('127', 'Pinsir', ''),
 ('128', 'Tauros', ''),
@@ -754,11 +836,11 @@ INSERT INTO `pokeid` (`id`, `pokemon`, `userAlerts`) VALUES
 ('135', 'Jolteon', ''),
 ('136', 'Flareon', ''),
 ('137', 'Porygon', ''),
-('138', 'Omanyte', ''),
+('138', 'Omanyte', '350968891,'),
 ('139', 'Omastar', ''),
 ('140', 'Kabuto', ''),
 ('141', 'Kabutops', ''),
-('142', 'Aerodactyl', ''),
+('142', 'Aerodactyl', '350968891,'),
 ('143', 'Snorlax', ''),
 ('144', 'Articuno', ''),
 ('145', 'Zapdos', ''),
@@ -943,7 +1025,7 @@ INSERT INTO `pokeid` (`id`, `pokemon`, `userAlerts`) VALUES
 ('324', 'Torkoal', ''),
 ('325', 'Spoink', ''),
 ('326', 'Grumpig', ''),
-('327', 'Spinda', ''),
+('327', 'Spinda', '158754689,350968891,'),
 ('328', 'Trapinch', ''),
 ('329', 'Vibrava', ''),
 ('330', 'Flygon', ''),
@@ -963,7 +1045,7 @@ INSERT INTO `pokeid` (`id`, `pokemon`, `userAlerts`) VALUES
 ('344', 'Claydol', ''),
 ('345', 'Lileep', ''),
 ('346', 'Cradily', ''),
-('347', 'Anorith', ''),
+('347', 'Anorith', '350968891,'),
 ('348', 'Armaldo', ''),
 ('349', 'Feebas', '355300180,'),
 ('350', 'Milotic', ''),
@@ -1427,7 +1509,7 @@ INSERT INTO `pokeid` (`id`, `pokemon`, `userAlerts`) VALUES
 --
 
 CREATE TABLE `quests` (
-  `quest` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `quest` varchar(75) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `pokestop` varchar(50) NOT NULL,
   `lat` varchar(15) NOT NULL,
   `lng` varchar(15) NOT NULL,
@@ -1440,7 +1522,8 @@ CREATE TABLE `quests` (
 --
 
 INSERT INTO `quests` (`quest`, `pokestop`, `lat`, `lng`, `zona`, `giorno`) VALUES
-('Bulbasaur', 'Lupo Meda', '41.913965', '12.546062', 'Est, ', '2018-12-17');
+('Gastly', 'Madonnina Nomentana', '41.924996', '12.522134', 'Centro, Libia, ', '2019-01-15'),
+('Gastly', 'Campetto Polivalente di Villa Blanc', '41.922287', '12.522917', 'Centro, Bologna, Lanciani, ', '2019-01-15');
 
 -- --------------------------------------------------------
 
@@ -1454,6 +1537,14 @@ CREATE TABLE `sessions` (
   `status` int(1) NOT NULL,
   `alert` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dump dei dati per la tabella `sessions`
+--
+
+INSERT INTO `sessions` (`userID`, `username`, `status`, `alert`) VALUES
+(2969750, 'pomettini', 1, '/100'),
+(710202051, 'danimo2992_31', 2, 'Tentacruel');
 
 -- --------------------------------------------------------
 
@@ -1472,32 +1563,63 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`reward`, `task`, `flag`) VALUES
+('Aerodactyl', 'Vinci 5 raid/Utilizza un ogetto per evolvere un Pokemon', 0),
+('Anorith', 'Effettua 3 ottimi tiri/Cattura 7 Pokemon di tipo Volante, Psico o Buio', 0),
+('Bidoof', 'Effettua 5 bei tiri', 0),
 ('Bulbasaur', 'Potenzia i Pokemon 5 volte/Vinci una sfida in palestra', 0),
 ('Chansey', 'Fai schiudere 5 uova', 1),
 ('Charmander', 'Potenzia i Pokemon 5 volte/Vinci una sfida in palestra', 0),
+('Cubone', 'Usa 5 baccalampon per catturare un Pokemon', 0),
 ('Dratini', 'Cattura un Pokemon di tipo Drago', 1),
+('Drowzee', 'Partecipa ad un raid', 0),
 ('Eevee', 'Evolvi un Pokemon', 0),
 ('Electabuzz', 'Utilizza una mossa caricata superefficace in 7 lotte', 0),
 ('Exeggcute', 'Fai schiudere un uovo', 0),
-('Feebas', 'Effettua uno scambio Pokemon', 0),
-('Gastly', 'Effettua 3 ottimi tiri', 0),
-('Golduck', 'Lancia 3 palle curve di fila', 0),
+('Gastly', 'Effettua 3 ottimi tiri/Invia 2 pacchi amicizia', 0),
+('Growlithe', 'Usa 5 bacche per catturare un Pokemon', 0),
+('Houndour', 'Cattura 10 Pokemon', 0),
 ('Jynx', 'Vinci 3 sfide in palestra', 0),
-('Lanturn', 'Fai schiudere un uovo', 0),
+('Kabuto', 'Cattura 10 Pokemon di tipo Ghiaccio', 0),
+('Lapras', 'Vinci 5 sfide in palestra', 1),
 ('Larvitar', 'Effettua 3 tiri eccellenti di fila', 1),
-('Machop', 'Lotta in una palestra 3 volte', 0),
-('Magikarp', 'Cattura 10 Pokemon', 0),
+('Lileep', 'Effettua 3 ottimi tiri', 0),
+('Machop', 'Lotta in una palestra 5 volte', 0),
+('Magikarp', 'Cattura 10 Pokemon/Usa 10 baccananas per catturare un Pok?mon', 0),
 ('Magmar', 'Fai schiudere 3 uova', 0),
+('Magnemite', 'Cattura 5 Pokemon di tipo Lotta', 0),
+('Manectric', 'Effettua uno scambio Pokemon', 0),
 ('Mankey', 'Lotta in una palestra', 0),
-('Misdreavus', 'Trasferisci 10 Pokemon', 0),
-('Numel', 'Cattura 3 Pokemon di tipo erba, acqua o fuoco', 0),
+('Omanyte', 'Vinci un raid di livello 3 o superiore', 0),
 ('Onix', 'Effettua 3 tiri ottimi di fila', 0),
 ('Poliwag', 'Cattura 5 Pokemon potenziati dalle condizioni atmosferiche', 0),
-('Porygon', 'Vinci un raid', 0),
-('Spinda', 'Lancia una palla curva con risultato ottimo', 0),
+('Sandshrew', 'Cattura 10 Pokemon di tipo Terra', 0),
+('Snubbull', 'Fai schiudere un uovo', 0),
+('Spinda', 'Lancia 5 palle curve di fila con risultato ottimo', 1),
 ('Squirtle', 'Potenzia i Pokemon 5 volte/Vinci una sfida in palestra', 0),
+('Starmie', 'Cattura 5 Pokemon di tipo Normale, Elettro o Veleno', 0),
+('Sunkern', 'Evolvi un Pokemon', 0),
+('Tentacruel', 'Guadagna 5 caramelle camminando con il compagno', 0),
 ('Voltorb', 'Effettua 5 bei tiri', 0),
 ('Vulpix', 'Cattura 5 Pokemon potenziati dalle condizioni atmosferiche', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `usersettings`
+--
+
+CREATE TABLE `usersettings` (
+  `username` varchar(50) NOT NULL,
+  `radius` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dump dei dati per la tabella `usersettings`
+--
+
+INSERT INTO `usersettings` (`username`, `radius`) VALUES
+('Trial4life', 1),
+('Illidanrex', 5);
 
 -- --------------------------------------------------------
 
@@ -1521,12 +1643,17 @@ INSERT INTO `zones` (`cellId`, `cellId64`, `name`, `groups`) VALUES
 ('132f67', '132f670000000000', 'Nord', ''),
 ('132f65', '132f650000000000', 'Nord-Est', ''),
 ('132f5f', '132f5f0000000000', 'Ovest', ''),
-('132f61', '132f610000000000', 'Centro', '-1001205498567,'),
+('132f61', '132f610000000000', 'Centro', ''),
 ('132f63', '132f630000000000', 'Est', ''),
 ('1325f5', '1325f50000000000', 'Sud-Ovest', ''),
 ('13258b', '13258b0000000000', 'Sud', ''),
 ('132589', '1325890000000000', 'Sud-Est', ''),
-('132f615', '132f615000000000', 'Libia', '-1001205498567,');
+('132f615', '132f615000000000', 'Libia', '-1001119443518,'),
+('132f60fc', '132f60fc00000000', 'Pincio', '-1001369640732,'),
+('132f611', '132f611000000000', 'Salario', '-1001369640732,'),
+('132f6164', '132f616400000000', 'Lanciani', '-1001119443518,'),
+('132f616c', '132f616c00000000', 'Trieste', '-1001119443518,'),
+('132f617', '132f617000000000', 'Bologna', NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
