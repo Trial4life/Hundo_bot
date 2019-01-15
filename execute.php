@@ -571,7 +571,7 @@ elseif($status == 0) {
 			echo json_encode($parameters);
 		}
 		else {
-			$response = 'Elenco delle quest nel raggio di *'.$rad.' km*:';
+			$response = 'Elenco delle quest nel raggio di <b>'.$rad.' km</b>:';
 			$check = FALSE;
 
 			for ($i = 0; $i <= sizeof($quest)-1; $i++){
