@@ -721,7 +721,7 @@ elseif($status == 0) {
 	/////////////////
 	/// RESETNEST ///
 	/////////////////
-	elseif(strpos($text, "/resetnest") === 0 ) {
+	elseif(strpos($text, "/resetnests") === 0 ) {
 		if (in_array($username, $admins)) {
 			mysqli_query($conn,"TRUNCATE `nests`");
 			$data = [
