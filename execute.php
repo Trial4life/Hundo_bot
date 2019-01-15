@@ -100,7 +100,9 @@ if(strpos($text, "/exeggutorhelp") === 0 ) {
 	   	$EMO_TRI . " *Per attivare/disattivare le notifiche per una quest* utilizzare i comandi `/addalert <inserire-la-ricompensa>` e `/delalert <inserire-la-ricompensa>` \n\n_Esempio_:\n`/addalert Larvitar`\n`/delalert Dratini`\n\n" .
 	   	$EMO_TRI ." *Per mostrare le notifiche attive*, utilizzare il comando `/alerts`.\n\n".
 	   	$EMO_TRI ." *Per mostrare le quest segnalate entro il raggio impostato*, inviare la posizione in privato al bot.\n\n".
-	   	$EMO_TRI ." *Per impostare il raggio entro il quale mostrare le quest segnalate*, usare il comando `/radius <chilometri>`. \n\n_Esempio_:\n`/radius 0.5`",
+	   	$EMO_TRI ." *Per impostare il raggio entro il quale mostrare le quest segnalate*, usare il comando `/radius <chilometri>`. \n\n_Esempio_:\n`/radius 0.5`\n\n".
+	   	$EMO_TRI ." *Per segnalare un nuovo nido*, usare il comando `/nest <pokemon>, <nido>`. \n\n_Esempio_:\n`/nest Squirtle, Villa Borghese`\n\n".
+	   	$EMO_TRI ." *Per elencare i nidi correnti*, usare il comando `/nidi`",
 	   'parse_mode' => 'markdown',
 	];
 	$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
@@ -120,7 +122,9 @@ if(strpos($text, "/adminhelp") === 0 ) {
 		   	$EMO_TRI . " *Per registrare un gruppo ad una cella S2*, utilizzare il comando `/register <nome-cella>` all'interno della chat del gruppo.\n\n_Esempio:_\n`/register Roma-Centro`.\n\n" .
 		   	$EMO_TRI . " *Per rimuovere un gruppo da una cella S2*, utilizzare il comando `/unregister <nome-cella>` all'interno della chat del gruppo.\n\n_Esempio:_\n`/unregister Roma-Centro`.\n\n" .
 		   	$EMO_TRI . " *Per elencare le celle S2 associate ad un gruppo*, utilizzare il comando `/groupcells` all'interno della chat del gruppo.\n\n" .
-		   	$EMO_TRI . " *Per elencare gli admin del bot*, utilizzare il comando `/admins`.",
+		   	$EMO_TRI . " *Per elencare gli admin del bot*, utilizzare il comando `/admins`.\n\n".
+		   	$EMO_TRI . " *Per rimuovere un singolo nido*, utilizzare il comando `/delnest <nido>`.\n\n".
+		   	$EMO_TRI . " *Per resettare i nidi correnti*, utilizzare il comando `/resetnests`.",
 		   	//$EMO_TRI . " *Per aggiungere un admin al bot*, utilizzare il comando `/addadmin <username>`.\n\n_Esempio:_\n`/addadmin Exeggutor`.\n\n" .
 		   	//$EMO_TRI . " *Per rimuovere un admin dal bot*, utilizzare il comando `/deladmin <username>`.\n\n_Esempio:_\n`/deladmin Exeggutor`.\n\n" .
 		   	//$EMO_TRI . " *Per aggiungere un gruppo al bot*, utilizzare il comando `/addgroup <ID-gruppo>, <nome-gruppo>`.\n\n_Esempio:_\n`/addgroup -123456, Exeggutor-group`.\n\n" .
