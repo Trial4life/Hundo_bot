@@ -1072,9 +1072,10 @@ elseif($status == 2) {
 			if ($flag == 1) {
 				$data = [
 			  		'chat_id' => $channel,
-			  		'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . str_replace("\'","'",$pkst) . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
+			  		// 'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . str_replace("\'","'",$pkst) . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
+			  		'text' => "<code>Quest:    </code><b>". $quest ."</b>\n<code>Pokéstop: </code>".'<a href="'.$link.'">'.str_replace("\'","'",$pkst)."</a>\n<code>Giorno:   </code>".$today2."\n<code>Task:     </code>".$task,
 			  		//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
-			  		'parse_mode' => 'markdown',
+			  		'parse_mode' => 'HTML',
 			  		'disable_web_page_preview' => TRUE,
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
@@ -1106,8 +1107,9 @@ elseif($status == 2) {
 				$grp = intval($groupsIDs[$i]);
 				$data = [
 				  	'chat_id' => $grp,
-				  	'text' => $firstname . " ha segnalato una quest *" . $quest . "* presso [" . str_replace("\'","'",$pkst) . "](" . $link . ").",
-				  	'parse_mode' => 'markdown',
+				  	//'text' => $firstname . " ha segnalato una quest *" . $quest . "* presso [" . str_replace("\'","'",$pkst) . "](" . $link . ").",
+				  	'text' => $firstname . " ha segnalato una quest <b>" . $quest . "</b> presso ".'<a href = "'. $link .'">' . str_replace("\'","'",$pkst) . ".",
+				  	'parse_mode' => 'HTML',
 				  	'disable_web_page_preview' => TRUE,
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
