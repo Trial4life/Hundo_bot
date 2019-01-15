@@ -617,10 +617,10 @@ elseif($status == 0) {
 	}
 
 	//////////////////
-	////// NIDO //////
+	////// NEST //////
 	//////////////////
 	elseif(strpos($text, "/nest") === 0 ) {
-		$str = str_replace('/nido ', '', $text);
+		$str = str_replace('/nest ', '', $text);
 		$strArr = explode(", ",$str);
 		$nest = ucfirst($strArr[0]);
 		$pkmn = ucfirst($strArr[1]);
