@@ -642,7 +642,7 @@ elseif($status == 0) {
 		$currNest = $row['nido'];
 
 		// setlocale(LC_ALL, "ita");
-		$endDate = str_replace('0','', strftime("%d/%m", strtotime(str_replace('-','/', $endDate))));
+		$endDate = strftime("%e/%m", strtotime(str_replace('-','/', $endDate)));
 
 		if ($currNest == $nest) {
 			$response = 'Il nido a *'.$nest.'* è stato già segnalato fino al *'.$endDate.'*.';
@@ -702,7 +702,7 @@ elseif($status == 0) {
 		}
 
 		// setlocale(LC_ALL, "ita");
-		$endDate = str_replace('0','', strftime("%d/%m", strtotime(str_replace('-','/', $endDate))));
+		$endDate = strftime("%e/%m", strtotime(str_replace('-','/', $endDate)));
 
 		if (!$nest) {
 			$response = 'Nessun nido segnalato fino al *'.$endDate.'*.';
