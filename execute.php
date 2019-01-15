@@ -326,8 +326,8 @@ elseif(strpos($text, "/quests ") === 0 ) {
 	$row = mysqli_fetch_assoc($result_quest);
 	$cell = $row['cellId'];
 
-	list($lat, $lng, $zoom) = getCellData(hexdec($row['cellId64']), 2);
-	$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $lat ."%2C". $lng . "&zoom=" . $zoom . "&cells=" . $cell;
+	list($latC, $lngC, $zoom) = getCellData(hexdec($row['cellId64']), 2);
+	$link = "https://s2.sidewalklabs.com/regioncoverer/?center=". $latC ."%2C". $lngC . "&zoom=" . $zoom . "&cells=" . $cell;
 
 	if (sizeof($quest)==0) {
 		$response = 'Non è stata segnalata nessuna quest nella cella ['.$zona.']('.$link.').';
