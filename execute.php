@@ -621,6 +621,11 @@ elseif($status == 0) {
 	//////////////////
 	elseif(strpos($text, "/nest") === 0 ) {
 		$str = str_replace('/nest ', '', $text);
+
+		$query = "SELECT * FROM `nestEnd`";
+		$result = mysqli_query($conn,$query);
+		$endDate = $row['endDate'];
+
 		$strArr = explode(", ",$str);
 		$pkmn = ucfirst($strArr[0]);
 		$nest = ucwords($strArr[1]);
@@ -628,13 +633,12 @@ elseif($status == 0) {
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
 		$currNest = $row['nido'];
-		$nextDate = 'TMP_Date';
 
 		if ($currNest == $nest) {
-			$response = 'Il nido a *'.$nest.'* è stato già segnalato fino al *'.$nextDate.'*.';
+			$response = 'Il nido a *'.$nest.'* è stato già segnalato fino al *'.$endDate.'*.';
 		}
 		else {
-			$response = $EMO_v.' Nido a *'.$nest.'* segnalato fino al *'.$nextDate.'*.';
+			$response = $EMO_v.' Nido a *'.$nest.'* segnalato fino al *'.$endDate.'*.';
 			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn')");
 		}
 
@@ -668,17 +672,24 @@ elseif($status == 0) {
 	////// NIDI //////
 	//////////////////
 	elseif(strpos($text, "/nidi") === 0 ) {
+		$query = "SELECT * FROM `nestEnd`";
+		$result = mysqli_query($conn,$query);
+		$endDate = $row['endDate'];
+		if ($today >= $endDate) {
+			mysqli_query($conn,"TRUNCATE `nests`");
+			$newEnd = date('Y-m-d', strtotime($endDate. ' + 14 days'));
+			mysqli_query($conn,"UPDATE `nestEnd` SET `endDate` = '$newEnd' WHERE `endDate` = '$endDate'");
+		}
+
 		$query = "SELECT * FROM `nests` ORDER BY `pokemon` ASC";
 		$result = mysqli_query($conn,$query);
 		$nest = $pkmn = array();
 		while ($row = mysqli_fetch_assoc($result)) {
 			array_push($nest, $row['nido']);
-			array_push($pkmn, $row['pokemon']);
-		}
+			array_push($pkmn, $row['pokemon']);		}
 
-		$dateStart = '10 gennaio';
-		$dateEnd = '17 gennaio';
-		$response = $EMO_TREE .' Nidi dal *'.$dateStart.'* al *'.$dateEnd.'*:';
+
+		$response = $EMO_TREE .' Nidi fino al *'.$endDate.'*:';
 		for ($i = 0; $i <= sizeof($nest)-1; $i++){
 			$response = $response."\n*".$pkmn[$i]."* − ".$nest[$i];
 		}
