@@ -51,6 +51,7 @@ $EMO_EXE = "\xF0\x9F\x8C\xB4";
 $EMO_TRI = "\xE2\x96\xB6";
 $EMO_ON = "\xF0\x9F\x94\x94";
 $EMO_OFF = "\xF0\x9F\x94\x95";
+$EMO_TREE = "\xF0\x9F\x8C\xB3";
 $EMO_v = json_decode('"'."\u2705".'"');
 $EMO_x = json_decode('"'."\u274c".'"');
 $EMO_ALR = json_decode('"'."\u203c".'"');
@@ -636,7 +637,7 @@ elseif($status == 0) {
 
 		$dateStart = '10 gennaio';
 		$dateEnd = '17 gennaio';
-		$response = $EMO_GLO .' Nidi dal *'.$dateStart.'* al *'.$dateEnd.':';
+		$response = $EMO_TREE .' Nidi dal *'.$dateStart.'* al *'.$dateEnd.':';
 		for ($i = 0; $i <= sizeof($nest)-1; $i++){
 			$response = $response."\n".$nest[$i]." − *".$pkmn[$i]."*";
 		}
