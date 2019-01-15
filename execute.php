@@ -704,9 +704,14 @@ elseif($status == 0) {
 		setlocale(LC_TIME, 'it_IT');
 		$endDate = str_replace('0','', strftime("%d %B", strtotime(str_replace('-','/', '2019-01-01'))));
 
-		$response = $EMO_TREE .' Nidi fino al *'.$endDate.'*:';
-		for ($i = 0; $i <= sizeof($nest)-1; $i++){
-			$response = $response."\n*".$pkmn[$i]."* − ".$nest[$i];
+		if (!$nest) {
+			$response = 'Nessun nido segnalato fino al *'.$endDate.'*:';
+		}
+		else {
+			$response = $EMO_TREE .' Nidi fino al *'.$endDate.'*:';
+			for ($i = 0; $i <= sizeof($nest)-1; $i++){
+				$response = $response."\n*".$pkmn[$i]."* − ".$nest[$i];
+			}
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
