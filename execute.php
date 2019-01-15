@@ -619,8 +619,29 @@ elseif($status == 0) {
 	//////////////////
 	////// NIDO //////
 	//////////////////
-	elseif(strpos($text, "/nido") === 0 ) {
+	elseif(strpos($text, "/nest") === 0 ) {
 
+	}
+
+	//////////////////
+	//// DELNIDO /////
+	//////////////////
+	elseif(strpos($text, "/delnest") === 0 ) {
+		$nest = ucfirst(str_replace('/delnest ', '', $text));
+		$query = "SELECT * FROM `nests` WHERE `nido` = '$nest'";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+		$currNest = $row['nido'];
+		if (!$row) {
+			$response = $EMO_ERR.' Nido *'.$nest.'* non trovato.';
+		}
+		else {
+			$response = $EMO_OFF.' Nido *'.$nest.'* cancellato.';
+		}
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+		mysqli_query($conn,"DELETE FROM `nests` WHERE `nido` = '$nest'");
 	}
 
 	//////////////////
