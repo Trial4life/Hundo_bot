@@ -620,7 +620,25 @@ elseif($status == 0) {
 	////// NIDO //////
 	//////////////////
 	elseif(strpos($text, "/nest") === 0 ) {
-
+		$str = str_replace('/nido ', '', $text);
+		$strArr = explode(", ",$str);
+		$nest = ucfirst($strArr[0]);
+		$pkmn = ucfirst($strArr[1]);
+		$query = "SELECT * FROM `nest` WHERE `nido` = '$nest'";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+		$currNest = $row['nido'];
+		$nextDate = 'TMP_Date';
+		if (!$row) {
+			$response = $EMO_ON.' Nido a *'.$nest.'* segnalato fino al *'.$nextdate."*.";
+			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest', '$pkmn')");
+		}
+		else {
+			$response = 'Il nido a *'.$nest.'* è stato già segnalato fino al *'.$nextdate."*.";
+		}
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
 	}
 
 	//////////////////
@@ -636,7 +654,7 @@ elseif($status == 0) {
 			$response = $EMO_ERR.' Nido *'.$nest.'* non trovato.';
 		}
 		else {
-			$response = $EMO_OFF.' Nido *'.$nest.'* cancellato.';
+			$response = $EMO_x.' Nido *'.$nest.'* cancellato.';
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
