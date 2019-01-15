@@ -658,9 +658,9 @@ elseif($status == 0) {
 
 		$dateStart = '10 gennaio';
 		$dateEnd = '17 gennaio';
-		$response = ' Nidi dal *'.$dateStart.'* al *'.$dateEnd.'*:';
+		$response = $EMO_TREE .' Nidi dal *'.$dateStart.'* al *'.$dateEnd.'*:';
 		for ($i = 0; $i <= sizeof($nest)-1; $i++){
-			$response = $response."\n*".$pkmn[$i]."* - ".$nest[$i];
+			$response = $response."\n*".$pkmn[$i]."* − ".$nest[$i];
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
