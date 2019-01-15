@@ -624,11 +624,13 @@ elseif($status == 0) {
 
 		$query = "SELECT * FROM `nestEnd`";
 		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
 		$endDate = $row['endDate'];
 		if ($today >= $endDate) {
 			mysqli_query($conn,"TRUNCATE `nests`");
 			$newEnd = date('Y-m-d', strtotime($endDate. ' + 14 days'));
 			mysqli_query($conn,"UPDATE `nestEnd` SET `endDate` = '$newEnd' WHERE `endDate` = '$endDate'");
+			$endDate = $newEnd;
 		}
 
 		$strArr = explode(", ",$str);
@@ -679,11 +681,13 @@ elseif($status == 0) {
 	elseif(strpos($text, "/nidi") === 0 ) {
 		$query = "SELECT * FROM `nestEnd`";
 		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
 		$endDate = $row['endDate'];
 		if ($today >= $endDate) {
 			mysqli_query($conn,"TRUNCATE `nests`");
 			$newEnd = date('Y-m-d', strtotime($endDate. ' + 14 days'));
 			mysqli_query($conn,"UPDATE `nestEnd` SET `endDate` = '$newEnd' WHERE `endDate` = '$endDate'");
+			$endDate = $newEnd;
 		}
 
 		$query = "SELECT * FROM `nests` ORDER BY `pokemon` ASC";
@@ -691,8 +695,8 @@ elseif($status == 0) {
 		$nest = $pkmn = array();
 		while ($row = mysqli_fetch_assoc($result)) {
 			array_push($nest, $row['nido']);
-			array_push($pkmn, $row['pokemon']);		}
-
+			array_push($pkmn, $row['pokemon']);
+		}
 
 		$response = $EMO_TREE .' Nidi fino al *'.$endDate.'*:';
 		for ($i = 0; $i <= sizeof($nest)-1; $i++){
