@@ -630,11 +630,11 @@ elseif($status == 0) {
 		$currNest = $row['nido'];
 		$nextDate = 'TMP_Date';
 		if (!$row) {
-			$response = $EMO_ON.' Nido a *'.$nest.'* segnalato fino al *'.$nextDate."*.";
+			$response = $EMO_v.' Nido a *'.$nest.'* segnalato fino al *'.$nextDate.'*.';
 			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest', '$pkmn')");
 		}
 		else {
-			$response = 'Il nido a *'.$nest.'* è stato già segnalato fino al *'.$nextDate."*.";
+			$response = 'Il nido a *'.$nest.'* è stato già segnalato fino al *'.$nextDate.'*.';
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
