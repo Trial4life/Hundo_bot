@@ -1058,7 +1058,7 @@ elseif($status == 2) {
 					$data = [
 			  			'chat_id' => $userAlertsID,
 			  			 //'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . str_replace("\'","'",$pkst) . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
-			  			'text' => "<code>Quest:    </code><b>". $quest .'</b>\n<code>Pokéstop: </code><a href="'.$link.'">'.str_replace("\'","'",$pkst)."</a>\n<code>Giorno:   </code>".$today2."\n<code>Task:     </code>".$task,
+			  			'text' => "<code>Quest:    </code><b>". $quest ."</b>\n<code>Pokéstop: </code>".'<a href="'.$link.'">'.str_replace("\'","'",$pkst)."</a>\n<code>Giorno:   </code>".$today2."\n<code>Task:     </code>".$task,
 			  			//'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . $pkst . "](" . $link . ")\n`Giorno:  ` ".$today2,
 			  			'parse_mode' => 'HTML',
 			  			// 'parse_mode' => 'markdown',
