@@ -440,6 +440,7 @@ elseif($status == 0) {
 	}
 
 	if(strpos($text, "/q ") === 0 )	{
+		mysqli_query($conn,"DELETE FROM `quests` WHERE giorno < '$today'");		// RIMUOVE LE QUEST DEL GIORNO PRECEDENTE
 		//if (in_array($chatId, $authorizedChats)) {
 		if ($chatType == 'group' or $chatType == 'supergroup') {
 			$response = $EMO_EXE." Per segnalare le quest, utilizza il comando /quest in chat privata con il bot.";
