@@ -622,8 +622,8 @@ elseif($status == 0) {
 	elseif(strpos($text, "/nest") === 0 ) {
 		$str = str_replace('/nest ', '', $text);
 		$strArr = explode(", ",$str);
-		$nest = ucfirst($strArr[0]);
-		$pkmn = ucfirst($strArr[1]);
+		$pkmn = ucfirst($strArr[0]);
+		$nest = ucwords($strArr[1]);
 		$query = "SELECT * FROM `nest` WHERE `nido` = '$nest'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
@@ -631,7 +631,7 @@ elseif($status == 0) {
 		$nextDate = 'TMP_Date';
 		if (!$row) {
 			$response = $EMO_v.' Nido a *'.$nest.'* segnalato fino al *'.$nextDate.'*.';
-			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest', '$pkmn')");
+			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn')");
 		}
 		else {
 			$response = 'Il nido a *'.$nest.'* è stato già segnalato fino al *'.$nextDate.'*.';
