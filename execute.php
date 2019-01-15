@@ -341,15 +341,14 @@ elseif(strpos($text, "/quests ") === 0 ) {
 
 		/* MARKDOWN
 		for ($i = 0; $i <= sizeof($quest)-1; $i++){
-			$link = urldecode('https://maps.google.com/?q='.$lat[$i].','.$lng[$i].'%28'.$pokestop[$i].'%29');    // BETA
-			//$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i];
+			$link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i];
 			$response = $response . "\n*" . ucfirst($quest[$i]) . "* − [" . $pokestop[$i] . "](" . $link . ")";
 		}
 		*/
 		for ($i = 0; $i <= sizeof($quest)-1; $i++){
 			$link = "https://maps.google.com/?q=".$lat[$i].",".$lng[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$pokestop[$i]))).")";
 			// $link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i];
-			$response = $response . "\n<b>" . ucfirst($quest[$i]) . '</b> − <a href = "' .$link.'">'.$pokestop[$i].'</a>';
+			$response = $response . "\n<b>" . ucfirst($quest[$i]) . '</b> − <a href = "' .$link.'">'.str_replace("\'","'",$pokestop[$i]).'</a>';
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "HTML", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
@@ -392,7 +391,7 @@ elseif(strpos($text, "/quests") === 0 ) {
 		for ($i = 0; $i <= sizeof($quest)-1; $i++){
 			$link = "https://maps.google.com/?q=".$lat[$i].",".$lng[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$pokestop[$i]))).")";
 			// $link = 'https://maps.google.com/?q='.$lat[$i].','.$lng[$i];
-			$response = $response . "\n<b>" . ucfirst($quest[$i]) . '</b> − <a href = "' .$link.'">'.$pokestop[$i].'</a>';
+			$response = $response . "\n<b>" . ucfirst($quest[$i]) . '</b> − <a href = "' .$link.'">'.str_replace("\'","'",$pokestop[$i]).'</a>';
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "HTML", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
