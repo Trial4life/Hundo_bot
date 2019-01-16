@@ -52,6 +52,7 @@ $EMO_TRI = "\xE2\x96\xB6";
 $EMO_ON = "\xF0\x9F\x94\x94";
 $EMO_OFF = "\xF0\x9F\x94\x95";
 $EMO_TREE = "\xF0\x9F\x8C\xB3";
+$EMO_TREE2 = "\xF0\x9F\x8C\xB2";
 $EMO_LEAF = "\xF0\x9F\x8D\x83";
 $EMO_v = json_decode('"'."\u2705".'"');
 $EMO_x = json_decode('"'."\u274c".'"');
@@ -844,10 +845,10 @@ elseif($status == 0) {
 			array_push($lng, $row['lng']);
 		}
 
-		$response = $EMO_TREE .' Elenco dei parchi:';
+		$response = $EMO_TREE.$EMO_TREE2.' <b>Elenco dei parchi </b>'.$EMO_TREE2.$EMO_TREE ;
 		for ($i = 0; $i <= sizeof($park)-1; $i++){
 			$link = "https://maps.google.com/?q=".$lat[$i].",".$lng[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$park[$i]))).")";
-			$response = $response. "\n".'<a href="'.$link.'">'.$park[$i].'</a>';
+			$response = $response. "\n− ".'<a href="'.$link.'">'.$park[$i].'</a>';
 		}
 
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "HTML", "disable_web_page_preview" => TRUE);
