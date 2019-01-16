@@ -766,7 +766,7 @@ elseif($status == 0) {
 				$response = $response."\n*".$pkmnN[$i]."* − ".$nest[$i];
 			}
 
-			$response = "\n\n".$EMO_LEAF .' Spawn frequenti fino al *'.$endDate.'*:';
+			$response = $response."\n\n".$EMO_LEAF .' Spawn frequenti fino al *'.$endDate.'*:';
 			for ($i = 0; $i <= sizeof($spawn)-1; $i++){
 				$response = $response."\n*".$pkmnS[$i]."* − ".$spawn[$i];
 			}
