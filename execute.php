@@ -652,8 +652,8 @@ elseif($status == 0) {
 			$response = 'Il nido a *'.$nest.'* è stato già registrato fino al *'.$endDate.'*.';
 		}
 		else {
+			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn',1)");
 			$response = $EMO_v.' Nido *'.$nest.'* registrato fino al *'.$endDate.'*.';
-			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn')");
 		}
 
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
