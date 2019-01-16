@@ -821,10 +821,10 @@ elseif($status == 0) {
 
 		if (!$row) {
 			mysqli_query($conn,"INSERT INTO `parks` VALUES ('$park','$lat','$lng')");
-			$response = $link;
+			$response = $EMO_v.' <a href="'.$link.'">'.$park.'</a> aggiunto/a al database.';
 		}
 		else {
-			$response = '<b><a href="'.$link.'">'.$park.'</a></b> è già presente nel database.';
+			$response = '<a href="'.$link.'">'.$park.'</a> è già presente nel database.';
 		}
 
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "HTML", "disable_web_page_preview" => TRUE);
