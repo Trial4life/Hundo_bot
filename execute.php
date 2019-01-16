@@ -630,7 +630,7 @@ elseif($status == 0) {
 	////// NEST //////
 	//////////////////
 	elseif(strpos($text, "/nest") === 0 ) {
-		$str = str_replace('/nest ', '', $text);
+		$str = str_replace('/nest ', '', str_replace("'","\'",$text));
 
 		$query = "SELECT * FROM `nestEnd`";
 		$result = mysqli_query($conn,$query);
@@ -671,7 +671,7 @@ elseif($status == 0) {
 	////// SPAWN /////
 	//////////////////
 	elseif(strpos($text, "/spawn") === 0 ) {
-		$str = str_replace('/spawn ', '', $text);
+		$str = str_replace('/spawn ', '', str_replace("'","\'",$text));
 
 		$query = "SELECT * FROM `nestEnd`";
 		$result = mysqli_query($conn,$query);
@@ -826,7 +826,7 @@ elseif($status == 0) {
 	//// NEWPARK /////
 	//////////////////
 	elseif(strpos($text, "/newpark") === 0 ) {
-		$str = str_replace('/newpark ', '', $text);
+		$str = str_replace('/newpark ', '', str_replace("'","\'",$text));
 
 		$strArr = explode(", ",$str);
 		$park = ucfirst($strArr[0]);
