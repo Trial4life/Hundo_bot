@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Gen 15, 2019 alle 12:42
+-- Creato il: Gen 16, 2019 alle 21:53
 -- Versione del server: 8.0.13
 -- Versione PHP: 7.2.10-0ubuntu0.18.04.1
 
@@ -668,19 +668,63 @@ INSERT INTO `nestEnd` (`endDate`) VALUES
 
 CREATE TABLE `nests` (
   `nido` varchar(50) NOT NULL,
-  `pokemon` varchar(20) NOT NULL
+  `pokemon` varchar(20) NOT NULL,
+  `type` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dump dei dati per la tabella `nests`
 --
 
-INSERT INTO `nests` (`nido`, `pokemon`) VALUES
-('Piazza Bologna', 'Skarmory'),
-('Villa Borghese', 'Charmander'),
-('Pincio', 'Electabuzz'),
-('Villa Leopardi', 'Poliwag'),
-('Villa Glori', 'Magnemite');
+INSERT INTO `nests` (`nido`, `pokemon`, `type`) VALUES
+('Piazza Bologna', 'Skarmory', 1),
+('Villa Borghese', 'Charmander', 1),
+('Pincio', 'Electabuzz', 1),
+('Villa Leopardi', 'Poliwag', 1),
+('Villa Glori', 'Magnemite', 1),
+('Ciclabile Aniene', 'Vulpix', 1),
+('Parco Don Enzo Boni', 'Sneasel', 1),
+('Parchetto Dei Galli', 'Squirtle', 2),
+('Villa Chigi', 'Clefairy', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `parks`
+--
+
+CREATE TABLE `parks` (
+  `park` varchar(50) NOT NULL,
+  `lat` varchar(15) NOT NULL,
+  `lng` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dump dei dati per la tabella `parks`
+--
+
+INSERT INTO `parks` (`park`, `lat`, `lng`) VALUES
+('Ciclabile Aniene', ' 41.937151', ' 12.527452'),
+('Colle Oppio', ' 41.891593', ' 12.496418'),
+('Convento Nomentana', ' 41.924540', ' 12.523747'),
+('Parco dei Daini', ' 41.915472', ' 12.491985'),
+('Parco della Caffarella', ' 41.864920', ' 12.522613'),
+('Parco delle Valli', ' 41.939656', ' 12.522775'),
+('Parco Don Enzo Boni', ' 41.933710', ' 12.519156'),
+('Parco Filippo Meda', ' 41.912592', ' 12.545813'),
+('Parco Virgiliano', ' 41.925426', ' 12.510588'),
+('Pincio', ' 41.911051', ' 12.479820'),
+('Villa Ada', ' 41.930702', ' 12.502056'),
+('Villa Blanc', ' 41.923024', ' 12.522185'),
+('Villa Borghese', ' 41.913567', ' 12.484158'),
+('Villa Chigi', ' 41.933222', ' 12.516468'),
+('Villa Glori', ' 41.930524', ' 12.480634'),
+('Villa Leopardi', ' 41.926208', ' 12.521774'),
+('Villa Mirafiori', ' 41.918699', ' 12.516893'),
+('Villa Pamphili', ' 41.884090', ' 12.446756'),
+('Villa Torlonia', ' 41.913707', ' 12.512150'),
+('Parchetto Dei Galli', '41.921532', '12.522627'),
+('Piazza Bologna', '41.913599', '12.520842');
 
 -- --------------------------------------------------------
 
@@ -1045,7 +1089,7 @@ INSERT INTO `pokeid` (`id`, `pokemon`, `userAlerts`) VALUES
 ('344', 'Claydol', ''),
 ('345', 'Lileep', ''),
 ('346', 'Cradily', ''),
-('347', 'Anorith', '350968891,'),
+('347', 'Anorith', ''),
 ('348', 'Armaldo', ''),
 ('349', 'Feebas', '355300180,'),
 ('350', 'Milotic', ''),
@@ -1522,8 +1566,16 @@ CREATE TABLE `quests` (
 --
 
 INSERT INTO `quests` (`quest`, `pokestop`, `lat`, `lng`, `zona`, `giorno`) VALUES
-('Gastly', 'Madonnina Nomentana', '41.924996', '12.522134', 'Centro, Libia, ', '2019-01-15'),
-('Gastly', 'Campetto Polivalente di Villa Blanc', '41.922287', '12.522917', 'Centro, Bologna, Lanciani, ', '2019-01-15');
+('Spinda', 'Murale Sartoria', '41.936108', '12.529731', 'Centro, Libia, ', '2019-01-16'),
+('Trapinch', 'Bar Caffè Murales', '41.921331', '12.524456', 'Centro, Bologna, Lanciani, ', '2019-01-16'),
+('Gira 10 pokestop per 5 ananas argento', 'Vespetta Murales', '41.948137', '12.514694', 'Nord, ', '2019-01-16'),
+('Spinda', 'Istituto Religioso', '41.910720', '12.503709', 'Centro, Salario, ', '2019-01-16'),
+('Trapinch', 'Murales Torta', '41.930841', '12.522769', 'Centro, Libia, ', '2019-01-16'),
+('Aerodactyl', 'Bugs Bunny', '41.914148', '12.546427', 'Est, ', '2019-01-16'),
+('Cubone', 'Angioletti Murales', '41.927344', '12.524610', 'Centro, Libia, ', '2019-01-16'),
+('Trapinch', 'Targa Cesare Zavattini', '41.924002', '12.523730', 'Centro, Libia, ', '2019-01-16'),
+('Aerodactyl', 'Campetto Polivalente di Villa Blanc', '41.922287', '12.522917', 'Centro, Bologna, Lanciani, ', '2019-01-16'),
+('Trapinch', 'Millepiedi Murales', '41.931560', '12.520027', 'Centro, Libia, ', '2019-01-16');
 
 -- --------------------------------------------------------
 
@@ -1544,7 +1596,7 @@ CREATE TABLE `sessions` (
 
 INSERT INTO `sessions` (`userID`, `username`, `status`, `alert`) VALUES
 (2969750, 'pomettini', 1, '/100'),
-(710202051, 'danimo2992_31', 2, 'Tentacruel');
+(2619206, 'thedarkmagister', 2, 'Gira 10 pokestop per 5 ananas argento');
 
 -- --------------------------------------------------------
 
@@ -1553,8 +1605,8 @@ INSERT INTO `sessions` (`userID`, `username`, `status`, `alert`) VALUES
 --
 
 CREATE TABLE `tasks` (
-  `reward` varchar(20) NOT NULL,
-  `task` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `reward` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `task` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `flag` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -1584,7 +1636,6 @@ INSERT INTO `tasks` (`reward`, `task`, `flag`) VALUES
 ('Larvitar', 'Effettua 3 tiri eccellenti di fila', 1),
 ('Lileep', 'Effettua 3 ottimi tiri', 0),
 ('Machop', 'Lotta in una palestra 5 volte', 0),
-('Magikarp', 'Cattura 10 Pokemon/Usa 10 baccananas per catturare un Pok?mon', 0),
 ('Magmar', 'Fai schiudere 3 uova', 0),
 ('Magnemite', 'Cattura 5 Pokemon di tipo Lotta', 0),
 ('Manectric', 'Effettua uno scambio Pokemon', 0),
@@ -1600,7 +1651,10 @@ INSERT INTO `tasks` (`reward`, `task`, `flag`) VALUES
 ('Sunkern', 'Evolvi un Pokemon', 0),
 ('Tentacruel', 'Guadagna 5 caramelle camminando con il compagno', 0),
 ('Voltorb', 'Effettua 5 bei tiri', 0),
-('Vulpix', 'Cattura 5 Pokemon potenziati dalle condizioni atmosferiche', 0);
+('Vulpix', 'Cattura 5 Pokemon potenziati dalle condizioni atmosferiche', 0),
+('Nosepass', 'Schiudi 2 uova', 1),
+('Trapinch', 'Evolvi 3 Wurmple', 1),
+('Magikarp', 'Cattura 10 Pokemon/Usa 10 baccananas per catturare un Pokemon', 1);
 
 -- --------------------------------------------------------
 

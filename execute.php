@@ -479,6 +479,33 @@ elseif($status == 0) {
 			}
 		}
 	}
+
+	///////////////////
+	/// RESETQUESTS ///
+	///////////////////
+	elseif(strpos($text, "/resetquests") === 0 ) {
+		if (in_array($username, $admins)) {
+			mysqli_query($conn,"TRUNCATE `quests`");
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_x.' Quest resettate.',
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		}
+
+		else {
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		}
+
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "HTML", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
+
 	/////////////////
 	/// NEW QUEST ///
 	/////////////////
@@ -826,24 +853,33 @@ elseif($status == 0) {
 	//// NEWPARK /////
 	//////////////////
 	elseif(strpos($text, "/newpark") === 0 ) {
-		$str = str_replace('/newpark ', '', str_replace("'","\'",$text));
+		if (in_array($username, $admins)) {
+			$str = str_replace('/newpark ', '', str_replace("'","\'",$text));
 
-		$strArr = explode(", ",$str);
-		$park = ucfirst($strArr[0]);
-		$lat = ucwords($strArr[1]);
-		$lng = ucwords($strArr[2]);
-		$link = "https://maps.google.com/?q=".$lat.",".$lng."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$park))).")";
+			$strArr = explode(", ",$str);
+			$park = ucfirst($strArr[0]);
+			$lat = ucwords($strArr[1]);
+			$lng = ucwords($strArr[2]);
+			$link = "https://maps.google.com/?q=".$lat.",".$lng."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$park))).")";
 
-		$query = "SELECT * FROM `parks` WHERE `park` = '$park'";
-		$result = mysqli_query($conn,$query);
-		$row = mysqli_fetch_assoc($result);
+			$query = "SELECT * FROM `parks` WHERE `park` = '$park'";
+			$result = mysqli_query($conn,$query);
+			$row = mysqli_fetch_assoc($result);
 
-		if (!$row) {
-			mysqli_query($conn,"INSERT INTO `parks` VALUES ('$park','$lat','$lng')");
-			$response = $EMO_v.' <a href="'.$link.'">'.str_replace("\'","'",$park).'</a> aggiunto/a al database dei parchi.';
+			if (!$row) {
+				mysqli_query($conn,"INSERT INTO `parks` VALUES ('$park','$lat','$lng')");
+				$response = $EMO_v.' <a href="'.$link.'">'.str_replace("\'","'",$park).'</a> aggiunto/a al database dei parchi.';
+			}
+			else {
+				$response = '<a href="'.$link.'">'.str_replace("\'","'",$park).'</a> è già presente nel database.';
+			}
 		}
 		else {
-			$response = '<a href="'.$link.'">'.str_replace("\'","'",$park).'</a> è già presente nel database.';
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}
 
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "HTML", "disable_web_page_preview" => TRUE);
@@ -855,20 +891,29 @@ elseif($status == 0) {
 	//// DELPARK ////
 	/////////////////
 	elseif(strpos($text, "/delpark") === 0 ) {
-		$park = ucwords(str_replace('/delpark ', '', str_replace("'","\'",$text)));
-		$query = "SELECT * FROM `parks` WHERE `park` = '$park'";
-		$result = mysqli_query($conn,$query);
-		$row = mysqli_fetch_assoc($result);
-		if (!$row) {
-			$response = $EMO_ERR.' *'.str_replace("\'","'",$park).'* non trovato/a.';
+		if (in_array($username, $admins)) {
+			$park = ucwords(str_replace('/delpark ', '', str_replace("'","\'",$text)));
+			$query = "SELECT * FROM `parks` WHERE `park` = '$park'";
+			$result = mysqli_query($conn,$query);
+			$row = mysqli_fetch_assoc($result);
+			if (!$row) {
+				$response = $EMO_ERR.' *'.str_replace("\'","'",$park).'* non trovato/a.';
+			}
+			else {
+				$response = $EMO_x.' *'.str_replace("\'","'",$park).'* rimosso/a dal database dei parchi.';
+				mysqli_query($conn,"DELETE FROM `parks` WHERE `park` = '$park'");
+			}
+			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+			$parameters["method"] = "sendMessage";
+			echo json_encode($parameters);
 		}
 		else {
-			$response = $EMO_x.' *'.str_replace("\'","'",$park).'* rimosso/a dal database dei parchi.';
-			mysqli_query($conn,"DELETE FROM `parks` WHERE `park` = '$park'");
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}
-		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
-		$parameters["method"] = "sendMessage";
-		echo json_encode($parameters);
 	}
 
 	///////////////
