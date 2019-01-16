@@ -762,14 +762,18 @@ elseif($status == 0) {
 			$response = 'Nessun nido segnalato fino al *'.$endDate.'*.';
 		}
 		else {
-			$response = $EMO_TREE .' Nidi fino al *'.$endDate.'*:';
-			for ($i = 0; $i <= sizeof($nest)-1; $i++){
-				$response = $response."\n*".$pkmnN[$i]."* − ".$nest[$i];
+			$response = "";
+			if ($nest) {
+				$response = $EMO_TREE .' Nidi fino al *'.$endDate.'*:';
+				for ($i = 0; $i <= sizeof($nest)-1; $i++){
+					$response = $response."\n*".$pkmnN[$i]."* − ".$nest[$i];
+				}
 			}
-
-			$response = $response."\n\n".$EMO_LEAF .' Spawn frequenti fino al *'.$endDate.'*:';
-			for ($i = 0; $i <= sizeof($spawn)-1; $i++){
-				$response = $response."\n*".$pkmnS[$i]."* − ".$spawn[$i];
+			if ($spawn) {
+				$response = $response."\n\n".$EMO_LEAF .' Spawn frequenti fino al *'.$endDate.'*:';
+				for ($i = 0; $i <= sizeof($spawn)-1; $i++){
+					$response = $response."\n*".$pkmnS[$i]."* − ".$spawn[$i];
+				}
 			}
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
