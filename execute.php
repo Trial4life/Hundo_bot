@@ -831,6 +831,29 @@ elseif($status == 0) {
 		echo json_encode($parameters);
 	}
 
+	///////////////
+	//// PARKS ////
+	///////////////
+	elseif(strpos($text, "/parks") === 0 ) {
+		$query = "SELECT * FROM `parks` ORDER BY `park` ASC";
+		$result = mysqli_query($conn,$query);
+		$park = $lat = $lng = array();
+		while ($row = mysqli_fetch_assoc($result)) {
+			array_push($park, $row['park']);
+			array_push($lat, $row['lat']);
+			array_push($lng, $row['lng']);
+		}
+
+		$response = $EMO_TREE .' Elenco dei parchi :';
+		for ($i = 0; $i <= sizeof($parks)-1; $i++){
+			$link = "https://maps.google.com/?q=".$lat[$i].",".$lng[$i]."(".str_replace(" ","+",$park[$i]).")";		// BETA
+			$response = "\n".'<a href="'.$link.'">'.$park[$i].'</a>';
+		}
+
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "HTML", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
 
 	/////////////////
 	/// ADD ALERT ///
