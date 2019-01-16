@@ -743,6 +743,36 @@ elseif($status == 0) {
 		}
 	}
 
+	//////////////////
+	//// NEWPARK /////
+	//////////////////
+	elseif(strpos($text, "/newpark") === 0 ) {
+		$str = str_replace('/newpark ', '', $text);
+
+		$strArr = explode(", ",$str);
+		$park = ucfirst($strArr[0]);
+		$lat = ucwords($strArr[1]);
+		$lng = ucwords($strArr[2]);
+		$link = "https://maps.google.com/?q=".$lat.",".$lng."(".str_replace(" ","+"$park).")";		// BETA
+
+		$query = "SELECT * FROM `parks` WHERE `park` = '$park'";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+
+		if (!$row) {
+			$response = $EMO_v.' <b><a href="'.$link.'">'.$park.'</a></b> aggiunto/a al database.';
+			mysqli_query($conn,"INSERT INTO `parks` VALUES ('$park','$lat','$lng')");
+		}
+		else {
+			$response = '<b><a href="'.$link.'">'.$park.'</a></b> è già presente nel database.';
+		}
+
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "HTML", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
+
+
 	/////////////////
 	/// ADD ALERT ///
 	/////////////////
