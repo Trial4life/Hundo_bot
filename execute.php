@@ -718,10 +718,10 @@ elseif($status == 0) {
 		$row = mysqli_fetch_assoc($result);
 		$currNest = $row['nido'];
 		if (!$row) {
-			$response = $EMO_ERR.' Nido *'.$nest.'* non trovato.';
+			$response = $EMO_ERR.' Nido *'.str_replace("\'","'",$nest).'* non trovato.';
 		}
 		else {
-			$response = $EMO_x.' Nido *'.$nest.'* cancellato.';
+			$response = $EMO_x.' Nido *'.str_replace("\'","'",$nest).'* cancellato.';
 			mysqli_query($conn,"DELETE FROM `nests` WHERE `nido` = '$nest'");
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
@@ -840,10 +840,10 @@ elseif($status == 0) {
 
 		if (!$row) {
 			mysqli_query($conn,"INSERT INTO `parks` VALUES ('$park','$lat','$lng')");
-			$response = $EMO_v.' <a href="'.$link.'">'.$park.'</a> aggiunto/a al database.';
+			$response = $EMO_v.' <a href="'.$link.'">'.str_replace("\'","'",$park).'</a> aggiunto/a al database.';
 		}
 		else {
-			$response = '<a href="'.$link.'">'.$park.'</a> è già presente nel database.';
+			$response = '<a href="'.$link.'">'.str_replace("\'","'",$park).'</a> è già presente nel database.';
 		}
 
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "HTML", "disable_web_page_preview" => TRUE);
@@ -860,10 +860,10 @@ elseif($status == 0) {
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
 		if (!$row) {
-			$response = $EMO_ERR.' *'.$park.'* non trovato/a.';
+			$response = $EMO_ERR.' *'.str_replace("\'","'",$park).'* non trovato/a.';
 		}
 		else {
-			$response = $EMO_x.' *'.$park.'* cancellato/a.';
+			$response = $EMO_x.' *'.str_replace("\'","'",$park).'* cancellato/a.';
 			mysqli_query($conn,"DELETE FROM `parks` WHERE `park` = '$park'");
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
