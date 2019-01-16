@@ -129,8 +129,8 @@ if(strpos($text, "/adminhelp") === 0 ) {
 		   	$EMO_TRI . " *Per elencare gli admin del bot*, utilizzare il comando `/admins`.\n\n".
 		   	$EMO_TRI . " *Per rimuovere un singolo nido*, utilizzare il comando `/delnest <nido>`.\n\n".
 		   	$EMO_TRI . " *Per resettare i nidi correnti*, utilizzare il comando `/resetnests`.".
-		   	$EMO_TRI . " *Per aggiungere un parco*, utilizzare il comando `/newpark <parco>, <latitudine>, <longitudine>`.\n\n_Esempio:_\n`/newpark Villa Borghese, 41.913567, 12.484158`.\n\n" .
-		   	$EMO_TRI . " *Per rimuovere un parco*, utilizzare il comando `/delpark <parco>`.\n\n_Esempio:_\n`/delpark Villa Borghese`.\n\n" ,
+		   	$EMO_TRI . " *Per aggiungere un parco*, utilizzare il comando `/newpark <parco>, <latitudine>, <longitudine>`.\n\n_Esempio:_\n`/newpark Villa Borghese, 41.913567, 12.484158`\n\n" .
+		   	$EMO_TRI . " *Per rimuovere un parco*, utilizzare il comando `/delpark <parco>`.\n\n_Esempio:_\n`/delpark Villa Borghese`\n\n" ,
 		   	//$EMO_TRI . " *Per aggiungere un admin al bot*, utilizzare il comando `/addadmin <username>`.\n\n_Esempio:_\n`/addadmin Exeggutor`.\n\n" .
 		   	//$EMO_TRI . " *Per rimuovere un admin dal bot*, utilizzare il comando `/deladmin <username>`.\n\n_Esempio:_\n`/deladmin Exeggutor`.\n\n" .
 		   	//$EMO_TRI . " *Per aggiungere un gruppo al bot*, utilizzare il comando `/addgroup <ID-gruppo>, <nome-gruppo>`.\n\n_Esempio:_\n`/addgroup -123456, Exeggutor-group`.\n\n" .
