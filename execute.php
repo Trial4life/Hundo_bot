@@ -813,15 +813,15 @@ elseif($status == 0) {
 		$park = ucfirst($strArr[0]);
 		$lat = ucwords($strArr[1]);
 		$lng = ucwords($strArr[2]);
-			$link = "https://maps.google.com/?q=".$lat.",".$lng."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$park))).")";
+		$link = "https://maps.google.com/?q=".$lat.",".$lng."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$park))).")";
 
 		$query = "SELECT * FROM `parks` WHERE `park` = '$park'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
 
 		if (!$row) {
-			$response = $EMO_v.' <b><a href="'.$link.'">'.$park.'</a></b> aggiunto/a al database.';
 			mysqli_query($conn,"INSERT INTO `parks` VALUES ('$park','$lat','$lng')");
+			$response = $link;
 		}
 		else {
 			$response = '<b><a href="'.$link.'">'.$park.'</a></b> è già presente nel database.';
