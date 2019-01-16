@@ -763,11 +763,11 @@ elseif($status == 0) {
 			array_push($pkmnS, $row['pokemon']);
 
 			$parkTMP = $row['nido'];
-			$query2 = "SELECT * FROM `parks` WHERE `park` = '$parkTMP'";
-			$result2 = mysqli_query($conn,$query2);
-			$row2 = mysqli_fetch_assoc($result2);
-			$row2['lat'] != '' ? array_push($latS, $row2['lat']) : array_push($latS, 0);
-			$row2['lng'] != '' ? array_push($lngS, $row2['lng']) : array_push($lngS, 0);
+			$query3 = "SELECT * FROM `parks` WHERE `park` = '$parkTMP'";
+			$result3 = mysqli_query($conn,$query3);
+			$row3 = mysqli_fetch_assoc($result3);
+			$row3['lat'] != '' ? array_push($latS, $row3['lat']) : array_push($latS, 0);
+			$row3['lng'] != '' ? array_push($lngS, $row3['lng']) : array_push($lngS, 0);
 		}
 
 		// setlocale(LC_ALL, "ita");
