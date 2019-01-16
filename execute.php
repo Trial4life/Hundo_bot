@@ -790,8 +790,8 @@ elseif($status == 0) {
 			if ($spawn) {
 				$response = $response."\n\n".$EMO_LEAF .' Spawn frequenti fino al <b>'.$endDate.'</b>:';
 				for ($i = 0; $i <= sizeof($spawn)-1; $i++){
-					$latS[$i] != '0' ? $link = "https://maps.google.com/?q=".$latS[$i].",".$lngS[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$spawn[$i]))).")" : "";
-					//$link = "https://maps.google.com/?q=".$latS[$i].",".$lngS[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$spawn[$i]))).")";
+					//$latS[$i] != '0' ? $link = "https://maps.google.com/?q=".$latS[$i].",".$lngS[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$spawn[$i]))).")" : "";
+					$link = "https://maps.google.com/?q=".$latS[$i].",".$lngS[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$spawn[$i]))).")";
 					$response = $response."\n<b>".$pkmnS[$i]."</b> − ".'<a href="'.$link.'">'.$spawn[$i].'</a>';
 				}
 			}
