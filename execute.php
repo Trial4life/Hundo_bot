@@ -753,7 +753,7 @@ elseif($status == 0) {
 			$result2 = mysqli_query($conn,$query2);
 			$row2 = mysqli_fetch_assoc($result2);
 			$row2['lat'] != '' ? array_push($latN, $row2['lat']) : array_push($latN, 0);
-			$row2['lng'] != '' array_push($lngN, $row2['lng']) : array_push($lngN, 0);
+			$row2['lng'] != '' ? array_push($lngN, $row2['lng']) : array_push($lngN, 0);
 		}
 
 		$query = "SELECT * FROM `nests` WHERE `type` = 2 ORDER BY `pokemon` ASC";
@@ -766,8 +766,8 @@ elseif($status == 0) {
 			$query2 = "SELECT * FROM `parks` WHERE `park` = '$parkTMP'";
 			$result2 = mysqli_query($conn,$query2);
 			$row2 = mysqli_fetch_assoc($result2);
-			$row2['lat'] != '' array_push($latS, $row2['lat']) : array_push($latS, 0);
-			$row2['lng'] != '' array_push($lngS, $row2['lng']) : array_push($lngS, 0);
+			$row2['lat'] != '' ? array_push($latS, $row2['lat']) : array_push($latS, 0);
+			$row2['lng'] != '' ? array_push($lngS, $row2['lng']) : array_push($lngS, 0);
 		}
 
 		// setlocale(LC_ALL, "ita");
