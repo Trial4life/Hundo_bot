@@ -812,7 +812,7 @@ elseif($status == 0) {
 		$park = ucfirst($strArr[0]);
 		$lat = ucwords($strArr[1]);
 		$lng = ucwords($strArr[2]);
-		$link = "https://maps.google.com/?q=".$lat.",".$lng."(".str_replace(" ","+"$park).")";		// BETA
+		$link = "https://maps.google.com/?q=".$lat.",".$lng."(".str_replace(" ","+",$park).")";		// BETA
 
 		$query = "SELECT * FROM `parks` WHERE `park` = '$park'";
 		$result = mysqli_query($conn,$query);
