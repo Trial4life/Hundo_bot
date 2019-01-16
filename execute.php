@@ -105,7 +105,8 @@ if(strpos($text, "/exeggutorhelp") === 0 ) {
 	   	$EMO_TRI ." *Per impostare il raggio entro il quale mostrare le quest segnalate*, usare il comando `/radius <chilometri>`. \n\n_Esempio_:\n`/radius 0.5`\n\n".
 	   	$EMO_TRI ." *Per segnalare un nuovo nido*, usare il comando `/nest <pokemon>, <nido>`. \n\n_Esempio_:\n`/nest Squirtle, Villa Borghese`\n\n".
 	   	$EMO_TRI ." *Per segnalare un nuovo spawn frequente*, usare il comando `/spawn <pokemon>, <spawn>`. \n\n_Esempio_:\n`/spawn Squirtle, Parchetto dei Galli`\n\n".
-	   	$EMO_TRI ." *Per elencare i nidi correnti*, usare il comando `/nidi`",
+	   	$EMO_TRI ." *Per elencare i nidi correnti*, usare il comando `/nidi`\n\n".
+	   	$EMO_TRI ." *Per elencare i parchi nel database*, usare il comando `/parks`",
 	   'parse_mode' => 'markdown',
 	];
 	$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
@@ -127,7 +128,9 @@ if(strpos($text, "/adminhelp") === 0 ) {
 		   	$EMO_TRI . " *Per elencare le celle S2 associate ad un gruppo*, utilizzare il comando `/groupcells` all'interno della chat del gruppo.\n\n" .
 		   	$EMO_TRI . " *Per elencare gli admin del bot*, utilizzare il comando `/admins`.\n\n".
 		   	$EMO_TRI . " *Per rimuovere un singolo nido*, utilizzare il comando `/delnest <nido>`.\n\n".
-		   	$EMO_TRI . " *Per resettare i nidi correnti*, utilizzare il comando `/resetnests`.",
+		   	$EMO_TRI . " *Per resettare i nidi correnti*, utilizzare il comando `/resetnests`.".
+		   	$EMO_TRI . " *Per aggiungere un parco*, utilizzare il comando `/newpark <parco>, <latitudine>, <longitudine>`.\n\n_Esempio:_\n`/newpark Villa Borghese, 41.913567, 12.484158`.\n\n" .
+		   	$EMO_TRI . " *Per rimuovere un parco*, utilizzare il comando `/delpark <parco>`.\n\n_Esempio:_\n`/delpark Villa Borghese`.\n\n" ,
 		   	//$EMO_TRI . " *Per aggiungere un admin al bot*, utilizzare il comando `/addadmin <username>`.\n\n_Esempio:_\n`/addadmin Exeggutor`.\n\n" .
 		   	//$EMO_TRI . " *Per rimuovere un admin dal bot*, utilizzare il comando `/deladmin <username>`.\n\n_Esempio:_\n`/deladmin Exeggutor`.\n\n" .
 		   	//$EMO_TRI . " *Per aggiungere un gruppo al bot*, utilizzare il comando `/addgroup <ID-gruppo>, <nome-gruppo>`.\n\n_Esempio:_\n`/addgroup -123456, Exeggutor-group`.\n\n" .
@@ -782,8 +785,6 @@ elseif($status == 0) {
 				$response = $EMO_TREE .' Nidi fino al <b>'.$endDate.'</b>:';
 				for ($i = 0; $i <= sizeof($nest)-1; $i++){
 					$latN[$i] != '0' ? $link = "https://maps.google.com/?q=".$latN[$i].",".$lngN[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$nest[$i]))).")" : $link = "";
-					//$link = "https://maps.google.com/?q=".$latN[$i].",".$lngN[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$nest[$i]))).")";
-
 					$response = $response."\n<b>".$pkmnN[$i]."</b> − ".'<a href="'.$link.'">'.$nest[$i].'</a>';
 				}
 			}
@@ -791,7 +792,6 @@ elseif($status == 0) {
 				$response = $response."\n\n".$EMO_LEAF .' Spawn frequenti fino al <b>'.$endDate.'</b>:';
 				for ($i = 0; $i <= sizeof($spawn)-1; $i++){
 					$latS[$i] != '0' ? $link = "https://maps.google.com/?q=".$latS[$i].",".$lngS[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$spawn[$i]))).")" : $link = "";
-					//$link = "https://maps.google.com/?q=".$latS[$i].",".$lngS[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$spawn[$i]))).")";
 					$response = $response."\n<b>".$pkmnS[$i]."</b> − ".'<a href="'.$link.'">'.$spawn[$i].'</a>';
 				}
 			}
