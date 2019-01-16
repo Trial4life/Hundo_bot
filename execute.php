@@ -741,7 +741,7 @@ elseif($status == 0) {
 
 		$query = "SELECT * FROM `nests` WHERE `type` = 1 ORDER BY `pokemon` ASC";
 		$result = mysqli_query($conn,$query);
-		$nest = $pkmn = $spawn = $pkmnS = array();
+		$nest = $pkmnN = $spawn = $pkmnS = array();
 		while ($row = mysqli_fetch_assoc($result)) {
 			array_push($nest, $row['nido']);
 			array_push($pkmnN, $row['pokemon']);
