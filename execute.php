@@ -661,6 +661,47 @@ elseif($status == 0) {
 		echo json_encode($parameters);
 	}
 
+	//////////////////
+	////// SPAWN /////
+	//////////////////
+	elseif(strpos($text, "/spawn") === 0 ) {
+		$str = str_replace('/spawn ', '', $text);
+
+		$query = "SELECT * FROM `nestEnd`";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+		$endDate = $row['endDate'];
+		if ($today >= $endDate) {
+			mysqli_query($conn,"TRUNCATE `nests`");
+			$newEnd = date('Y-m-d', strtotime($endDate. ' + 14 days'));
+			mysqli_query($conn,"UPDATE `nestEnd` SET `endDate` = '$newEnd' WHERE `endDate` = '$endDate'");
+			$endDate = $newEnd;
+		}
+
+		$strArr = explode(", ",$str);
+		$pkmn = ucfirst($strArr[0]);
+		$nest = ucwords($strArr[1]);
+		$query = "SELECT * FROM `nests` WHERE `nido` = '$nest'";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+		$currNest = $row['nido'];
+
+		// setlocale(LC_ALL, "ita");
+		$endDate = str_replace(" ","",date("j/m", strtotime(str_replace('-','/', $endDate))));
+
+		if ($currNest == $nest) {
+			$response = 'Lo spawn frequente a *'.$nest.'* è stato già registrato fino al *'.$endDate.'*.';
+		}
+		else {
+			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn',2)");
+			$response = $EMO_v.' Spawn frequente *'.$nest.'* registrato fino al *'.$endDate.'*.';
+		}
+
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
+
 	/////////////////
 	//// DELNEST ////
 	/////////////////
