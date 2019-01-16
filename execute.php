@@ -659,7 +659,7 @@ elseif($status == 0) {
 		}
 		else {
 			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn',1)");
-			$response = $EMO_v.' Nido *'.$nest.'* registrato fino al *'.$endDate.'*.';
+			$response = $EMO_v.' Nido *'.str_replace("\'","'",$nest).'* registrato fino al *'.$endDate.'*.';
 		}
 
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
@@ -700,7 +700,7 @@ elseif($status == 0) {
 		}
 		else {
 			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn',2)");
-			$response = $EMO_v.' Spawn frequente *'.$nest.'* registrato fino al *'.$endDate.'*.';
+			$response = $EMO_v.' Spawn frequente *'.str_replace("\'","'",$nest).'* registrato fino al *'.$endDate.'*.';
 		}
 
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
@@ -840,7 +840,7 @@ elseif($status == 0) {
 
 		if (!$row) {
 			mysqli_query($conn,"INSERT INTO `parks` VALUES ('$park','$lat','$lng')");
-			$response = $EMO_v.' <a href="'.$link.'">'.str_replace("\'","'",$park).'</a> aggiunto/a al database.';
+			$response = $EMO_v.' <a href="'.$link.'">'.str_replace("\'","'",$park).'</a> aggiunto/a al database dei parchi.';
 		}
 		else {
 			$response = '<a href="'.$link.'">'.str_replace("\'","'",$park).'</a> è già presente nel database.';
@@ -863,7 +863,7 @@ elseif($status == 0) {
 			$response = $EMO_ERR.' *'.str_replace("\'","'",$park).'* non trovato/a.';
 		}
 		else {
-			$response = $EMO_x.' *'.str_replace("\'","'",$park).'* cancellato/a.';
+			$response = $EMO_x.' *'.str_replace("\'","'",$park).'* rimosso/a dal database dei parchi.';
 			mysqli_query($conn,"DELETE FROM `parks` WHERE `park` = '$park'");
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
