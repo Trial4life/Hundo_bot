@@ -719,11 +719,11 @@ elseif($status == 0) {
 		}
 		else {
 			$response = $EMO_x.' Nido *'.$nest.'* cancellato.';
+			mysqli_query($conn,"DELETE FROM `nests` WHERE `nido` = '$nest'");
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
-		mysqli_query($conn,"DELETE FROM `nests` WHERE `nido` = '$nest'");
 	}
 
 	//////////////////
@@ -828,6 +828,26 @@ elseif($status == 0) {
 		}
 
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "HTML", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
+
+	/////////////////
+	//// DELPARK ////
+	/////////////////
+	elseif(strpos($text, "/delpark") === 0 ) {
+		$park = ucfirst(str_replace('/delpark ', '', $text));
+		$query = "SELECT * FROM `parks` WHERE `park` = '$park'";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+		if (!$row) {
+			$response = $EMO_ERR.'*'.$park.'* non trovato/a.';
+		}
+		else {
+			$response = $EMO_x.' *'.$park.'* cancellato/a.';
+			mysqli_query($conn,"DELETE FROM `parks` WHERE `park` = '$park'");
+		}
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
 	}
