@@ -52,6 +52,7 @@ $EMO_TRI = "\xE2\x96\xB6";
 $EMO_ON = "\xF0\x9F\x94\x94";
 $EMO_OFF = "\xF0\x9F\x94\x95";
 $EMO_TREE = "\xF0\x9F\x8C\xB3";
+$EMO_LEAF = "\xF0\x9F\x8D\x83";
 $EMO_v = json_decode('"'."\u2705".'"');
 $EMO_x = json_decode('"'."\u274c".'"');
 $EMO_ALR = json_decode('"'."\u203c".'"');
@@ -738,24 +739,36 @@ elseif($status == 0) {
 			$endDate = $newEnd;
 		}
 
-		$query = "SELECT * FROM `nests` ORDER BY `pokemon` ASC";
+		$query = "SELECT * FROM `nests` WHERE `type` = 1 ORDER BY `pokemon` ASC";
 		$result = mysqli_query($conn,$query);
-		$nest = $pkmn = array();
+		$nest = $pkmn = $spawn = $pkmnS = array();
 		while ($row = mysqli_fetch_assoc($result)) {
 			array_push($nest, $row['nido']);
-			array_push($pkmn, $row['pokemon']);
+			array_push($pkmnN, $row['pokemon']);
+		}
+
+		$query = "SELECT * FROM `nests` WHERE `type` = 2 ORDER BY `pokemon` ASC";
+		$result = mysqli_query($conn,$query);
+		while ($row = mysqli_fetch_assoc($result)) {
+			array_push($spawn, $row['nido']);
+			array_push($pkmnS, $row['pokemon']);
 		}
 
 		// setlocale(LC_ALL, "ita");
 		$endDate = str_replace(" ","",date("j/m", strtotime(str_replace('-','/', $endDate))));
 
-		if (!$nest) {
+		if (!$nest and !$spawn) {
 			$response = 'Nessun nido segnalato fino al *'.$endDate.'*.';
 		}
 		else {
 			$response = $EMO_TREE .' Nidi fino al *'.$endDate.'*:';
 			for ($i = 0; $i <= sizeof($nest)-1; $i++){
-				$response = $response."\n*".$pkmn[$i]."* − ".$nest[$i];
+				$response = $response."\n*".$pkmnN[$i]."* − ".$nest[$i];
+			}
+
+			$response = "\n\n".$EMO_LEAF .' Spawn frequenti fino al *'.$endDate.'*:';
+			for ($i = 0; $i <= sizeof($spawn)-1; $i++){
+				$response = $response."\n*".$pkmnS[$i]."* − ".$spawn[$i];
 			}
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
