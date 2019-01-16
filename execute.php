@@ -752,8 +752,8 @@ elseif($status == 0) {
 			$query2 = "SELECT * FROM `parks` WHERE `park` = '$parkTMP'";
 			$result2 = mysqli_query($conn,$query2);
 			$row2 = mysqli_fetch_assoc($result2);
-			$row2['lat'] != '' ? array_push($latN, $row2['lat']) : array_push($latN, 0);
-			$row2['lng'] != '' ? array_push($lngN, $row2['lng']) : array_push($lngN, 0);
+			$row2['lat'] != '' ? array_push($latN, $row2['lat']) : array_push($latN, '0');
+			$row2['lng'] != '' ? array_push($lngN, $row2['lng']) : array_push($lngN, '0');
 		}
 
 		$query = "SELECT * FROM `nests` WHERE `type` = 2 ORDER BY `pokemon` ASC";
@@ -763,11 +763,11 @@ elseif($status == 0) {
 			array_push($pkmnS, $row['pokemon']);
 
 			$parkTMP = $row['nido'];
-			$query3 = "SELECT * FROM `parks` WHERE `park` = '$parkTMP'";
-			$result3 = mysqli_query($conn,$query3);
-			$row3 = mysqli_fetch_assoc($result3);
-			$row3['lat'] != '' ? array_push($latS, $row3['lat']) : array_push($latS, 0);
-			$row3['lng'] != '' ? array_push($lngS, $row3['lng']) : array_push($lngS, 0);
+			$query2 = "SELECT * FROM `parks` WHERE `park` = '$parkTMP'";
+			$result2 = mysqli_query($conn,$query2);
+			$row2 = mysqli_fetch_assoc($result2);
+			$row2['lat'] != '' ? array_push($latS, $row2['lat']) : array_push($latS, '0');
+			$row2['lng'] != '' ? array_push($lngS, $row2['lng']) : array_push($lngS, '0');
 		}
 
 		// setlocale(LC_ALL, "ita");
@@ -781,7 +781,7 @@ elseif($status == 0) {
 			if ($nest) {
 				$response = $EMO_TREE .' Nidi fino al <b>'.$endDate.'</b>:';
 				for ($i = 0; $i <= sizeof($nest)-1; $i++){
-					$latN[$i] != 0 ? $link = "https://maps.google.com/?q=".$latN[$i].",".$lngN[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$nest[$i]))).")" : "";
+					$latN[$i] != '0' ? $link = "https://maps.google.com/?q=".$latN[$i].",".$lngN[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$nest[$i]))).")" : "";
 					//$link = "https://maps.google.com/?q=".$latN[$i].",".$lngN[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$nest[$i]))).")";
 
 					$response = $response."\n<b>".$pkmnN[$i]."</b> − ".'<a href="'.$link.'">'.$nest[$i].'</a>';
@@ -790,7 +790,7 @@ elseif($status == 0) {
 			if ($spawn) {
 				$response = $response."\n\n".$EMO_LEAF .' Spawn frequenti fino al <b>'.$endDate.'</b>:';
 				for ($i = 0; $i <= sizeof($spawn)-1; $i++){
-					$latS[$i] != 0 ? $link = "https://maps.google.com/?q=".$latS[$i].",".$lngS[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$spawn[$i]))).")" : "";
+					$latS[$i] != '0' ? $link = "https://maps.google.com/?q=".$latS[$i].",".$lngS[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$spawn[$i]))).")" : "";
 					//$link = "https://maps.google.com/?q=".$latS[$i].",".$lngS[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$spawn[$i]))).")";
 					$response = $response."\n<b>".$pkmnS[$i]."</b> − ".'<a href="'.$link.'">'.$spawn[$i].'</a>';
 				}
