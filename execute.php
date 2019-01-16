@@ -712,7 +712,7 @@ elseif($status == 0) {
 	//// DELNEST ////
 	/////////////////
 	elseif(strpos($text, "/delnest") === 0 ) {
-		$nest = ucfirst(str_replace('/delnest ', '', $text));
+		$nest = ucfirst(str_replace('/delnest ', '', str_replace("'","\'",$text)));
 		$query = "SELECT * FROM `nests` WHERE `nido` = '$nest'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
@@ -855,7 +855,7 @@ elseif($status == 0) {
 	//// DELPARK ////
 	/////////////////
 	elseif(strpos($text, "/delpark") === 0 ) {
-		$park = ucwords(str_replace('/delpark ', '', $text));
+		$park = ucwords(str_replace('/delpark ', '', str_replace("'","\'",$text)));
 		$query = "SELECT * FROM `parks` WHERE `park` = '$park'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
