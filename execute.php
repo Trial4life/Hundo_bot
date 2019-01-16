@@ -743,10 +743,17 @@ elseif($status == 0) {
 
 		$query = "SELECT * FROM `nests` WHERE `type` = 1 ORDER BY `pokemon` ASC";
 		$result = mysqli_query($conn,$query);
-		$nest = $pkmnN = $spawn = $pkmnS = array();
+		$nest = $pkmnN = $spawn = $pkmnS = $latN = $lngN = $latS = $lngS = array();
 		while ($row = mysqli_fetch_assoc($result)) {
 			array_push($nest, $row['nido']);
 			array_push($pkmnN, $row['pokemon']);
+
+			$parkTMP = $row['nido'];
+			$query2 = "SELECT * FROM `parks` WHERE `park` = '$parkTMP'";
+			$result2 = mysqli_query($conn,$query2);
+			$row2 = mysqli_fetch_assoc($result2);
+			array_push($latN, $row2['lat']);
+			array_push($lngN, $row2['pokemon']);
 		}
 
 		$query = "SELECT * FROM `nests` WHERE `type` = 2 ORDER BY `pokemon` ASC";
@@ -754,30 +761,39 @@ elseif($status == 0) {
 		while ($row = mysqli_fetch_assoc($result)) {
 			array_push($spawn, $row['nido']);
 			array_push($pkmnS, $row['pokemon']);
+
+			$parkTMP = $row['nido'];
+			$query2 = "SELECT * FROM `parks` WHERE `park` = '$parkTMP'";
+			$result2 = mysqli_query($conn,$query2);
+			$row2 = mysqli_fetch_assoc($result2);
+			array_push($latS, $row2['lat']);
+			array_push($lngS, $row2['pokemon']);
 		}
 
 		// setlocale(LC_ALL, "ita");
 		$endDate = str_replace(" ","",date("j/m", strtotime(str_replace('-','/', $endDate))));
 
 		if (!$nest and !$spawn) {
-			$response = 'Nessun nido segnalato fino al *'.$endDate.'*.';
+			$response = 'Nessun nido segnalato fino al <b>'.$endDate.'</b>.';
 		}
 		else {
 			$response = "";
 			if ($nest) {
-				$response = $EMO_TREE .' Nidi fino al *'.$endDate.'*:';
+				$response = $EMO_TREE .' Nidi fino al <b>'.$endDate.'</b>:';
 				for ($i = 0; $i <= sizeof($nest)-1; $i++){
-					$response = $response."\n*".$pkmnN[$i]."* − ".$nest[$i];
+					$link = "https://maps.google.com/?q=".$latN[$i].",".$lngN[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$nest[$i]))).")";
+					$response = $response."\n<b>".$pkmnN[$i]."</b> − ".'<a href="'.$link.'">'.$nest[$i].'</a>';
 				}
 			}
 			if ($spawn) {
-				$response = $response."\n\n".$EMO_LEAF .' Spawn frequenti fino al *'.$endDate.'*:';
+				$response = $response."\n\n".$EMO_LEAF .' Spawn frequenti fino al <b>'.$endDate.'</b>:';
 				for ($i = 0; $i <= sizeof($spawn)-1; $i++){
-					$response = $response."\n*".$pkmnS[$i]."* − ".$spawn[$i];
+					$link = "https://maps.google.com/?q=".$latS[$i].",".$lngS[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$spawn[$i]))).")";
+					$response = $response."\n*".$pkmnS[$i]."* − ".'<a href="'.$link.'">'.$spawn[$i].'</a>';
 				}
 			}
 		}
-		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "HTML", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
 	}
