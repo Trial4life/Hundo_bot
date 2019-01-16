@@ -812,7 +812,7 @@ elseif($status == 0) {
 		$park = ucfirst($strArr[0]);
 		$lat = ucwords($strArr[1]);
 		$lng = ucwords($strArr[2]);
-		$link = "https://maps.google.com/?q=".$lat.",".$lng."(".str_replace(" ","+",$park).")";		// BETA
+			$link = "https://maps.google.com/?q=".$lat.",".$lng."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$park))).")";
 
 		$query = "SELECT * FROM `parks` WHERE `park` = '$park'";
 		$result = mysqli_query($conn,$query);
@@ -844,10 +844,10 @@ elseif($status == 0) {
 			array_push($lng, $row['lng']);
 		}
 
-		$response = $EMO_TREE .' Elenco dei parchi :';
-		for ($i = 0; $i <= sizeof($parks)-1; $i++){
-			$link = "https://maps.google.com/?q=".$lat[$i].",".$lng[$i]."(".str_replace(" ","+",$park[$i]).")";		// BETA
-			$response = "\n".'<a href="'.$link.'">'.$park[$i].'</a>';
+		$response = $EMO_TREE .' Elenco dei parchi:';
+		for ($i = 0; $i <= sizeof($park)-1; $i++){
+			$link = "https://maps.google.com/?q=".$lat[$i].",".$lng[$i]."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$park[$i]))).")";
+			$response = $response. "\n".'<a href="'.$link.'">'.$park[$i].'</a>';
 		}
 
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "HTML", "disable_web_page_preview" => TRUE);
