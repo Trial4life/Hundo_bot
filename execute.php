@@ -655,7 +655,7 @@ elseif($status == 0) {
 		$endDate = str_replace(" ","",date("j/m", strtotime(str_replace('-','/', $endDate))));
 
 		if ($currNest == $nest) {
-			$response = 'Il nido a *'.$nest.'* è stato già registrato fino al *'.$endDate.'*.';
+			$response = 'Il nido a *'.str_replace("\'","'",$nest).'* è stato già registrato fino al *'.$endDate.'*.';
 		}
 		else {
 			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn',1)");
@@ -696,7 +696,7 @@ elseif($status == 0) {
 		$endDate = str_replace(" ","",date("j/m", strtotime(str_replace('-','/', $endDate))));
 
 		if ($currNest == $nest) {
-			$response = 'Lo spawn frequente a *'.$nest.'* è stato già registrato fino al *'.$endDate.'*.';
+			$response = 'Lo spawn frequente a *'.str_replace("\'","'",$nest).'* è stato già registrato fino al *'.$endDate.'*.';
 		}
 		else {
 			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn',2)");
