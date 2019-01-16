@@ -753,7 +753,7 @@ elseif($status == 0) {
 			$result2 = mysqli_query($conn,$query2);
 			$row2 = mysqli_fetch_assoc($result2);
 			array_push($latN, $row2['lat']);
-			array_push($lngN, $row2['pokemon']);
+			array_push($lngN, $row2['lng']);
 		}
 
 		$query = "SELECT * FROM `nests` WHERE `type` = 2 ORDER BY `pokemon` ASC";
@@ -767,7 +767,7 @@ elseif($status == 0) {
 			$result2 = mysqli_query($conn,$query2);
 			$row2 = mysqli_fetch_assoc($result2);
 			array_push($latS, $row2['lat']);
-			array_push($lngS, $row2['pokemon']);
+			array_push($lngS, $row2['lng']);
 		}
 
 		// setlocale(LC_ALL, "ita");
