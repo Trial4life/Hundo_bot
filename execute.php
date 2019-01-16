@@ -52,6 +52,7 @@ $EMO_TRI = "\xE2\x96\xB6";
 $EMO_ON = "\xF0\x9F\x94\x94";
 $EMO_OFF = "\xF0\x9F\x94\x95";
 $EMO_TREE = "\xF0\x9F\x8C\xB3";
+$EMO_LEAF = "\xF0\x9F\x8D\x83";
 $EMO_v = json_decode('"'."\u2705".'"');
 $EMO_x = json_decode('"'."\u274c".'"');
 $EMO_ALR = json_decode('"'."\u203c".'"');
@@ -102,6 +103,7 @@ if(strpos($text, "/exeggutorhelp") === 0 ) {
 	   	$EMO_TRI ." *Per mostrare le quest segnalate entro il raggio impostato*, inviare la posizione in privato al bot.\n\n".
 	   	$EMO_TRI ." *Per impostare il raggio entro il quale mostrare le quest segnalate*, usare il comando `/radius <chilometri>`. \n\n_Esempio_:\n`/radius 0.5`\n\n".
 	   	$EMO_TRI ." *Per segnalare un nuovo nido*, usare il comando `/nest <pokemon>, <nido>`. \n\n_Esempio_:\n`/nest Squirtle, Villa Borghese`\n\n".
+	   	$EMO_TRI ." *Per segnalare un nuovo spawn frequente*, usare il comando `/spawn <pokemon>, <spawn>`. \n\n_Esempio_:\n`/spawn Squirtle, Parchetto dei Galli`\n\n".
 	   	$EMO_TRI ." *Per elencare i nidi correnti*, usare il comando `/nidi`",
 	   'parse_mode' => 'markdown',
 	];
@@ -652,8 +654,49 @@ elseif($status == 0) {
 			$response = 'Il nido a *'.$nest.'* è stato già registrato fino al *'.$endDate.'*.';
 		}
 		else {
+			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn',1)");
 			$response = $EMO_v.' Nido *'.$nest.'* registrato fino al *'.$endDate.'*.';
-			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn')");
+		}
+
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
+
+	//////////////////
+	////// SPAWN /////
+	//////////////////
+	elseif(strpos($text, "/spawn") === 0 ) {
+		$str = str_replace('/spawn ', '', $text);
+
+		$query = "SELECT * FROM `nestEnd`";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+		$endDate = $row['endDate'];
+		if ($today >= $endDate) {
+			mysqli_query($conn,"TRUNCATE `nests`");
+			$newEnd = date('Y-m-d', strtotime($endDate. ' + 14 days'));
+			mysqli_query($conn,"UPDATE `nestEnd` SET `endDate` = '$newEnd' WHERE `endDate` = '$endDate'");
+			$endDate = $newEnd;
+		}
+
+		$strArr = explode(", ",$str);
+		$pkmn = ucfirst($strArr[0]);
+		$nest = ucwords($strArr[1]);
+		$query = "SELECT * FROM `nests` WHERE `nido` = '$nest'";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+		$currNest = $row['nido'];
+
+		// setlocale(LC_ALL, "ita");
+		$endDate = str_replace(" ","",date("j/m", strtotime(str_replace('-','/', $endDate))));
+
+		if ($currNest == $nest) {
+			$response = 'Lo spawn frequente a *'.$nest.'* è stato già registrato fino al *'.$endDate.'*.';
+		}
+		else {
+			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn',2)");
+			$response = $EMO_v.' Spawn frequente *'.$nest.'* registrato fino al *'.$endDate.'*.';
 		}
 
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
@@ -697,24 +740,40 @@ elseif($status == 0) {
 			$endDate = $newEnd;
 		}
 
-		$query = "SELECT * FROM `nests` ORDER BY `pokemon` ASC";
+		$query = "SELECT * FROM `nests` WHERE `type` = 1 ORDER BY `pokemon` ASC";
 		$result = mysqli_query($conn,$query);
-		$nest = $pkmn = array();
+		$nest = $pkmnN = $spawn = $pkmnS = array();
 		while ($row = mysqli_fetch_assoc($result)) {
 			array_push($nest, $row['nido']);
-			array_push($pkmn, $row['pokemon']);
+			array_push($pkmnN, $row['pokemon']);
+		}
+
+		$query = "SELECT * FROM `nests` WHERE `type` = 2 ORDER BY `pokemon` ASC";
+		$result = mysqli_query($conn,$query);
+		while ($row = mysqli_fetch_assoc($result)) {
+			array_push($spawn, $row['nido']);
+			array_push($pkmnS, $row['pokemon']);
 		}
 
 		// setlocale(LC_ALL, "ita");
 		$endDate = str_replace(" ","",date("j/m", strtotime(str_replace('-','/', $endDate))));
 
-		if (!$nest) {
+		if (!$nest and !$spawn) {
 			$response = 'Nessun nido segnalato fino al *'.$endDate.'*.';
 		}
 		else {
-			$response = $EMO_TREE .' Nidi fino al *'.$endDate.'*:';
-			for ($i = 0; $i <= sizeof($nest)-1; $i++){
-				$response = $response."\n*".$pkmn[$i]."* − ".$nest[$i];
+			$response = "";
+			if ($nest) {
+				$response = $EMO_TREE .' Nidi fino al *'.$endDate.'*:';
+				for ($i = 0; $i <= sizeof($nest)-1; $i++){
+					$response = $response."\n*".$pkmnN[$i]."* − ".$nest[$i];
+				}
+			}
+			if ($spawn) {
+				$response = $response."\n\n".$EMO_LEAF .' Spawn frequenti fino al *'.$endDate.'*:';
+				for ($i = 0; $i <= sizeof($spawn)-1; $i++){
+					$response = $response."\n*".$pkmnS[$i]."* − ".$spawn[$i];
+				}
 			}
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
