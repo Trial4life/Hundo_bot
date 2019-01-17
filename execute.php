@@ -683,19 +683,19 @@ elseif($status == 0) {
 		    "inline_keyboard" => array(
 		    	array(
 		    		array(
-		    			"text" => $EMO_NO,
+		    			"text" => "NE",
 		    			"callback_data" => "myCallbackData"
 		    		),
 		    		array(
-		    			"text" => $EMO_N,
+		    			"text" => "N",
 		    			"callback_data" => "myCallbackData"
-		    		)
+		    		),
 		    		array(
-		    			"text" => $EMO_NE,
+		    			"text" => "NO",
 		    			"callback_data" => "myCallbackData"
 		    		),
 		    	)
-		    )
+		   )
 		);
 
     	$encodedKeyboard = json_encode($keyboard, true);
