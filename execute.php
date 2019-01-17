@@ -680,6 +680,10 @@ elseif($status == 0) {
 */
    	$response = "Ciao, benvenuto!";
 
+		$keyboard = array(
+		    "inline_keyboard" => array(array(array("text" => "My Button Text", "callback_data" => "myCallbackData")))
+		);
+		/*
      	$keyboard = [
      	    'inline_keyboard' => [
      	        [
@@ -687,8 +691,8 @@ elseif($status == 0) {
      	        ]
      	    ],
      	];
-
-    	$encodedKeyboard = json_encode($keyboard);
+*/
+    	$encodedKeyboard = json_encode($keyboard, true);
     	$parameters =
     	    array(
     	        'chat_id' => $chatId,
