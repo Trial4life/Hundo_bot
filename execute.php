@@ -681,7 +681,7 @@ elseif($status == 0) {
     	$response = "Ciao, benvenuto!";
 
      	$keyboard = [
-     	    'inline_keyboard' => [
+     	    'keyboard' => [
      	        [
      	            ['text' => 'forward me to groups']
      	        ]
