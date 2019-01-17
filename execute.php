@@ -420,6 +420,11 @@ elseif(strpos($text, "/mappaquest") === 0 ) {
 }
 
 elseif($status == 0) {
+
+####################
+###### QUESTS ######
+####################
+
 	///////////////
 	//// QUEST ////
 	///////////////
@@ -652,6 +657,21 @@ elseif($status == 0) {
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
 	}
+
+#####################
+###### WEATHER ######
+#####################
+
+	/////////////
+	/// METEO ///
+	/////////////
+	elseif(strpos($text, "/meteo") === 0 ){
+
+	}
+
+###################
+###### NESTS ######
+###################
 
 	//////////////////
 	////// NEST //////
@@ -940,6 +960,10 @@ elseif($status == 0) {
 		echo json_encode($parameters);
 	}
 
+####################
+###### ALERTS ######
+####################
+
 	/////////////////
 	/// ADD ALERT ///
 	/////////////////
@@ -987,9 +1011,9 @@ elseif($status == 0) {
 		mysqli_query($conn,"UPDATE `pokeid` SET userAlerts = replace('$currUserAlerts',concat('$userId', ','), '') WHERE pokemon = '$quest'");
 	}
 
-	/////////////////
-	/// DEL ALERT ///
-	/////////////////
+	//////////////
+	/// ALERTS ///
+	//////////////
 	elseif(strpos($text, "/alerts") === 0 ) {
 		// CERCA ALERTS NEL DATABASE
 		$query = "SELECT * FROM `pokeid`";
@@ -1023,6 +1047,10 @@ elseif($status == 0) {
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
 	}
+
+###################
+###### CELLS ######
+###################
 
 	////////////////
 	/// ADD CELL ///
@@ -1233,6 +1261,10 @@ elseif($status == 0) {
 			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 		}
 	}
+
+###################
+###### ADMIN ######
+###################
 
 	//////////////////
 	/// ADD ADMINS ///
