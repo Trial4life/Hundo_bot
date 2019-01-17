@@ -683,7 +683,7 @@ elseif($status == 0) {
 		    "inline_keyboard" => array(
 		    	array(
 		    		array(
-		    			"text" => "NE",
+		    			"text" => $EMO_NO,
 		    			"callback_data" => "myCallbackData"
 		    		),
 		    		array(
