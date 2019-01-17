@@ -33,6 +33,8 @@ $lng = isset($message['location']['longitude']) ? $message['location']['longitud
 $today = date('Y-m-d');
 $today2 = date('d/m/y');
 
+$callback = isset($update['callback_query']) ? $update['callback_query'] : "";
+
 header("Content-Type: application/json");
 $response = '';
 $apiToken = "689487990:AAGhqhcsalt0mXYRnUqFro9ECNxPuOOVPZc";
@@ -736,23 +738,13 @@ elseif($status == 0) {
     	$parameters["method"] = "sendMessage";
     	echo json_encode($parameters);
 
-
-
-    	$content = file_get_contents("php://input");
-		$update = json_decode($content, true);
-		$chatID = $update["message"]["chat"]["id"];
-
-		if (($update['message']) != null) {
-
-		}
-		else if ($update['callback_query'] != Null) {
-    		$parameters =
-    		    array(
-    		        'chat_id' => $chatId,
-    		        'text' => $update['callback_query'],
-    		    );
-    		$parameters["method"] = "sendMessage";
-    		echo json_encode($parameters);
+    	$parameters =
+    		array(
+    		    'chat_id' => $chatId,
+    		    'text' => $callback,
+    		);
+    	$parameters["method"] = "sendMessage";
+    	echo json_encode($parameters);
 		}
 	}
 
