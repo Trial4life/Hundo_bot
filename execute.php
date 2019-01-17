@@ -54,6 +54,17 @@ $EMO_OFF = "\xF0\x9F\x94\x95";
 $EMO_TREE = "\xF0\x9F\x8C\xB3";
 $EMO_TREE2 = "\xF0\x9F\x8C\xB2";
 $EMO_LEAF = "\xF0\x9F\x8D\x83";
+
+$EMO_0 = "\x30\xE2\x83\xA3" ;
+$EMO_E = "\xE2\x9E\xA1" ;
+$EMO_NE = "\xE2\x86\x97" ;
+$EMO_N = "\xE2\xAC\x86" ;
+$EMO_NO = "\xE2\x86\x96" ;
+$EMO_O = "\xE2\xAC\x85" ;
+$EMO_SO = "\xE2\x86\x99" ;
+$EMO_S = "\xE2\xAC\x86" ;
+$EMO_SE = "\xE2\x86\x98" ;
+
 $EMO_v = json_decode('"'."\u2705".'"');
 $EMO_x = json_decode('"'."\u274c".'"');
 $EMO_ALR = json_decode('"'."\u203c".'"');
@@ -666,32 +677,27 @@ elseif($status == 0) {
 	/// METEO ///
 	/////////////
 	elseif(strpos($text, "/meteo") === 0 ){
-		/*$inline_keyboard = [
-		    new InlineKeyboardButton(['text' => 'inline', 'switch_inline_query' => 'true']),
-		    new InlineKeyboardButton(['text' => 'callback', 'callback_data' => 'identifier']),
-		    new InlineKeyboardButton(['text' => 'open url', 'url' => 'https://github.com/akalongman/php-telegram-bot']),
-		];
-		$data = [
-		    'chat_id' => $chat_id,
-		    'text'    => 'inline keyboard',
-		    'reply_markup' => new InlineKeyboardMarkup(['inline_keyboard' => [$inline_keyboard]]),
-		];
-		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
-*/
-   	$response = "Ciao, benvenuto!";
+   	$response = "− − −";
 
 		$keyboard = array(
-		    "inline_keyboard" => array(array(array("text" => "My Button Text", "callback_data" => "myCallbackData")))
+		    "inline_keyboard" => array(
+		    	array(
+		    		array(
+		    			"text" => $EMO_NO,
+		    			"callback_data" => "myCallbackData"
+		    		),
+		    		array(
+		    			"text" => $EMO_N,
+		    			"callback_data" => "myCallbackData"
+		    		)
+		    		array(
+		    			"text" => $EMO_NE,
+		    			"callback_data" => "myCallbackData"
+		    		),
+		    	)
+		    )
 		);
-		/*
-     	$keyboard = [
-     	    'inline_keyboard' => [
-     	        [
-     	            ['text' => 'forward me to groups']
-     	        ]
-     	    ],
-     	];
-*/
+
     	$encodedKeyboard = json_encode($keyboard, true);
     	$parameters =
     	    array(
@@ -701,12 +707,6 @@ elseif($status == 0) {
     	    );
     	$parameters["method"] = "sendMessage";
     	echo json_encode($parameters);
-/*
-    	// REMOVE KEYBOARD
-    	$removeKeyboard = array('remove_keyboard' => true);
-		$removeKeyboardEncoded = json_encode($removeKeyboard);
-    	file_get_contents("https://api.telegram.org/$apiToken/sendmessage?chat_id=$chatId&reply_markup=$removeKeyboardEncoded");
-*/
 	}
 
 ###################
