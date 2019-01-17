@@ -33,6 +33,9 @@ $lng = isset($message['location']['longitude']) ? $message['location']['longitud
 $today = date('Y-m-d');
 $today2 = date('d/m/y');
 
+$callback_query = isset($update["callback_query"]) ? $update["callback_query"] : "";
+$callbackId = isset($callback_query['message']['chat']['id']) ? $callback_query['message']['chat']['id'] : "";
+
 $callback = isset($update['callback_query']['id']) ? $update['callback_query']['id'] : "";
 
 header("Content-Type: application/json");
@@ -740,8 +743,8 @@ elseif($status == 0) {
 
     	$parameters =
     		array(
-    		    'chat_id' => $chatId,
-    		    'text' => $callback,
+    		    'chat_id' => $callbackId,
+    		    'text' => 'prova',
     		);
     	$parameters["method"] = "sendMessage";
     	echo json_encode($parameters);
