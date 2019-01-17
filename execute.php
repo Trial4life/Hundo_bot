@@ -677,7 +677,7 @@ elseif($status == 0) {
 	/// METEO ///
 	/////////////
 	elseif(strpos($text, "/meteo") === 0 ){
-   	$response = "Selezionare la cella meteo di Roma:";
+   	$response = "Selezionare la cella meteo interessata:";
 
 		$keyboard = array(
 		    "inline_keyboard" => array(
@@ -687,39 +687,39 @@ elseif($status == 0) {
 		    			"callback_data" => "myCallbackData"
 		    		),
 		    		array(
-		    			"text" => "N",
+		    			"text" => $EMO_N,
 		    			"callback_data" => "myCallbackData"
 		    		),
 		    		array(
-		    			"text" => "NO",
-		    			"callback_data" => "myCallbackData"
-		    		),
-		    	),
-		    	array(
-		    		array(
-		    			"text" => "O",
-		    			"callback_data" => "myCallbackData"
-		    		),
-		    		array(
-		    			"text" => "C",
-		    			"callback_data" => "myCallbackData"
-		    		),
-		    		array(
-		    			"text" => "E",
+		    			"text" => $EMO_NE,
 		    			"callback_data" => "myCallbackData"
 		    		),
 		    	),
 		    	array(
 		    		array(
-		    			"text" => "SE",
+		    			"text" => $EMO_O,
 		    			"callback_data" => "myCallbackData"
 		    		),
 		    		array(
-		    			"text" => "S",
+		    			"text" => $EMO_C,
 		    			"callback_data" => "myCallbackData"
 		    		),
 		    		array(
-		    			"text" => "SO",
+		    			"text" => $EMO_E,
+		    			"callback_data" => "myCallbackData"
+		    		),
+		    	),
+		    	array(
+		    		array(
+		    			"text" => $EMO_SO,
+		    			"callback_data" => "myCallbackData"
+		    		),
+		    		array(
+		    			"text" => $EMO_S,
+		    			"callback_data" => "myCallbackData"
+		    		),
+		    		array(
+		    			"text" => $EMO_SE,
 		    			"callback_data" => "myCallbackData"
 		    		),
 		    	)
