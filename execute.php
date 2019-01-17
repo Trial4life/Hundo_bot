@@ -33,7 +33,7 @@ $lng = isset($message['location']['longitude']) ? $message['location']['longitud
 $today = date('Y-m-d');
 $today2 = date('d/m/y');
 
-$callback = isset($update['callback_query']) ? $update['callback_query'] : "";
+$callback = isset($update['callback_query']['id']) ? $update['callback_query']['id'] : "";
 
 header("Content-Type: application/json");
 $response = '';
