@@ -62,7 +62,7 @@ $EMO_N = "\xE2\xAC\x86" ;
 $EMO_NO = "\xE2\x86\x96" ;
 $EMO_O = "\xE2\xAC\x85" ;
 $EMO_SO = "\xE2\x86\x99" ;
-$EMO_S = "\xE2\xAC\x86" ;
+$EMO_S = "\xE2\xAC\x87" ;
 $EMO_SE = "\xE2\x86\x98" ;
 
 $EMO_v = json_decode('"'."\u2705".'"');
@@ -723,7 +723,7 @@ elseif($status == 0) {
 		    			"callback_data" => "myCallbackData"
 		    		),
 		    	)
-		   )
+		   ),
 		   'resize_keyboard' => true,
 		);
 
