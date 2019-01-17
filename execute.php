@@ -666,7 +666,7 @@ elseif($status == 0) {
 	/// METEO ///
 	/////////////
 	elseif(strpos($text, "/meteo") === 0 ){
-		$inline_keyboard = [
+		/*$inline_keyboard = [
 		    new InlineKeyboardButton(['text' => 'inline', 'switch_inline_query' => 'true']),
 		    new InlineKeyboardButton(['text' => 'callback', 'callback_data' => 'identifier']),
 		    new InlineKeyboardButton(['text' => 'open url', 'url' => 'https://github.com/akalongman/php-telegram-bot']),
@@ -677,6 +677,26 @@ elseif($status == 0) {
 		    'reply_markup' => new InlineKeyboardMarkup(['inline_keyboard' => [$inline_keyboard]]),
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+*/
+    	$response = "Ciao, benvenuto!";
+
+     	$keyboard = [
+     	    'inline_keyboard' => [
+     	        [
+     	            ['text' => 'forward me to groups']
+     	        ]
+     	    ]
+     	];
+
+    	$encodedKeyboard = json_encode($keyboard);
+    	$parameters =
+    	    array(
+    	        'chat_id' => $chatId,
+    	        'text' => $response,
+    	        'reply_markup' => $encodedKeyboard
+    	    );
+    	$parameters["method"] = "sendMessage";
+    	echo json_encode($parameters);
 	}
 
 ###################
