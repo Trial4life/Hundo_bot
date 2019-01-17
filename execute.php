@@ -724,6 +724,7 @@ elseif($status == 0) {
 		    		),
 		    	)
 		   )
+		   'resize_keyboard' => true,
 		);
 
     	$encodedKeyboard = json_encode($keyboard, true);
