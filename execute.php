@@ -684,47 +684,46 @@ elseif($status == 0) {
 		    	array(
 		    		array(
 		    			"text" => $EMO_NO,
-		    			"callback_data" => "myCallbackData"
+		    			"callback_data" => "roma_no"
 		    		),
 		    		array(
 		    			"text" => $EMO_N,
-		    			"callback_data" => "myCallbackData"
+		    			"callback_data" => "roma_n"
 		    		),
 		    		array(
 		    			"text" => $EMO_NE,
-		    			"callback_data" => "myCallbackData"
+		    			"callback_data" => "roma_ne"
 		    		),
 		    	),
 		    	array(
 		    		array(
 		    			"text" => $EMO_O,
-		    			"callback_data" => "myCallbackData"
+		    			"callback_data" => "roma_o"
 		    		),
 		    		array(
 		    			"text" => $EMO_C,
-		    			"callback_data" => "myCallbackData"
+		    			"callback_data" => "roma_c"
 		    		),
 		    		array(
 		    			"text" => $EMO_E,
-		    			"callback_data" => "myCallbackData"
+		    			"callback_data" => "roma_e"
 		    		),
 		    	),
 		    	array(
 		    		array(
 		    			"text" => $EMO_SO,
-		    			"callback_data" => "myCallbackData"
+		    			"callback_data" => "roma_so"
 		    		),
 		    		array(
 		    			"text" => $EMO_S,
-		    			"callback_data" => "myCallbackData"
+		    			"callback_data" => "roma_s"
 		    		),
 		    		array(
 		    			"text" => $EMO_SE,
-		    			"callback_data" => "myCallbackData"
+		    			"callback_data" => "roma_se"
 		    		),
-		    	)
+		    	),
 		   ),
-		   'resize_keyboard' => true,
 		);
 
     	$encodedKeyboard = json_encode($keyboard, true);
@@ -736,6 +735,25 @@ elseif($status == 0) {
     	    );
     	$parameters["method"] = "sendMessage";
     	echo json_encode($parameters);
+
+
+
+    	$content = file_get_contents("php://input");
+		$update = json_decode($content, true);
+		$chatID = $update["message"]["chat"]["id"];
+
+		if (($update['message']) != null) {
+
+		}
+		else if ($update['callback_query'] != Null) {
+    		$parameters =
+    		    array(
+    		        'chat_id' => $chatId,
+    		        'text' => $update['callback_query'],
+    		    );
+    		$parameters["method"] = "sendMessage";
+    		echo json_encode($parameters);
+		}
 	}
 
 ###################
