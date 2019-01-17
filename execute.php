@@ -676,6 +676,7 @@ elseif($status == 0) {
 		    'text'    => 'inline keyboard',
 		    'reply_markup' => new InlineKeyboardMarkup(['inline_keyboard' => [$inline_keyboard]]),
 		];
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
 
 ###################
