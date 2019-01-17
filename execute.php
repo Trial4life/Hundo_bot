@@ -678,14 +678,15 @@ elseif($status == 0) {
 		];
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 */
-/*    	$response = "Ciao, benvenuto!";
+   	$response = "Ciao, benvenuto!";
 
      	$keyboard = [
      	    'keyboard' => [
      	        [
      	            ['text' => 'forward me to groups']
      	        ]
-     	    ]
+     	    ],
+     	    'remove_keyboard' => true,
      	];
 
     	$encodedKeyboard = json_encode($keyboard);
@@ -697,11 +698,12 @@ elseif($status == 0) {
     	    );
     	$parameters["method"] = "sendMessage";
     	echo json_encode($parameters);
-*/
+/*
     	// REMOVE KEYBOARD
     	$removeKeyboard = array('remove_keyboard' => true);
 		$removeKeyboardEncoded = json_encode($removeKeyboard);
     	file_get_contents("https://api.telegram.org/$apiToken/sendmessage?chat_id=$chatId&reply_markup=$removeKeyboardEncoded");
+*/
 	}
 
 ###################
