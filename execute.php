@@ -697,6 +697,11 @@ elseif($status == 0) {
     	    );
     	$parameters["method"] = "sendMessage";
     	echo json_encode($parameters);
+
+    	// REMOVE KEYBOARD
+    	$removeKeyboard = array('remove_keyboard' => true);
+		$removeKeyboardEncoded = json_encode($removeKeyboard);
+    	file_get_contents("https://api.telegram.org/$apiToken/sendmessage?chat_id=$chatId&reply_markup=$removeKeyboardEncoded");
 	}
 
 ###################
