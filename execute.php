@@ -515,7 +515,7 @@ elseif($status == 0) {
 			$reward = ucfirst($str[0]);
 			$task = ucfirst($str[1]);
 			$flag = $str[2];
-			mysqli_query($conn,"INSERT INTO `tasks` (reward, task, flag) VALUES ('$reward', '$task', 1)");
+			mysqli_query($conn,"INSERT INTO `tasks` (reward, task, flag) VALUES ('$reward', '$task', $flag)");
 
 			$response = $EMO_v.' Quest aggiunta.';
 			$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
@@ -1400,7 +1400,7 @@ elseif($status == 2) {
 			$userAlerts = $row3['userAlerts'];
 			$userAlertsIDs = explode(',', $userAlerts);
 			foreach ($userAlertsIDs as $userAlertsID) {
-				if ($userAlertsID == $userId) {
+				if ($userAlertsID != $userId) {
 					$data = [
 			  			'chat_id' => $userAlertsID,
 			  			 //'text' => "`Quest:   ` *". $quest . "*\n`Pokéstop:` [" . str_replace("\'","'",$pkst) . "](" . $link . ")\n`Giorno:  ` ".$today2."\n`Task:    ` ". $task,
