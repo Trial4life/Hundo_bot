@@ -681,11 +681,6 @@ elseif($status == 0) {
    	$response = "Ciao, benvenuto!";
 
      	$keyboard = [
-     	    'keyboard' => [
-     	        [
-     	            ['text' => 'forward me to groups']
-     	        ]
-     	    ],
      	    'remove_keyboard' => true,
      	];
 
