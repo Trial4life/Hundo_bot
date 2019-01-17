@@ -681,7 +681,11 @@ elseif($status == 0) {
    	$response = "Ciao, benvenuto!";
 
      	$keyboard = [
-     	    'remove_keyboard' => true,
+     	    'inline_keyboard' => [
+     	        [
+     	            ['text' => 'forward me to groups']
+     	        ]
+     	    ],
      	];
 
     	$encodedKeyboard = json_encode($keyboard);
