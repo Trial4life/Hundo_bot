@@ -2,8 +2,10 @@
    date_default_timezone_set('Europe/Rome');
 
 	// Cells //
+	$cell = $callbackData;
 	$cellCode = array("roma_c","roma_e","roma_ne","roma_n","roma_no","roma_o","roma_so","roma_s","roma_se",);
 	$cellTitle = array("Centro","Est","Nord-Est","Nord","Nord-Ovest","Ovest","Sud-Ovest","Sud","Sud-Est",);
+	$cellId = ('132f61','132f63','132f65','132f67','132f5d','132f5f','1325f5','13258b','132589');
 
 /* È GIÀ CONNESSO DAL MAIN
 	// Create connection
@@ -102,6 +104,7 @@
 	$sunriseHour = intval(substr(date_sunrise(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, 2),0,-2));
 	$sunsetHour = intval(substr(date_sunset(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, 2),0,-2));
 	$now = date('G');
+	$link_all = "https://s2.sidewalklabs.com/regioncoverer/?center=41.891165%2C12.492826&zoom=12&cells=".$cellId[$cell];
 
 	$response = "Meteo per la cella <b>".$cellTitle[$cell]."</b>:";
 

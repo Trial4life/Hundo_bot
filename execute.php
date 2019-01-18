@@ -743,7 +743,6 @@ elseif($status == 0) {
 	}
 
 	elseif (isset($update["callback_query"])) {
-		$cell = $callbackData;
 		include_once $_SERVER['DOCUMENT_ROOT'] . "/weather.php";
 
     	$parameters = array(
