@@ -78,7 +78,7 @@
 			elseif ($GO1[$t]=='Sereno') {
 				return "\xE2\x98\x80";
 			}
-			elseif ($GO1[$t]=="P\_nuvoloso") {
+			elseif ($GO1[$t]=="P_nuvoloso") {
 				return "\xE2\x9B\x85";
 			}
 			elseif ($GO1[$t]=='Coperto') {
@@ -108,7 +108,7 @@
 			elseif ($GO2[$t]=='Sereno') {
 				return "\xE2\x98\x80";
 			}
-			elseif ($GO2[$t]=="P\_nuvoloso") {
+			elseif ($GO2[$t]=="P_nuvoloso") {
 				return "\xE2\x9B\x85";
 			}
 			elseif ($GO2[$t]=='Coperto') {
