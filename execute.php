@@ -690,43 +690,43 @@ elseif($status == 0) {
 		    	array(
 		    		array(
 		    			"text" => $EMO_NO,
-		    			"callback_data" => "roma_no"
+		    			"callback_data" => "4"
 		    		),
 		    		array(
 		    			"text" => $EMO_N,
-		    			"callback_data" => "roma_n"
+		    			"callback_data" => "3"
 		    		),
 		    		array(
 		    			"text" => $EMO_NE,
-		    			"callback_data" => "roma_ne"
+		    			"callback_data" => "2"
 		    		),
 		    	),
 		    	array(
 		    		array(
 		    			"text" => $EMO_O,
-		    			"callback_data" => "roma_o"
+		    			"callback_data" => "5"
 		    		),
 		    		array(
 		    			"text" => $EMO_C,
-		    			"callback_data" => "roma_c"
+		    			"callback_data" => "0"
 		    		),
 		    		array(
 		    			"text" => $EMO_E,
-		    			"callback_data" => "roma_e"
+		    			"callback_data" => "1"
 		    		),
 		    	),
 		    	array(
 		    		array(
 		    			"text" => $EMO_SO,
-		    			"callback_data" => "roma_so"
+		    			"callback_data" => "6"
 		    		),
 		    		array(
 		    			"text" => $EMO_S,
-		    			"callback_data" => "roma_s"
+		    			"callback_data" => "7"
 		    		),
 		    		array(
 		    			"text" => $EMO_SE,
-		    			"callback_data" => "roma_se"
+		    			"callback_data" => "8"
 		    		),
 		    	),
 		   ),
@@ -743,8 +743,8 @@ elseif($status == 0) {
 	}
 
 	elseif (isset($update["callback_query"])) {
-
-		// CODICE METEO BOT
+		$cell = $callbackData;
+		//include_once $_SERVER['DOCUMENT_ROOT'] . "/weather.php";
 
 		$response = $callbackData;
 

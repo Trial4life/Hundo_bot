@@ -62,6 +62,29 @@
 		return $distance;
    }
 
+   function getWeather($ind, $t) {
+		global $wind_1, $wind_2, $gust_1, $gust_2, $GO1, $GO2, $AW1, $AW2, $sunsetHour, $sunriseHour;
+
+		if ($ind == 1) {
+			if ($gust_1[$t] > 30.0 && $GO1[$t] != "Pioggia" && $GO1[$t] != "Neve" && strpos($AW1[$t], "rovesci") === false && strpos($AW1[$t], "temporali") === false) {
+				return "Vento";
+			}
+			elseif ($GO1[$t]=="Sereno" && ($t <= $sunriseHour || $t > $sunsetHour)) {
+				return "Sereno_N";
+			}
+			else { return $GO1[$t]; }
+		}
+		elseif ($ind == 2) {
+			if ($gust_2[$t] > 30.0 && $GO2[$t] != "Pioggia" && $GO2[$t] != "Neve" && strpos($AW2[$t], "rovesci") === false && strpos($AW2[$t], "temporali") === false) {
+				return "Vento";
+			}
+			elseif ($GO2[$t]=="Sereno" && ($t <= $sunriseHour || $t > $sunsetHour)) {
+				return "Sereno_N";
+			}
+			else { return $GO2[$t]; }
+		}
+	}
+
    /* FUNZIONE BETA PER COPIARE I DATABASE
    function copyDB() {
    	$conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");
