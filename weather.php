@@ -106,7 +106,7 @@
 	$now = date('G');
 	$link = "https://s2.sidewalklabs.com/regioncoverer/?center=41.891165%2C12.492826&zoom=12&cells=".$cellId[$cell];
 
-	$response = "Meteo per la cella <a href='".$link."'>Roma ".$cellTitle[$cell]."</a>:";
+	$response = "Previsioni meteo per la cella <a href='".$link."'>Roma ".$cellTitle[$cell]."</a>:";
 
 	for ($i = $now; $i <= $now+12; $i++) {
 		$i < 24 ? $n = $i : $n = $i % 24;
