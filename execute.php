@@ -746,7 +746,7 @@ elseif($status == 0) {
     	$parameters =
     		array(
     		    'chat_id' => $callbackId,
-    		    'text' => $callbackId,
+    		    'text' => json_encode($callback_query['data']),
     		);
     	$parameters["method"] = "sendMessage";
     	echo json_encode($parameters);
