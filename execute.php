@@ -35,6 +35,7 @@ $today2 = date('d/m/y');
 
 $callback_query = isset($update["callback_query"]) ? $update["callback_query"] : "";
 $callbackId = isset($callback_query['message']['chat']['id']) ? $callback_query['message']['chat']['id'] : "";
+$callbackData = isset($callback_query['data']) ? $callback_query['data'] : "";
 
 $callback = isset($update['callback_query']['id']) ? $update['callback_query']['id'] : "";
 
@@ -746,7 +747,7 @@ elseif($status == 0) {
     	$parameters =
     		array(
     		    'chat_id' => $callbackId,
-    		    'text' => json_encode($callback_query['data']),
+    		    'text' => $callbackData,
     		);
     	$parameters["method"] = "sendMessage";
     	echo json_encode($parameters);
