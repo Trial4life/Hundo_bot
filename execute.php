@@ -749,6 +749,7 @@ elseif($status == 0) {
     		'chat_id' => $callbackId,
     		'text' => $response,
     		'parse_mode' => 'HTML',
+   		'disable_web_page_preview' => TRUE,
     	);
     	$parameters["method"] = "sendMessage";
     	echo json_encode($parameters);
