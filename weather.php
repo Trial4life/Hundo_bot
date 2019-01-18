@@ -105,7 +105,7 @@
 	$response = $cellTitle[$cell];
 
 	for ($i = 0; $i <= 23; $i++) {
-		$response = $response. "\n".$i. getWeather(1,$i). " | " .getWeather(2,$i);
+		$response = $response. "\n".sprintf('%02d',$i).":00 − ". getWeather(1,$i). " | " .getWeather(2,$i);
 	};
 
 ?>
