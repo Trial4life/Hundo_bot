@@ -13,7 +13,7 @@
        die("Connection failed: " . $conn->connect_error);
    }
 */
-	$AW1 = $AW2 = $wind_1 = $wind_2 = $gust_1 = $gust_2 = $GO1 = $GO2 = array();
+	$AW1 = $AW2 = $wind_1 = $wind_2 = $gust_1 = $gust_2 = $GO1 = $GO2 = $GO1_EMO[] = $GO2_EMO[] = array();
 
 	$query = "SELECT * FROM `$cellCode[$cell]`";
 	$result = mysqli_query($conn,$query);
@@ -36,11 +36,13 @@
 		$result2 = mysqli_query($conn,$query2);
 		$row2 = mysqli_fetch_array($result2);
 		$GO1[] = str_replace(" ", "_", $row2['GO']);
+		$GO1_EMO[] = $row2['EMO'];
 
 		$query3 = "SELECT * FROM `conversion` WHERE `AW` = '$AW2_value'";
 		$result3 = mysqli_query($conn,$query3);
 		$row3 = mysqli_fetch_array($result3);
 		$GO2[] = str_replace(" ", "_", $row3['GO']);
+		$GO2_EMO[] = $row3['EMO'];
 	}
 
 	$updateDateResult = mysqli_query($conn,"SELECT update_time
