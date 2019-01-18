@@ -106,7 +106,7 @@
 	$now = date('G');
 	$link = "https://s2.sidewalklabs.com/regioncoverer/?center=41.891165%2C12.492826&zoom=12&cells=".$cellId[$cell];
 
-	$response = "Meteo per la cella <a href='".$link."'>".$cellTitle[$cell]."</a>:";
+	$response = "Meteo per la cella <a href='".$link."'>Roma ".$cellTitle[$cell]."</a>:";
 
 	for ($i = $now; $i <= 23; $i++) {
 		$h = strval(sprintf('%02d',$i));
