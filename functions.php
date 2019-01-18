@@ -65,8 +65,6 @@
    function getWeather($ind, $t) {
 		global $wind_1, $wind_2, $gust_1, $gust_2, $GO1, $GO2, $GO1_EMO, $GO2_EMO, $AW1, $AW2, $sunsetHour, $sunriseHour;
 
-		$EMO = array()
-
 		if ($ind == 1) {
 			if ($AW1[$t] == 'x') {
 				return "\xE2\x96\xAB";
