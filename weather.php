@@ -102,7 +102,7 @@
 	$sunriseHour = intval(substr(date_sunrise(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, 2),0,-2));
 	$sunsetHour = intval(substr(date_sunset(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, 2),0,-2));
 
-	$response = "Meteo per la cella *".$cellTitle[$cell]"*:";
+	$response = "Meteo per la cella *".$cellTitle[$cell]."*:";
 
 	for ($i = 0; $i <= 23; $i++) {
 		$response = $response. "\n".sprintf('%02d',$i).":00 − ". getWeather(1,$i). " | " .getWeather(2,$i);
