@@ -66,22 +66,28 @@
 		global $wind_1, $wind_2, $gust_1, $gust_2, $GO1, $GO2, $AW1, $AW2, $sunsetHour, $sunriseHour;
 
 		if ($ind == 1) {
-			if ($gust_1[$t] > 30.0 && $GO1[$t] != "Pioggia" && $GO1[$t] != "Neve" && strpos($AW1[$t], "rovesci") === false && strpos($AW1[$t], "temporali") === false) {
-				return "";
+			if ($AW1[$t] == 'x') {
+				return "\\xE2\\x96\\xAB";
+			}
+			elseif ($gust_1[$t] > 30.0 && $GO1[$t] != "Pioggia" && $GO1[$t] != "Neve" && strpos($AW1[$t], "rovesci") === false && strpos($AW1[$t], "temporali") === false) {
+				return "\\xF0\\x9F\\x92\\xA8";
 			}
 			elseif ($GO1[$t]=="Sereno" && ($t <= $sunriseHour || $t > $sunsetHour)) {
-				return "";
+				return "\\xF0\\x9F\\x8C\\x99";
 			}
-			else { return str_replace("","",$GO1[$t]); }
+			else { return str_replace("","",$GO1_EMO[$t]); }
 		}
 		elseif ($ind == 2) {
-			if ($gust_2[$t] > 30.0 && $GO2[$t] != "Pioggia" && $GO2[$t] != "Neve" && strpos($AW2[$t], "rovesci") === false && strpos($AW2[$t], "temporali") === false) {
-				return "";
+			if ($AW2[$t] == 'x') {
+				return "\\xE2\\x96\\xAB";
+			}
+			elseif ($gust_2[$t] > 30.0 && $GO2[$t] != "Pioggia" && $GO2[$t] != "Neve" && strpos($AW2[$t], "rovesci") === false && strpos($AW2[$t], "temporali") === false) {
+				return "\\xF0\\x9F\\x92\\xA8";
 			}
 			elseif ($GO2[$t]=="Sereno" && ($t <= $sunriseHour || $t > $sunsetHour)) {
-				return "";
+				return "\\xF0\\x9F\\x8C\\x99";
 			}
-			else { return str_replace("","",$GO2[$t]); }
+			else { return str_replace("","",$GO2_EMO[$t]); }
 		}
 	}
 
