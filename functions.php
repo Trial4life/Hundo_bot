@@ -75,7 +75,7 @@
 			elseif ($GO1[$t]=="Sereno" && ($t <= $sunriseHour || $t > $sunsetHour)) {
 				return "\xF0\x9F\x8C\x99";
 			}
-			else { return str_replace("\\\\","\\",$GO1_EMO[$t]); }
+			else { return str_replace("","",$GO1_EMO[$t]); }
 		}
 		elseif ($ind == 2) {
 			if ($AW2[$t] == 'x') {
@@ -87,7 +87,7 @@
 			elseif ($GO2[$t]=="Sereno" && ($t <= $sunriseHour || $t > $sunsetHour)) {
 				return "\xF0\x9F\x8C\x99";
 			}
-			else { return str_replace("\\\\","\\",$GO2_EMO[$t]); }
+			else { return str_replace("","",$GO2_EMO[$t]); }
 		}
 	}
 
