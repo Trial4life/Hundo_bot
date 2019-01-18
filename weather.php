@@ -15,7 +15,7 @@
        die("Connection failed: " . $conn->connect_error);
    }
 */
-	$AW1 = $AW2 = $wind_1 = $wind_2 = $gust_1 = $gust_2 = $GO1 = $GO2 = $GO1_EMO = $GO2_EMO = array();
+	$AW1 = $AW2 = $wind_1 = $wind_2 = $gust_1 = $gust_2 = $GO1 = $GO2 array(); 	// = $GO1_EMO = $GO2_EMO =
 
 	$query = "SELECT * FROM `$cellCode[$cell]`";
 	$result = mysqli_query($conn,$query);
