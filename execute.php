@@ -120,6 +120,7 @@ if(strpos($text, "/exeggutorhelp") === 0 ) {
 	   	$EMO_TRI ." *Per mostrare le notifiche attive*, utilizzare il comando `/alerts`.\n\n".
 	   	$EMO_TRI ." *Per mostrare le quest segnalate entro il raggio impostato*, inviare la posizione in privato al bot.\n\n".
 	   	$EMO_TRI ." *Per impostare il raggio entro il quale mostrare le quest segnalate*, usare il comando `/radius <chilometri>`. \n\n_Esempio_:\n`/radius 0.5`\n\n".
+	   	$EMO_TRI ." *Per consultare il meteo*, usare il comando `/meteo`\n\n".
 	   	$EMO_TRI ." *Per segnalare un nuovo nido*, usare il comando `/nest <pokemon>, <nido>`. \n\n_Esempio_:\n`/nest Squirtle, Villa Borghese`\n\n".
 	   	$EMO_TRI ." *Per segnalare un nuovo spawn frequente*, usare il comando `/spawn <pokemon>, <spawn>`. \n\n_Esempio_:\n`/spawn Squirtle, Parchetto dei Galli`\n\n".
 	   	$EMO_TRI ." *Per elencare i nidi correnti*, usare il comando `/nidi`\n\n".
