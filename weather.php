@@ -107,6 +107,6 @@
 
 	for ($i = $now; $i <= 23; $i++) {
 		$h = strval(sprintf('%02d',$i));
-		$response = $response. "\n".$h.":00 − ". getWeather(1,$i). " | " .getWeather(2,$i);
+		$response = $response. "\n<code>".$h.":00</code> − ". getWeather(1,$i). " | " .getWeather(2,$i);
 	};
 ?>
