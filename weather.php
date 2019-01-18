@@ -104,9 +104,9 @@
 	$sunriseHour = intval(substr(date_sunrise(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, 2),0,-2));
 	$sunsetHour = intval(substr(date_sunset(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, 2),0,-2));
 	$now = date('G');
-	$link_all = "https://s2.sidewalklabs.com/regioncoverer/?center=41.891165%2C12.492826&zoom=12&cells=".$cellId[$cell];
+	$link = "https://s2.sidewalklabs.com/regioncoverer/?center=41.891165%2C12.492826&zoom=12&cells=".$cellId[$cell];
 
-	$response = "Meteo per la cella <b>".$cellTitle[$cell]."</b>:";
+	$response = "Meteo per la cella <a href='".$link."'>".$cellTitle[$cell]."</a>:";
 
 	for ($i = $now; $i <= 23; $i++) {
 		$h = strval(sprintf('%02d',$i));
