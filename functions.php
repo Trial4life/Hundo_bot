@@ -63,7 +63,7 @@
    }
 
    function getWeather($ind, $t) {
-		global $wind_1, $wind_2, $gust_1, $gust_2, $GO1, $GO2, $AW1, $AW2, $sunsetHour, $sunriseHour;
+		global $wind_1, $wind_2, $gust_1, $gust_2, $GO1, $GO2, $GO1_EMO, $GO2_EMO, $AW1, $AW2, $sunsetHour, $sunriseHour;
 
 		if ($ind == 1) {
 			if ($AW1[$t] == 'x') {
