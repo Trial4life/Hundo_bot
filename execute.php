@@ -690,43 +690,43 @@ elseif($status == 0) {
 		    	array(
 		    		array(
 		    			"text" => $EMO_NO,
-		    			"callback_data" => "4"
+		    			"callback_data" => 4
 		    		),
 		    		array(
 		    			"text" => $EMO_N,
-		    			"callback_data" => "3"
+		    			"callback_data" => 3
 		    		),
 		    		array(
 		    			"text" => $EMO_NE,
-		    			"callback_data" => "2"
+		    			"callback_data" => 2
 		    		),
 		    	),
 		    	array(
 		    		array(
 		    			"text" => $EMO_O,
-		    			"callback_data" => "5"
+		    			"callback_data" => 5
 		    		),
 		    		array(
 		    			"text" => $EMO_C,
-		    			"callback_data" => "0"
+		    			"callback_data" => 0
 		    		),
 		    		array(
 		    			"text" => $EMO_E,
-		    			"callback_data" => "1"
+		    			"callback_data" => 1
 		    		),
 		    	),
 		    	array(
 		    		array(
 		    			"text" => $EMO_SO,
-		    			"callback_data" => "6"
+		    			"callback_data" => 6
 		    		),
 		    		array(
 		    			"text" => $EMO_S,
-		    			"callback_data" => "7"
+		    			"callback_data" => 7
 		    		),
 		    		array(
 		    			"text" => $EMO_SE,
-		    			"callback_data" => "8"
+		    			"callback_data" => 8
 		    		),
 		    	),
 		   ),
