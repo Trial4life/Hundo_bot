@@ -106,7 +106,7 @@
 
 	for ($i = 0; $i <= 23; $i++) {
 		$h = strval(sprintf('%02d',$i));
-		$response = $response. "\n".$h.":00 − ". getWeather(1,$i). " | " .getWeather(2,$i).$GO1_EMO[$i]." | ".$GO2_EMO[$i];
+		$response = $response. "\n".$h.":00 − ". getWeather(1,$i). " | " .getWeather(2,$i)." ||| ".$GO1_EMO[$i]." | ".$GO2_EMO[$i];
 	};
 
 ?>
