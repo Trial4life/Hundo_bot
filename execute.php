@@ -744,10 +744,15 @@ elseif($status == 0) {
 	}
 
 	elseif (isset($update["callback_query"])) {
+
+		// CODICE METEO BOT
+
+		$response = $callbackData;
+
     	$parameters =
     		array(
     		    'chat_id' => $callbackId,
-    		    'text' => $callbackData,
+    		    'text' => $response,
     		);
     	$parameters["method"] = "sendMessage";
     	echo json_encode($parameters);
