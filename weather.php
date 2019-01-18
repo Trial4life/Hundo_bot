@@ -105,8 +105,8 @@
 	$response = "Meteo per la cella *".$cellTitle[$cell]."*:";
 
 	for ($i = 0; $i <= 23; $i++) {
-		$h = strval(sprintf('%02d',$i));
-		$response = $response. "\n".$h.":00 − ". getWeather(1,$i). " | " .getWeather(2,$i);
+		//$h = strval(sprintf('%02d',$i));
+		$response = $response. "\n".$i.":00 − ". getWeather(1,$i). " | " .getWeather(2,$i);
 	};
 
 ?>
