@@ -733,12 +733,11 @@ elseif($status == 0) {
 		);
 
     	$encodedKeyboard = json_encode($keyboard, true);
-    	$parameters =
-    	    array(
-    	        'chat_id' => $chatId,
-    	        'text' => $response,
-    	        'reply_markup' => $encodedKeyboard
-    	    );
+    	$parameters = array(
+    		'chat_id' => $chatId,
+    		'text' => $response,
+    		'reply_markup' => $encodedKeyboard
+    	);
     	$parameters["method"] = "sendMessage";
     	echo json_encode($parameters);
 	}
@@ -749,11 +748,10 @@ elseif($status == 0) {
 
 		$response = $callbackData;
 
-    	$parameters =
-    		array(
-    		    'chat_id' => $callbackId,
-    		    'text' => $response,
-    		);
+    	$parameters = array(
+    		'chat_id' => $callbackId,
+    		'text' => $response,
+    	);
     	$parameters["method"] = "sendMessage";
     	echo json_encode($parameters);
 	}
