@@ -107,7 +107,7 @@
 
 	for ($i = $now; $i <= 23; $i++) {
 		$h = strval(sprintf('%02d',$i));
-		$response = $response. "\n".$h.":00 − ". getWeather(1,$i). " | " .getWeather(2,$i);
+		$response = $response. "\n".$h.":00 − ". html_entity_decode(getWeather(1,$i)). " | " .html_entity_decode(getWeather(2,$i));
 	};
 
 ?>
