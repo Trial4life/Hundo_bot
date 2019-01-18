@@ -108,8 +108,9 @@
 
 	$response = "Meteo per la cella <a href='".$link."'>Roma ".$cellTitle[$cell]."</a>:";
 
-	for ($i = $now; $i <= 23; $i++) {
-		$h = strval(sprintf('%02d',$i));
+	for ($i = $now; $i <= $now+12; $i++) {
+		$i < 24 ? $n = $i : $n = $i%24;
+		$h = strval(sprintf('%02d',$n));
 		$response = $response. "\n<code>".$h.":00</code> − ". getWeather(1,$i). " | " .getWeather(2,$i);
 	};
 ?>
