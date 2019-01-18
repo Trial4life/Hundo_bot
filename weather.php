@@ -107,7 +107,17 @@
 
 	for ($i = $now; $i <= 23; $i++) {
 		$h = strval(sprintf('%02d',$i));
-		$response = $response. "\n".$h.":00 − ". html_entity_decode(getWeather(1,$i)). " | " .html_entity_decode(getWeather(2,$i));
+		$response = $response. "\n".$h.":00 − ". preg_replace_callback('/[\x{80}-\x{10FFFF}]/u', function ($match) {
+    list($utf8) = $match;
+    $binary = mb_convert_encoding($utf8, 'UTF-32BE', 'UTF-8');
+    $entity = vsprintf('&#x%x;', unpack('N', $binary));
+    return $entity;
+}, getWeather(1,$i)). " | " .preg_replace_callback('/[\x{80}-\x{10FFFF}]/u', function ($match) {
+    list($utf8) = $match;
+    $binary = mb_convert_encoding($utf8, 'UTF-32BE', 'UTF-8');
+    $entity = vsprintf('&#x%x;', unpack('N', $binary));
+    return $entity;
+}, getWeather(2,$i));
 	};
 
 ?>
