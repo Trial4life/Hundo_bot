@@ -684,7 +684,7 @@ elseif($status == 0) {
 	/// METEO ///
 	/////////////
 	elseif(strpos($text, "/meteo") === 0 ){
-   	$response = $EMO_GLO." Selezionare la cella meteo";
+   	$response = $EMO_GLO." Selezionare la cella meteo ".$EMO_GLO;
 
 		$keyboard = array(
 		    "inline_keyboard" => array(
