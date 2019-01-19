@@ -1545,7 +1545,7 @@ elseif($status == 2) {
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			}
-
+/*
 			// INVIA MESSAGGIO NEL GRUPPO SE REGISTRATO ALLE CELLE CHE CONTENGONO LA QUEST
 			$minlevel = 10;
 			$maxlevel = 13;
@@ -1579,7 +1579,7 @@ elseif($status == 2) {
 				];
 				$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			}
-
+*/
 			$response = $EMO_v.' La quest è stata registrata.';
 			$parameters = array('chat_id' => $userId, "text" => $response, "parse_mode" => "markdown");
 			$parameters["method"] = "sendMessage";
