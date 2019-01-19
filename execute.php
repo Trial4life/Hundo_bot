@@ -1505,7 +1505,7 @@ elseif($status == 2) {
 			mysqli_query($conn,"DELETE FROM `sessions` WHERE userID = $userId");
 		}
 		else {
-			$query = "SELECT * FROM `tasks` WHERE `reward` = '$quest'";
+			$query = "SELECT * FROM `tasks` WHERE '$quest' LIKE CONCAT('%',`reward`,'%')";
 			$result = mysqli_query($conn,$query);
 			$row2 = mysqli_fetch_assoc($result);
 			$flag = $row2['flag'];
