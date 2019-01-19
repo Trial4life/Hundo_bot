@@ -264,7 +264,7 @@ elseif($status == 1) {
 
 // IN CASO DI ERRORE DI CONNESSIONE CON IL DATABASE
 
-elseif ($conn->connect_error and (strpos($text, "/annulla") === 0 or strpos($text, "/cancella") === 0 or strpos($text, "/quests") === 0 or strpos($text, "/quest") === 0 or strpos($text, "/100") === 0 or strpos($text, "/mappaquest") === 0)) {
+elseif ($conn->connect_error and (strpos($text, "/annulla") === 0 or strpos($text, "/cancella") === 0 or strpos($text, "/quests") === 0 or strpos($text, "/quest") or strpos($text, "/q")  === 0 or strpos($text, "/100") === 0 or strpos($text, "/mappaquest") === 0)) {
 	$response = $EMO_zZz . " Database temporaneamente offline, riprova più tardi.";
 	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown");
 	$parameters["method"] = "sendMessage";
