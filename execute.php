@@ -1,9 +1,5 @@
 <?php
-																						$data = [
-					  	'chat_id' => 158754689,
-					  	'text' => 'End: '.date("H:i:s"),
-					];
-					$response = file_get_contents("https://api.telegram.org/bot689487990:AAGhqhcsalt0mXYRnUqFro9ECNxPuOOVPZc/sendMessage?" . http_build_query($data) );
+																		 include $_SERVER['DOCUMENT_ROOT'] . "/timingS.php";		// TIMER START
 
 spl_autoload_register(
     function ($class) {
@@ -84,8 +80,8 @@ $EMO_ALR = json_decode('"'."\u203c".'"');
 $EMO_ERR = json_decode('"'."\u26d4".'"');
 																		include $_SERVER['DOCUMENT_ROOT'] . "/timingS.php";		// TIMER START
 // MySQL -> Create connection
-//$conn = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
- $conn = new mysqli("2.227.251.71:3306", "root", "", "tradepkmn");
+$conn = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
+// $conn = new mysqli("2.227.251.71:3306", "root", "", "tradepkmn");
 // $conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");   [OLD freemysqlhosting account]
 // Check connection
 
