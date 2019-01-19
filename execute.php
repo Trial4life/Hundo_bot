@@ -3,7 +3,6 @@
 include $_SERVER['DOCUMENT_ROOT'] . "/functions.php";
 
 $breakpoint = microtime(true);
-delta('START');
 
 spl_autoload_register(
     function ($class) {
@@ -11,6 +10,8 @@ spl_autoload_register(
         if (file_exists($path)) require_once $path;
     }
 );
+
+delta('SPL');
 
 date_default_timezone_set('Europe/Rome');
 $today = date('Y-m-d');
@@ -798,11 +799,11 @@ elseif($status == 0) {
 		$endDate = str_replace(" ","",date("j/m", strtotime(str_replace('-','/', $endDate))));
 
 		if ($currNest == $nest) {
-			$response = 'Il nido a *'.str_replace("\'","'",$nest).'* è stato già registrato fino al *'.$endDate.'*.';
+			$response = 'Il nido di *'.str_replace("\'","'",$nest).'* è stato già registrato fino al *'.$endDate.'*.';
 		}
 		else {
 			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn',1)");
-			$response = $EMO_v.' Nido *'.str_replace("\'","'",$nest).'* registrato fino al *'.$endDate.'*.';
+			$response = $EMO_v.' Nido di *'.str_replace("\'","'",$nest).'* registrato fino al *'.$endDate.'*.';
 		}
 
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
@@ -839,11 +840,11 @@ elseif($status == 0) {
 		$endDate = str_replace(" ","",date("j/m", strtotime(str_replace('-','/', $endDate))));
 
 		if ($currNest == $nest) {
-			$response = 'Lo spawn frequente a *'.str_replace("\'","'",$nest).'* è stato già registrato fino al *'.$endDate.'*.';
+			$response = 'Lo spawn frequente di *'.str_replace("\'","'",$nest).'* è stato già registrato fino al *'.$endDate.'*.';
 		}
 		else {
 			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn',2)");
-			$response = $EMO_v.' Spawn frequente *'.str_replace("\'","'",$nest).'* registrato fino al *'.$endDate.'*.';
+			$response = $EMO_v.' Spawn frequente di *'.str_replace("\'","'",$nest).'* registrato fino al *'.$endDate.'*.';
 		}
 
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
@@ -861,10 +862,10 @@ elseif($status == 0) {
 		$row = mysqli_fetch_assoc($result);
 		$currNest = $row['nido'];
 		if (!$row) {
-			$response = $EMO_ERR.' Nido *'.str_replace("\'","'",$nest).'* non trovato.';
+			$response = $EMO_ERR.' Nido di *'.str_replace("\'","'",$nest).'* non trovato.';
 		}
 		else {
-			$response = $EMO_x.' Nido *'.str_replace("\'","'",$nest).'* cancellato.';
+			$response = $EMO_x.' Nido di *'.str_replace("\'","'",$nest).'* cancellato.';
 			mysqli_query($conn,"DELETE FROM `nests` WHERE `nido` = '$nest'");
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
