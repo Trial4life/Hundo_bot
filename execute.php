@@ -1,5 +1,5 @@
 <?php
-																		 include $_SERVER['DOCUMENT_ROOT'] . "/timingS.php";		// TIMER START
+																		// include $_SERVER['DOCUMENT_ROOT'] . "/timingS.php";		// TIMER START
 
 spl_autoload_register(
     function ($class) {
@@ -78,10 +78,10 @@ $EMO_v = json_decode('"'."\u2705".'"');
 $EMO_x = json_decode('"'."\u274c".'"');
 $EMO_ALR = json_decode('"'."\u203c".'"');
 $EMO_ERR = json_decode('"'."\u26d4".'"');
-																		include $_SERVER['DOCUMENT_ROOT'] . "/timingS.php";		// TIMER START
+																		//include $_SERVER['DOCUMENT_ROOT'] . "/timingS.php";		// TIMER START
 // MySQL -> Create connection
-//$conn = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
- $conn = new mysqli("2.227.251.71:3306", "root", "", "tradepkmn");
+$conn = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
+// $conn = new mysqli("2.227.251.71:3306", "root", "", "tradepkmn");
 // $conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");   [OLD freemysqlhosting account]
 // Check connection
 
@@ -1597,7 +1597,7 @@ elseif($status == 2) {
 
 //close the mySQL connection
 $conn->close();
-																		 include $_SERVER['DOCUMENT_ROOT'] . "/timingE.php";		// TIMER END
+																		// include $_SERVER['DOCUMENT_ROOT'] . "/timingE.php";		// TIMER END
 
 /*
 // DEBUG - PRINT
