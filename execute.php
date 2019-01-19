@@ -7,6 +7,9 @@ spl_autoload_register(
 );
 
 date_default_timezone_set('Europe/Rome');
+$today = date('Y-m-d');
+$today2 = date('d/m/y');
+
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
 
@@ -30,8 +33,6 @@ $URLs = isset($message['entities']) ? $message['entities'] : "";
 $reply = isset($message['reply_to_message']['text']) ? $message['reply_to_message']['text'] : "";
 $lat = isset($message['location']['latitude']) ? $message['location']['latitude'] : NULL;
 $lng = isset($message['location']['longitude']) ? $message['location']['longitude'] : NULL;
-$today = date('Y-m-d');
-$today2 = date('d/m/y');
 
 $callback_query = isset($update["callback_query"]) ? $update["callback_query"] : "";
 $callbackId = isset($callback_query['message']['chat']['id']) ? $callback_query['message']['chat']['id'] : "";
@@ -77,8 +78,8 @@ $EMO_ALR = json_decode('"'."\u203c".'"');
 $EMO_ERR = json_decode('"'."\u26d4".'"');
 
 // MySQL -> Create connection
-$conn = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
-//$conn = new mysqli("2.227.251.71:3306", "root", "", "tradepkmn");
+//$conn = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
+$conn = new mysqli("2.227.251.71:3306", "root", "", "tradepkmn");
 // $conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");   [OLD freemysqlhosting account]
 // Check connection
 

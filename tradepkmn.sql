@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Gen 16, 2019 alle 21:53
+-- Creato il: Gen 19, 2019 alle 17:23
 -- Versione del server: 8.0.13
 -- Versione PHP: 7.2.10-0ubuntu0.18.04.1
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admins` (
   `username` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
 -- Dump dei dati per la tabella `admins`
@@ -54,8 +54,8 @@ INSERT INTO `admins` (`username`) VALUES
 
 CREATE TABLE `auth_groups` (
   `groupName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `groupID` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `groupID` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
 -- Dump dei dati per la tabella `auth_groups`
@@ -68,13 +68,62 @@ INSERT INTO `auth_groups` (`groupName`, `groupID`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `conversion`
+--
+
+CREATE TABLE `conversion` (
+  `AW` varchar(43) DEFAULT NULL,
+  `GO` varchar(10) DEFAULT NULL,
+  `EMO` varchar(17) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+--
+-- Dump dei dati per la tabella `conversion`
+--
+
+INSERT INTO `conversion` (`AW`, `GO`, `EMO`) VALUES
+('Soleggiato', 'Sereno', '\\xE2\\x98\\x80'),
+('Sereno', 'Sereno', '\\xE2\\x98\\x80'),
+('Prevalentemente soleggiato', 'Sereno', '\\xE2\\x98\\x80'),
+('Prevalentemente sereno', 'Sereno', '\\xE2\\x98\\x80'),
+('Parzialmente soleggiato', 'P nuvoloso', '\\xE2\\x9B\\x85'),
+('Parzialmente nuvoloso', 'P nuvoloso', '\\xE2\\x9B\\x85'),
+('Nuvole intermittenti', 'P nuvoloso', '\\xE2\\x9B\\x85'),
+('Nuvole intermittenti', 'P nuvoloso', '\\xE2\\x9B\\x85'),
+('Prevalentemente nuvoloso', 'Coperto', '\\xE2\\x98\\x81'),
+('Prevalentemente nuvoloso', 'Coperto', '\\xE2\\x98\\x81'),
+('Nuvoloso', 'Coperto', '\\xE2\\x98\\x81'),
+('Parzialmente soleggiato con rovesci is', 'P nuvoloso', '\\xE2\\x9B\\x85'),
+('Parzialmente nuvoloso con rovesci', 'P nuvoloso', '\\xE2\\x9B\\x85'),
+('Prevalentemente nuvoloso con rovesci', 'Coperto', '\\xE2\\x98\\x81'),
+('Prevalentemente nuvoloso con rovesci', 'Coperto', '\\xE2\\x98\\x81'),
+('Rovesci', 'Pioggia', '\\xE2\\x98\\x94'),
+('Pioggia', 'Pioggia', '\\xE2\\x98\\x94'),
+('Temporali', 'Pioggia', '\\xE2\\x98\\x94'),
+('Parzialmente soleggiato con temporali', 'P nuvoloso', '\\xE2\\x9B\\x85'),
+('Parzialmente nuvoloso con temporali', 'P nuvoloso', '\\xE2\\x9B\\x85'),
+('Prevalentemente nuvoloso con temporali', 'Coperto', '\\xE2\\x98\\x81'),
+('Prevalentemente nuvoloso con temporali', 'Coperto', '\\xE2\\x98\\x81'),
+('Sole velato', 'Coperto', '\\xE2\\x98\\x81'),
+('Foschia notturna', 'Coperto', '\\xE2\\x98\\x81'),
+('Nebbia', 'Nebbia', '\\xF0\\x9F\\x8C\\x81'),
+('Parzialmente soleggiato con nevicate', 'P nuvoloso', '\\xE2\\x9B\\x85'),
+('Prevalentemente nuvoloso con nevicate', 'Coperto', '\\xE2\\x98\\x81'),
+('Prevalentemente nuvoloso con nevicate', 'Coperto', '\\xE2\\x98\\x81'),
+('0', '0', ''),
+('x', 'x', ''),
+('Neve', 'Neve', '\\xE2\\x9D\\x84');
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `IVtable`
 --
 
 CREATE TABLE `IVtable` (
-  `pokemon` varchar(20) NOT NULL,
+  `pokemon` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `pl` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
 -- Dump dei dati per la tabella `IVtable`
@@ -650,8 +699,8 @@ INSERT INTO `IVtable` (`pokemon`, `pl`) VALUES
 --
 
 CREATE TABLE `nestEnd` (
-  `endDate` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `endDate` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
 -- Dump dei dati per la tabella `nestEnd`
@@ -667,10 +716,10 @@ INSERT INTO `nestEnd` (`endDate`) VALUES
 --
 
 CREATE TABLE `nests` (
-  `nido` varchar(50) NOT NULL,
-  `pokemon` varchar(20) NOT NULL,
+  `nido` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `pokemon` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `type` int(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
 -- Dump dei dati per la tabella `nests`
@@ -685,7 +734,8 @@ INSERT INTO `nests` (`nido`, `pokemon`, `type`) VALUES
 ('Ciclabile Aniene', 'Vulpix', 1),
 ('Parco Don Enzo Boni', 'Sneasel', 1),
 ('Parchetto Dei Galli', 'Squirtle', 2),
-('Villa Chigi', 'Clefairy', 1);
+('Villa Chigi', 'Clefairy', 1),
+('Piazza Annibaliano', 'Swinub', 2);
 
 -- --------------------------------------------------------
 
@@ -694,10 +744,10 @@ INSERT INTO `nests` (`nido`, `pokemon`, `type`) VALUES
 --
 
 CREATE TABLE `parks` (
-  `park` varchar(50) NOT NULL,
-  `lat` varchar(15) NOT NULL,
-  `lng` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `park` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `lat` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `lng` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
 -- Dump dei dati per la tabella `parks`
@@ -724,7 +774,8 @@ INSERT INTO `parks` (`park`, `lat`, `lng`) VALUES
 ('Villa Pamphili', ' 41.884090', ' 12.446756'),
 ('Villa Torlonia', ' 41.913707', ' 12.512150'),
 ('Parchetto Dei Galli', '41.921532', '12.522627'),
-('Piazza Bologna', '41.913599', '12.520842');
+('Piazza Bologna', '41.913599', '12.520842'),
+('Piazza Annibaliano', '41.923228', '12.515657');
 
 -- --------------------------------------------------------
 
@@ -736,7 +787,7 @@ CREATE TABLE `pokeid` (
   `id` varchar(3) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `pokemon` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `userAlerts` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
 -- Dump dei dati per la tabella `pokeid`
@@ -867,7 +918,7 @@ INSERT INTO `pokeid` (`id`, `pokemon`, `userAlerts`) VALUES
 ('122', 'Mr. Mime', ''),
 ('123', 'Scyther', ''),
 ('124', 'Jynx', ''),
-('125', 'Electabuzz', ''),
+('125', 'Electabuzz', '350968891,'),
 ('126', 'Magmar', ''),
 ('127', 'Pinsir', ''),
 ('128', 'Tauros', ''),
@@ -1070,7 +1121,7 @@ INSERT INTO `pokeid` (`id`, `pokemon`, `userAlerts`) VALUES
 ('325', 'Spoink', ''),
 ('326', 'Grumpig', ''),
 ('327', 'Spinda', '158754689,350968891,'),
-('328', 'Trapinch', ''),
+('328', 'Trapinch', '158754689,'),
 ('329', 'Vibrava', ''),
 ('330', 'Flygon', ''),
 ('331', 'Cacnea', ''),
@@ -1554,28 +1605,465 @@ INSERT INTO `pokeid` (`id`, `pokemon`, `userAlerts`) VALUES
 
 CREATE TABLE `quests` (
   `quest` varchar(75) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `pokestop` varchar(50) NOT NULL,
-  `lat` varchar(15) NOT NULL,
-  `lng` varchar(15) NOT NULL,
+  `pokestop` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `lat` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `lng` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `zona` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `giorno` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `giorno` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
 -- Dump dei dati per la tabella `quests`
 --
 
 INSERT INTO `quests` (`quest`, `pokestop`, `lat`, `lng`, `zona`, `giorno`) VALUES
-('Spinda', 'Murale Sartoria', '41.936108', '12.529731', 'Centro, Libia, ', '2019-01-16'),
-('Trapinch', 'Bar Caffè Murales', '41.921331', '12.524456', 'Centro, Bologna, Lanciani, ', '2019-01-16'),
-('Gira 10 pokestop per 5 ananas argento', 'Vespetta Murales', '41.948137', '12.514694', 'Nord, ', '2019-01-16'),
-('Spinda', 'Istituto Religioso', '41.910720', '12.503709', 'Centro, Salario, ', '2019-01-16'),
-('Trapinch', 'Murales Torta', '41.930841', '12.522769', 'Centro, Libia, ', '2019-01-16'),
-('Aerodactyl', 'Bugs Bunny', '41.914148', '12.546427', 'Est, ', '2019-01-16'),
-('Cubone', 'Angioletti Murales', '41.927344', '12.524610', 'Centro, Libia, ', '2019-01-16'),
-('Trapinch', 'Targa Cesare Zavattini', '41.924002', '12.523730', 'Centro, Libia, ', '2019-01-16'),
-('Aerodactyl', 'Campetto Polivalente di Villa Blanc', '41.922287', '12.522917', 'Centro, Bologna, Lanciani, ', '2019-01-16'),
-('Trapinch', 'Millepiedi Murales', '41.931560', '12.520027', 'Centro, Libia, ', '2019-01-16');
+('15 buoni', 'Stählerne Gebote', '41.913454', '12.485054', 'Centro, Salario, ', '2019-01-19'),
+('15 buoni', 'Globe Theatre', '41.914075', '12.485888', 'Centro, Salario, ', '2019-01-19'),
+('15 buoni', 'Kopflose Dame', '41.913696', '12.485711', 'Centro, Salario, ', '2019-01-19'),
+('10 ottimo', 'Steinkugel', '41.914197', '12.486329', 'Centro, Salario, ', '2019-01-19'),
+('10 ottimo', 'Globe Theatre', '41.914533', '12.485360', 'Centro, Salario, ', '2019-01-19'),
+('10 ottimo', 'Museo Pietro Canonica', '41.915049', '12.486427', 'Centro, Salario, ', '2019-01-19'),
+('10 ottimo', 'Fontana della Vasca di Marmo', '41.914208', '12.484971', 'Centro, Salario, ', '2019-01-19'),
+('10 ottimo', 'Shell Fountain', '41.913999', '12.484411', 'Centro, Salario, ', '2019-01-19'),
+('10 ottimo', 'Tempio d’Esculapio', '41.914393', '12.482812', 'Centro, Pincio, ', '2019-01-19'),
+('10 ottimo', 'Casina Del Lago', '41.913696', '12.483752', 'Centro, Pincio, ', '2019-01-19'),
+('15 buoni', 'Giacomo Manzù - Il Grande Card', '41.913194', '12.483489', 'Centro, Pincio, ', '2019-01-19'),
+('15 buoni', 'Jose\' Ortigas', '41.913703', '12.481273', 'Centro, Pincio, ', '2019-01-19'),
+('10 ottimo', 'Fontana di Esculapio', '41.913883', '12.480514', 'Centro, Pincio, ', '2019-01-19'),
+('15 buoni', 'Grotta Di Tritone', '41.913329', '12.478304', 'Centro, Pincio, ', '2019-01-19'),
+('10 ottimo', 'In Onore A George Washington', '41.912957', '12.477767', 'Centro, Pincio, ', '2019-01-19'),
+('10 ottimo', 'Gogol', '41.915033', '12.480267', 'Centro, Pincio, ', '2019-01-19'),
+('15 buoni', 'Balcone', '41.915385', '12.481949', 'Centro, Pincio, ', '2019-01-19'),
+('10 ottimo', 'Palo Arrotondato', '41.916564', '12.482312', 'Centro, Pincio, ', '2019-01-19'),
+('15 buoni', 'la barca nel muro', '41.916354', '12.482849', 'Centro, Pincio, ', '2019-01-19'),
+('10 ottimo', 'Il Partigiano', '41.917366', '12.482425', 'Centro, Pincio, ', '2019-01-19'),
+('15 buoni', 'Accademia Britannica', '41.918271', '12.481109', 'Centro, ', '2019-01-19'),
+('10 ottimo', 'Targa al Padre della Patria', '41.916574', '12.479809', 'Centro, Pincio, ', '2019-01-19'),
+('10 ottimo', 'Divina Provvidenza', '41.918852', '12.477648', 'Centro, ', '2019-01-19'),
+('Spinda', '4Faces Mural', '41.940150', '12.531888', 'Est, ', '2019-01-19');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `roma_c`
+--
+
+CREATE TABLE `roma_c` (
+  `ID` int(2) DEFAULT NULL,
+  `hour` varchar(5) DEFAULT NULL,
+  `AW1` varchar(38) DEFAULT NULL,
+  `wind_1` decimal(3,1) DEFAULT NULL,
+  `gust_1` decimal(3,1) DEFAULT NULL,
+  `AW2` varchar(38) DEFAULT NULL,
+  `wind_2` decimal(3,1) DEFAULT NULL,
+  `gust_2` decimal(3,1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+--
+-- Dump dei dati per la tabella `roma_c`
+--
+
+INSERT INTO `roma_c` (`ID`, `hour`, `AW1`, `wind_1`, `gust_1`, `AW2`, `wind_2`, `gust_2`) VALUES
+(0, '00:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(1, '01:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(2, '02:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(3, '03:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(4, '04:00', 'Parzialmente nuvoloso', '7.4', '11.1', 'x', '0.0', '0.0'),
+(5, '05:00', 'Parzialmente nuvoloso', '9.3', '11.1', 'x', '0.0', '0.0'),
+(6, '06:00', 'Parzialmente nuvoloso', '9.3', '13.0', 'x', '0.0', '0.0'),
+(7, '07:00', 'Prevalentemente nuvoloso', '9.3', '13.0', 'x', '0.0', '0.0'),
+(8, '08:00', 'Prevalentemente nuvoloso', '11.1', '13.0', 'x', '0.0', '0.0'),
+(9, '09:00', 'Prevalentemente nuvoloso', '13.0', '16.7', 'x', '0.0', '0.0'),
+(10, '10:00', 'Rovesci', '9.3', '13.0', 'x', '0.0', '0.0'),
+(11, '11:00', 'Nuvoloso', '11.1', '13.0', 'Nuvoloso', '11.1', '13.0'),
+(12, '12:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '11.1', '14.8'),
+(13, '13:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '11.1', '14.8'),
+(14, '14:00', 'Rovesci', '11.1', '14.8', 'Rovesci', '11.1', '14.8'),
+(15, '15:00', 'Prevalentemente nuvoloso', '9.3', '13.0', 'Prevalentemente nuvoloso', '9.3', '13.0'),
+(16, '16:00', 'Prevalentemente nuvoloso', '7.4', '11.1', 'Prevalentemente nuvoloso', '7.4', '11.1'),
+(17, '17:00', 'Prevalentemente nuvoloso', '7.4', '11.1', 'Prevalentemente nuvoloso', '7.4', '11.1'),
+(18, '18:00', 'Rovesci', '7.4', '9.3', 'Rovesci', '7.4', '9.3'),
+(19, '19:00', 'Nuvole intermittenti', '7.4', '9.3', 'Nuvole intermittenti', '7.4', '9.3'),
+(20, '20:00', 'Prevalentemente nuvoloso con rovesci', '7.4', '9.3', 'Prevalentemente nuvoloso con rovesci', '7.4', '9.3'),
+(21, '21:00', 'Nuvole intermittenti', '7.4', '11.1', 'Nuvole intermittenti', '7.4', '11.1'),
+(22, '22:00', 'x', '0.0', '0.0', 'Nuvole intermittenti', '7.4', '11.1'),
+(23, '23:00', 'x', '0.0', '0.0', 'Nuvole intermittenti', '9.3', '11.1');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `roma_e`
+--
+
+CREATE TABLE `roma_e` (
+  `ID` int(2) DEFAULT NULL,
+  `hour` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `AW1` varchar(38) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `wind_1` decimal(3,1) DEFAULT NULL,
+  `gust_1` decimal(3,1) DEFAULT NULL,
+  `AW2` varchar(38) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `wind_2` decimal(3,1) DEFAULT NULL,
+  `gust_2` decimal(3,1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `roma_e`
+--
+
+INSERT INTO `roma_e` (`ID`, `hour`, `AW1`, `wind_1`, `gust_1`, `AW2`, `wind_2`, `gust_2`) VALUES
+(0, '00:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(1, '01:00', 'Nuvole intermittenti', '7.4', '7.4', 'x', '0.0', '0.0'),
+(2, '02:00', 'Nuvole intermittenti', '7.4', '7.4', 'x', '0.0', '0.0'),
+(3, '03:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(4, '04:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(5, '05:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(6, '06:00', 'Parzialmente nuvoloso', '9.3', '11.1', 'x', '0.0', '0.0'),
+(7, '07:00', 'Prevalentemente nuvoloso', '9.3', '13.0', 'x', '0.0', '0.0'),
+(8, '08:00', 'Prevalentemente nuvoloso', '11.1', '13.0', 'x', '0.0', '0.0'),
+(9, '09:00', 'Parzialmente soleggiato', '7.4', '11.1', 'x', '0.0', '0.0'),
+(10, '10:00', 'Prevalentemente nuvoloso con rovesci', '7.4', '11.1', 'x', '0.0', '0.0'),
+(11, '11:00', 'Prevalentemente nuvoloso', '11.1', '11.1', 'Nuvoloso', '9.3', '11.1'),
+(12, '12:00', 'Rovesci', '11.1', '13.0', 'Rovesci', '11.1', '14.8'),
+(13, '13:00', 'Rovesci', '11.1', '14.8', 'Rovesci', '11.1', '14.8'),
+(14, '14:00', 'Prevalentemente nuvoloso', '11.1', '14.8', 'Prevalentemente nuvoloso', '11.1', '14.8'),
+(15, '15:00', 'Prevalentemente nuvoloso', '11.1', '13.0', 'Prevalentemente nuvoloso', '11.1', '14.8'),
+(16, '16:00', 'Rovesci', '11.1', '11.1', 'Rovesci', '11.1', '13.0'),
+(17, '17:00', 'Prevalentemente nuvoloso', '7.4', '11.1', 'Prevalentemente nuvoloso', '7.4', '11.1'),
+(18, '18:00', 'Prevalentemente nuvoloso', '5.6', '9.3', 'Prevalentemente nuvoloso', '5.6', '9.3'),
+(19, '19:00', 'Nuvole intermittenti', '5.6', '9.3', 'Nuvole intermittenti', '5.6', '9.3'),
+(20, '20:00', 'Prevalentemente nuvoloso con rovesci', '5.6', '11.1', 'Prevalentemente nuvoloso con rovesci', '5.6', '11.1'),
+(21, '21:00', 'Nuvole intermittenti', '7.4', '11.1', 'Nuvole intermittenti', '7.4', '11.1'),
+(22, '22:00', 'x', '0.0', '0.0', 'Nuvole intermittenti', '7.4', '11.1'),
+(23, '23:00', 'x', '0.0', '0.0', 'Nuvole intermittenti', '7.4', '11.1');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `roma_n`
+--
+
+CREATE TABLE `roma_n` (
+  `ID` int(2) DEFAULT NULL,
+  `hour` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `AW1` varchar(38) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `wind_1` decimal(3,1) DEFAULT NULL,
+  `gust_1` decimal(3,1) DEFAULT NULL,
+  `AW2` varchar(38) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `wind_2` decimal(3,1) DEFAULT NULL,
+  `gust_2` decimal(3,1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `roma_n`
+--
+
+INSERT INTO `roma_n` (`ID`, `hour`, `AW1`, `wind_1`, `gust_1`, `AW2`, `wind_2`, `gust_2`) VALUES
+(0, '00:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(1, '01:00', 'Parzialmente nuvoloso', '3.7', '9.3', 'x', '0.0', '0.0'),
+(2, '02:00', 'Parzialmente nuvoloso', '3.7', '9.3', 'x', '0.0', '0.0'),
+(3, '03:00', 'Parzialmente nuvoloso', '3.7', '9.3', 'x', '0.0', '0.0'),
+(4, '04:00', 'Parzialmente nuvoloso', '5.6', '11.1', 'x', '0.0', '0.0'),
+(5, '05:00', 'Parzialmente nuvoloso', '3.7', '7.4', 'x', '0.0', '0.0'),
+(6, '06:00', 'Parzialmente nuvoloso', '5.6', '11.1', 'x', '0.0', '0.0'),
+(7, '07:00', 'Rovesci', '5.6', '11.1', 'x', '0.0', '0.0'),
+(8, '08:00', 'Prevalentemente nuvoloso', '5.6', '13.0', 'x', '0.0', '0.0'),
+(9, '09:00', 'Prevalentemente nuvoloso', '1.9', '1.9', 'x', '0.0', '0.0'),
+(10, '10:00', 'Parzialmente soleggiato', '3.7', '3.7', 'x', '0.0', '0.0'),
+(11, '11:00', 'Prevalentemente nuvoloso con rovesci', '5.6', '7.4', 'Rovesci', '14.8', '16.7'),
+(12, '12:00', 'Prevalentemente nuvoloso', '3.7', '7.4', 'Nuvoloso', '0.0', '3.7'),
+(13, '13:00', 'Nuvoloso', '5.6', '11.1', 'Nuvoloso', '1.9', '7.4'),
+(14, '14:00', 'Rovesci', '7.4', '13.0', 'Rovesci', '3.7', '9.3'),
+(15, '15:00', 'Prevalentemente nuvoloso', '9.3', '13.0', 'Prevalentemente nuvoloso', '7.4', '11.1'),
+(16, '16:00', 'Rovesci', '9.3', '11.1', 'Rovesci', '7.4', '9.3'),
+(17, '17:00', 'Prevalentemente nuvoloso', '5.6', '11.1', 'Prevalentemente nuvoloso', '3.7', '9.3'),
+(18, '18:00', 'Prevalentemente nuvoloso', '1.9', '5.6', 'Prevalentemente nuvoloso', '1.9', '5.6'),
+(19, '19:00', 'Prevalentemente nuvoloso con rovesci', '3.7', '7.4', 'Prevalentemente nuvoloso con rovesci', '3.7', '7.4'),
+(20, '20:00', 'Nuvole intermittenti', '3.7', '7.4', 'Nuvole intermittenti', '3.7', '7.4'),
+(21, '21:00', 'Nuvole intermittenti', '3.7', '9.3', 'Nuvole intermittenti', '3.7', '9.3'),
+(22, '22:00', 'x', '0.0', '0.0', 'Nuvole intermittenti', '5.6', '11.1'),
+(23, '23:00', 'x', '0.0', '0.0', 'Nuvole intermittenti', '3.7', '7.4');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `roma_ne`
+--
+
+CREATE TABLE `roma_ne` (
+  `ID` int(2) DEFAULT NULL,
+  `hour` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `AW1` varchar(38) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `wind_1` decimal(3,1) DEFAULT NULL,
+  `gust_1` decimal(3,1) DEFAULT NULL,
+  `AW2` varchar(38) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `wind_2` decimal(3,1) DEFAULT NULL,
+  `gust_2` decimal(3,1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `roma_ne`
+--
+
+INSERT INTO `roma_ne` (`ID`, `hour`, `AW1`, `wind_1`, `gust_1`, `AW2`, `wind_2`, `gust_2`) VALUES
+(0, '00:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(1, '01:00', 'Parzialmente nuvoloso', '3.7', '9.3', 'x', '0.0', '0.0'),
+(2, '02:00', 'Parzialmente nuvoloso', '3.7', '9.3', 'x', '0.0', '0.0'),
+(3, '03:00', 'Parzialmente nuvoloso', '3.7', '9.3', 'x', '0.0', '0.0'),
+(4, '04:00', 'Parzialmente nuvoloso', '5.6', '11.1', 'x', '0.0', '0.0'),
+(5, '05:00', 'Parzialmente nuvoloso', '3.7', '7.4', 'x', '0.0', '0.0'),
+(6, '06:00', 'Parzialmente nuvoloso', '5.6', '11.1', 'x', '0.0', '0.0'),
+(7, '07:00', 'Rovesci', '5.6', '11.1', 'x', '0.0', '0.0'),
+(8, '08:00', 'Prevalentemente nuvoloso', '5.6', '13.0', 'x', '0.0', '0.0'),
+(9, '09:00', 'Prevalentemente nuvoloso', '1.9', '1.9', 'x', '0.0', '0.0'),
+(10, '10:00', 'Parzialmente soleggiato', '3.7', '3.7', 'x', '0.0', '0.0'),
+(11, '11:00', 'Prevalentemente nuvoloso con rovesci', '5.6', '7.4', 'Rovesci', '14.8', '16.7'),
+(12, '12:00', 'Prevalentemente nuvoloso', '3.7', '7.4', 'Nuvoloso', '0.0', '3.7'),
+(13, '13:00', 'Nuvoloso', '5.6', '11.1', 'Nuvoloso', '1.9', '7.4'),
+(14, '14:00', 'Rovesci', '7.4', '13.0', 'Rovesci', '3.7', '9.3'),
+(15, '15:00', 'Prevalentemente nuvoloso', '9.3', '13.0', 'Prevalentemente nuvoloso', '7.4', '11.1'),
+(16, '16:00', 'Rovesci', '9.3', '11.1', 'Rovesci', '7.4', '9.3'),
+(17, '17:00', 'Prevalentemente nuvoloso', '5.6', '11.1', 'Prevalentemente nuvoloso', '3.7', '9.3'),
+(18, '18:00', 'Prevalentemente nuvoloso', '1.9', '5.6', 'Prevalentemente nuvoloso', '1.9', '5.6'),
+(19, '19:00', 'Prevalentemente nuvoloso con rovesci', '3.7', '7.4', 'Prevalentemente nuvoloso con rovesci', '3.7', '7.4'),
+(20, '20:00', 'Nuvole intermittenti', '3.7', '7.4', 'Nuvole intermittenti', '3.7', '7.4'),
+(21, '21:00', 'Nuvole intermittenti', '3.7', '9.3', 'Nuvole intermittenti', '3.7', '9.3'),
+(22, '22:00', 'x', '0.0', '0.0', 'Nuvole intermittenti', '5.6', '11.1'),
+(23, '23:00', 'x', '0.0', '0.0', 'Nuvole intermittenti', '3.7', '7.4');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `roma_no`
+--
+
+CREATE TABLE `roma_no` (
+  `ID` int(2) DEFAULT NULL,
+  `hour` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `AW1` varchar(38) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `wind_1` decimal(3,1) DEFAULT NULL,
+  `gust_1` decimal(3,1) DEFAULT NULL,
+  `AW2` varchar(38) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `wind_2` decimal(3,1) DEFAULT NULL,
+  `gust_2` decimal(3,1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `roma_no`
+--
+
+INSERT INTO `roma_no` (`ID`, `hour`, `AW1`, `wind_1`, `gust_1`, `AW2`, `wind_2`, `gust_2`) VALUES
+(0, '00:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(1, '01:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(2, '02:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(3, '03:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(4, '04:00', 'Parzialmente nuvoloso', '7.4', '11.1', 'x', '0.0', '0.0'),
+(5, '05:00', 'Parzialmente nuvoloso', '9.3', '11.1', 'x', '0.0', '0.0'),
+(6, '06:00', 'Parzialmente nuvoloso', '9.3', '13.0', 'x', '0.0', '0.0'),
+(7, '07:00', 'Prevalentemente nuvoloso', '9.3', '13.0', 'x', '0.0', '0.0'),
+(8, '08:00', 'Rovesci', '11.1', '13.0', 'x', '0.0', '0.0'),
+(9, '09:00', 'Prevalentemente nuvoloso', '13.0', '16.7', 'x', '0.0', '0.0'),
+(10, '10:00', 'Nuvoloso', '11.1', '13.0', 'x', '0.0', '0.0'),
+(11, '11:00', 'Rovesci', '11.1', '14.8', 'Rovesci', '11.1', '14.8'),
+(12, '12:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '11.1', '14.8'),
+(13, '13:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '11.1', '14.8'),
+(14, '14:00', 'Rovesci', '11.1', '14.8', 'Rovesci', '11.1', '14.8'),
+(15, '15:00', 'Prevalentemente nuvoloso', '9.3', '13.0', 'Prevalentemente nuvoloso', '9.3', '13.0'),
+(16, '16:00', 'Prevalentemente nuvoloso', '7.4', '11.1', 'Prevalentemente nuvoloso', '7.4', '11.1'),
+(17, '17:00', 'Prevalentemente nuvoloso', '7.4', '11.1', 'Prevalentemente nuvoloso', '7.4', '11.1'),
+(18, '18:00', 'Rovesci', '5.6', '9.3', 'Rovesci', '5.6', '9.3'),
+(19, '19:00', 'Nuvole intermittenti', '5.6', '9.3', 'Nuvole intermittenti', '5.6', '9.3'),
+(20, '20:00', 'Prevalentemente nuvoloso con rovesci', '7.4', '9.3', 'Prevalentemente nuvoloso con rovesci', '7.4', '9.3'),
+(21, '21:00', 'Nuvole intermittenti', '7.4', '9.3', 'Nuvole intermittenti', '7.4', '9.3'),
+(22, '22:00', 'x', '0.0', '0.0', 'Nuvole intermittenti', '7.4', '11.1'),
+(23, '23:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `roma_o`
+--
+
+CREATE TABLE `roma_o` (
+  `ID` int(2) DEFAULT NULL,
+  `hour` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `AW1` varchar(38) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `wind_1` decimal(3,1) DEFAULT NULL,
+  `gust_1` decimal(3,1) DEFAULT NULL,
+  `AW2` varchar(38) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `wind_2` decimal(3,1) DEFAULT NULL,
+  `gust_2` decimal(3,1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `roma_o`
+--
+
+INSERT INTO `roma_o` (`ID`, `hour`, `AW1`, `wind_1`, `gust_1`, `AW2`, `wind_2`, `gust_2`) VALUES
+(0, '00:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(1, '01:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(2, '02:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(3, '03:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(4, '04:00', 'Parzialmente nuvoloso', '7.4', '11.1', 'x', '0.0', '0.0'),
+(5, '05:00', 'Parzialmente nuvoloso', '9.3', '11.1', 'x', '0.0', '0.0'),
+(6, '06:00', 'Parzialmente nuvoloso', '9.3', '13.0', 'x', '0.0', '0.0'),
+(7, '07:00', 'Prevalentemente nuvoloso', '9.3', '13.0', 'x', '0.0', '0.0'),
+(8, '08:00', 'Rovesci', '11.1', '13.0', 'x', '0.0', '0.0'),
+(9, '09:00', 'Prevalentemente nuvoloso', '13.0', '16.7', 'x', '0.0', '0.0'),
+(10, '10:00', 'Nuvoloso', '11.1', '13.0', 'x', '0.0', '0.0'),
+(11, '11:00', 'Rovesci', '11.1', '14.8', 'Rovesci', '11.1', '14.8'),
+(12, '12:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '11.1', '14.8'),
+(13, '13:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '11.1', '14.8'),
+(14, '14:00', 'Rovesci', '11.1', '14.8', 'Rovesci', '11.1', '14.8'),
+(15, '15:00', 'Prevalentemente nuvoloso', '9.3', '13.0', 'Prevalentemente nuvoloso', '9.3', '13.0'),
+(16, '16:00', 'Prevalentemente nuvoloso', '7.4', '11.1', 'Prevalentemente nuvoloso', '7.4', '11.1'),
+(17, '17:00', 'Prevalentemente nuvoloso', '7.4', '11.1', 'Prevalentemente nuvoloso', '7.4', '11.1'),
+(18, '18:00', 'Rovesci', '5.6', '9.3', 'Rovesci', '5.6', '9.3'),
+(19, '19:00', 'Nuvole intermittenti', '5.6', '9.3', 'Nuvole intermittenti', '5.6', '9.3'),
+(20, '20:00', 'Prevalentemente nuvoloso con rovesci', '7.4', '9.3', 'Prevalentemente nuvoloso con rovesci', '7.4', '9.3'),
+(21, '21:00', 'Nuvole intermittenti', '7.4', '9.3', 'Nuvole intermittenti', '7.4', '9.3'),
+(22, '22:00', 'x', '0.0', '0.0', 'Nuvole intermittenti', '7.4', '11.1'),
+(23, '23:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `roma_s`
+--
+
+CREATE TABLE `roma_s` (
+  `ID` int(2) DEFAULT NULL,
+  `hour` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `AW1` varchar(38) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `wind_1` decimal(3,1) DEFAULT NULL,
+  `gust_1` decimal(3,1) DEFAULT NULL,
+  `AW2` varchar(38) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `wind_2` decimal(3,1) DEFAULT NULL,
+  `gust_2` decimal(3,1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `roma_s`
+--
+
+INSERT INTO `roma_s` (`ID`, `hour`, `AW1`, `wind_1`, `gust_1`, `AW2`, `wind_2`, `gust_2`) VALUES
+(0, '00:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(1, '01:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(2, '02:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(3, '03:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(4, '04:00', 'Parzialmente nuvoloso', '7.4', '11.1', 'x', '0.0', '0.0'),
+(5, '05:00', 'Parzialmente nuvoloso', '9.3', '11.1', 'x', '0.0', '0.0'),
+(6, '06:00', 'Parzialmente nuvoloso', '9.3', '13.0', 'x', '0.0', '0.0'),
+(7, '07:00', 'Prevalentemente nuvoloso', '9.3', '13.0', 'x', '0.0', '0.0'),
+(8, '08:00', 'Prevalentemente nuvoloso', '11.1', '13.0', 'x', '0.0', '0.0'),
+(9, '09:00', 'Prevalentemente nuvoloso', '13.0', '16.7', 'x', '0.0', '0.0'),
+(10, '10:00', 'Rovesci', '9.3', '13.0', 'x', '0.0', '0.0'),
+(11, '11:00', 'Nuvoloso', '11.1', '13.0', 'Nuvoloso', '11.1', '13.0'),
+(12, '12:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '11.1', '14.8'),
+(13, '13:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '11.1', '14.8'),
+(14, '14:00', 'Rovesci', '11.1', '14.8', 'Rovesci', '11.1', '14.8'),
+(15, '15:00', 'Prevalentemente nuvoloso', '9.3', '13.0', 'Prevalentemente nuvoloso', '9.3', '13.0'),
+(16, '16:00', 'Prevalentemente nuvoloso', '7.4', '11.1', 'Prevalentemente nuvoloso', '7.4', '11.1'),
+(17, '17:00', 'Prevalentemente nuvoloso', '7.4', '11.1', 'Prevalentemente nuvoloso', '7.4', '11.1'),
+(18, '18:00', 'Rovesci', '7.4', '9.3', 'Rovesci', '7.4', '9.3'),
+(19, '19:00', 'Nuvole intermittenti', '7.4', '9.3', 'Nuvole intermittenti', '7.4', '9.3'),
+(20, '20:00', 'Prevalentemente nuvoloso con rovesci', '7.4', '9.3', 'Prevalentemente nuvoloso con rovesci', '7.4', '9.3'),
+(21, '21:00', 'Nuvole intermittenti', '7.4', '11.1', 'Nuvole intermittenti', '7.4', '11.1'),
+(22, '22:00', 'x', '0.0', '0.0', 'Nuvole intermittenti', '7.4', '11.1'),
+(23, '23:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `roma_se`
+--
+
+CREATE TABLE `roma_se` (
+  `ID` int(2) DEFAULT NULL,
+  `hour` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `AW1` varchar(38) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `wind_1` decimal(3,1) DEFAULT NULL,
+  `gust_1` decimal(3,1) DEFAULT NULL,
+  `AW2` varchar(38) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `wind_2` decimal(3,1) DEFAULT NULL,
+  `gust_2` decimal(3,1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `roma_se`
+--
+
+INSERT INTO `roma_se` (`ID`, `hour`, `AW1`, `wind_1`, `gust_1`, `AW2`, `wind_2`, `gust_2`) VALUES
+(0, '00:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(1, '01:00', 'Nuvole intermittenti', '7.4', '7.4', 'x', '0.0', '0.0'),
+(2, '02:00', 'Nuvole intermittenti', '7.4', '7.4', 'x', '0.0', '0.0'),
+(3, '03:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(4, '04:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(5, '05:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(6, '06:00', 'Parzialmente nuvoloso', '9.3', '11.1', 'x', '0.0', '0.0'),
+(7, '07:00', 'Prevalentemente nuvoloso', '9.3', '13.0', 'x', '0.0', '0.0'),
+(8, '08:00', 'Prevalentemente nuvoloso', '11.1', '13.0', 'x', '0.0', '0.0'),
+(9, '09:00', 'Parzialmente soleggiato', '7.4', '11.1', 'x', '0.0', '0.0'),
+(10, '10:00', 'Prevalentemente nuvoloso con rovesci', '7.4', '11.1', 'x', '0.0', '0.0'),
+(11, '11:00', 'Prevalentemente nuvoloso', '11.1', '11.1', 'Nuvoloso', '9.3', '11.1'),
+(12, '12:00', 'Rovesci', '11.1', '13.0', 'Rovesci', '9.3', '13.0'),
+(13, '13:00', 'Rovesci', '11.1', '14.8', 'Rovesci', '11.1', '13.0'),
+(14, '14:00', 'Prevalentemente nuvoloso', '11.1', '14.8', 'Prevalentemente nuvoloso', '9.3', '13.0'),
+(15, '15:00', 'Prevalentemente nuvoloso', '11.1', '13.0', 'Prevalentemente nuvoloso', '11.1', '13.0'),
+(16, '16:00', 'Rovesci', '11.1', '11.1', 'Rovesci', '11.1', '11.1'),
+(17, '17:00', 'Prevalentemente nuvoloso', '7.4', '11.1', 'Prevalentemente nuvoloso', '7.4', '11.1'),
+(18, '18:00', 'Prevalentemente nuvoloso', '5.6', '9.3', 'Prevalentemente nuvoloso', '5.6', '9.3'),
+(19, '19:00', 'Nuvole intermittenti', '5.6', '9.3', 'Nuvole intermittenti', '5.6', '9.3'),
+(20, '20:00', 'Prevalentemente nuvoloso con rovesci', '5.6', '11.1', 'Prevalentemente nuvoloso con rovesci', '5.6', '11.1'),
+(21, '21:00', 'Nuvole intermittenti', '7.4', '11.1', 'Nuvole intermittenti', '7.4', '11.1'),
+(22, '22:00', 'x', '0.0', '0.0', 'Nuvole intermittenti', '7.4', '11.1'),
+(23, '23:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `roma_so`
+--
+
+CREATE TABLE `roma_so` (
+  `ID` int(2) DEFAULT NULL,
+  `hour` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `AW1` varchar(38) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `wind_1` decimal(3,1) DEFAULT NULL,
+  `gust_1` decimal(3,1) DEFAULT NULL,
+  `AW2` varchar(38) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `wind_2` decimal(3,1) DEFAULT NULL,
+  `gust_2` decimal(3,1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `roma_so`
+--
+
+INSERT INTO `roma_so` (`ID`, `hour`, `AW1`, `wind_1`, `gust_1`, `AW2`, `wind_2`, `gust_2`) VALUES
+(0, '00:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(1, '01:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(2, '02:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(3, '03:00', 'Parzialmente nuvoloso', '7.4', '9.3', 'x', '0.0', '0.0'),
+(4, '04:00', 'Parzialmente nuvoloso', '7.4', '11.1', 'x', '0.0', '0.0'),
+(5, '05:00', 'Parzialmente nuvoloso', '9.3', '11.1', 'x', '0.0', '0.0'),
+(6, '06:00', 'Parzialmente nuvoloso', '9.3', '13.0', 'x', '0.0', '0.0'),
+(7, '07:00', 'Prevalentemente nuvoloso', '9.3', '13.0', 'x', '0.0', '0.0'),
+(8, '08:00', 'Rovesci', '11.1', '13.0', 'x', '0.0', '0.0'),
+(9, '09:00', 'Prevalentemente nuvoloso', '13.0', '16.7', 'x', '0.0', '0.0'),
+(10, '10:00', 'Nuvoloso', '11.1', '13.0', 'x', '0.0', '0.0'),
+(11, '11:00', 'Rovesci', '11.1', '14.8', 'Rovesci', '11.1', '14.8'),
+(12, '12:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '11.1', '14.8'),
+(13, '13:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '11.1', '14.8'),
+(14, '14:00', 'Rovesci', '11.1', '14.8', 'Rovesci', '11.1', '14.8'),
+(15, '15:00', 'Prevalentemente nuvoloso', '9.3', '13.0', 'Prevalentemente nuvoloso', '9.3', '13.0'),
+(16, '16:00', 'Prevalentemente nuvoloso', '7.4', '11.1', 'Prevalentemente nuvoloso', '7.4', '11.1'),
+(17, '17:00', 'Prevalentemente nuvoloso', '7.4', '11.1', 'Prevalentemente nuvoloso', '7.4', '11.1'),
+(18, '18:00', 'Rovesci', '5.6', '9.3', 'Rovesci', '5.6', '9.3'),
+(19, '19:00', 'Nuvole intermittenti', '5.6', '9.3', 'Nuvole intermittenti', '5.6', '9.3'),
+(20, '20:00', 'Prevalentemente nuvoloso con rovesci', '7.4', '9.3', 'Prevalentemente nuvoloso con rovesci', '7.4', '9.3'),
+(21, '21:00', 'Nuvole intermittenti', '7.4', '9.3', 'Nuvole intermittenti', '7.4', '9.3'),
+(22, '22:00', 'x', '0.0', '0.0', 'Nuvole intermittenti', '7.4', '11.1'),
+(23, '23:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0');
 
 -- --------------------------------------------------------
 
@@ -1588,15 +2076,7 @@ CREATE TABLE `sessions` (
   `username` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `status` int(1) NOT NULL,
   `alert` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dump dei dati per la tabella `sessions`
---
-
-INSERT INTO `sessions` (`userID`, `username`, `status`, `alert`) VALUES
-(2969750, 'pomettini', 1, '/100'),
-(2619206, 'thedarkmagister', 2, 'Gira 10 pokestop per 5 ananas argento');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -1608,7 +2088,7 @@ CREATE TABLE `tasks` (
   `reward` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `task` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `flag` int(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
 -- Dump dei dati per la tabella `tasks`
@@ -1652,9 +2132,36 @@ INSERT INTO `tasks` (`reward`, `task`, `flag`) VALUES
 ('Tentacruel', 'Guadagna 5 caramelle camminando con il compagno', 0),
 ('Voltorb', 'Effettua 5 bei tiri', 0),
 ('Vulpix', 'Cattura 5 Pokemon potenziati dalle condizioni atmosferiche', 0),
-('Nosepass', 'Schiudi 2 uova', 1),
-('Trapinch', 'Evolvi 3 Wurmple', 1),
-('Magikarp', 'Cattura 10 Pokemon/Usa 10 baccananas per catturare un Pokemon', 1);
+('Nosepass', 'Schiudi 2 uova', 0),
+('Magikarp', 'Cattura 10 Pokemon/Usa 10 baccananas per catturare un Pokemon', 0),
+('Trapinch', 'Evolvi 3 Wurmple', 0),
+('Shiny', '−', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `update_times`
+--
+
+CREATE TABLE `update_times` (
+  `cell` varchar(7) DEFAULT NULL,
+  `update_time` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+--
+-- Dump dei dati per la tabella `update_times`
+--
+
+INSERT INTO `update_times` (`cell`, `update_time`) VALUES
+('roma_c', '2019-01-19'),
+('roma_e', '2019-01-19'),
+('roma_ne', '2019-01-19'),
+('roma_n', '2019-01-19'),
+('roma_no', '2019-01-19'),
+('roma_o', '2019-01-19'),
+('roma_so', '2019-01-19'),
+('roma_s', '2019-01-19'),
+('roma_se', '2019-01-19');
 
 -- --------------------------------------------------------
 
@@ -1663,9 +2170,9 @@ INSERT INTO `tasks` (`reward`, `task`, `flag`) VALUES
 --
 
 CREATE TABLE `usersettings` (
-  `username` varchar(50) NOT NULL,
+  `username` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `radius` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
 -- Dump dei dati per la tabella `usersettings`
@@ -1686,7 +2193,7 @@ CREATE TABLE `zones` (
   `cellId64` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `groups` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
 -- Dump dei dati per la tabella `zones`
