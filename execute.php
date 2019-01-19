@@ -1,5 +1,9 @@
 <?php
-																		// include $_SERVER['DOCUMENT_ROOT'] . "/timingS.php";		// TIMER START
+// FUNZIONI
+include $_SERVER['DOCUMENT_ROOT'] . "/functions.php";
+
+$breakpoint = microtime(true);
+delta('START');
 
 spl_autoload_register(
     function ($class) {
@@ -47,10 +51,6 @@ $response = '';
 $apiToken = "689487990:AAGhqhcsalt0mXYRnUqFro9ECNxPuOOVPZc";
 $channel = '@PokeradarRoma';
 
-// AUTORIZZAZIONI
-include $_SERVER['DOCUMENT_ROOT'] . "/authorizations.php";
-// FUNZIONI
-include $_SERVER['DOCUMENT_ROOT'] . "/functions.php";
 // EMOJIS
 $EMO_100 = "\xF0\x9F\x92\xAF";
 $EMO_PIN = "\xF0\x9F\x93\x8C";
@@ -78,12 +78,18 @@ $EMO_v = json_decode('"'."\u2705".'"');
 $EMO_x = json_decode('"'."\u274c".'"');
 $EMO_ALR = json_decode('"'."\u203c".'"');
 $EMO_ERR = json_decode('"'."\u26d4".'"');
-																		//include $_SERVER['DOCUMENT_ROOT'] . "/timingS.php";		// TIMER START
+
+delta('Pre-connection');
+
 // MySQL -> Create connection
 $conn = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
 // $conn = new mysqli("2.227.251.71:3306", "root", "", "tradepkmn");
 // $conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");   [OLD freemysqlhosting account]
 // Check connection
+delta('Post-connection');
+
+// AUTORIZZAZIONI
+include $_SERVER['DOCUMENT_ROOT'] . "/authorizations.php";
 
 // CONTROLLA SESSIONE UTENTE
 $query = "SELECT * FROM `sessions` WHERE `userID` = $userId";
@@ -1606,5 +1612,6 @@ $parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
 */
+delta('End');
 
 

@@ -127,6 +127,18 @@
 		}
 	}
 
+	function delta($breakMsg) {
+		global $breakpoint;
+
+		$a = microtime(true);
+		$data = [
+			'chat_id' => 158754689,
+			'text' => $breakMsg.': '.sprintf('%.4f',$a - $breakpoint),
+		];
+		$response = file_get_contents("https://api.telegram.org/bot689487990:AAGhqhcsalt0mXYRnUqFro9ECNxPuOOVPZc/sendMessage?" . http_build_query($data) );
+		$breakpoint = microtime(true);
+	}
+
    /* FUNZIONE BETA PER COPIARE I DATABASE
    function copyDB() {
    	$conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");

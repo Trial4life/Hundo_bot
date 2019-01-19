@@ -1,7 +1,7 @@
 <?php
-$conn2 = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
+//$conn = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
 	$query = "SELECT * FROM `auth_groups`";
-	$result = mysqli_query($conn2,$query);
+	$result = mysqli_query($conn,$query);
 	$authorizedChats = $authorizedChatsNames = array();
 	while ($row = mysqli_fetch_assoc($result)) {
 		array_push($authorizedChats, intval($row['groupID']));
@@ -9,7 +9,7 @@ $conn2 = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
 	}
 
 	$query = "SELECT * FROM `admins`";
-	$result = mysqli_query($conn2,$query);
+	$result = mysqli_query($conn,$query);
 	$admins = array();
 	while ($row = mysqli_fetch_assoc($result)) {
 		array_push($admins, $row['username']);
@@ -52,5 +52,5 @@ $conn2 = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
 	$bannedUsers = array(
 
 	);
-$conn2->close();
+//$conn->close();
 ?>
