@@ -842,7 +842,7 @@ elseif($status == 0) {
 		$row2 = mysqli_fetch_assoc($result2);
 		$row2['lat'] != '' ? $latS = $row2['lat'] : $latS = '0';
 		$row2['lng'] != '' ? $lngS = $row2['lng'] : $lngS = '0';
-		$latN != '0' ? $link = "https://maps.google.com/?q=".$latS.",".$lngS."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$nest))).")" : $link = "";
+		$latS != '0' ? $link = "https://maps.google.com/?q=".$latS.",".$lngS."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$nest))).")" : $link = "";
 
 		// setlocale(LC_ALL, "ita");
 		$endDate = str_replace(" ","",date("j/m", strtotime(str_replace('-','/', $endDate))));
