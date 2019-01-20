@@ -789,18 +789,26 @@ elseif($status == 0) {
 		$row = mysqli_fetch_assoc($result);
 		$currNest = $row['nido'];
 
+		$query2 = "SELECT * FROM `parks` WHERE `park` = '$nest'";
+		$result2 = mysqli_query($conn,$query2);
+		$row2 = mysqli_fetch_assoc($result2);
+		$row2['lat'] != '' ? $latN = $row2['lat'] : $latN = '0';
+		$row2['lng'] != '' ? $lngN = $row2['lng'] : $lngN = '0';
+
+		$latN != '0' ? $link = "https://maps.google.com/?q=".$latN.",".$lngN."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$nest))).")" : $link = "";
+
 		// setlocale(LC_ALL, "ita");
 		$endDate = str_replace(" ","",date("j/m", strtotime(str_replace('-','/', $endDate))));
 
 		if ($currNest == $nest) {
-			$response = 'Il nido di *'.str_replace("\'","'",$nest).'* è stato già registrato fino al *'.$endDate.'*.';
+			$response = 'Il nido di <a href="'.$link.'">'.str_replace("\'","'",$nest).'</a> è stato già registrato fino al <b>'.$endDate.'</b>.';
 		}
 		else {
 			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn',1)");
-			$response = $EMO_v.' Nido di *'.str_replace("\'","'",$nest).'* registrato fino al *'.$endDate.'*.';
+			$response = $EMO_v.' Nido di <a href="'.$link.'">'.str_replace("\'","'",$nest).'</a> registrato fino al <b>'.$endDate.'</b>.';
 		}
 
-		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "HTML", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
 	}
