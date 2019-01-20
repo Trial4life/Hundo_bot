@@ -1,5 +1,5 @@
 <?php
-   date_default_timezone_set('Europe/Rome');
+   // date_default_timezone_set('Europe/Rome');	\\ GIÀ DICHIARATO NEL MAIN
 
 	// Cells //
 	$cell = $callbackData;

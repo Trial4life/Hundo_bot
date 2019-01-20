@@ -128,15 +128,15 @@
 	}
 
 	function delta($breakMsg) {
-		global $breakpoint;
+		global $BREAKPOINT;
 
 		$a = microtime(true);
 		$data = [
 			'chat_id' => 158754689,
-			'text' => $breakMsg.': '.sprintf('%.4f',$a - $breakpoint),
+			'text' => $breakMsg.': '.sprintf('%.4f',$a - $BREAKPOINT),
 		];
 		$response = file_get_contents("https://api.telegram.org/bot689487990:AAGhqhcsalt0mXYRnUqFro9ECNxPuOOVPZc/sendMessage?" . http_build_query($data) );
-		$breakpoint = microtime(true);
+		$BREAKPOINT = microtime(true);
 	}
 
    /* FUNZIONE BETA PER COPIARE I DATABASE
