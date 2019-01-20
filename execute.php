@@ -1303,7 +1303,7 @@ elseif($status == 0) {
 			$result = mysqli_query($conn,$query);
 			$row = mysqli_fetch_assoc($result);
 			$currGropus = $row['groups'];
-			$cellId = $row['groups'];
+			$cellId = $row['cellId'];
 			$zona = str_replace("'","\'",$row['name']);
 			list($lat, $lng, $zoom) = getCellData(hexdec($row['cellId64']), 2);
 
