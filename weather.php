@@ -54,7 +54,7 @@
 												  FROM   update_times
 												  WHERE  cell = 'NEW_FC'");
 	$newFC = mysqli_fetch_array($newFCresult);
-	$newFC['update_time'] == '0' ? $FCstatus = "-" : $FCstatus = ">";
+	$newFC['update_time'] == '0' ? $FCstatus = " − " : $FCstatus = " > ";
 /*
 	//close the mySQL connection
 	$conn->close();
@@ -115,6 +115,6 @@
 	for ($i = $now; $i <= $now+12; $i++) {
 		$i < 24 ? $n = $i : $n = $i % 24;
 		$h = strval(sprintf('%02d',$n));
-		$response = $response. "\n<code>".$h.":00</code> ".$FCstatus." ". getWeather(1,$n). " | " .getWeather(2,$n);
+		$response = $response. "\n<code>".$h.":00</code> − ". getWeather(1,$n). $FCstatus .getWeather(2,$n);
 	};
 ?>
