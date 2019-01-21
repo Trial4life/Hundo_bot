@@ -760,6 +760,37 @@ elseif($status == 0) {
     	echo json_encode($parameters);
 	}
 
+	/////////////
+	/// NEWFC ///
+	/////////////
+	elseif(strpos($text, "/fc") === 0 ){
+		if (in_array($username, $admins)) {
+			$query = "SELECT * FROM `update_times` WHERE `cell` = 'NEW_FC'";
+			$result = mysqli_query($conn,$query);
+			$row = mysqli_fetch_assoc($result);
+
+			if ($row['update_time'] == '0') {
+				mysqli_query($conn,"UPDATE `update_times` SET `update_time` = '1' WHERE `cell` = 'NEW_FC'");
+				$response = $EMO_v.' Previsioni meteo aggiornate.';
+			}
+			else {
+				$response = 'Le previsioni meteo sono già state aggiornate per oggi.';
+			}
+		}
+		else {
+			$data = [
+		  		'chat_id' => $chatId,
+		  		'text' => $EMO_ERR.' Solo gli admin possono utilizzare questo comando. '.$EMO_ERR,
+			];
+			$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+		}
+
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "HTML", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
+	}
+
 ###################
 ###### NESTS ######
 ###################
