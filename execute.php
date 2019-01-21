@@ -785,7 +785,6 @@ elseif($status == 0) {
 		echo json_encode($parameters);
 	}
 
-
 	/////////////
 	/// NEWFC ///
 	/////////////
@@ -815,7 +814,6 @@ elseif($status == 0) {
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
 	}
-
 
 ###################
 ###### NESTS ######
