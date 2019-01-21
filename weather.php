@@ -38,19 +38,23 @@
 		$result2 = mysqli_query($conn,$query2);
 		$row2 = mysqli_fetch_array($result2);
 		$GO1[] = str_replace(" ", "_", $row2['GO']);
-		//$GO1_EMO[] = $row2['EMO'];
 
 		$query3 = "SELECT * FROM `conversion` WHERE `AW` = '$AW2_value'";
 		$result3 = mysqli_query($conn,$query3);
 		$row3 = mysqli_fetch_array($result3);
 		$GO2[] = str_replace(" ", "_", $row3['GO']);
-		//$GO2_EMO[] = $row3['EMO'];
 	}
 
 	$updateDateResult = mysqli_query($conn,"SELECT update_time
-														FROM   update_times
-														WHERE  cell = '$cellCode[$cell]'");
+														 FROM   update_times
+														 WHERE  cell = '$cellCode[$cell]'");
 	$updateDate = mysqli_fetch_array($updateDateResult);
+
+	$newFCresult = mysqli_query($conn,"SELECT *
+												  FROM   update_times
+												  WHERE  cell = 'NEW_FC'");
+	$newFC = mysqli_fetch_array($newFCresult);
+	$newFC['update_time'] == '0' ? $FCstatus = "-" : $FCstatus = ">";
 /*
 	//close the mySQL connection
 	$conn->close();
@@ -106,11 +110,11 @@
 	$now = date('G');
 	$link = "https://s2.sidewalklabs.com/regioncoverer/?center=41.891165%2C12.492826&zoom=12&cells=".$cellId[$cell];
 
-	$response = "Previsioni meteo per la cella <a href='".$link."'>Roma ".$cellTitle[$cell]."</a>:";
+	$response = "Previsioni meteo per la cella \n<a href='".$link."'>Roma ".$cellTitle[$cell]."</a>:";
 
 	for ($i = $now; $i <= $now+12; $i++) {
 		$i < 24 ? $n = $i : $n = $i % 24;
 		$h = strval(sprintf('%02d',$n));
-		$response = $response. "\n<code>".$h.":00</code> − ". getWeather(1,$n). " | " .getWeather(2,$n);
+		$response = $response. "\n<code>".$h.":00</code> ".$FCstatus." ". getWeather(1,$n). " | " .getWeather(2,$n);
 	};
 ?>
