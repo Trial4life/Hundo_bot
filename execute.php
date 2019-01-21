@@ -789,7 +789,6 @@ elseif($status == 0) {
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
 	}
-	}
 
 ###################
 ###### NESTS ######
