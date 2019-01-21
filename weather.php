@@ -54,7 +54,7 @@
 												  FROM   update_times
 												  WHERE  cell = 'NEW_FC'");
 	$newFC = mysqli_fetch_array($newFCresult);
-	$newFC['update_time'] == '0' ? $FCstatus = " − " : $FCstatus = " > ";
+	$newFC['update_time'] == '0' ? $FCstatus = " − " : $FCstatus = " ┆ ";
 /*
 	//close the mySQL connection
 	$conn->close();
