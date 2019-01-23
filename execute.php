@@ -8,7 +8,7 @@ spl_autoload_register(
 
 // FUNZIONI
 include $_SERVER['DOCUMENT_ROOT'] . "/functions.php";
-//	$BREAKPOINT = microtime(true);	TIMESTAMP INIZIALE PER I DEBUG
+	$BREAKPOINT = microtime(true);	TIMESTAMP INIZIALE PER I DEBUG
 
 date_default_timezone_set('Europe/Rome');
 $today = date('Y-m-d');
@@ -77,11 +77,13 @@ $EMO_x = json_decode('"'."\u274c".'"');
 $EMO_ALR = json_decode('"'."\u203c".'"');
 $EMO_ERR = json_decode('"'."\u26d4".'"');
 
+delta('Pre-db4free-connection');
 // MySQL -> Create connection
 $conn = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
 // $conn = new mysqli("2.227.251.71:3306", "root", "", "tradepkmn");
 // $conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");   [OLD freemysqlhosting account]
 // Check connection
+delta('Post-db4free-connection');
 
 // AUTORIZZAZIONI
 include $_SERVER['DOCUMENT_ROOT'] . "/authorizations.php";
@@ -335,6 +337,7 @@ elseif(strpos($text, "/termina") === 0 ) {
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
 }
+delta('Pre-quests');
 
 elseif(strpos($text, "/quests ") === 0 ) {
 	$zona = ucfirst(str_replace('/quests ', '', $text));
@@ -1668,6 +1671,7 @@ elseif($status == 2) {
 //close the mySQL connection
 $conn->close();
 																		// include $_SERVER['DOCUMENT_ROOT'] . "/timingE.php";		// TIMER END
+delta('End');
 
 /*
 // DEBUG - PRINT
