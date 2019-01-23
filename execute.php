@@ -337,9 +337,9 @@ elseif(strpos($text, "/termina") === 0 ) {
 		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 	}
 }
-delta('Pre-quests');
 
-elseif(strpos($text, "/quests ") === 0 ) {
+
+elseif(strpos($text, "/quests ") === 0 ) {delta('Pre-quests');
 	$zona = ucfirst(str_replace('/quests ', '', $text));
 	// ELENCO QUESTS
 	mysqli_query($conn,"DELETE FROM `quests` WHERE giorno < '$today'");  // RIMUOVE LE QUEST DEL GIORNO PRECEDENTE
