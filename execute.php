@@ -10,7 +10,7 @@ spl_autoload_register(
 include $_SERVER['DOCUMENT_ROOT'] . "/functions.php";
 //	$BREAKPOINT = microtime(true);	// TIMESTAMP INIZIALE PER I DEBUG
 
-date_default_timezone_set('Europe/Rome');
+date_default_timezone_set('Europe/London');
 $today = date('Y-m-d');
 $today2 = date('d/m/y');
 
