@@ -16,3 +16,6 @@ curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 0);
 curl_setopt($handle, CURLOPT_TIMEOUT, 120);
 $result = curl_exec($handle);
 print_r($result);
+
+// FAST REGISTER: TYPE IN BROWSER
+// https://api.telegram.org/bot689487990:AAGhqhcsalt0mXYRnUqFro9ECNxPuOOVPZc/setWebhook?url=https://hundo.herokuapp.com/execute.php
