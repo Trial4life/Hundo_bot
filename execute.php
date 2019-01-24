@@ -7,7 +7,7 @@ spl_autoload_register(
 );
 
 // FUNZIONI
-include $_SERVER['DOCUMENT_ROOT'] . "/functions.php";
+include "functions.php";
 //	$BREAKPOINT = microtime(true);	// TIMESTAMP INIZIALE PER I DEBUG
 
 date_default_timezone_set('Europe/London');
@@ -84,7 +84,7 @@ $conn = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
 // Check connection
 
 // AUTORIZZAZIONI
-include $_SERVER['DOCUMENT_ROOT'] . "/authorizations.php";
+include "authorizations.php";
 
 // CONTROLLA SESSIONE UTENTE
 $query = "SELECT * FROM `sessions` WHERE `userID` = $userId";
@@ -748,7 +748,7 @@ elseif($status == 0) {
 	}
 
 	elseif (isset($update["callback_query"])) {
-		include_once $_SERVER['DOCUMENT_ROOT'] . "/weather.php";
+		include_once "weather.php";
 
     	$parameters = array(
     		'chat_id' => $callbackId,
