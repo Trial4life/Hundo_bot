@@ -2,7 +2,7 @@
 
 // PARAMETRI DA MODIFICARE
 $WEBHOOK_URL = 'https://hundo.herokuapp.com/execute.php';
-// $WEBHOOK_URL = 'https://2.227.251.71/_DEV_/[HEROKU]/Exeggutor_bot/hundo_bot/execute.php';
+// $WEBHOOK_URL = 'https://<IP>/_DEV_/[HEROKU]/Exeggutor_bot/hundo_bot/execute.php';
 $BOT_TOKEN = '689487990:AAGhqhcsalt0mXYRnUqFro9ECNxPuOOVPZc';
 
 // NON APPORTARE MODIFICHE NEL CODICE SEGUENTE
