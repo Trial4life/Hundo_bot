@@ -822,7 +822,7 @@ elseif($status == 0) {
 	//////////////////
 	////// NEST //////
 	//////////////////
-	elseif(strpos($text, "/nest") === 0 ) {
+	elseif(strpos($text, "/nest ") === 0 ) {
 		$str = str_replace('/nest ', '', str_replace("'","\'",$text));
 
 		$query = "SELECT * FROM `nestEnd`";
@@ -870,7 +870,7 @@ elseif($status == 0) {
 	//////////////////
 	////// SPAWN /////
 	//////////////////
-	elseif(strpos($text, "/spawn") === 0 ) {
+	elseif(strpos($text, "/spawn ") === 0 ) {
 		$str = str_replace('/spawn ', '', str_replace("'","\'",$text));
 
 		$query = "SELECT * FROM `nestEnd`";
