@@ -1,5 +1,8 @@
 <?php
-   // date_default_timezone_set('Europe/Rome');	\\ GIÀ DICHIARATO NEL MAIN
+   date_default_timezone_set('Europe/Rome');	// Nel main è dichiarato "London", qui serve "Rome" per gli orari di alba e tramonto
+	$sunriseHour = intval(substr(date_sunrise(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, 2),0,-2));
+	$sunsetHour = intval(substr(date_sunset(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, 2),0,-2));
+	$now = date('G');
 
 	// Cells //
 	$cell = $callbackData;
@@ -7,14 +10,6 @@
 	$cellTitle = array("Centro","Est","Nord-Est","Nord","Nord-Ovest","Ovest","Sud-Ovest","Sud","Sud-Est",);
 	$cellId = array('132f61','132f63','132f65','132f67','132f5d','132f5f','1325f5','13258b','132589');
 
-/* È GIÀ CONNESSO DAL MAIN
-	// Create connection
-   $conn = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
-   // Check connection
-   if ($conn->connect_error) {
-       die("Connection failed: " . $conn->connect_error);
-   }
-*/
 	$AW1 = $AW2 = $wind_1 = $wind_2 = $gust_1 = $gust_2 = $GO1 = $GO2 = array(); 	// = $GO1_EMO = $GO2_EMO =
 
 	$query = "SELECT * FROM `$cellCode[$cell]`";
@@ -55,11 +50,8 @@
 												  WHERE  cell = 'NEW_FC'");
 	$newFC = mysqli_fetch_array($newFCresult);
 	$newFC['update_time'] == '0' ? $FCstatus = " | " : $FCstatus = " ¦ ";
-/*
-	//close the mySQL connection
-	$conn->close();
-*/
 
+// Current time
 /*
 	$currentTime = date("H:i");
 	$cT = intval(substr($currentTime, 0, -3));
@@ -105,14 +97,9 @@
 		}
 	}
 */
-	date_default_timezone_set('Europe/Rome');
-	$sunriseHour = intval(substr(date_sunrise(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, 2),0,-2));
-	$sunsetHour = intval(substr(date_sunset(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, 2),0,-2));
-	$now = date('G');
+
 	$link = "https://s2.sidewalklabs.com/regioncoverer/?center=41.891165%2C12.492826&zoom=12&cells=".$cellId[$cell];
-
 	$response = "Previsioni meteo per la cella \n<a href='".$link."'>Roma ".$cellTitle[$cell]."</a>:";
-
 	for ($i = $now; $i <= $now+12; $i++) {
 		$i < 24 ? $n = $i : $n = $i % 24;
 		$h = strval(sprintf('%02d',$n));
