@@ -1,5 +1,5 @@
 <?php
-   //date_default_timezone_set('Europe/Rome');		// Nel main è dichiarato "London", qui serve "Rome" per gli orari di alba e tramonto
+   date_default_timezone_set('Europe/Rome');		// Nel main è dichiarato "London", qui serve "Rome" per gli orari di alba e tramonto
    $dtz = new DateTimeZone('Europe/Rome');
 	$time_Rome = new DateTime('now', $dtz);
 	$offset = $dtz->getOffset( $time_Rome ) / 3600;
