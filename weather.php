@@ -13,7 +13,6 @@
 	$cellTitle = array("Centro","Est","Nord-Est","Nord","Nord-Ovest","Ovest","Sud-Ovest","Sud","Sud-Est",);
 	$cellId = array('132f61','132f63','132f65','132f67','132f5d','132f5f','1325f5','13258b','132589');
 
-	// $AW1 = $AW2 = $wind_1 = $wind_2 = $gust_1 = $gust_2 = $GO1 = $GO2 = array();
 	$AW = $wind = $gust = $GO = array(array(), array());
 
 	$query = "SELECT * FROM `$cellCode[$cell]`";

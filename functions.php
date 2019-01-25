@@ -63,7 +63,6 @@
    }
 
    function getWeather($ind, $t) {
-		// global $wind_1, $wind_2, $gust_1, $gust_2, $GO1, $GO2, $GO1_EMO, $GO2_EMO, $AW1, $AW2, $sunsetHour, $sunriseHour;
 		global $wind, $gust, $GO, $AW, $sunsetHour, $sunriseHour;
 
 		if ($AW[$ind][$t] == 'x') {
@@ -93,7 +92,6 @@
 		elseif ($GO[$ind][$t]=='Nebbia') {
 			return "\xF0\x9F\x8C\x81";
 		}
-		//else { return str_replace("\\\\","\\",$GO1_EMO[$t]); }
 	}
 
 	function delta($breakMsg) {
