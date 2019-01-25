@@ -1,7 +1,10 @@
 <?php
-   date_default_timezone_set('Europe/Rome');		// Nel main è dichiarato "London", qui serve "Rome" per gli orari di alba e tramonto
-	$sunriseHour = intval(substr(date_sunrise(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, 2),0,-2)) -1;		// -1 è per un bug di date_sunrise?
-	$sunsetHour = intval(substr(date_sunset(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, 2),0,-2)) -1;		// -1 è per un bug di date_sunset?
+   //date_default_timezone_set('Europe/Rome');		// Nel main è dichiarato "London", qui serve "Rome" per gli orari di alba e tramonto
+   $dtz = new DateTimeZone('Europe/Rome');
+	$time_Rome = new DateTime('now', $dtz);
+	$offset = $dtz->getOffset( $time_Rome ) / 3600;
+	$sunriseHour = intval(substr(date_sunrise(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, $offset),0,-2));
+	$sunsetHour  = intval(substr( date_sunset(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, $offset),0,-2));
 	$now = date('G');
 
 	// Cells //
