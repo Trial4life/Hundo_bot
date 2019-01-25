@@ -1,7 +1,7 @@
 <?php
    date_default_timezone_set('Europe/Rome');		// Nel main è dichiarato "London", qui serve "Rome" per gli orari di alba e tramonto
-	$sunriseHour = intval(substr(date_sunrise(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, 2),0,-2));
-	$sunsetHour = intval(substr(date_sunset(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, 2),0,-2));
+	$sunriseHour = intval(substr(date_sunrise(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, 2),0,-2))-1;
+	$sunsetHour = intval(substr(date_sunset(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, 2),0,-2))-1;
 	$now = date('G');
 
 	// Cells //
@@ -103,6 +103,6 @@
 	for ($i = $now; $i <= $now+12; $i++) {
 		$i < 24 ? $n = $i : $n = $i % 24;
 		$h = strval(sprintf('%02d',$n));
-		$response = $response. "\n<code>".$h.":00</code> − ". getWeather(1,$n). $FCstatus .getWeather(2,$n).substr(date_sunrise(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, 2),0,-2).substr(date_sunset(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, 2),0,-2);
+		$response = $response. "\n<code>".$h.":00</code> − ". getWeather(1,$n). $FCstatus .getWeather(2,$n);
 	};
 ?>
