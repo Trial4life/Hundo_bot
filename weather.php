@@ -13,7 +13,8 @@
 	$cellTitle = array("Centro","Est","Nord-Est","Nord","Nord-Ovest","Ovest","Sud-Ovest","Sud","Sud-Est",);
 	$cellId = array('132f61','132f63','132f65','132f67','132f5d','132f5f','1325f5','13258b','132589');
 
-	$AW1 = $AW2 = $wind_1 = $wind_2 = $gust_1 = $gust_2 = $GO1 = $GO2 = array();
+	// $AW1 = $AW2 = $wind_1 = $wind_2 = $gust_1 = $gust_2 = $GO1 = $GO2 = array();
+	$AW = $wind = $gust = $GO = array(array(), array());
 
 	$query = "SELECT * FROM `$cellCode[$cell]`";
 	$result = mysqli_query($conn,$query);
@@ -23,24 +24,24 @@
 	}
 
 	while($row =  mysqli_fetch_assoc($result)) {
-   	$AW1[] = str_replace(" ", "_", $row['AW1']);
-		$AW2[] = str_replace(" ", "_", $row['AW2']);
-		$wind_1[] = $row['wind_1'];
-		$wind_2[] = $row['wind_2'];
-		$gust_1[] = $row['gust_1'];
-		$gust_2[] = $row['gust_2'];
+   	$AW[0][] = str_replace(" ", "_", $row['AW1']);
+		$AW[1][] = str_replace(" ", "_", $row['AW2']);
+		$wind[0][] = $row['wind_1'];
+		$wind[1][] = $row['wind_2'];
+		$gust[0][] = $row['gust_1'];
+		$gust[1][] = $row['gust_2'];
 		$AW1_value = $row['AW1'];
 		$AW2_value = $row['AW2'];
 
 		$query2 = "SELECT * FROM `conversion` WHERE `AW` = '$AW1_value'";
 		$result2 = mysqli_query($conn,$query2);
 		$row2 = mysqli_fetch_array($result2);
-		$GO1[] = str_replace(" ", "_", $row2['GO']);
+		$GO[0][] = str_replace(" ", "_", $row2['GO']);
 
 		$query3 = "SELECT * FROM `conversion` WHERE `AW` = '$AW2_value'";
 		$result3 = mysqli_query($conn,$query3);
 		$row3 = mysqli_fetch_array($result3);
-		$GO2[] = str_replace(" ", "_", $row3['GO']);
+		$GO[0][] = str_replace(" ", "_", $row3['GO']);
 	}
 
 	$updateDateResult = mysqli_query($conn,"SELECT update_time

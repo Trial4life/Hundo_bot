@@ -63,68 +63,37 @@
    }
 
    function getWeather($ind, $t) {
-		global $wind_1, $wind_2, $gust_1, $gust_2, $GO1, $GO2, $GO1_EMO, $GO2_EMO, $AW1, $AW2, $sunsetHour, $sunriseHour;
+		// global $wind_1, $wind_2, $gust_1, $gust_2, $GO1, $GO2, $GO1_EMO, $GO2_EMO, $AW1, $AW2, $sunsetHour, $sunriseHour;
+		global $wind, $gust, $GO, $AW, $sunsetHour, $sunriseHour;
 
-		if ($ind == 1) {
-			if ($AW1[$t] == 'x') {
-				return "\xE2\x96\xAB";
-			}
-			elseif ($gust_1[$t] > 30.0 && $GO1[$t] != "Pioggia" && $GO1[$t] != "Neve" && strpos($AW1[$t], "rovesci") === false && strpos($AW1[$t], "temporali") === false) {
-				return "\xF0\x9F\x92\xA8";		// Vento
-			}
-			elseif ($GO1[$t]=="Sereno" && ($t < $sunriseHour || $t > $sunsetHour)) {
-				return "\xF0\x9F\x8C\x99";		// Luna
-			}
-			elseif ($GO1[$t]=='Sereno') {
-				return "\xE2\x98\x80";
-			}
-			elseif ($GO1[$t]=="P_nuvoloso") {
-				return "\xE2\x9B\x85";
-			}
-			elseif ($GO1[$t]=='Coperto') {
-				return "\xE2\x98\x81";
-			}
-			elseif ($GO1[$t]=='Pioggia') {
-				return "\xE2\x98\x94";
-			}
-			elseif ($GO1[$t]=='Neve') {
-				return "\xE2\x9D\x84";
-			}
-			elseif ($GO1[$t]=='Nebbia') {
-				return "\xF0\x9F\x8C\x81";
-			}
-			//else { return str_replace("\\\\","\\",$GO1_EMO[$t]); }
+		if ($AW[$ind][$t] == 'x') {
+			return "\xE2\x96\xAB";
 		}
-		elseif ($ind == 2) {
-			if ($AW2[$t] == 'x') {
-				return "\xE2\x96\xAB";
-			}
-			elseif ($gust_2[$t] > 30.0 && $GO2[$t] != "Pioggia" && $GO2[$t] != "Neve" && strpos($AW2[$t], "rovesci") === false && strpos($AW2[$t], "temporali") === false) {
-				return "\xF0\x9F\x92\xA8";		// Vento
-			}
-			elseif ($GO2[$t]=="Sereno" && ($t < $sunriseHour || $t > $sunsetHour)) {
-				return "\xF0\x9F\x8C\x99";		// Luna
-			}
-			elseif ($GO2[$t]=='Sereno') {
-				return "\xE2\x98\x80";
-			}
-			elseif ($GO2[$t]=="P_nuvoloso") {
-				return "\xE2\x9B\x85";
-			}
-			elseif ($GO2[$t]=='Coperto') {
-				return "\xE2\x98\x81";
-			}
-			elseif ($GO2[$t]=='Pioggia') {
-				return "\xE2\x98\x94";
-			}
-			elseif ($GO2[$t]=='Neve') {
-				return "\xE2\x9D\x84";
-			}
-			elseif ($GO2[$t]=='Nebbia') {
-				return "\xF0\x9F\x8C\x81";
-			}
-			//else { return str_replace("\\\\","\\",$GO2_EMO[$t]); }
+		elseif ($gust[$ind][$t] > 30.0 && $GO[$ind][$t] != "Pioggia" && $GO[$ind][$t] != "Neve" && strpos($AW[$ind][$t], "rovesci") === false && strpos($AW[$ind][$t], "temporali") === false) {
+			return "\xF0\x9F\x92\xA8";		// Vento
 		}
+		elseif ($GO[$ind][$t]=="Sereno" && ($t < $sunriseHour || $t > $sunsetHour)) {
+			return "\xF0\x9F\x8C\x99";		// Luna
+		}
+		elseif ($GO[$ind][$t]=='Sereno') {
+			return "\xE2\x98\x80";
+		}
+		elseif ($GO[$ind][$t]=="P_nuvoloso") {
+			return "\xE2\x9B\x85";
+		}
+		elseif ($GO[$ind][$t]=='Coperto') {
+			return "\xE2\x98\x81";
+		}
+		elseif ($GO[$ind][$t]=='Pioggia') {
+			return "\xE2\x98\x94";
+		}
+		elseif ($GO[$ind][$t]=='Neve') {
+			return "\xE2\x9D\x84";
+		}
+		elseif ($GO[$ind][$t]=='Nebbia') {
+			return "\xF0\x9F\x8C\x81";
+		}
+		//else { return str_replace("\\\\","\\",$GO1_EMO[$t]); }
 	}
 
 	function delta($breakMsg) {
