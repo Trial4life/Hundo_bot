@@ -10,7 +10,7 @@
 	$cellTitle = array("Centro","Est","Nord-Est","Nord","Nord-Ovest","Ovest","Sud-Ovest","Sud","Sud-Est",);
 	$cellId = array('132f61','132f63','132f65','132f67','132f5d','132f5f','1325f5','13258b','132589');
 
-	$AW1 = $AW2 = $wind_1 = $wind_2 = $gust_1 = $gust_2 = $GO1 = $GO2 = array(); 	// = $GO1_EMO = $GO2_EMO =
+	$AW1 = $AW2 = $wind_1 = $wind_2 = $gust_1 = $gust_2 = $GO1 = $GO2 = array();
 
 	$query = "SELECT * FROM `$cellCode[$cell]`";
 	$result = mysqli_query($conn,$query);
