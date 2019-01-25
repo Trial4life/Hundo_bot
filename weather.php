@@ -41,7 +41,7 @@
 		$query3 = "SELECT * FROM `conversion` WHERE `AW` = '$AW2_value'";
 		$result3 = mysqli_query($conn,$query3);
 		$row3 = mysqli_fetch_array($result3);
-		$GO[0][] = str_replace(" ", "_", $row3['GO']);
+		$GO[1][] = str_replace(" ", "_", $row3['GO']);
 	}
 
 	$updateDateResult = mysqli_query($conn,"SELECT update_time
