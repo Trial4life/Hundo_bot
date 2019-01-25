@@ -1,5 +1,5 @@
 <?php
-   date_default_timezone_set('Europe/Rome');	// Nel main è dichiarato "London", qui serve "Rome" per gli orari di alba e tramonto
+   date_default_timezone_set('Europe/Rome');		// Nel main è dichiarato "London", qui serve "Rome" per gli orari di alba e tramonto
 	$sunriseHour = intval(substr(date_sunrise(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, 2),0,-2));
 	$sunsetHour = intval(substr(date_sunset(time(), SUNFUNCS_RET_STRING, 41.893056, 12.482778, 90, 2),0,-2));
 	$now = date('G');
