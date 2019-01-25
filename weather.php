@@ -107,6 +107,6 @@
 	for ($i = $now; $i <= $now+12; $i++) {
 		$i < 24 ? $n = $i : $n = $i % 24;
 		$h = strval(sprintf('%02d',$n));
-		$response = $response. "\n<code>".$h.":00</code> − ". getWeather(1,$n). $FCstatus .getWeather(2,$n);
+		$response = $response. "\n<code>".$h.":00</code> − ". getWeather(0,$n). $FCstatus .getWeather(1,$n);
 	};
 ?>
