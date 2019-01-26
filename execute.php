@@ -1188,7 +1188,7 @@ elseif($status == 0) {
 			array_push($trainer, $row['trainer']);
 			array_push($telegram, $row['telegram']);
 			array_push($telegramId, $row['userId']);
-						array_push($code, $row['code']);
+			array_push($code, $row['code']);
 		}
 
 		$response = $EMO_NUM .' Lista dei codici amico:';
