@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Creato il: Gen 24, 2019 alle 10:51
+-- Creato il: Gen 26, 2019 alle 18:27
 -- Versione del server: 8.0.13
 -- Versione PHP: 7.2.10-0ubuntu0.18.04.1
 
@@ -64,6 +64,25 @@ CREATE TABLE `auth_groups` (
 INSERT INTO `auth_groups` (`groupName`, `groupID`) VALUES
 ('PoGoRaidRomaNordEst', '-1001119443518'),
 ('LegitGo Salario-Pinciano-Parioli', '-1001369640732');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `codes`
+--
+
+CREATE TABLE `codes` (
+  `trainer` varchar(50) NOT NULL,
+  `telegram` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `code` varchar(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=COMPACT;
+
+--
+-- Dump dei dati per la tabella `codes`
+--
+
+INSERT INTO `codes` (`trainer`, `telegram`, `code`) VALUES
+('Trial4life', 'Trial4life', '1111 1111 1111');
 
 -- --------------------------------------------------------
 
@@ -721,6 +740,26 @@ CREATE TABLE `nests` (
   `type` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
+--
+-- Dump dei dati per la tabella `nests`
+--
+
+INSERT INTO `nests` (`nido`, `pokemon`, `type`) VALUES
+('Villa Albani', 'Piplup', 1),
+('Villa Borghese', 'Pinsir', 1),
+('Villa Ada', 'Swinub', 1),
+('Villa Glori', 'Electrike', 1),
+('Parco Delle Sabine', 'Pikachu', 1),
+('Convento Nomentana', 'Scyther', 2),
+('Via Valsolda', 'Doduo', 1),
+('Parco Virgiliano', 'Ponyta', 1),
+('Villa Paganini', 'Doduo', 1),
+('Parco Filippo Meda', 'Machop', 1),
+('Villa Gordiani Nord', 'Abra', 1),
+('Villa Gordiani Sud', 'Rhyhorn', 1),
+('Parco Delle Valli', 'Phanpy', 1),
+('Ciclabile Aniene', 'Phanpy', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -738,21 +777,18 @@ CREATE TABLE `parks` (
 --
 
 INSERT INTO `parks` (`park`, `lat`, `lng`) VALUES
-('Ciclabile Aniene', ' 41.937151', ' 12.527452'),
 ('Colle Oppio', ' 41.891593', ' 12.496418'),
 ('Convento Nomentana', ' 41.924540', ' 12.523747'),
 ('Parco dei Daini', ' 41.915472', ' 12.491985'),
 ('Parco della Caffarella', ' 41.864920', ' 12.522613'),
 ('Parco delle Valli', ' 41.939656', ' 12.522775'),
 ('Parco Don Enzo Boni', ' 41.933710', ' 12.519156'),
-('Parco Filippo Meda', ' 41.912592', ' 12.545813'),
 ('Parco Virgiliano', ' 41.925426', ' 12.510588'),
 ('Pincio', ' 41.911051', ' 12.479820'),
 ('Villa Ada', ' 41.930702', ' 12.502056'),
 ('Villa Blanc', ' 41.923024', ' 12.522185'),
 ('Villa Borghese', ' 41.913567', ' 12.484158'),
 ('Villa Chigi', ' 41.933222', ' 12.516468'),
-('Villa Glori', ' 41.930524', ' 12.480634'),
 ('Villa Leopardi', ' 41.926208', ' 12.521774'),
 ('Villa Mirafiori', ' 41.918699', ' 12.516893'),
 ('Villa Pamphili', ' 41.884090', ' 12.446756'),
@@ -763,7 +799,16 @@ INSERT INTO `parks` (`park`, `lat`, `lng`) VALUES
 ('Parco del Ninfeo', '41.838625', '12.469329'),
 ('Parco del Turismo', '41.839782', '12.466711'),
 ('Villa Paganini', '41.916551', '12.509974'),
-('Sedia del Diavolo', '41.929541', '12.522745');
+('Sedia del Diavolo', '41.929541', '12.522745'),
+('Villa Albani', '41.915165', '12.500368'),
+('Parco delle Sabine', '41.973858', '12.529966'),
+('Villa Glori', '41.931093', '12.479891'),
+('Via Valsolda', '41.936334', '12.530309'),
+('Ciclabile Aniene', '41.934722', '12.526916'),
+('Colle Oppio Nord', '41.892937', '12.495292'),
+('Parco filippo meda', '41.912701', '12.545641'),
+('Villa Gordiani Nord', '41.895261', '12.553654'),
+('Villa Gordiani Sud', '41.892841', '12.553502');
 
 -- --------------------------------------------------------
 
@@ -1601,6 +1646,17 @@ CREATE TABLE `quests` (
   `giorno` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
+--
+-- Dump dei dati per la tabella `quests`
+--
+
+INSERT INTO `quests` (`quest`, `pokestop`, `lat`, `lng`, `zona`, `giorno`) VALUES
+('Aerodactyl (usa strumento)', 'Murales Torta', '41.930841', '12.522769', 'Centro, Libia, ', '2019-01-26'),
+('Aerodactyl (strumento)', 'Chronotime Murales', '41.929871', '12.523334', 'Centro, Libia, ', '2019-01-26'),
+('Aerodactyl strumento', 'Stemma Spqr', '41.946208', '12.535445', 'Nord-Est, Tufello, ', '2019-01-26'),
+('Trapinch', 'Ice Cream Statue', '41.931532', '12.518747', 'Centro, Libia, ', '2019-01-26'),
+('5 baccananas argento (gira 10 pokestop)', 'Millepiedi Murales', '41.931560', '12.520027', 'Centro, Libia, ', '2019-01-26');
+
 -- --------------------------------------------------------
 
 --
@@ -1623,30 +1679,30 @@ CREATE TABLE `roma_c` (
 --
 
 INSERT INTO `roma_c` (`ID`, `hour`, `AW1`, `wind_1`, `gust_1`, `AW2`, `wind_2`, `gust_2`) VALUES
-(0, '00:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
-(1, '01:00', 'Nuvoloso', '11.1', '18.5', 'x', '0.0', '0.0'),
-(2, '02:00', 'Pioggia', '11.1', '16.7', 'x', '0.0', '0.0'),
-(3, '03:00', 'Nuvoloso', '16.7', '27.8', 'x', '0.0', '0.0'),
-(4, '04:00', 'Pioggia', '13.0', '20.4', 'x', '0.0', '0.0'),
-(5, '05:00', 'Nuvoloso', '13.0', '16.7', 'x', '0.0', '0.0'),
-(6, '06:00', 'Nuvoloso', '13.0', '20.4', 'x', '0.0', '0.0'),
-(7, '07:00', 'Pioggia', '16.7', '22.2', 'x', '0.0', '0.0'),
-(8, '08:00', 'Nuvoloso', '16.7', '25.9', 'x', '0.0', '0.0'),
-(9, '09:00', 'Nuvoloso', '16.7', '25.9', 'x', '0.0', '0.0'),
-(10, '10:00', 'Nuvoloso', '14.8', '22.2', 'x', '0.0', '0.0'),
-(11, '11:00', 'Nuvoloso', '13.0', '18.5', 'Nuvoloso', '9.3', '16.7'),
-(12, '12:00', 'Pioggia', '11.1', '16.7', 'Nuvoloso', '9.3', '14.8'),
-(13, '13:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '9.3', '13.0'),
-(14, '14:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '11.1', '14.8'),
-(15, '15:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '13.0', '16.7'),
-(16, '16:00', 'Nuvoloso', '13.0', '16.7', 'Nuvoloso', '14.8', '18.5'),
-(17, '17:00', 'Nuvoloso', '14.8', '18.5', 'Nuvoloso', '14.8', '20.4'),
-(18, '18:00', 'Nuvoloso', '16.7', '22.2', 'Nuvoloso', '16.7', '20.4'),
-(19, '19:00', 'Nuvoloso', '16.7', '22.2', 'Nuvoloso', '16.7', '22.2'),
-(20, '20:00', 'Nuvoloso', '16.7', '22.2', 'Nuvoloso', '18.5', '24.1'),
-(21, '21:00', 'x', '0.0', '0.0', 'Nuvoloso', '20.4', '25.9'),
-(22, '22:00', 'x', '0.0', '0.0', 'Nuvoloso', '20.4', '27.8'),
-(23, '23:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0');
+(0, '00:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '5.6', '9.3'),
+(1, '01:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '3.7', '7.4'),
+(2, '02:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '5.6', '7.4'),
+(3, '03:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '5.6', '9.3'),
+(4, '04:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '7.4', '11.1'),
+(5, '05:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '9.3', '11.1'),
+(6, '06:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(7, '07:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(8, '08:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(9, '09:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(10, '10:00', 'x', '0.0', '0.0', 'Parzialmente soleggiato', '18.5', '31.5'),
+(11, '11:00', 'x', '0.0', '0.0', 'Soleggiato', '14.8', '27.8'),
+(12, '12:00', 'Parzialmente soleggiato', '16.7', '22.2', 'Soleggiato', '18.5', '25.9'),
+(13, '13:00', 'Parzialmente soleggiato', '16.7', '22.2', 'Prevalentemente soleggiato', '20.4', '25.9'),
+(14, '14:00', 'Parzialmente soleggiato', '16.7', '22.2', 'Prevalentemente soleggiato', '16.7', '27.8'),
+(15, '15:00', 'Parzialmente soleggiato', '14.8', '22.2', 'Parzialmente soleggiato', '18.5', '24.1'),
+(16, '16:00', 'Parzialmente soleggiato', '14.8', '20.4', 'Parzialmente soleggiato', '14.8', '20.4'),
+(17, '17:00', 'Parzialmente soleggiato', '13.0', '18.5', 'Parzialmente soleggiato', '14.8', '25.9'),
+(18, '18:00', 'Parzialmente nuvoloso', '13.0', '16.7', 'Parzialmente nuvoloso', '14.8', '22.2'),
+(19, '19:00', 'Nuvole intermittenti', '11.1', '16.7', 'Prevalentemente sereno', '13.0', '18.5'),
+(20, '20:00', 'Nuvole intermittenti', '9.3', '14.8', 'Prevalentemente sereno', '11.1', '16.7'),
+(21, '21:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '9.3', '13.0'),
+(22, '22:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '9.3', '13.0'),
+(23, '23:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '7.4', '11.1');
 
 -- --------------------------------------------------------
 
@@ -1670,30 +1726,30 @@ CREATE TABLE `roma_e` (
 --
 
 INSERT INTO `roma_e` (`ID`, `hour`, `AW1`, `wind_1`, `gust_1`, `AW2`, `wind_2`, `gust_2`) VALUES
-(0, '00:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
-(1, '01:00', 'Prevalentemente nuvoloso', '18.5', '20.4', 'x', '0.0', '0.0'),
-(2, '02:00', 'Pioggia', '22.2', '22.2', 'x', '0.0', '0.0'),
-(3, '03:00', 'Nuvole intermittenti', '16.7', '20.4', 'x', '0.0', '0.0'),
-(4, '04:00', 'Pioggia', '13.0', '14.8', 'x', '0.0', '0.0'),
-(5, '05:00', 'Prevalentemente nuvoloso', '13.0', '13.0', 'x', '0.0', '0.0'),
-(6, '06:00', 'Pioggia', '16.7', '20.4', 'x', '0.0', '0.0'),
-(7, '07:00', 'Nuvoloso', '14.8', '20.4', 'x', '0.0', '0.0'),
-(8, '08:00', 'Pioggia', '18.5', '20.4', 'x', '0.0', '0.0'),
-(9, '09:00', 'Prevalentemente nuvoloso', '9.3', '14.8', 'x', '0.0', '0.0'),
-(10, '10:00', 'Nuvoloso', '9.3', '13.0', 'x', '0.0', '0.0'),
-(11, '11:00', 'Nuvoloso', '11.1', '11.1', 'Prevalentemente nuvoloso', '14.8', '18.5'),
-(12, '12:00', 'Pioggia', '11.1', '13.0', 'Nuvoloso', '13.0', '16.7'),
-(13, '13:00', 'Nuvoloso', '13.0', '13.0', 'Nuvoloso', '11.1', '13.0'),
-(14, '14:00', 'Nuvoloso', '14.8', '14.8', 'Nuvoloso', '11.1', '13.0'),
-(15, '15:00', 'Nuvoloso', '16.7', '16.7', 'Nuvoloso', '13.0', '14.8'),
-(16, '16:00', 'Nuvoloso', '16.7', '18.5', 'Nuvoloso', '14.8', '16.7'),
-(17, '17:00', 'Nuvoloso', '16.7', '18.5', 'Nuvoloso', '16.7', '18.5'),
-(18, '18:00', 'Nuvoloso', '18.5', '20.4', 'Nuvoloso', '16.7', '18.5'),
-(19, '19:00', 'Nuvoloso', '18.5', '20.4', 'Nuvoloso', '18.5', '20.4'),
-(20, '20:00', 'Nuvoloso', '18.5', '20.4', 'Nuvoloso', '16.7', '20.4'),
-(21, '21:00', 'x', '0.0', '0.0', 'Nuvoloso', '14.8', '22.2'),
-(22, '22:00', 'x', '0.0', '0.0', 'Nuvoloso', '16.7', '24.1'),
-(23, '23:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0');
+(0, '00:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '7.4', '11.1'),
+(1, '01:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '7.4', '9.3'),
+(2, '02:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '9.3', '9.3'),
+(3, '03:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '7.4', '9.3'),
+(4, '04:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '7.4', '11.1'),
+(5, '05:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '9.3', '13.0'),
+(6, '06:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(7, '07:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(8, '08:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(9, '09:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(10, '10:00', 'x', '0.0', '0.0', 'Parzialmente soleggiato', '14.8', '16.7'),
+(11, '11:00', 'x', '0.0', '0.0', 'Soleggiato', '14.8', '16.7'),
+(12, '12:00', 'Parzialmente soleggiato', '20.4', '25.9', 'Soleggiato', '18.5', '20.4'),
+(13, '13:00', 'Parzialmente soleggiato', '22.2', '22.2', 'Soleggiato', '18.5', '18.5'),
+(14, '14:00', 'Parzialmente soleggiato', '20.4', '22.2', 'Prevalentemente soleggiato', '20.4', '24.1'),
+(15, '15:00', 'Parzialmente soleggiato', '20.4', '22.2', 'Parzialmente soleggiato', '20.4', '22.2'),
+(16, '16:00', 'Parzialmente soleggiato', '18.5', '20.4', 'Parzialmente soleggiato', '16.7', '20.4'),
+(17, '17:00', 'Parzialmente soleggiato', '18.5', '20.4', 'Parzialmente soleggiato', '13.0', '14.8'),
+(18, '18:00', 'Parzialmente nuvoloso', '14.8', '18.5', 'Nuvole intermittenti', '14.8', '18.5'),
+(19, '19:00', 'Nuvole intermittenti', '14.8', '16.7', 'Prevalentemente sereno', '13.0', '16.7'),
+(20, '20:00', 'Prevalentemente nuvoloso', '13.0', '14.8', 'Prevalentemente sereno', '13.0', '14.8'),
+(21, '21:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '11.1', '13.0'),
+(22, '22:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '7.4', '13.0'),
+(23, '23:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '5.6', '11.1');
 
 -- --------------------------------------------------------
 
@@ -1717,30 +1773,30 @@ CREATE TABLE `roma_n` (
 --
 
 INSERT INTO `roma_n` (`ID`, `hour`, `AW1`, `wind_1`, `gust_1`, `AW2`, `wind_2`, `gust_2`) VALUES
-(0, '00:00', 'Pioggia', '7.4', '14.8', 'x', '0.0', '0.0'),
-(1, '01:00', 'Nuvoloso', '5.6', '14.8', 'x', '0.0', '0.0'),
-(2, '02:00', 'Pioggia', '7.4', '14.8', 'x', '0.0', '0.0'),
-(3, '03:00', 'Nuvoloso', '7.4', '14.8', 'x', '0.0', '0.0'),
-(4, '04:00', 'Pioggia', '7.4', '14.8', 'x', '0.0', '0.0'),
-(5, '05:00', 'Nuvoloso', '5.6', '14.8', 'x', '0.0', '0.0'),
-(6, '06:00', 'Nuvoloso', '7.4', '18.5', 'x', '0.0', '0.0'),
-(7, '07:00', 'Nuvoloso', '9.3', '20.4', 'x', '0.0', '0.0'),
-(8, '08:00', 'Nuvoloso', '9.3', '20.4', 'x', '0.0', '0.0'),
-(9, '09:00', 'Pioggia', '11.1', '22.2', 'x', '0.0', '0.0'),
-(10, '10:00', 'Nuvoloso', '11.1', '22.2', 'x', '0.0', '0.0'),
-(11, '11:00', 'Nuvoloso', '14.8', '20.4', 'Nuvole intermittenti', '7.4', '7.4'),
-(12, '12:00', 'Pioggia', '13.0', '16.7', 'Rovesci', '7.4', '9.3'),
-(13, '13:00', 'Nuvoloso', '14.8', '16.7', 'Nuvoloso', '11.1', '13.0'),
-(14, '14:00', 'Nuvoloso', '16.7', '16.7', 'Nuvoloso', '11.1', '14.8'),
-(15, '15:00', 'Nuvoloso', '20.4', '22.2', 'Nuvoloso', '18.5', '20.4'),
-(16, '16:00', 'Nuvoloso', '18.5', '20.4', 'Nuvoloso', '18.5', '18.5'),
-(17, '17:00', 'Nuvoloso', '18.5', '20.4', 'Nuvoloso', '18.5', '20.4'),
-(18, '18:00', 'Nuvoloso', '16.7', '22.2', 'Nuvoloso', '20.4', '22.2'),
-(19, '19:00', 'Nuvole intermittenti', '18.5', '22.2', 'Nuvoloso', '20.4', '22.2'),
-(20, '20:00', 'Nuvole intermittenti', '18.5', '22.2', 'Nuvoloso', '22.2', '24.1'),
-(21, '21:00', 'Nuvoloso', '5.6', '13.0', 'Nuvoloso', '22.2', '25.9'),
-(22, '22:00', 'Nuvoloso', '9.3', '14.8', 'Nuvoloso', '22.2', '27.8'),
-(23, '23:00', 'Nuvoloso', '7.4', '14.8', 'x', '0.0', '0.0');
+(0, '00:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '3.7', '9.3'),
+(1, '01:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '3.7', '7.4'),
+(2, '02:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '1.9', '5.6'),
+(3, '03:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '1.9', '5.6'),
+(4, '04:00', 'x', '0.0', '0.0', 'Sereno', '3.7', '7.4'),
+(5, '05:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '3.7', '9.3'),
+(6, '06:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(7, '07:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(8, '08:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(9, '09:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(10, '10:00', 'x', '0.0', '0.0', 'Soleggiato', '22.2', '24.1'),
+(11, '11:00', 'x', '0.0', '0.0', 'Soleggiato', '20.4', '22.2'),
+(12, '12:00', 'Parzialmente soleggiato', '20.4', '24.1', 'Soleggiato', '24.1', '25.9'),
+(13, '13:00', 'Parzialmente soleggiato', '22.2', '24.1', 'Soleggiato', '22.2', '24.1'),
+(14, '14:00', 'Parzialmente soleggiato', '20.4', '22.2', 'Prevalentemente soleggiato', '22.2', '27.8'),
+(15, '15:00', 'Parzialmente soleggiato', '24.1', '25.9', 'Parzialmente soleggiato', '18.5', '24.1'),
+(16, '16:00', 'Parzialmente soleggiato', '22.2', '24.1', 'Prevalentemente nuvoloso', '16.7', '18.5'),
+(17, '17:00', 'Parzialmente soleggiato', '18.5', '20.4', 'Nuvole intermittenti', '16.7', '16.7'),
+(18, '18:00', 'Parzialmente nuvoloso', '14.8', '16.7', 'Nuvole intermittenti', '11.1', '13.0'),
+(19, '19:00', 'Nuvole intermittenti', '16.7', '16.7', 'Prevalentemente nuvoloso', '9.3', '13.0'),
+(20, '20:00', 'Prevalentemente nuvoloso', '13.0', '14.8', 'Prevalentemente nuvoloso', '9.3', '13.0'),
+(21, '21:00', 'x', '0.0', '0.0', 'Nuvole intermittenti', '7.4', '11.1'),
+(22, '22:00', 'x', '0.0', '0.0', 'Nuvole intermittenti', '5.6', '13.0'),
+(23, '23:00', 'x', '0.0', '0.0', 'Nuvole intermittenti', '5.6', '11.1');
 
 -- --------------------------------------------------------
 
@@ -1764,30 +1820,30 @@ CREATE TABLE `roma_ne` (
 --
 
 INSERT INTO `roma_ne` (`ID`, `hour`, `AW1`, `wind_1`, `gust_1`, `AW2`, `wind_2`, `gust_2`) VALUES
-(0, '00:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
-(1, '01:00', 'Nuvoloso', '5.6', '13.0', 'x', '0.0', '0.0'),
-(2, '02:00', 'Pioggia', '7.4', '13.0', 'x', '0.0', '0.0'),
-(3, '03:00', 'Nuvoloso', '14.8', '24.1', 'x', '0.0', '0.0'),
-(4, '04:00', 'Pioggia', '11.1', '20.4', 'x', '0.0', '0.0'),
-(5, '05:00', 'Nuvoloso', '7.4', '16.7', 'x', '0.0', '0.0'),
-(6, '06:00', 'Nuvoloso', '7.4', '18.5', 'x', '0.0', '0.0'),
-(7, '07:00', 'Nuvoloso', '9.3', '20.4', 'x', '0.0', '0.0'),
-(8, '08:00', 'Nuvoloso', '11.1', '22.2', 'x', '0.0', '0.0'),
-(9, '09:00', 'Pioggia', '11.1', '22.2', 'x', '0.0', '0.0'),
-(10, '10:00', 'Nuvoloso', '11.1', '22.2', 'x', '0.0', '0.0'),
-(11, '11:00', 'Nuvoloso', '14.8', '20.4', 'Nuvole intermittenti', '7.4', '7.4'),
-(12, '12:00', 'Pioggia', '13.0', '16.7', 'Rovesci', '7.4', '9.3'),
-(13, '13:00', 'Nuvoloso', '14.8', '16.7', 'Nuvoloso', '11.1', '13.0'),
-(14, '14:00', 'Nuvoloso', '16.7', '16.7', 'Nuvoloso', '11.1', '14.8'),
-(15, '15:00', 'Nuvoloso', '20.4', '22.2', 'Nuvoloso', '18.5', '20.4'),
-(16, '16:00', 'Nuvoloso', '18.5', '20.4', 'Nuvoloso', '18.5', '18.5'),
-(17, '17:00', 'Nuvoloso', '18.5', '20.4', 'Nuvoloso', '18.5', '20.4'),
-(18, '18:00', 'Nuvoloso', '16.7', '22.2', 'Nuvoloso', '20.4', '22.2'),
-(19, '19:00', 'Nuvole intermittenti', '18.5', '22.2', 'Nuvoloso', '20.4', '22.2'),
-(20, '20:00', 'Nuvole intermittenti', '18.5', '22.2', 'Nuvoloso', '22.2', '24.1'),
-(21, '21:00', 'x', '0.0', '0.0', 'Nuvoloso', '22.2', '25.9'),
-(22, '22:00', 'x', '0.0', '0.0', 'Nuvoloso', '22.2', '27.8'),
-(23, '23:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0');
+(0, '00:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '3.7', '9.3'),
+(1, '01:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '3.7', '7.4'),
+(2, '02:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '1.9', '5.6'),
+(3, '03:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '1.9', '5.6'),
+(4, '04:00', 'x', '0.0', '0.0', 'Sereno', '3.7', '7.4'),
+(5, '05:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '3.7', '9.3'),
+(6, '06:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(7, '07:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(8, '08:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(9, '09:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(10, '10:00', 'x', '0.0', '0.0', 'Prevalentemente soleggiato', '16.7', '20.4'),
+(11, '11:00', 'x', '0.0', '0.0', 'Soleggiato', '14.8', '18.5'),
+(12, '12:00', 'Parzialmente soleggiato', '20.4', '24.1', 'Soleggiato', '24.1', '25.9'),
+(13, '13:00', 'Parzialmente soleggiato', '22.2', '24.1', 'Soleggiato', '22.2', '24.1'),
+(14, '14:00', 'Parzialmente soleggiato', '20.4', '22.2', 'Prevalentemente soleggiato', '22.2', '27.8'),
+(15, '15:00', 'Parzialmente soleggiato', '24.1', '25.9', 'Parzialmente soleggiato', '18.5', '24.1'),
+(16, '16:00', 'Parzialmente soleggiato', '22.2', '24.1', 'Prevalentemente nuvoloso', '16.7', '18.5'),
+(17, '17:00', 'Parzialmente soleggiato', '18.5', '20.4', 'Nuvole intermittenti', '16.7', '16.7'),
+(18, '18:00', 'Parzialmente nuvoloso', '14.8', '16.7', 'Nuvole intermittenti', '11.1', '13.0'),
+(19, '19:00', 'Nuvole intermittenti', '16.7', '16.7', 'Prevalentemente nuvoloso', '9.3', '13.0'),
+(20, '20:00', 'Prevalentemente nuvoloso', '13.0', '14.8', 'Prevalentemente nuvoloso', '9.3', '13.0'),
+(21, '21:00', 'x', '0.0', '0.0', 'Nuvole intermittenti', '7.4', '11.1'),
+(22, '22:00', 'x', '0.0', '0.0', 'Nuvole intermittenti', '5.6', '13.0'),
+(23, '23:00', 'x', '0.0', '0.0', 'Nuvole intermittenti', '5.6', '11.1');
 
 -- --------------------------------------------------------
 
@@ -1811,30 +1867,30 @@ CREATE TABLE `roma_no` (
 --
 
 INSERT INTO `roma_no` (`ID`, `hour`, `AW1`, `wind_1`, `gust_1`, `AW2`, `wind_2`, `gust_2`) VALUES
-(0, '00:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
-(1, '01:00', 'Nuvoloso', '11.1', '18.5', 'x', '0.0', '0.0'),
-(2, '02:00', 'Pioggia', '11.1', '16.7', 'x', '0.0', '0.0'),
-(3, '03:00', 'Nuvoloso', '16.7', '25.9', 'x', '0.0', '0.0'),
-(4, '04:00', 'Pioggia', '13.0', '18.5', 'x', '0.0', '0.0'),
-(5, '05:00', 'Nuvoloso', '13.0', '18.5', 'x', '0.0', '0.0'),
-(6, '06:00', 'Nuvoloso', '13.0', '16.7', 'x', '0.0', '0.0'),
-(7, '07:00', 'Nuvoloso', '14.8', '18.5', 'x', '0.0', '0.0'),
-(8, '08:00', 'Pioggia', '14.8', '18.5', 'x', '0.0', '0.0'),
-(9, '09:00', 'Nuvoloso', '14.8', '18.5', 'x', '0.0', '0.0'),
-(10, '10:00', 'Nuvoloso', '13.0', '18.5', 'x', '0.0', '0.0'),
-(11, '11:00', 'Nuvoloso', '13.0', '18.5', 'Nuvoloso', '11.1', '18.5'),
-(12, '12:00', 'Pioggia', '11.1', '16.7', 'Nuvoloso', '9.3', '16.7'),
-(13, '13:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '9.3', '14.8'),
-(14, '14:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '11.1', '14.8'),
-(15, '15:00', 'Nuvoloso', '13.0', '16.7', 'Nuvoloso', '13.0', '18.5'),
-(16, '16:00', 'Nuvoloso', '13.0', '16.7', 'Nuvoloso', '14.8', '20.4'),
-(17, '17:00', 'Nuvoloso', '14.8', '20.4', 'Nuvoloso', '16.7', '20.4'),
-(18, '18:00', 'Nuvoloso', '16.7', '22.2', 'Nuvoloso', '16.7', '22.2'),
-(19, '19:00', 'Nuvoloso', '18.5', '24.1', 'Nuvoloso', '16.7', '22.2'),
-(20, '20:00', 'x', '0.0', '0.0', 'Nuvoloso', '18.5', '24.1'),
-(21, '21:00', 'x', '0.0', '0.0', 'Nuvoloso', '20.4', '25.9'),
-(22, '22:00', 'x', '0.0', '0.0', 'Nuvoloso', '22.2', '27.8'),
-(23, '23:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0');
+(0, '00:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '5.6', '9.3'),
+(1, '01:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '3.7', '7.4'),
+(2, '02:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '5.6', '5.6'),
+(3, '03:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '5.6', '9.3'),
+(4, '04:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '7.4', '9.3'),
+(5, '05:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '9.3', '11.1'),
+(6, '06:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(7, '07:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(8, '08:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(9, '09:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(10, '10:00', 'x', '0.0', '0.0', 'Parzialmente soleggiato', '20.4', '31.5'),
+(11, '11:00', 'x', '0.0', '0.0', 'Soleggiato', '14.8', '18.5'),
+(12, '12:00', 'Parzialmente soleggiato', '16.7', '24.1', 'Soleggiato', '18.5', '25.9'),
+(13, '13:00', 'Parzialmente soleggiato', '16.7', '22.2', 'Prevalentemente soleggiato', '20.4', '25.9'),
+(14, '14:00', 'Parzialmente soleggiato', '16.7', '22.2', 'Prevalentemente soleggiato', '16.7', '27.8'),
+(15, '15:00', 'Parzialmente soleggiato', '16.7', '22.2', 'Parzialmente soleggiato', '18.5', '24.1'),
+(16, '16:00', 'Parzialmente soleggiato', '14.8', '20.4', 'Parzialmente soleggiato', '14.8', '20.4'),
+(17, '17:00', 'Parzialmente soleggiato', '13.0', '18.5', 'Parzialmente soleggiato', '14.8', '25.9'),
+(18, '18:00', 'Parzialmente nuvoloso', '13.0', '18.5', 'Parzialmente nuvoloso', '14.8', '22.2'),
+(19, '19:00', 'Nuvole intermittenti', '11.1', '16.7', 'Prevalentemente sereno', '13.0', '18.5'),
+(20, '20:00', 'Nuvole intermittenti', '9.3', '14.8', 'Prevalentemente sereno', '11.1', '16.7'),
+(21, '21:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '9.3', '14.8'),
+(22, '22:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '9.3', '13.0'),
+(23, '23:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '7.4', '11.1');
 
 -- --------------------------------------------------------
 
@@ -1858,30 +1914,30 @@ CREATE TABLE `roma_o` (
 --
 
 INSERT INTO `roma_o` (`ID`, `hour`, `AW1`, `wind_1`, `gust_1`, `AW2`, `wind_2`, `gust_2`) VALUES
-(0, '00:00', 'Pioggia', '13.0', '18.5', 'x', '0.0', '0.0'),
-(1, '01:00', 'Nuvoloso', '11.1', '18.5', 'x', '0.0', '0.0'),
-(2, '02:00', 'Pioggia', '16.7', '29.6', 'x', '0.0', '0.0'),
-(3, '03:00', 'Nuvoloso', '16.7', '25.9', 'x', '0.0', '0.0'),
-(4, '04:00', 'Pioggia', '13.0', '18.5', 'x', '0.0', '0.0'),
-(5, '05:00', 'Nuvoloso', '13.0', '22.2', 'x', '0.0', '0.0'),
-(6, '06:00', 'Nuvoloso', '16.7', '25.9', 'x', '0.0', '0.0'),
-(7, '07:00', 'Nuvoloso', '16.7', '25.9', 'x', '0.0', '0.0'),
-(8, '08:00', 'Pioggia', '16.7', '27.8', 'x', '0.0', '0.0'),
-(9, '09:00', 'Nuvoloso', '14.8', '25.9', 'x', '0.0', '0.0'),
-(10, '10:00', 'Nuvoloso', '14.8', '22.2', 'Pioggia', '11.1', '18.5'),
-(11, '11:00', 'Nuvoloso', '13.0', '18.5', 'Nuvoloso', '11.1', '18.5'),
-(12, '12:00', 'Pioggia', '11.1', '16.7', 'Nuvoloso', '9.3', '16.7'),
-(13, '13:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '9.3', '14.8'),
-(14, '14:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '11.1', '14.8'),
-(15, '15:00', 'Nuvoloso', '13.0', '16.7', 'Nuvoloso', '13.0', '18.5'),
-(16, '16:00', 'Nuvoloso', '13.0', '16.7', 'Nuvoloso', '14.8', '20.4'),
-(17, '17:00', 'Nuvoloso', '14.8', '20.4', 'Nuvoloso', '16.7', '20.4'),
-(18, '18:00', 'Nuvoloso', '16.7', '22.2', 'Nuvoloso', '16.7', '22.2'),
-(19, '19:00', 'Nuvoloso', '18.5', '24.1', 'Nuvoloso', '16.7', '22.2'),
-(20, '20:00', 'x', '0.0', '0.0', 'Nuvoloso', '18.5', '24.1'),
-(21, '21:00', 'x', '0.0', '0.0', 'Nuvoloso', '20.4', '25.9'),
-(22, '22:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
-(23, '23:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0');
+(0, '00:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '5.6', '9.3'),
+(1, '01:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '3.7', '7.4'),
+(2, '02:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '5.6', '5.6'),
+(3, '03:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '5.6', '9.3'),
+(4, '04:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '7.4', '9.3'),
+(5, '05:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(6, '06:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(7, '07:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(8, '08:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(9, '09:00', 'x', '0.0', '0.0', 'Parzialmente soleggiato', '20.4', '31.5'),
+(10, '10:00', 'x', '0.0', '0.0', 'Soleggiato', '14.8', '18.5'),
+(11, '11:00', 'x', '0.0', '0.0', 'Soleggiato', '20.4', '27.8'),
+(12, '12:00', 'Parzialmente soleggiato', '16.7', '24.1', 'Soleggiato', '22.2', '29.6'),
+(13, '13:00', 'Parzialmente soleggiato', '16.7', '22.2', 'Prevalentemente soleggiato', '18.5', '33.3'),
+(14, '14:00', 'Parzialmente soleggiato', '16.7', '22.2', 'Prevalentemente soleggiato', '20.4', '27.8'),
+(15, '15:00', 'Parzialmente soleggiato', '16.7', '22.2', 'Parzialmente soleggiato', '16.7', '22.2'),
+(16, '16:00', 'Parzialmente soleggiato', '14.8', '20.4', 'Parzialmente soleggiato', '16.7', '27.8'),
+(17, '17:00', 'Parzialmente soleggiato', '13.0', '18.5', 'Parzialmente soleggiato', '16.7', '24.1'),
+(18, '18:00', 'Parzialmente nuvoloso', '13.0', '18.5', 'Parzialmente nuvoloso', '14.8', '22.2'),
+(19, '19:00', 'Nuvole intermittenti', '11.1', '16.7', 'Prevalentemente sereno', '13.0', '18.5'),
+(20, '20:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '11.1', '16.7'),
+(21, '21:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '9.3', '14.8'),
+(22, '22:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '9.3', '13.0'),
+(23, '23:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '7.4', '11.1');
 
 -- --------------------------------------------------------
 
@@ -1905,30 +1961,30 @@ CREATE TABLE `roma_s` (
 --
 
 INSERT INTO `roma_s` (`ID`, `hour`, `AW1`, `wind_1`, `gust_1`, `AW2`, `wind_2`, `gust_2`) VALUES
-(0, '00:00', 'Pioggia', '13.0', '18.5', 'x', '0.0', '0.0'),
-(1, '01:00', 'Nuvoloso', '11.1', '18.5', 'x', '0.0', '0.0'),
-(2, '02:00', 'Pioggia', '16.7', '29.6', 'x', '0.0', '0.0'),
-(3, '03:00', 'Nuvoloso', '14.8', '22.2', 'x', '0.0', '0.0'),
-(4, '04:00', 'Pioggia', '13.0', '20.4', 'x', '0.0', '0.0'),
-(5, '05:00', 'Nuvoloso', '13.0', '16.7', 'x', '0.0', '0.0'),
-(6, '06:00', 'Nuvoloso', '16.7', '25.9', 'x', '0.0', '0.0'),
-(7, '07:00', 'Pioggia', '16.7', '27.8', 'x', '0.0', '0.0'),
-(8, '08:00', 'Nuvoloso', '16.7', '25.9', 'x', '0.0', '0.0'),
-(9, '09:00', 'Nuvoloso', '16.7', '25.9', 'x', '0.0', '0.0'),
-(10, '10:00', 'Nuvoloso', '14.8', '22.2', 'Pioggia', '9.3', '16.7'),
-(11, '11:00', 'Nuvoloso', '13.0', '18.5', 'Nuvoloso', '9.3', '16.7'),
-(12, '12:00', 'Pioggia', '11.1', '16.7', 'Nuvoloso', '9.3', '14.8'),
-(13, '13:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '9.3', '13.0'),
-(14, '14:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '11.1', '14.8'),
-(15, '15:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '13.0', '16.7'),
-(16, '16:00', 'Nuvoloso', '13.0', '16.7', 'Nuvoloso', '14.8', '18.5'),
-(17, '17:00', 'Nuvoloso', '14.8', '18.5', 'Nuvoloso', '14.8', '20.4'),
-(18, '18:00', 'Nuvoloso', '16.7', '22.2', 'Nuvoloso', '16.7', '20.4'),
-(19, '19:00', 'Nuvoloso', '16.7', '22.2', 'Nuvoloso', '16.7', '22.2'),
-(20, '20:00', 'Nuvoloso', '16.7', '22.2', 'Nuvoloso', '18.5', '24.1'),
-(21, '21:00', 'x', '0.0', '0.0', 'Nuvoloso', '20.4', '25.9'),
-(22, '22:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
-(23, '23:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0');
+(0, '00:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '5.6', '9.3'),
+(1, '01:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '3.7', '7.4'),
+(2, '02:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '5.6', '7.4'),
+(3, '03:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '5.6', '9.3'),
+(4, '04:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '7.4', '11.1'),
+(5, '05:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(6, '06:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(7, '07:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(8, '08:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(9, '09:00', 'x', '0.0', '0.0', 'Parzialmente soleggiato', '18.5', '29.6'),
+(10, '10:00', 'x', '0.0', '0.0', 'Soleggiato', '13.0', '18.5'),
+(11, '11:00', 'x', '0.0', '0.0', 'Soleggiato', '14.8', '27.8'),
+(12, '12:00', 'Parzialmente soleggiato', '16.7', '22.2', 'Soleggiato', '22.2', '29.6'),
+(13, '13:00', 'Parzialmente soleggiato', '16.7', '22.2', 'Prevalentemente soleggiato', '18.5', '33.3'),
+(14, '14:00', 'Parzialmente soleggiato', '16.7', '22.2', 'Prevalentemente soleggiato', '20.4', '27.8'),
+(15, '15:00', 'Parzialmente soleggiato', '14.8', '22.2', 'Parzialmente soleggiato', '16.7', '22.2'),
+(16, '16:00', 'Parzialmente soleggiato', '14.8', '20.4', 'Parzialmente soleggiato', '16.7', '29.6'),
+(17, '17:00', 'Parzialmente soleggiato', '13.0', '18.5', 'Parzialmente soleggiato', '16.7', '24.1'),
+(18, '18:00', 'Parzialmente nuvoloso', '13.0', '16.7', 'Parzialmente nuvoloso', '14.8', '22.2'),
+(19, '19:00', 'Nuvole intermittenti', '11.1', '16.7', 'Prevalentemente sereno', '13.0', '18.5'),
+(20, '20:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '11.1', '16.7'),
+(21, '21:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '9.3', '13.0'),
+(22, '22:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '9.3', '13.0'),
+(23, '23:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '7.4', '11.1');
 
 -- --------------------------------------------------------
 
@@ -1952,30 +2008,30 @@ CREATE TABLE `roma_se` (
 --
 
 INSERT INTO `roma_se` (`ID`, `hour`, `AW1`, `wind_1`, `gust_1`, `AW2`, `wind_2`, `gust_2`) VALUES
-(0, '00:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
-(1, '01:00', 'Prevalentemente nuvoloso', '18.5', '20.4', 'x', '0.0', '0.0'),
-(2, '02:00', 'Pioggia', '22.2', '22.2', 'x', '0.0', '0.0'),
-(3, '03:00', 'Nuvole intermittenti', '18.5', '22.2', 'x', '0.0', '0.0'),
-(4, '04:00', 'Pioggia', '13.0', '14.8', 'x', '0.0', '0.0'),
-(5, '05:00', 'Prevalentemente nuvoloso', '13.0', '13.0', 'x', '0.0', '0.0'),
-(6, '06:00', 'Pioggia', '16.7', '20.4', 'x', '0.0', '0.0'),
-(7, '07:00', 'Nuvoloso', '14.8', '20.4', 'x', '0.0', '0.0'),
-(8, '08:00', 'Pioggia', '18.5', '20.4', 'x', '0.0', '0.0'),
-(9, '09:00', 'Prevalentemente nuvoloso', '9.3', '14.8', 'x', '0.0', '0.0'),
-(10, '10:00', 'Nuvoloso', '9.3', '13.0', 'x', '0.0', '0.0'),
-(11, '11:00', 'Nuvoloso', '11.1', '11.1', 'Prevalentemente nuvoloso', '14.8', '18.5'),
-(12, '12:00', 'Pioggia', '11.1', '13.0', 'Nuvoloso', '13.0', '16.7'),
-(13, '13:00', 'Nuvoloso', '13.0', '13.0', 'Nuvoloso', '11.1', '13.0'),
-(14, '14:00', 'Nuvoloso', '14.8', '14.8', 'Nuvoloso', '11.1', '13.0'),
-(15, '15:00', 'Nuvoloso', '16.7', '16.7', 'Nuvoloso', '13.0', '14.8'),
-(16, '16:00', 'Nuvoloso', '16.7', '18.5', 'Nuvoloso', '14.8', '16.7'),
-(17, '17:00', 'Nuvoloso', '16.7', '18.5', 'Nuvoloso', '16.7', '18.5'),
-(18, '18:00', 'Nuvoloso', '18.5', '20.4', 'Nuvoloso', '16.7', '18.5'),
-(19, '19:00', 'Nuvoloso', '18.5', '20.4', 'Nuvoloso', '18.5', '20.4'),
-(20, '20:00', 'Nuvoloso', '18.5', '20.4', 'Nuvoloso', '16.7', '20.4'),
-(21, '21:00', 'x', '0.0', '0.0', 'Nuvoloso', '14.8', '22.2'),
-(22, '22:00', 'x', '0.0', '0.0', 'Nuvoloso', '16.7', '24.1'),
-(23, '23:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0');
+(0, '00:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '7.4', '11.1'),
+(1, '01:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '7.4', '9.3'),
+(2, '02:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '9.3', '9.3'),
+(3, '03:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '7.4', '9.3'),
+(4, '04:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '7.4', '11.1'),
+(5, '05:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '9.3', '13.0'),
+(6, '06:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(7, '07:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(8, '08:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(9, '09:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(10, '10:00', 'x', '0.0', '0.0', 'Prevalentemente soleggiato', '14.8', '16.7'),
+(11, '11:00', 'x', '0.0', '0.0', 'Soleggiato', '16.7', '18.5'),
+(12, '12:00', 'Parzialmente soleggiato', '20.4', '25.9', 'Soleggiato', '18.5', '20.4'),
+(13, '13:00', 'Parzialmente soleggiato', '22.2', '22.2', 'Soleggiato', '18.5', '18.5'),
+(14, '14:00', 'Parzialmente soleggiato', '20.4', '22.2', 'Prevalentemente soleggiato', '20.4', '24.1'),
+(15, '15:00', 'Parzialmente soleggiato', '20.4', '22.2', 'Parzialmente soleggiato', '20.4', '22.2'),
+(16, '16:00', 'Parzialmente soleggiato', '18.5', '20.4', 'Parzialmente soleggiato', '16.7', '20.4'),
+(17, '17:00', 'Parzialmente soleggiato', '18.5', '20.4', 'Parzialmente soleggiato', '13.0', '14.8'),
+(18, '18:00', 'Parzialmente nuvoloso', '14.8', '18.5', 'Nuvole intermittenti', '14.8', '18.5'),
+(19, '19:00', 'Nuvole intermittenti', '14.8', '16.7', 'Prevalentemente sereno', '13.0', '16.7'),
+(20, '20:00', 'Prevalentemente nuvoloso', '13.0', '14.8', 'Prevalentemente sereno', '13.0', '14.8'),
+(21, '21:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '11.1', '13.0'),
+(22, '22:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '7.4', '13.0'),
+(23, '23:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '5.6', '11.1');
 
 -- --------------------------------------------------------
 
@@ -1999,30 +2055,30 @@ CREATE TABLE `roma_so` (
 --
 
 INSERT INTO `roma_so` (`ID`, `hour`, `AW1`, `wind_1`, `gust_1`, `AW2`, `wind_2`, `gust_2`) VALUES
-(0, '00:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
-(1, '01:00', 'Nuvoloso', '11.1', '18.5', 'x', '0.0', '0.0'),
-(2, '02:00', 'Pioggia', '11.1', '16.7', 'x', '0.0', '0.0'),
-(3, '03:00', 'Nuvoloso', '16.7', '25.9', 'x', '0.0', '0.0'),
-(4, '04:00', 'Pioggia', '13.0', '18.5', 'x', '0.0', '0.0'),
-(5, '05:00', 'Nuvoloso', '13.0', '18.5', 'x', '0.0', '0.0'),
-(6, '06:00', 'Nuvoloso', '13.0', '20.4', 'x', '0.0', '0.0'),
-(7, '07:00', 'Nuvoloso', '16.7', '22.2', 'x', '0.0', '0.0'),
-(8, '08:00', 'Pioggia', '16.7', '25.9', 'x', '0.0', '0.0'),
-(9, '09:00', 'Nuvoloso', '14.8', '25.9', 'x', '0.0', '0.0'),
-(10, '10:00', 'Nuvoloso', '14.8', '22.2', 'x', '0.0', '0.0'),
-(11, '11:00', 'Nuvoloso', '13.0', '18.5', 'Nuvoloso', '11.1', '18.5'),
-(12, '12:00', 'Pioggia', '11.1', '16.7', 'Nuvoloso', '9.3', '16.7'),
-(13, '13:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '9.3', '14.8'),
-(14, '14:00', 'Nuvoloso', '11.1', '14.8', 'Nuvoloso', '11.1', '14.8'),
-(15, '15:00', 'Nuvoloso', '13.0', '16.7', 'Nuvoloso', '13.0', '18.5'),
-(16, '16:00', 'Nuvoloso', '13.0', '16.7', 'Nuvoloso', '14.8', '20.4'),
-(17, '17:00', 'Nuvoloso', '14.8', '20.4', 'Nuvoloso', '16.7', '20.4'),
-(18, '18:00', 'Nuvoloso', '16.7', '22.2', 'Nuvoloso', '16.7', '22.2'),
-(19, '19:00', 'Nuvoloso', '18.5', '24.1', 'Nuvoloso', '16.7', '22.2'),
-(20, '20:00', 'Nuvoloso', '18.5', '24.1', 'Nuvoloso', '18.5', '24.1'),
-(21, '21:00', 'x', '0.0', '0.0', 'Nuvoloso', '20.4', '25.9'),
-(22, '22:00', 'x', '0.0', '0.0', 'Nuvoloso', '22.2', '27.8'),
-(23, '23:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0');
+(0, '00:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '5.6', '9.3'),
+(1, '01:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '3.7', '7.4'),
+(2, '02:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '5.6', '5.6'),
+(3, '03:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '5.6', '9.3'),
+(4, '04:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '7.4', '9.3'),
+(5, '05:00', 'x', '0.0', '0.0', 'Parzialmente nuvoloso', '9.3', '11.1'),
+(6, '06:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(7, '07:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(8, '08:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(9, '09:00', 'x', '0.0', '0.0', 'x', '0.0', '0.0'),
+(10, '10:00', 'x', '0.0', '0.0', 'Parzialmente soleggiato', '18.5', '27.8'),
+(11, '11:00', 'x', '0.0', '0.0', 'Soleggiato', '14.8', '27.8'),
+(12, '12:00', 'Parzialmente soleggiato', '16.7', '24.1', 'Soleggiato', '18.5', '25.9'),
+(13, '13:00', 'Parzialmente soleggiato', '16.7', '22.2', 'Prevalentemente soleggiato', '20.4', '25.9'),
+(14, '14:00', 'Parzialmente soleggiato', '16.7', '22.2', 'Prevalentemente soleggiato', '16.7', '27.8'),
+(15, '15:00', 'Parzialmente soleggiato', '16.7', '22.2', 'Parzialmente soleggiato', '18.5', '24.1'),
+(16, '16:00', 'Parzialmente soleggiato', '14.8', '20.4', 'Parzialmente soleggiato', '14.8', '20.4'),
+(17, '17:00', 'Parzialmente soleggiato', '13.0', '18.5', 'Parzialmente soleggiato', '14.8', '25.9'),
+(18, '18:00', 'Parzialmente nuvoloso', '13.0', '18.5', 'Parzialmente nuvoloso', '14.8', '22.2'),
+(19, '19:00', 'Nuvole intermittenti', '11.1', '16.7', 'Prevalentemente sereno', '13.0', '18.5'),
+(20, '20:00', 'Nuvole intermittenti', '9.3', '14.8', 'Prevalentemente sereno', '11.1', '16.7'),
+(21, '21:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '9.3', '14.8'),
+(22, '22:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '9.3', '13.0'),
+(23, '23:00', 'x', '0.0', '0.0', 'Prevalentemente sereno', '7.4', '11.1');
 
 -- --------------------------------------------------------
 
@@ -2112,17 +2168,17 @@ CREATE TABLE `update_times` (
 --
 
 INSERT INTO `update_times` (`cell`, `update_time`) VALUES
-('roma_c', '2019-01-24'),
-('roma_e', '2019-01-24'),
-('roma_ne', '2019-01-24'),
-('roma_n', '2019-01-24'),
-('roma_no', '2019-01-24'),
-('roma_o', '2019-01-24'),
-('roma_so', '2019-01-24'),
-('roma_s', '2019-01-24'),
-('roma_se', '2019-01-24'),
-('NEW_FC', '0'),
-('MIDDAY', '0');
+('roma_c', '2019-01-26'),
+('roma_e', '2019-01-26'),
+('roma_ne', '2019-01-26'),
+('roma_n', '2019-01-26'),
+('roma_no', '2019-01-26'),
+('roma_o', '2019-01-26'),
+('roma_so', '2019-01-26'),
+('roma_s', '2019-01-26'),
+('roma_se', '2019-01-26'),
+('NEW_FC', '1'),
+('MIDDAY', '1');
 
 -- --------------------------------------------------------
 
