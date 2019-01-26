@@ -61,6 +61,7 @@ $EMO_OFF = "\xF0\x9F\x94\x95";
 $EMO_TREE = "\xF0\x9F\x8C\xB3";
 $EMO_TREE2 = "\xF0\x9F\x8C\xB2";
 $EMO_LEAF = "\xF0\x9F\x8D\x83";
+$EMO_NUM = "\xF0\x9F\x94\xA2";
 
 $EMO_C = "\x30\xE2\x83\xA3" ;
 $EMO_E = "\xE2\x9E\xA1" ;
@@ -1217,7 +1218,7 @@ elseif($status == 0) {
 			array_push($code, $row['code']);
 		}
 
-		$response = $EMO_TREE .' Lista dei codici amico:';
+		$response = $EMO_NUM .' Lista dei codici amico:';
 		for ($i = 0; $i <= sizeof($trainer)-1; $i++){
 			$response = $response."\n*".$trainer[$i]."* − _".$telegram[$i].'_ - '.$code[$i];
 		}
