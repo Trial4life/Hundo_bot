@@ -1209,7 +1209,6 @@ elseif($status == 0) {
 	elseif(strpos($text, "/codici") === 0 ) {
 		$query = "SELECT * FROM `codes`";
 		$result = mysqli_query($conn,$query);
-		$row = mysqli_fetch_assoc($result);
 
 		$trainer = $telegram = $code = array();
 		while ($row = mysqli_fetch_assoc($result)) {
