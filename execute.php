@@ -1143,7 +1143,7 @@ elseif($status == 0) {
 		$strArr = explode(", ",$str);
 		$trainer = $strArr[0];
 		$code = $strArr[1];
-		$query = "SELECT * FROM `codes` WHERE `username` = '$username'";
+		$query = "SELECT * FROM `codes` WHERE `telegram` = '$username'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
 		$currUsername = $row['telegram'];
@@ -1165,18 +1165,9 @@ elseif($status == 0) {
 	//// DELCODE ////
 	/////////////////
 	elseif(strpos($text, "/delcode") === 0 ) {
-		$nest = ucfirst(str_replace('/delcode ', '', str_replace("'","\'",$text)));
-		$query = "SELECT * FROM `nests` WHERE `nido` = '$nest'";
-		$result = mysqli_query($conn,$query);
-		$row = mysqli_fetch_assoc($result);
-		$currNest = $row['nido'];
-		if (!$row) {
-			$response = $EMO_ERR.' Nido di *'.str_replace("\'","'",$nest).'* non trovato.';
-		}
-		else {
-			$response = $EMO_x.' Nido di *'.str_replace("\'","'",$nest).'* cancellato.';
-			mysqli_query($conn,"DELETE FROM `nests` WHERE `nido` = '$nest'");
-		}
+		mysqli_query($conn,"DELETE FROM `codes` WHERE `telegram` = '$username'");
+		$response = $EMO_x.' Codice amico rimosso.';
+
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
