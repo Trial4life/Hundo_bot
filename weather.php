@@ -22,7 +22,7 @@
 	   die(mysqli_error());
 	}
 
-	while($row =  mysqli_fetch_assoc($result)) {
+	while($row = mysqli_fetch_assoc($result)) {
    	$AW[0][] = str_replace(" ", "_", $row['AW1']);
 		$AW[1][] = str_replace(" ", "_", $row['AW2']);
 		$wind[0][] = $row['wind_1'];

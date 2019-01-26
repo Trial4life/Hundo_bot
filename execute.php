@@ -1129,6 +1129,103 @@ elseif($status == 0) {
 		echo json_encode($parameters);
 	}
 
+###############################
+###### CODICI ALLENATORE ######
+###############################
+
+	///////////////////
+	///// ADDCODE /////
+	///////////////////
+	elseif(strpos($text, "/addcode ") === 0 ) {
+		$str = str_replace('/addcode ', '', str_replace("'","\'",$text));
+
+		$query = "SELECT * FROM `nestEnd`";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+		$endDate = $row['endDate'];
+		if ($today >= $endDate) {
+			mysqli_query($conn,"TRUNCATE `nests`");
+			$newEnd = date('Y-m-d', strtotime($endDate. ' + 14 days'));
+			mysqli_query($conn,"UPDATE `nestEnd` SET `endDate` = '$newEnd' WHERE `endDate` = '$endDate'");
+			$endDate = $newEnd;
+		}
+
+		$strArr = explode(", ",$str);
+		$pkmn = ucfirst($strArr[0]);
+		$nest = ucwords($strArr[1]);
+		$query = "SELECT * FROM `nests` WHERE `nido` = '$nest'";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+		$currNest = $row['nido'];
+
+		$query2 = "SELECT * FROM `parks` WHERE `park` = '$nest'";
+		$result2 = mysqli_query($conn,$query2);
+		$row2 = mysqli_fetch_assoc($result2);
+		$row2['lat'] != '' ? $latN = $row2['lat'] : $latN = '0';
+		$row2['lng'] != '' ? $lngN = $row2['lng'] : $lngN = '0';
+		$latN != '0' ? $link = "https://maps.google.com/?q=".$latN.",".$lngN."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$nest))).")" : $link = "";
+
+		// setlocale(LC_ALL, "ita");
+		$endDate = str_replace(" ","",date("j/m", strtotime(str_replace('-','/', $endDate))));
+
+		if ($currNest == $nest) {
+			$response = 'Il nido di <a href="'.$link.'">'.str_replace("\'","'",$nest).'</a> è stato già registrato fino al <b>'.$endDate.'</b>.';
+		}
+		else {
+			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn',1)");
+			$response = $EMO_v.' Nido di <b>'.$pkmn.'</b> a <a href="'.$link.'">'.str_replace("\'","'",$nest).'</a> registrato fino al <b>'.$endDate.'</b>.';
+		}
+
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "HTML", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
+
+	/////////////////
+	//// DELCODE ////
+	/////////////////
+	elseif(strpos($text, "/delcode") === 0 ) {
+		$nest = ucfirst(str_replace('/delcode ', '', str_replace("'","\'",$text)));
+		$query = "SELECT * FROM `nests` WHERE `nido` = '$nest'";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+		$currNest = $row['nido'];
+		if (!$row) {
+			$response = $EMO_ERR.' Nido di *'.str_replace("\'","'",$nest).'* non trovato.';
+		}
+		else {
+			$response = $EMO_x.' Nido di *'.str_replace("\'","'",$nest).'* cancellato.';
+			mysqli_query($conn,"DELETE FROM `nests` WHERE `nido` = '$nest'");
+		}
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
+
+	//////////////////
+	///// CODICI /////
+	//////////////////
+	elseif(strpos($text, "/codici") === 0 ) {
+		$query = "SELECT * FROM `codes`";
+		$result = mysqli_query($conn,$query);
+		$row = mysqli_fetch_assoc($result);
+
+		$trainer = $telegram = $code = array();
+		while ($row = mysqli_fetch_assoc($result)) {
+			array_push($trainer, $row['trainer']);
+			array_push($telegram, $row['telegram']);
+			array_push($code, $row['code']);
+		}
+
+		$response = $EMO_TREE .' Lista dei codici amico:';
+		for ($i = 0; $i <= sizeof($trainer)-1; $i++){
+			$response = $response."\n*".$trainer[$i]."* − _".$telegram[$i].'_ - '.$code[$i];
+		}
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+	}
+
 ####################
 ###### ALERTS ######
 ####################
