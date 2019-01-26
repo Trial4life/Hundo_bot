@@ -1140,44 +1140,23 @@ elseif($status == 0) {
 	elseif(strpos($text, "/addcode ") === 0 ) {
 		$str = str_replace('/addcode ', '', str_replace("'","\'",$text));
 
-		$query = "SELECT * FROM `nestEnd`";
-		$result = mysqli_query($conn,$query);
-		$row = mysqli_fetch_assoc($result);
-		$endDate = $row['endDate'];
-		if ($today >= $endDate) {
-			mysqli_query($conn,"TRUNCATE `nests`");
-			$newEnd = date('Y-m-d', strtotime($endDate. ' + 14 days'));
-			mysqli_query($conn,"UPDATE `nestEnd` SET `endDate` = '$newEnd' WHERE `endDate` = '$endDate'");
-			$endDate = $newEnd;
-		}
-
 		$strArr = explode(", ",$str);
-		$pkmn = ucfirst($strArr[0]);
-		$nest = ucwords($strArr[1]);
-		$query = "SELECT * FROM `nests` WHERE `nido` = '$nest'";
+		$trainer = $strArr[0];
+		$code = $strArr[1];
+		$query = "SELECT * FROM `codes` WHERE `username` = '$username'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
-		$currNest = $row['nido'];
+		$currUsername = $row['username'];
 
-		$query2 = "SELECT * FROM `parks` WHERE `park` = '$nest'";
-		$result2 = mysqli_query($conn,$query2);
-		$row2 = mysqli_fetch_assoc($result2);
-		$row2['lat'] != '' ? $latN = $row2['lat'] : $latN = '0';
-		$row2['lng'] != '' ? $lngN = $row2['lng'] : $lngN = '0';
-		$latN != '0' ? $link = "https://maps.google.com/?q=".$latN.",".$lngN."(".str_replace(" ","+",str_replace("\'","'",str_replace("\"","''",$nest))).")" : $link = "";
-
-		// setlocale(LC_ALL, "ita");
-		$endDate = str_replace(" ","",date("j/m", strtotime(str_replace('-','/', $endDate))));
-
-		if ($currNest == $nest) {
-			$response = 'Il nido di <a href="'.$link.'">'.str_replace("\'","'",$nest).'</a> è stato già registrato fino al <b>'.$endDate.'</b>.';
+		if ($currUsername == $username) {
+			$response = 'Hai già registrato il tuo codice amico.';
 		}
 		else {
-			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn',1)");
-			$response = $EMO_v.' Nido di <b>'.$pkmn.'</b> a <a href="'.$link.'">'.str_replace("\'","'",$nest).'</a> registrato fino al <b>'.$endDate.'</b>.';
+			mysqli_query($conn,"INSERT INTO `codes` VALUES ('$trainer','$username','$code')");
+			$response = $EMO_v.' Codice amico registrato.';
 		}
 
-		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "HTML", "disable_web_page_preview" => TRUE);
+		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
 		echo json_encode($parameters);
 	}
