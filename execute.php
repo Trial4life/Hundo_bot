@@ -1151,9 +1151,9 @@ elseif($status == 0) {
 		$query = "SELECT * FROM `codes` WHERE `userId` = '$userId'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
-		$currUserId = $row['userId'];
+		$currTrainer = $row['trainer'];
 
-		if ($currUserId == $userId) {
+		if ($currTrainer == $trainer) {
 			$response = 'Hai già registrato il tuo codice amico.';
 		}
 		else {
@@ -1182,7 +1182,7 @@ elseif($status == 0) {
 	///// CODICI /////
 	//////////////////
 	elseif(strpos($text, "/codici") === 0 ) {
-		$query = "SELECT * FROM `codes` ORDER BY `trainer` ASC";
+		$query = "SELECT * FROM `codes` ORDER BY `telegram` ASC";
 		$result = mysqli_query($conn,$query);
 
 		$trainer = $telegram = $telegramName = $telegramId = $code = array();
@@ -1200,7 +1200,7 @@ elseif($status == 0) {
 			// $tgLink = "[".$telegram[$i]."](https://t.me/".$telegramId[$i].")";
 			$tgLink = "[".$telegramDispName."](tg://user?id=".$telegramId[$i].")";
 
-			$response = $response."\n*".$trainer[$i]."* − ".$tgLink."\n`".$code[$i].'`';
+			$response = $response."\n".$tgLink." − .*".$trainer[$i]."*\n`".$code[$i].'`';
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
