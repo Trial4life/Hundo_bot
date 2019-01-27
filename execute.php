@@ -130,7 +130,7 @@ if(strpos($text, "/exeggutorhelp") === 0 ) {
 	   	$EMO_TRI ." *Per segnalare un nuovo spawn frequente*, usare il comando `/spawn <pokemon>, <spawn>`. \n\n_Esempio_:\n`/spawn Squirtle, Parchetto dei Galli`\n\n".
 	   	$EMO_TRI ." *Per elencare i nidi correnti*, usare il comando `/nidi`\n\n".
 	   	$EMO_TRI ." *Per elencare i parchi nel database*, usare il comando `/parks`\n\n".
-	   	$EMO_TRI ." *Per registrare il proprio codice amico*, usare il comando `/addcode <nick-in-game>, <#### #### ####>`\n\n_Esempio_:\n`/addcode Ash, 2142 8421 4284`\n\n".
+	   	$EMO_TRI ." *Per registrare il proprio codice amico*, usare il comando `/addcode <nick-in-game> <#### #### ####>`\n\n_Esempio_:\n`/addcode Ash 2142 8421 4284`\n\n".
 	   	$EMO_TRI ." *Per rimuovere il proprio codice amico*, usare il comando `/delcode`\n\n".
 	   	$EMO_TRI ." *Per mostrare l'elenco dei codici amico*, usare il comando `/codici`",
 	   'parse_mode' => 'markdown',
