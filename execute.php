@@ -129,10 +129,10 @@ if(strpos($text, "/exeggutorhelp") === 0 ) {
 	   	$EMO_TRI ." *Per segnalare un nuovo nido*, usare il comando `/nest <pokemon>, <nido>`. \n\n_Esempio_:\n`/nest Squirtle, Villa Borghese`\n\n".
 	   	$EMO_TRI ." *Per segnalare un nuovo spawn frequente*, usare il comando `/spawn <pokemon>, <spawn>`. \n\n_Esempio_:\n`/spawn Squirtle, Parchetto dei Galli`\n\n".
 	   	$EMO_TRI ." *Per elencare i nidi correnti*, usare il comando `/nidi`\n\n".
-	   	$EMO_TRI ." *Per elencare i parchi nel database*, usare il comando `/parks`".
+	   	$EMO_TRI ." *Per elencare i parchi nel database*, usare il comando `/parks`\n\n".
 	   	$EMO_TRI ." *Per registrare il proprio codice amico*, usare il comando `/addcode <nick-in-game>, <#### #### ####>`\n\n_Esempio_:\n`/addcode Ash, 2142 8421 4284`\n\n".
 	   	$EMO_TRI ." *Per rimuovere il proprio codice amico*, usare il comando `/delcode`\n\n".
-	   	$EMO_TRI ." *Per mostrare l'elenco dei codici amico*, usare il comando `/codici`\n\n",
+	   	$EMO_TRI ." *Per mostrare l'elenco dei codici amico*, usare il comando `/codici`",
 	   'parse_mode' => 'markdown',
 	];
 	$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
@@ -154,7 +154,7 @@ if(strpos($text, "/adminhelp") === 0 ) {
 		   	$EMO_TRI . " *Per elencare le celle S2 associate ad un gruppo*, utilizzare il comando `/groupcells` all'interno della chat del gruppo.\n\n" .
 		   	$EMO_TRI . " *Per elencare gli admin del bot*, utilizzare il comando `/admins`.\n\n".
 		   	$EMO_TRI . " *Per rimuovere un singolo nido*, utilizzare il comando `/delnest <nido>`.\n\n".
-		   	$EMO_TRI . " *Per resettare i nidi correnti*, utilizzare il comando `/resetnests`.".
+		   	$EMO_TRI . " *Per resettare i nidi correnti*, utilizzare il comando `/resetnests`\n\n.".
 		   	$EMO_TRI . " *Per aggiungere un parco*, utilizzare il comando `/newpark <parco>, <latitudine>, <longitudine>`.\n\n_Esempio:_\n`/newpark Villa Borghese, 41.913567, 12.484158`\n\n" .
 		   	$EMO_TRI . " *Per rimuovere un parco*, utilizzare il comando `/delpark <parco>`.\n\n_Esempio:_\n`/delpark Villa Borghese`\n\n" ,
 		   	//$EMO_TRI . " *Per aggiungere un admin al bot*, utilizzare il comando `/addadmin <username>`.\n\n_Esempio:_\n`/addadmin Exeggutor`.\n\n" .
