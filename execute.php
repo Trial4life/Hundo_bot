@@ -1145,9 +1145,10 @@ elseif($status == 0) {
 	elseif(strpos($text, "/addcode ") === 0 ) {
 		$str = str_replace('/addcode ', '', str_replace("'","\'",$text));
 
-		$strArr = explode(", ",$str);
+		$strArr = explode(" ",$str);
 		$trainer = $strArr[0];
-		$code = $strArr[1];
+		$codeArr = array_slice($strArr,1);
+		$code = $codeArr[0]." ".$codeArr[1]." ".$codeArr[2];
 		$query = "SELECT * FROM `codes` WHERE `userId` = '$userId'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
