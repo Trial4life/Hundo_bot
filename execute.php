@@ -1146,12 +1146,12 @@ elseif($status == 0) {
 		$strArr = explode(", ",$str);
 		$trainer = $strArr[0];
 		$code = $strArr[1];
-		$query = "SELECT * FROM `codes` WHERE `telegram` = '$username'";
+		$query = "SELECT * FROM `codes` WHERE `userId` = '$userId'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
-		$currUsername = $row['telegram'];
+		$currUserId = $row['userId'];
 
-		if ($currUsername == $username) {
+		if ($currUserId == $userId) {
 			$response = 'Hai già registrato il tuo codice amico.';
 		}
 		else {
