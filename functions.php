@@ -68,7 +68,7 @@
 		if ($AW[$ind][$t] == 'x') {
 			return "\xE2\x96\xAB";
 		}
-		elseif ($gust[$ind][$t] > 30.0 && $GO[$ind][$t] != "Pioggia" && $GO[$ind][$t] != "Neve" && strpos($AW[$ind][$t], "rovesci") === false && strpos($AW[$ind][$t], "temporali") === false) {
+		elseif ($wind[$ind][$t] + $gust[$ind][$t] > 55.0 && $GO[$ind][$t] != "Pioggia" && $GO[$ind][$t] != "Neve" && strpos($AW[$ind][$t], "rovesci") === false && strpos($AW[$ind][$t], "temporali") === false) {
 			return "\xF0\x9F\x92\xA8";		// Vento
 		}
 		elseif ($GO[$ind][$t]=="Sereno" && ($t < $sunriseHour || $t > $sunsetHour)) {
