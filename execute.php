@@ -1155,7 +1155,7 @@ elseif($status == 0) {
 			$response = 'Hai già registrato il tuo codice amico.';
 		}
 		else {
-			mysqli_query($conn,"INSERT INTO `codes` VALUES ('$trainer','$username','$userId','$code')");
+			mysqli_query($conn,"INSERT INTO `codes` VALUES ('$trainer','$username','$firstname','$userId','$code')");
 			$response = $EMO_v.' Codice amico registrato.';
 		}
 
@@ -1183,19 +1183,20 @@ elseif($status == 0) {
 		$query = "SELECT * FROM `codes` ORDER BY `trainer` ASC";
 		$result = mysqli_query($conn,$query);
 
-		$trainer = $telegram = $telegramId = $code = array();
+		$trainer = $telegram = $telegramName = $telegramId = $code = array();
 		while ($row = mysqli_fetch_assoc($result)) {
 			array_push($trainer, $row['trainer']);
 			array_push($telegram, $row['telegram']);
+			array_push($telegramName, $row['telegramName']);
 			array_push($telegramId, $row['userId']);
 			array_push($code, $row['code']);
 		}
 
 		$response = $EMO_NUM .' Lista dei codici amico:';
 		for ($i = 0; $i <= sizeof($trainer)-1; $i++){
-			// $tgLink = "[".$telegram[$i]."](tg://user?id=".$telegram[$i].")";
-			// $tgLink = "[".$telegram[$i]."]"."(https://web.telegram.org/#/im?p=@".$telegram[$i].")";
-			$tgLink = "[".$telegram[$i]."](tg://user?id=".$telegramId[$i].")";
+			// $tgLink = "[".$telegram[$i]."](https://t.me/".$telegramId[$i].")";
+			$tgLink = "[".$telegram[$i] != '' ? $telegram[$i] : $telegramName[$i]."](tg://user?id=".$telegramId[$i].")";
+
 			$response = $response."\n*".$trainer[$i]."* − ".$tgLink."\n`".$code[$i].'`';
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
