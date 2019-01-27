@@ -439,7 +439,7 @@ elseif(strpos($text, "/quests") === 0 ) {
 elseif(strpos($text, "/mappaquest") === 0 ) {
 	$response = $EMO_GLO . ' Mappa delle quest ' . $EMO_GLO;
 	$link = 'http://pogocasts.com/questmap/questmap.php';
-	$response = "[" . $response . "](" . $link . ")";
+	$response = "[" . $response . "](" . $link . ")";				$response = '. . . Under maintenance. . .';
 	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 	$parameters["method"] = "sendMessage";
 	echo json_encode($parameters);
@@ -448,7 +448,7 @@ elseif(strpos($text, "/mappaquest") === 0 ) {
 elseif(strpos($text, "/mappanidi") === 0 ) {
 	$response = $EMO_TREE . ' Mappa dei nidi ' . $EMO_TREE;
 	$link = 'http://pogocasts.com/questmap/nestmap.php';
-	$response = "[" . $response . "](" . $link . ")";
+	$response = "[" . $response . "](" . $link . ")";				$response = '. . . Under maintenance. . .';
 	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 	$parameters["method"] = "sendMessage";
 	echo json_encode($parameters);
