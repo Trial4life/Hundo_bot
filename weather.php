@@ -12,6 +12,7 @@
 	$cellCode = array("roma_c","roma_e","roma_ne","roma_n","roma_no","roma_o","roma_so","roma_s","roma_se",);
 	$cellTitle = array("Centro","Est","Nord-Est","Nord","Nord-Ovest","Ovest","Sud-Ovest","Sud","Sud-Est",);
 	$cellId = array('132f61','132f63','132f65','132f67','132f5d','132f5f','1325f5','13258b','132589');
+	$cellEMO = array($EMO_C,$EMO_E,$EMO_NE,$EMO_N,$EMO_NO,$EMO_O,$EMO_SO,$EMO_S,$EMO_SE);
 
 	$AW = $wind = $gust = $GO = array(array(), array());
 
@@ -102,7 +103,7 @@
 */
 
 	$link = "https://s2.sidewalklabs.com/regioncoverer/?center=41.891165%2C12.492826&zoom=12&cells=".$cellId[$cell];
-	$response = "Previsioni meteo per la cella \n<a href='".$link."'>Roma ".$cellTitle[$cell]."</a>:";
+	$response = "Previsioni meteo per la cella \n".$cellEMO[$cell]."<a href='".$link."'> Roma ".$cellTitle[$cell]."</a>:";
 	for ($i = $now; $i <= $now+12; $i++) {
 		$i < 24 ? $n = $i : $n = $i % 24;
 		$h = strval(sprintf('%02d',$n));
