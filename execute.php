@@ -1200,7 +1200,7 @@ elseif($status == 0) {
 			// $tgLink = "[".$telegram[$i]."](https://t.me/".$telegramId[$i].")";
 			$tgLink = "[".$telegramDispName."](tg://user?id=".$telegramId[$i].")";
 
-			$response = $response."\n".$tgLink." − .*".$trainer[$i]."*\n`".$code[$i].'`';
+			$response = $response."\n".$tgLink." − *".$trainer[$i]."*\n`".$code[$i].'`';
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
