@@ -440,7 +440,7 @@ elseif(strpos($text, "/mappaquest") === 0 ) {
 	$response = $EMO_GLO . ' Mappa delle quest ' . $EMO_GLO;
 	// $link = 'http://pogocasts.com/questmap/questmap.php';
 	$link = 'https://pogocast.000webhostapp.com/questmap/questmap.php';
-	$response = "[" . $response . "](" . $link . ")";				//$response = '. . . Under maintenance. . .';
+	$response = "[" . $response . "](" . $link . ")";
 	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 	$parameters["method"] = "sendMessage";
 	echo json_encode($parameters);
@@ -450,7 +450,7 @@ elseif(strpos($text, "/mappanidi") === 0 ) {
 	$response = $EMO_TREE . ' Mappa dei nidi ' . $EMO_TREE;
 	// $link = 'http://pogocasts.com/questmap/nestmap.php';
 	$link = 'https://pogocast.000webhostapp.com/questmap/nestmap.php';
-	$response = "[" . $response . "](" . $link . ")";				//$response = '. . . Under maintenance. . .';
+	$response = "[" . $response . "](" . $link . ")";
 	$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 	$parameters["method"] = "sendMessage";
 	echo json_encode($parameters);
