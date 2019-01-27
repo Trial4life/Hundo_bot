@@ -1194,8 +1194,9 @@ elseif($status == 0) {
 
 		$response = $EMO_NUM .' Lista dei codici amico:';
 		for ($i = 0; $i <= sizeof($trainer)-1; $i++){
+			$telegram[$i] != '' ? $telegramDispName = $telegram[$i] : $telegramDispName = $telegramName[$i];
 			// $tgLink = "[".$telegram[$i]."](https://t.me/".$telegramId[$i].")";
-			$tgLink = "[".$telegram[$i] != '' ? $telegram[$i] : $telegramName[$i]."](tg://user?id=".$telegramId[$i].")";
+			$tgLink = "[".$telegramDispName."](tg://user?id=".$telegramId[$i].")";
 
 			$response = $response."\n*".$trainer[$i]."* − ".$tgLink."\n`".$code[$i].'`';
 		}
