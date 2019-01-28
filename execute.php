@@ -873,7 +873,9 @@ elseif($status == 0) {
 			$response = 'Il nido di <a href="'.$link.'">'.str_replace("\'","'",$nest).'</a> è stato già registrato fino al <b>'.$endDate.'</b>.';
 		}
 		else {
-			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn',1)");
+			date_default_timezone_set('Europe/Rome');
+			$today = date('Y-m-d');
+			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn',1,'$today')");
 			$response = $EMO_v.' Nido di <b>'.$pkmn.'</b> a <a href="'.$link.'">'.str_replace("\'","'",$nest).'</a> registrato fino al <b>'.$endDate.'</b>.';
 		}
 
@@ -921,7 +923,9 @@ elseif($status == 0) {
 			$response = 'Lo spawn frequente di <a href="'.$link.'">'.str_replace("\'","'",$nest).'</a> è stato già registrato fino al <b>'.$endDate.'</b>.';
 		}
 		else {
-			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn',2)");
+			date_default_timezone_set('Europe/Rome');
+			$today = date('Y-m-d');
+			mysqli_query($conn,"INSERT INTO `nests` VALUES ('$nest','$pkmn',2,'$today')");
 			$response = $EMO_v.' Spawn frequente di <b>'.$pkmn.'</b> a <a href="'.$link.'">'.str_replace("\'","'",$nest).'</a> registrato fino al <b>'.$endDate.'</b>.';
 		}
 
