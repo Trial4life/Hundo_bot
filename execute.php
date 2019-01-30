@@ -1151,7 +1151,7 @@ elseif($status == 0) {
 
 		$strArr = explode(" ",$str,2);
 		$trainer = $strArr[0];
-		$code = $strArr[1];
+		$code = wordwrap(str_replace(" ", "", $strArr[1]), 4, ' ', true);
 		$query = "SELECT * FROM `codes` WHERE `userId` = '$userId'";
 		$result = mysqli_query($conn,$query);
 		$row = mysqli_fetch_assoc($result);
