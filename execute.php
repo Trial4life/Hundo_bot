@@ -2076,11 +2076,7 @@ elseif(strpos($text, "/cerco") === 0 )
 	} else { $response = "Non sei autorizzato a usare questo comando."; }
 	}
 
-}
 
-else {
-	$response = "Gruppo non autorizzato. Contattare l'admin.";
-};
 
 //close the mySQL connection
 $conn->close();
