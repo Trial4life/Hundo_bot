@@ -1758,14 +1758,15 @@ elseif($status == 2) {
 }
 
 elseif(strpos($text, "/test") === 0 ) {
-		$query = "SELECT * FROM `-267586313` WHERE `pokemon` = 'Squirtle'";
-		$result = mysqli_query($conn,$query);
-		$row = mysqli_fetch_assoc($result);
-		$data = [
-		  	'chat_id' => $chatId,
-		  	'text' => $row['ID'],
-		];
-		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
+	$query = "SELECT * FROM `-267586313` WHERE `pokemon` = 'Squirtle'";
+	$result = mysqli_query($conn,$query);
+	$row = mysqli_fetch_assoc($result);
+	$response = $row['ID'];
+	$data = [
+	  	'chat_id' => $chatId,
+	  	'text' => $response,
+	];
+	$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 }
 
 //close the mySQL connection
