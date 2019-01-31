@@ -1758,10 +1758,10 @@ elseif($status == 2) {
 }
 
 elseif(strpos($text, "/test") === 0 ) {
-	$query = "SELECT * FROM `-267586313` WHERE `pokemon` = 'Squirtle'";
+	$query = "SELECT * FROM `pokeid` WHERE `pokemon` = 'Squirtle'";
 	$result = mysqli_query($conn,$query);
 	$row = mysqli_fetch_assoc($result);
-	$response = $row['ID'];
+	$response = $row['id'];
 	$data = [
 	  	'chat_id' => $chatId,
 	  	'text' => $response,
