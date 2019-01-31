@@ -80,9 +80,7 @@ $EMO_ERR = json_decode('"'."\u26d4".'"');
 
 // MySQL -> Create connection
 $conn = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
-// $conn = new mysqli("2.227.251.71:3306", "root", "", "tradepkmn");
-// $conn = new mysqli("sql7.freemysqlhosting.net:3306/sql7243921", "sql7243921", "4ezgelH6xq", "sql7243921");   [OLD freemysqlhosting account]
-// Check connection
+// $conn = new mysqli("localhost", "root", "", "tradepkmn");
 
 // AUTORIZZAZIONI
 include "authorizations.php";
@@ -1757,7 +1755,7 @@ elseif($status == 2) {
 	}
 }
 
-if($chatId === $group_TestBot or $chatId === $group_NordEstLegit) {
+if ($chatId === $group_TestBot or $chatId === $group_NordEstLegit) {
 	if(strpos($text, "/cerco") === 0 ) {
 		$arr = explode('/cerco ', $text);
 		$pokemon = str_replace('*',' shiny',ucfirst ($arr[1]));
