@@ -1783,7 +1783,7 @@ elseif(strpos($text, "/cerco") === 0 )
 
 				// REGISTRA UTENTE NEL DATABASE
 				if (!stristr($currUsers_C, $username)) {
-					mysqli_query($conn,"UPDATE `$chatId` SET cerco = concat('$currUsers_C', '$userId','@','$firstname','@','$username','|') WHERE ID = $pkmnID");
+					mysqli_query($conn,"UPDATE `-267586313` SET cerco = concat('$currUsers_C', '$userId','@','$firstname','@','$username','|') WHERE ID = $pkmnID");
 
 				if ($pkmnID == "") { $err_resp = TRUE; } else { array_push($append_resp, $pokemon_arr[$i]); }
 				}
@@ -1791,15 +1791,23 @@ elseif(strpos($text, "/cerco") === 0 )
 
 			// INVIA MESSAGGIO
 			if ($err_resp == TRUE) {
-				$response = "Uno o più Pokémon non trovati. Riprovare.";
+				$response = "Uno o più Pokémon non trovati. Riprovare.";		$data = [
+		  	'chat_id' => $chatId,
+		  	'text' => $response,
+		];
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			}
 			else {
-				$response = "Pokémon aggiunti alla lista di @" . $username . ".";
+				$response = "Pokémon aggiunti alla lista di @" . $username . ".";		$data = [
+		  	'chat_id' => $chatId,
+		  	'text' => $response,
+		];
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			}
 		}
 		else {
 			// CERCA NEL DATABASE
-			$query = "SELECT * FROM `$chatId` WHERE `pokemon` = '$pokemon'";
+			$query = "SELECT * FROM `-267586313` WHERE `pokemon` = '$pokemon'";
 			$result = mysqli_query($conn,$query);
 			$row = mysqli_fetch_assoc($result);
 			$pkmnID = $row['ID'];
@@ -1810,24 +1818,40 @@ elseif(strpos($text, "/cerco") === 0 )
 
 			// REGISTRA UTENTE NEL DATABASE
 			if (!stristr($currUsers_C, $username)) {
-				mysqli_query($conn,"UPDATE `$chatId` SET cerco = concat('$currUsers_C', '$userId','@','$firstname','@','$username','|') WHERE ID = $pkmnID");
+				mysqli_query($conn,"UPDATE `-267586313` SET cerco = concat('$currUsers_C', '$userId','@','$firstname','@','$username','|') WHERE ID = $pkmnID");
 			}
 
 			// INVIA MESSAGGIO
 			if ($pokemon == "") {
-				$response = "Digitare il nome di un Pokémon dopo il comando.";
+				$response = "Digitare il nome di un Pokémon dopo il comando.";		$data = [
+		  	'chat_id' => $chatId,
+		  	'text' => $response,
+		];
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			}
 			elseif ($pkmnID == "") {
-				$response = "Pokémon *" . $pokemon . "* non trovato.";
+				$response = "Pokémon *" . $pokemon . "* non trovato.";		$data = [
+		  	'chat_id' => $chatId,
+		  	'text' => $response,
+		];
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 			}
-			elseif ($currUsers_S_arr[0]=="") { $response = "Al momento nessun allenatore vuole scambiare *" . $pokemon . "*."; }
+			elseif ($currUsers_S_arr[0]=="") { $response = "Al momento nessun allenatore vuole scambiare *" . $pokemon . "*."; 		$data = [
+		  	'chat_id' => $chatId,
+		  	'text' => $response,
+		];
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );}
 			else {
 				$response1 = "Allenatori che scambiano *" . $pokemon . "*:";
 				$response2 = "";
 				$usersNum = sizeof($currUsers_S_arr);
 				for ($i = 0; $i <= $usersNum-2; $i++) {
 					$currentUser = array(); $currentUser = explode('@', $currUsers_S_arr[$i]);
-					$response2 = $response2 . "\n− [".$currentUser[1]."](tg://user?id=".$currentUser[0].")";
+					$response2 = $response2 . "\n− [".$currentUser[1]."](tg://user?id=".$currentUser[0].")";		$data = [
+		  	'chat_id' => $chatId,
+		  	'text' => $response,
+		];
+		$response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?" . http_build_query($data) );
 				}
 
 				$response = $response1 . $response2;
