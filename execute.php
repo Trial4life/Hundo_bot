@@ -1757,11 +1757,11 @@ elseif($status == 2) {
 	}
 }
 
-elseif(strpos($text, "/test") === 0 ) {
-	$query = "SELECT * FROM `pokeid` WHERE `pokemon` = 'Squirtle'";
+if(strpos($text, "/test") === 0 ) {
+	$query = "SELECT * FROM `-267586313` WHERE `pokemon` = 'Squirtle'";
 	$result = mysqli_query($conn,$query);
 	$row = mysqli_fetch_assoc($result);
-	$response = $row['id'];
+	$response = $row['ID'];
 	$data = [
 	  	'chat_id' => $chatId,
 	  	'text' => $response,
