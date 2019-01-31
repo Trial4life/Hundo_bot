@@ -1,5 +1,8 @@
 <?php
 //$conn = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
+	$group_TestBot = -267586313;
+	$group_NordEstLegit = -1001187994497;
+
 	$query = "SELECT * FROM `auth_groups`";
 	$result = mysqli_query($conn,$query);
 	$authorizedChats = $authorizedChatsNames = array();
