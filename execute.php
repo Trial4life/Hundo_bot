@@ -1761,7 +1761,7 @@ elseif($status == 2) {
 if ($chatId === $group_TestBot or $chatId === $group_NordEstLegit) {
 	if(strpos($text, "/cerco ") === 0 ) {
 		$str = explode('/cerco ', $text);
-		$list = array_map('trim', explode(',',$str[1]));
+		$list = array_map('trim', explode(',',str_replace("*"," shiny",$str[1])));
 		$list = array_map('ucfirst', $list);
 
 		// CERCA NEL DATABASE SE L'UTENTE È GIÀ REGISTRATO
@@ -1812,7 +1812,7 @@ if ($chatId === $group_TestBot or $chatId === $group_NordEstLegit) {
 
 	elseif(strpos($text, "/scambio ") === 0 ) {
 		$str = explode('/scambio ', $text);
-		$list = array_map('trim', explode(',',$str[1]));
+		$list = array_map('trim', explode(',',str_replace("*"," shiny",$str[1])));
 		$list = array_map('ucfirst', $list);
 
 		// CERCA NEL DATABASE SE L'UTENTE È GIÀ REGISTRATO
@@ -1863,7 +1863,7 @@ if ($chatId === $group_TestBot or $chatId === $group_NordEstLegit) {
 
 	elseif(strpos($text, "/elimina ") === 0 ) {
 		$str = explode('/elimina ', $text);
-		$list = array_map('trim', explode(',',$str[1]));
+		$list = array_map('trim', explode(',',str_replace("*"," shiny",$str[1])));
 		$list = array_map('ucfirst', $list);
 
 		// CERCA NEL DATABASE SE L'UTENTE È GIÀ REGISTRATO
