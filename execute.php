@@ -1774,7 +1774,7 @@ if ($chatId === $group_TestBot or $chatId === $group_NordEstLegit) {
 			// UPDATE
 			$currList = $row['cerco'];
 			$currListArr = explode(",", $currList);
-			$newListArr = array_unique(array_merge($currListArr,$list), SORT_REGULAR);
+			$newListArr = array_filter(array_unique(array_merge($currListArr,$list), SORT_REGULAR), function($value) { return $value !== ''; });
 			$newList = implode(',',$newListArr);
 			mysqli_query($conn,"UPDATE `$chatId` SET `cerco` = '$newList' WHERE `username` = '$username'");
 		}
@@ -1825,7 +1825,7 @@ if ($chatId === $group_TestBot or $chatId === $group_NordEstLegit) {
 			// UPDATE
 			$currList = $row['scambio'];
 			$currListArr = explode(",", $currList);
-			$newListArr = array_unique(array_merge($currListArr,$list), SORT_REGULAR);
+			$newListArr = array_filter(array_unique(array_merge($currListArr,$list), SORT_REGULAR), function($value) { return $value !== ''; });
 			$newList = implode(',',$newListArr);
 			mysqli_query($conn,"UPDATE `$chatId` SET `scambio` = '$newList' WHERE `username` = '$username'");
 		}
