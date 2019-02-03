@@ -1201,12 +1201,8 @@ elseif($status == 0) {
 
 		$response = $EMO_NUM .' Lista dei codici amico:';
 		for ($i = 0; $i <= sizeof($trainer)-1; $i++){
-			$telegram[$i] != '' ? $telegramDispName = $telegram[$i] : $telegramDispName = $telegramName[$i];
-			// $tgLink = "[".$telegram[$i]."](https://t.me/".$telegramId[$i].")";
-			$tgLink = "[".$telegramDispName."](tg://user?id=".$telegramId[$i].")";
-
-			// $response = $response."\n*".$trainer[$i]."* − ".$tgLink."\n`".$code[$i].'`';
-			$response = $response."\n".$tgLink." − *".$trainer[$i]."*\n`".$code[$i].'`';
+			$tgLink = "[".$trainer[$i]."](tg://user?id=".$telegramId[$i].")";
+			$response = $response."\n".$tgLink."\n`".$code[$i].'`';
 		}
 		$parameters = array('chat_id' => $chatId, "text" => $response, "parse_mode" => "markdown", "disable_web_page_preview" => TRUE);
 		$parameters["method"] = "sendMessage";
