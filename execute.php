@@ -1187,7 +1187,7 @@ elseif($status == 0) {
 	///// CODICI /////
 	//////////////////
 	elseif(strpos($text, "/codici") === 0 ) {
-		$query = "SELECT * FROM `codes` ORDER BY `telegram` ASC";
+		$query = "SELECT * FROM `codes` ORDER BY `trainer` ASC";
 		$result = mysqli_query($conn,$query);
 
 		$trainer = $telegram = $telegramName = $telegramId = $code = array();
