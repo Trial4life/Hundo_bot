@@ -127,8 +127,8 @@ if(strpos($text, "/exeggutorhelp") === 0 ) {
 	   	$EMO_TRI ." *Per mostrare le quest segnalate entro il raggio impostato*, inviare la posizione in privato al bot.\n\n".
 	   	$EMO_TRI ." *Per impostare il raggio entro il quale mostrare le quest segnalate*, usare il comando `/radius <chilometri>`. \n\n_Esempio_:\n`/radius 0.5`\n\n".
 	   	$EMO_TRI ." *Per consultare il meteo*, usare il comando `/meteo`\n\n".
-	   	$EMO_TRI ." *Per segnalare un nuovo nido*, usare il comando `/nest <pokemon>, <nido>`. \n\n_Esempio_:\n`/nest Bulbasaur, Villa Borghese`\n\n".
-	   	$EMO_TRI ." *Per segnalare un nuovo spawn frequente*, usare il comando `/spawn <pokemon>, <spawn>`. \n\n_Esempio_:\n`/spawn Squirtle, Parchetto dei Galli`\n\n".
+	   	$EMO_TRI ." *Per segnalare un nuovo nido*, usare il comando `/nest <pokemon> <nido>`. \n\n_Esempio_:\n`/nest Bulbasaur Villa Borghese`\n\n".
+	   	$EMO_TRI ." *Per segnalare un nuovo spawn frequente*, usare il comando `/spawn <pokemon> <spawn>`. \n\n_Esempio_:\n`/spawn Squirtle Parchetto dei Galli`\n\n".
 	   	$EMO_TRI ." *Per elencare i nidi correnti*, usare il comando `/nidi`\n\n".
 	   	$EMO_TRI ." *Per elencare i parchi nel database*, usare il comando `/parks`\n\n".
 	   	$EMO_TRI ." *Per registrare il proprio codice amico*, usare il comando `/addcode <nick-in-game> <#### #### ####>`\n\n_Esempio_:\n`/addcode Ash 2142 8421 4284`\n\n".
@@ -852,7 +852,7 @@ elseif($status == 0) {
 			$endDate = $newEnd;
 		}
 
-		$strArr = explode(", ",$str);
+		$strArr = explode(" ",$str,2);
 		$pkmn = ucfirst($strArr[0]);
 		$nest = ucwords($strArr[1]);
 		$query = "SELECT * FROM `nests` WHERE `nido` = '$nest'";
@@ -902,7 +902,7 @@ elseif($status == 0) {
 			$endDate = $newEnd;
 		}
 
-		$strArr = explode(", ",$str);
+		$strArr = explode(" ",$str,2);
 		$pkmn = ucfirst($strArr[0]);
 		$nest = ucwords($strArr[1]);
 		$query = "SELECT * FROM `nests` WHERE `nido` = '$nest'";
