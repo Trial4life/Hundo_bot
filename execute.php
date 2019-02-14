@@ -82,7 +82,7 @@ $EMO_ALR = json_decode('"'."\u203c".'"');
 $EMO_ERR = json_decode('"'."\u26d4".'"');
 
 // MySQL -> Create connection
-$conn = new mysqli("db4free.net", "trial4life", "16021993", "tradepkmn");
+$conn = new mysqli("db4free.net", "trial4life", "16021993", "trial4life");
 // $conn = new mysqli("localhost", "root", "", "tradepkmn");
 
 // AUTORIZZAZIONI
